@@ -117,8 +117,6 @@ Slides
 
 [Trabalho Prático: Implementação e Análise de Algoritmos de Ordenação em C](laboratorios/02_trabalho_pratico.md)
 
-[Atividade Avaliativa – Apresentação em Vídeo do Trabalho de Algoritmos de Ordenação](laboratorios/03_atividade_avaliativa.md)
-
 ---
 
 ### Apostila

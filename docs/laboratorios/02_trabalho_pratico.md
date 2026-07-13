@@ -512,12 +512,51 @@ ordenacao-trio/
 
 ---
 
-## 📦 Entrega
+## 🎥 Defesa do Trabalho: Apresentação em Vídeo
 
-1. Repositório no GitHub (público ou privado com acesso ao professor)
-2. Tag final: `git tag -a v1.0 -m "Entrega ordenacao"`
-3. `git push origin main --tags`
-4. Enviar **link** + **nomes dos integrantes via SIGAA em Comentários**
+Esta atividade serve como a **defesa oral do trabalho prático** e sua nota (**4,0 pontos**) substituirá a avaliação escrita da Terceira Unidade. O objetivo é demonstrar o domínio sobre o código desenvolvido e as ferramentas utilizadas.
+
+### Entrega do Vídeo
+- **Formato:** Gravação com duração entre **8 e 15 minutos** postada no YouTube (como público ou não listado).
+- **Envio:** O link do vídeo deve ser enviado no SIGAA junto com a entrega do repositório.
+
+### Estrutura Obrigatória do Vídeo
+1. **Apresentação da Equipe:** Apresentar os integrantes, turma e objetivos gerais.
+2. **Implementação dos Algoritmos:** Mostrar a organização do código-fonte (arquivos e estrutura) e explicar partes relevantes dos algoritmos desenvolvidos.
+3. **Demonstração da Execução:** Compilar e executar o programa ao vivo no vídeo, mostrando a entrada de dados, saída de testes e a coleta das métricas.
+4. **Análise Experimental:** Discutir a tabela de tempos de execução, contagens de comparações e trocas, comparando a performance dos algoritmos na prática com a teoria de complexidade.
+5. **Uso de Ferramentas:** Demonstrar o funcionamento do `gcov` (cobertura obtida), `gprof` (funções mais pesadas/gargalos) e `cppcheck` (correções feitas).
+6. **Conclusões:** Responder qual algoritmo performou melhor, se as medições batem com a teoria estudada e quais dificuldades a equipe encontrou.
+
+### Critérios de Avaliação do Vídeo (Total: 4.0 pts)
+| Critério | O que será observado | Pontos |
+| --- | --- | --- |
+| **Organização e Clareza** | Apresentação didática, áudio nítido, divisão do tempo e boa estrutura | 1.0 |
+| **Demonstração do Código** | Explicação concisa da implementação e compilação/execução correta | 1.0 |
+| **Análise de Resultados** | Discussão fundamentada nas medições empíricas comparando os algoritmos | 1.0 |
+| **Domínio e Participação** | Todos os integrantes do grupo devem falar e demonstrar autoria do código | 1.0 |
+
+### Regras Gerais
+- Os grupos devem ser exatamente os mesmos do trabalho prático.
+- Não serão aceitas apresentações compostas apenas de slides; é obrigatório alternar para a tela do terminal e editor para mostrar o código e a execução real.
+- A voz e explicações devem ser claras e audíveis por todos os integrantes.
+
+---
+
+## 📦 Entrega do Projeto
+
+Para concluir a entrega do laboratório, certifique-se de realizar os seguintes passos:
+
+1. **Repositório GitHub** atualizado (público ou com acesso liberado ao professor).
+2. **Tag de Versão**: Criar uma tag git da entrega final:
+   ```bash
+   git tag -a v1.0 -m "Entrega final do trabalho de ordenação"
+   git push origin main --tags
+   ```
+3. **Envio via SIGAA**: Enviar em um único comentário por equipe:
+   - Nomes completos dos integrantes da equipe.
+   - Link do repositório GitHub.
+   - Link do vídeo de apresentação no YouTube.
 
 ---
 

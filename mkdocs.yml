@@ -89,7 +89,6 @@ nav:
   - Laboratórios:
     - "Laboratório: REPL Baseado em Pilha": laboratorios/01_repl_pilha.md
     - "Trabalho Prático: Algoritmos de Ordenação": laboratorios/02_trabalho_pratico.md
-    - "Avaliação: Apresentação em Vídeo": laboratorios/03_atividade_avaliativa.md
 
   - Slides (PDF):
     - "Ordenação: Algoritmos Básicos": slides/ordenacao_algoritmos_basicos.pdf
