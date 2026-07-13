@@ -1,5 +1,8 @@
 # Árvores Binárias de Busca
 
+> [!NOTE]
+> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Árvores Binárias](../slides/arvores_binarias.pdf).
+
 ## 1. Revisão Motivadora: Busca Binária em Vetores
 
 ---

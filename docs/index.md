@@ -52,13 +52,7 @@ Unidade 2
 
 [AVL - Implementação](aulas/11_arvores_avl_implementacao.md)
 
-Slides  (com exemplo de codigo em Python)
 
-[Arvores.pdf](slides/arvores_conceitos.pdf)
-
-[Arvores Binárias.pdf](slides/arvores_binarias.pdf)
-
-[Arvores AVL.pdf](slides/arvores_avl.pdf)
 
 Unidade 3
 
@@ -68,9 +62,7 @@ Unidade 3
 
 [Algoritmos de Ordenação Avançados](aulas/14_ordenacao_avancada.md)
 
-Slides
 
-[Ordenação - Algoritmos Básicos.pdf](slides/ordenacao_algoritmos_basicos.pdf)
 
 ---
 

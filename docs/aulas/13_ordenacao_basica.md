@@ -1,5 +1,8 @@
 # Algoritmos de Ordenação Básicos
 
+> [!NOTE]
+> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Algoritmos de Ordenação Básicos](../slides/ordenacao_algoritmos_basicos.pdf).
+
 ### 1.1 O Que É Ordenação?
 
 > **Definição:** Ordenação é o processo de rearranjar os elementos de uma coleção em uma sequência específica, geralmente **crescente** ou **decrescente**, com base em uma chave de comparação.

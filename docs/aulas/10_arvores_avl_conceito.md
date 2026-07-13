@@ -1,5 +1,8 @@
 # Árvores AVL : Conceito
 
+> [!NOTE]
+> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Árvores AVL](../slides/arvores_avl.pdf).
+
 ---
 
 ## 1. Revisão & Motivação: O Problema da Degeneração

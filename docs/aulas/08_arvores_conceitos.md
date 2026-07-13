@@ -1,5 +1,8 @@
 # Árvores : Conceitos e Binária
 
+> [!NOTE]
+> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Conceitos de Árvores](../slides/arvores_conceitos.pdf).
+
 # 1. Introdução: O que são Estruturas de Dados?
 
 ---

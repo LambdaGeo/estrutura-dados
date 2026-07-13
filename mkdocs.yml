@@ -90,8 +90,4 @@ nav:
     - "Laboratório: REPL Baseado em Pilha": laboratorios/01_repl_pilha.md
     - "Trabalho Prático: Algoritmos de Ordenação": laboratorios/02_trabalho_pratico.md
 
-  - Slides (PDF):
-    - "Ordenação: Algoritmos Básicos": slides/ordenacao_algoritmos_basicos.pdf
-    - "Árvores: Conceitos": slides/arvores_conceitos.pdf
-    - "Árvores Binárias": slides/arvores_binarias.pdf
-    - "Árvores AVL": slides/arvores_avl.pdf
+
