@@ -1,101 +1,45 @@
-# Pilha Estática I: Implementação básica com vetores globais
+# Pilha Estática I: Implementação Básica com Vetores Globais
 
----
+Este capítulo introduz o conceito de Tipo Abstrato de Dados (TAD) através do exemplo mais simples possível: a pilha. O objetivo é compreender a lógica LIFO da pilha e, em seguida, vivenciar na prática as limitações de uma implementação sem encapsulamento — o que motivará, no próximo capítulo, a introdução de `struct` e funções.
 
-**Disciplina:** Estrutura de Dados / Algoritmos
+## 1. Tipo Abstrato de Dados (TAD)
 
-**Público:** Iniciantes em C / Estrutura de Dados
+Um Tipo Abstrato de Dados (TAD) é uma forma de organizar uma coleção de dados junto com um conjunto de operações bem definidas, escondendo como essa coleção é realmente armazenada na memória. Dito de forma mais direta: um TAD é como um "container" de dados — ele define que tipo de dado você pode colocar dentro e quais operações fazem sentido nesse container, sem que quem o usa precise saber os detalhes de implementação.
 
-**Objetivo Geral:** Compreender o conceito de Tipo Abstrato de Dados (TAD), entender a lógica LIFO da Pilha e vivenciar as limitações de uma implementação sem encapsulamento.
+Três ideias sustentam esse conceito:
 
----
+1. **Abstração:** quem usa o TAD conhece a interface ("o que ela faz"), não o "como".
+2. **Encapsulamento:** o estado interno (por exemplo, o vetor e o topo de uma pilha) fica protegido; o acesso só acontece através das operações previstas.
+3. **Reusabilidade:** o mesmo TAD pode ser usado em vários contextos diferentes.
 
-## 🕒 Aula 1 (50 min) – TAD, Pilha, Política de Acesso e Aplicações
+Pilha, fila, lista e árvore são todos exemplos de TADs — cada um com uma lógica própria de organização e acesso.
 
-### 1.1 Conceito de Tipo Abstrato de Dados (TAD)
+## 2. A Pilha como TAD
 
-**Tempo estimado:** 15 min
+A ideia por trás de uma pilha é intuitiva: imagine uma pilha de pratos, de livros ou de caixas. Os elementos são colocados uns sobre os outros, e apenas o elemento do topo está diretamente acessível. Na pilha, o primeiro elemento a entrar pode ficar "sepultado" por muito tempo; o último a entrar é sempre o primeiro a sair.
 
-- **Definição Formal:**
-    
-    > "Um Tipo Abstrato de Dados (TAD) é uma forma de organizar uma coleção de dados junto com um conjunto de operações bem definidas, escondendo como essa coleção é realmente armazenada na memória."
-- **Definição Simplificada (Para a turma):**
-    
-    > "Um TAD é como um 'container' de dados: ele define que tipo de dados você pode colocar dentro e quais operações faz sentido fazer com esse container, sem que o usuário precise saber os detalhes de implementação."
-- **Ideias‑Chave:**
-    1. **Abstração:** O usuário conhece a interface ("o que ela faz"), não o "como".
-    2. **Encapsulamento:** O estado interno (ex.: o vetor, topo) fica "protegido"; o usuário só acessa por operações adequadas.
-    3. **Reusabilidade:** O mesmo TAD pode ser usado em vários contextos.
-- **Exemplos Informais:**
-    - Pilha, Fila, Lista, Árvore. Todos são TADs, cada um com uma lógica específica de organização e acesso.
+Essa política de acesso é chamada de **LIFO** — *Last In, First Out* (último a entrar, primeiro a sair) — e se resume a três regras: a inserção sempre acontece no topo da pilha, a remoção só pode remover o topo, e o acesso de leitura também se limita ao topo. As três operações conceituais que implementam essa política são `push` (empilhar, insere um elemento no topo), `pop` (desempilhar, remove o elemento do topo) e `peek`/`top` (consulta o valor do topo sem removê-lo).
 
-### 1.2 Pilha como TAD Simples
+Essa estrutura aparece com frequência fora da sala de aula: em uma pilha de pratos, tudo que é lavado é colocado em cima, e ao retirar um prato sempre se retira o de cima; no navegador web, cada página visitada é empilhada, e o botão "Voltar" desempilha a última página visitada; em um editor de texto, cada ação é empilhada, e `Ctrl+Z` desfaz desempilhando a ação mais recente.
 
-**Tempo estimado:** 20 min
+## 3. Aplicações de Pilha em Programação
 
-### 1.2.1 Ideia Intuitiva
+A pilha não é apenas um exercício didático — ela está presente em mecanismos que você já usa no dia a dia da programação. A **pilha de chamadas** (*call stack*) gerencia as funções em execução e suas variáveis locais. A avaliação de expressões em notação pós-fixa (polonesa reversa) depende de uma pilha para armazenar operandos intermediários. Algoritmos de exploração como busca em profundidade (DFS) e *backtracking* usam pilhas — explícitas ou implícitas, via recursão — para acompanhar o caminho percorrido. E funcionalidades de "desfazer"/"voltar" em sistemas em geral são, no fundo, uma pilha de estados anteriores.
 
-- **Desenho no Quadro:** Representar visualmente uma pilha de objetos.
-    - Pilha de pratos.
-    - Pilha de livros.
-    - Pilha de caixas.
-- **Conceito:** Elementos são colocados uns sobre os outros. Só o de cima está realmente "acessível" de forma direta.
-- **Frase de Efeito:**
-    
-    > "Na pilha, o primeiro que entra pode ficar sepultado; o último que entra é o primeiro a sair."
+## 4. Implementação Estática Simples em C
 
-### 1.2.2 Política de Acesso: LIFO
+Antes de construir uma pilha bem projetada, vale a pena implementar uma versão deliberadamente "nua": apenas variáveis globais, sem funções, sem ponteiros e sem `struct`. Isso torna visíveis os problemas que um TAD bem feito resolve.
 
-- **Sigla:** **LIFO** = *Last In, First Out* (Último a Entrar, Primeiro a Sair).
-- **Regras:**
-    1. **Inserção:** Sempre no topo da pilha.
-    2. **Remoção:** Só o topo da pilha pode ser removido.
-    3. **Acesso:** O usuário só vê o topo.
-- **Operações Conceituais:**
-    - `Push` (Empilhar): Coloca um elemento no topo.
-    - `Pop` (Desempilhar): Remove o elemento do topo.
-    - `Peek/Top` (Ver topo): Examina o topo sem remover.
+O núcleo dessa versão são duas variáveis globais:
 
-### 1.2.3 Analogias com o Mundo Real
+```c
+int pilha[MAX];
+int topo = -1;
+```
 
-- **Pilha de Pratos:** Tudo novo é colocado em cima. Ao tirar, sempre se tira o de cima.
-- **Navegador Web:** Cada página visitada é "empilhada". Ao clicar em "Voltar", desempilha a última página.
-- **Editor de Texto:** Cada ação é empilhada. `Ctrl+Z` desempilha a ação mais recente.
+O vetor `pilha` guarda os elementos, e a variável `topo` indica o índice do último elemento inserido — quando `topo == -1`, a pilha está vazia.
 
-### 1.3 Aplicações de Pilha em Programação
-
-**Tempo estimado:** 15 min
-
-- **Call Stack (Pilha de Chamadas):** Gerenciamento de funções e variáveis locais.
-- **Avaliação de Expressões:** Notação pós-fixa (polonesa reversa) e infixa.
-- **Algoritmos de Exploração:** DFS (Depth-First Search) e Backtracking.
-- **Históricos:** Funcionalidades de "Voltar" em sistemas.
-- **Mensagem Final aos Alunos:**
-    
-    > "Isso não é só teoria de aula; é algo que existe nos sistemas e nos programas que você já usa."
-
----
-
-## 🕒 Aula 2 (50 min) – Implementação Estática Simples em C
-
-### 2.1 Objetivo Desta Parte
-
-**Tempo estimado:** 5 min
-
-- Mostrar uma pilha muito "nua" em C usando apenas variáveis globais.
-- **Restrições Intencionais:** Sem funções, sem ponteiros, sem `struct`.
-- **Código Base:**
-    
-    ```c
-    int pilha[MAX];
-    int topo = -1;
-    ```
-    
-- **Foco da Discussão:** Falta de reuso e falta de controle sobre o valor de `topo`.
-
-### 2.2 Código no Quadro (Exemplo Completo)
-
-**Tempo estimado:** 20 min (Digitação e Explicação)
+Um exemplo completo, empilhando e desempilhando alguns valores:
 
 ```c
 #include <stdio.h>
@@ -167,20 +111,9 @@ int main() {
 }
 ```
 
-### 2.3 Explicação Passo a Passo
+`#define MAX 10` fixa o tamanho do vetor em tempo de compilação, e `int topo = -1` guarda o índice do último elemento inserido: `topo == -1` significa pilha vazia, `topo == 0` significa que existe um elemento em `pilha[0]`, e `topo == MAX - 1` significa pilha cheia.
 
-**Tempo estimado:** 15 min
-
-### 2.3.1 Estrutura Básica
-
-- `#define MAX 10`: Vetor estático (fixo no tempo de compilação).
-- `int pilha[MAX]`: Armazena os 10 inteiros.
-- `int topo = -1`: Guarda o índice do último elemento inserido.
-    - `topo == -1` ⇒ Pilha vazia.
-    - `topo == 0` ⇒ Existe um elemento em `pilha[0]`.
-    - `topo == MAX - 1` ⇒ Pilha cheia.
-
-### 2.3.2 Lógica de Empilhar (Push)
+A lógica de empilhar sempre incrementa `topo` antes de gravar o valor — justamente porque `topo` começa em -1:
 
 ```c
 if (topo < MAX - 1) {
@@ -191,9 +124,7 @@ if (topo < MAX - 1) {
 }
 ```
 
-- **Atenção:** Primeiro incrementa, depois atribui (porque `topo` começa em -1).
-
-### 2.3.3 Lógica de Desempilhar (Pop)
+A lógica de desempilhar faz o caminho inverso: lê o valor no topo antes de decrementar o indicador.
 
 ```c
 if (topo == -1) {
@@ -205,11 +136,7 @@ if (topo == -1) {
 }
 ```
 
-### 2.4 Exibição do Estado da Pilha (Tabela de Memória)
-
-**Tempo estimado:** 5 min
-
-- Desenhar no quadro para simular a execução:
+A tabela a seguir mostra como `topo` e o conteúdo do vetor evoluem ao longo de uma sequência de operações:
 
 | Comando | `topo` | `pilha` (índices 0, 1, 2, 3…) |
 | --- | --- | --- |
@@ -217,44 +144,24 @@ if (topo == -1) {
 | `empilha 10` | 0 | `[10, ?, ?, …]` |
 | `empilha 20` | 1 | `[10, 20, ?, …]` |
 | `empilha 30` | 2 | `[10, 20, 30, …]` |
-| `desempilha` | 1 | `[10, 20, 30, …]` (30 acessado antes) |
-| `empilha 40` | 2 | `[10, 20, 40, …]` (sobrescreve posição 2) |
-- **Dica Visual:** Usar cores ou setas para mostrar que o índice `topo` "anda" para frente e para trás.
+| `desempilha` | 1 | `[10, 20, 30, …]` (30 já foi lido) |
+| `empilha 40` | 2 | `[10, 20, 40, …]` (sobrescreve a posição 2) |
 
-### 2.5 Problemas Dessa Versão (Discussão Crítica)
+## 5. Limitações desta Implementação
 
-**Tempo estimado:** 5 min
+O código funciona, mas viola os princípios de um TAD robusto de três formas.
 
-- **Mensagem:** "O código funciona, mas viola os princípios de um TAD robusto."
-1. **Falta de Reuso:**
-    - O código está todo dentro do `main`.
-    - Para usar em outro lugar, precisa copiar e colar a lógica.
-    - Não existe um "módulo de pilha" importável.
-2. **Falta de Controle sobre `topo`:**
-    - Nada impede que alguém escreva no `main`:
-        
-        ```c
-        topo = 1000;        // Quebra a lógica
-        pilha[9999] = 42;   // Acesso indevido à memória
-        ```
-        
-    - O `main` tem acesso direto ao vetor e à variável de controle. Isso quebra o **encapsulamento**.
-3. **Poluição de Escopo:**
-    - Variáveis globais (`pilha`, `topo`) podem ser alteradas acidentalmente por qualquer parte do código.
+Primeiro, **falta reuso**: toda a lógica está dentro do `main`, então usá-la em outro lugar exige copiar e colar o código — não existe um "módulo de pilha" importável.
 
-### 2.6 Resumo e Próximos Passos
+Segundo, **falta controle sobre `topo`**: nada impede que qualquer parte do programa escreva diretamente
 
-**Tempo estimado:** 5 min
+```c
+topo = 1000;        // Quebra a lógica
+pilha[9999] = 42;   // Acesso indevido à memória
+```
 
-| Parte | Conceito Principal | Exemplo de Código Mostrado |
-| --- | --- | --- |
-| **Aula 1** | TAD como container; Pilha (LIFO) | Nada de código — só ideias/Analogias |
-| **Aula 2** | Pilha estática em C: `int pilha[MAX]; int topo;` | `pilha[topo] = x; topo++;` e variantes |
-| **Discussão** | Falta de reuso e controle; não é um TAD bem feito | Código comentado no quadro |
-- **Gancho para a Próxima Aula:**
-    - Como resolver esses problemas?
-    - Introduzir `struct` para agrupar `pilha` e `topo`.
-    - Definir funções `empilha()`, `desempilha()`, `pilhaVazia()`.
-    - Transformar esse código "não‑TAD" em um TAD verdadeiro, reutilizável e com controle.
+já que o `main` (e qualquer outra função) tem acesso direto ao vetor e à variável de controle. Isso quebra o encapsulamento que um TAD deveria garantir.
 
----
+Terceiro, há **poluição de escopo**: por serem variáveis globais, `pilha` e `topo` podem ser alteradas acidentalmente por qualquer parte do programa, sem qualquer aviso.
+
+Esses três problemas motivam o próximo passo: agrupar `pilha` e `topo` dentro de uma `struct`, e definir funções como `empilha()`, `desempilha()` e `pilhaVazia()` para transformar este código "não-TAD" em um TAD de verdade — reutilizável e com controle sobre seu próprio estado.

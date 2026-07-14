@@ -1,7 +1,7 @@
 # Algoritmos de Ordenação Básicos
 
 !!! note "Material de Apoio"
-    Você pode acompanhar esta aula utilizando os [Slides sobre Algoritmos de Ordenação Básicos](../slides/ordenacao_algoritmos_basicos.pdf).
+    Você pode complementar este capítulo com os [Slides sobre Algoritmos de Ordenação Básicos](../slides/ordenacao_algoritmos_basicos.pdf).
 
 ## 1.1 O Que É Ordenação?
 
@@ -743,7 +743,7 @@ void insertionSortAlunos(Aluno alunos[], int n) {
 
 ### 9.3 O Próximo Nível: Algoritmos O(n log n)
 
-> 🔜 **Próxima aula:** Merge Sort e Quick Sort — como quebrar a barreira O(n²) usando divisão e conquista.
+> 🔜 **No próximo capítulo:** Merge Sort e Quick Sort — como quebrar a barreira O(n²) usando divisão e conquista.
 
 ```
 Comparação teórica para n = 10.000:
@@ -761,7 +761,7 @@ Quick Sort  | 140.000              | ~1x
 
 ---
 
-## 10. Resumo da Aula
+## 10. Resumo do Capítulo
 
 ✅ **Conceitos fundamentais**
 
@@ -804,7 +804,7 @@ Quick Sort  | 140.000              | ~1x
 
 ## 11. Próximos Passos & Ferramentas
 
-🔜 **Próxima aula:** Algoritmos eficientes de ordenação
+🔜 **No próximo capítulo:** Algoritmos eficientes de ordenação
 
 - Merge Sort: divisão, conquista e intercalação
 - Quick Sort: particionamento e pivô

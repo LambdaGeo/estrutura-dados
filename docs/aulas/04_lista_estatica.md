@@ -84,7 +84,7 @@ Em materiais acadêmicos sobre estruturas de dados, a pilha aparece como exemplo
 
 ### 2.3 Implementação Anterior (Tudo em Um Arquivo)
 
-Na aula sobre pilha, implementamos algo assim:
+No capítulo sobre pilha, implementamos algo assim:
 
 ```c
 // pilha_tudo_em_um.c
@@ -191,7 +191,7 @@ O **mesmo TAD LISTA** pode ser implementado de formas diferentes:
 | **Vetor dinâmico** | Array que cresce/reduz com `realloc` | Compromisso entre acesso rápido e flexibilidade |
 
 !!! warning "Importante"
-    Nesta aula, focaremos na **implementação estática com vetor**. Em um encontro futuro, implementaremos o **mesmo TAD** com lista encadeada, mantendo a mesma interface. Isso demonstra o poder da abstração: o código cliente não precisa mudar quando a implementação interna muda.
+    Neste capítulo, focaremos na **implementação estática com vetor**. No próximo capítulo, implementaremos o **mesmo TAD** com lista encadeada, mantendo a mesma interface. Isso demonstra o poder da abstração: o código cliente não precisa mudar quando a implementação interna muda.
 
 ---
 
@@ -553,7 +553,7 @@ int main(void) {
 
 ## 10. Guia de Estudo e Prática
 
-### Antes da Próxima Aula
+### Exercícios Recomendados
 
 - [ ]  Reimplementar `inserePos` sem consultar o código
 - [ ]  Criar um teste que cause "posição inválida" e validar a mensagem de erro
@@ -622,7 +622,7 @@ Falta atualizar `l->ultimo--` após o deslocamento. Sem isso, a lista reporta um
 
 ---
 
-## 11. Ponte para a Próxima Aula: Listas Dinâmicas
+## 11. Continuando o Estudo: Listas Dinâmicas
 
 ### Pergunta para Reflexão
 
@@ -631,7 +631,7 @@ Falta atualizar `l->ultimo--` após o deslocamento. Sem isso, a lista reporta um
 typedef struct lista Lista;  /* Tipo opaco */
 
 /*
- * Hoje usamos:
+ * Nesta implementação usamos:
  *   struct lista { int valores[MAX]; int ultimo; }
  *
  * Desafio: Como reescreveríamos a struct para remover
@@ -642,9 +642,9 @@ typedef struct lista Lista;  /* Tipo opaco */
  */
 ```
 
-### Comparativo: Estática vs. Dinâmica (Próximo Encontro)
+### Comparativo: Estática vs. Dinâmica
 
-| Característica | Lista Estática (Hoje) | Lista Encadeada (Futuro) |
+| Característica | Lista Estática (Atual) | Lista Encadeada (Próximo Capítulo) |
 | --- | --- | --- |
 | Alocação | Tempo de compilação (`MAX`) | Tempo de execução (`malloc`) |
 | Crescimento | Fixo | Ilimitado (até memória acabar) |
@@ -653,7 +653,7 @@ typedef struct lista Lista;  /* Tipo opaco */
 | Uso de memória | Pode desperdiçar espaço | Usa apenas o necessário + overhead de ponteiros |
 
 !!! tip "Mensagem Final"
-    *"Hoje vocês dominaram a lista estática. Na próxima aula, vamos libertar a lista do limite MAX – e descobrir por que, às vezes, pagar o custo de ponteiros vale a pena."*
+    *"Neste capítulo, dominamos a lista estática. No próximo capítulo, vamos libertar a lista do limite MAX – e descobrir por que, às vezes, pagar o custo de ponteiros vale a pena."*
 
 ---
 
@@ -668,4 +668,4 @@ typedef struct lista Lista;  /* Tipo opaco */
 ---
 
 !!! note "Nota"
-    Este material é para consulta após a aula. Em caso de dúvidas, revise os exemplos de código, execute os testes sugeridos e consulte as referências. A prática com código é essencial para fixar os conceitos de TAD e encapsulamento.
+    Em caso de dúvidas, revise os exemplos de código, execute os testes sugeridos e consulte as referências. A prática com código é essencial para fixar os conceitos de TAD e encapsulamento.

@@ -4,7 +4,7 @@
 
 **Tema:** Tipo Abstrato de Dados FILA – Implementações Estática (Circular) e Dinâmica
 
-**Pré-requisitos:** TADs, Listas Estáticas e Encadeadas (Encontros 5 e 6), Ponteiros, `malloc`/`free`
+**Pré-requisitos:** TADs, Listas Estáticas e Encadeadas (capítulos anteriores), Ponteiros, `malloc`/`free`
 
 ---
 
@@ -411,7 +411,7 @@ int tamanho(const Fila* f) {
 
 ## 9. Guia de Estudo e Prática
 
-### Antes da Próxima Aula
+### Exercícios Recomendados
 
 - [ ]  Implementar a Fila Circular estática sem usar o contador `n` (dica: use a condição `inicio == fim` para vazia e `(fim + 1) % MAX == inicio` para cheia, sacrificando uma posição).
 - [ ]  Desenhar o estado dos ponteiros `inicio` e `fim` após 5 enfileiramentos e 3 desenfileiramentos.
@@ -474,7 +474,7 @@ if (f->inicio == NULL) {
 
 ---
 
-## 10. Ponte para Próximos Tópicos
+## 10. Continuando o Estudo
 
 ### 10.1 Resumo da Unidade de Estruturas Lineares
 
@@ -484,9 +484,9 @@ Neste módulo, cobrimos as três estruturas lineares fundamentais:
 2. **Filas (FIFO):** Acesso restrito às extremidades.
 3. **Listas:** Acesso livre a qualquer posição.
 
-### 10.2 Próximo Encontro: Estruturas Não-Lineares
+### 10.2 Próximo Capítulo: Estruturas Não-Lineares
 
-> "Até agora, todos os dados estavam organizados em uma única dimensão (sequência). No próximo encontro, sairemos da linearidade para explorar **Árvores**, onde cada elemento pode ter múltiplos sucessores, permitindo hierarquias e buscas mais eficientes (O(log n))."
+> "Até agora, todos os dados estavam organizados em uma única dimensão (sequência). No próximo capítulo, sairemos da linearidade para explorar **Árvores**, onde cada elemento pode ter múltiplos sucessores, permitindo hierarquias e buscas mais eficientes (O(log n))."
 
 ### 10.3 Exercício de Consolidação
 
@@ -508,4 +508,4 @@ Crie um programa que simule um caixa de supermercado:
 
 ---
 
-> **Nota:** Este material é para consulta após a aula. Para fixar os conceitos, implemente as versões estática e dinâmica, execute testes de estresse (encher e esvaziar repetidamente) e compare o comportamento. O domínio de filas é essencial para algoritmos de grafos e sistemas concorrentes.
+> **Nota:** Para fixar os conceitos, implemente as versões estática e dinâmica, execute testes de estresse (encher e esvaziar repetidamente) e compare o comportamento. O domínio de filas é essencial para algoritmos de grafos e sistemas concorrentes.

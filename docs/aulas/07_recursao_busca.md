@@ -191,7 +191,7 @@ int main() {
 
 ### 4. Busca Binária: Implementação Recursiva
 
-Podemos unir a Aula 1 com a Aula 2! A busca binária é um algoritmo clássico de recursão.
+Podemos unir os dois temas deste capítulo: recursão e busca! A busca binária é um algoritmo clássico de recursão.
 A cada chamada, o "estado modificado" é a redução do intervalo de busca (`primeiro` a `ultimo`).
 
 ```
@@ -250,7 +250,7 @@ Dado essa característica, o número máximo de comparações para encontrar (ou
 - **Busca Sequencial:** No pior cenário, você fará **1.000.000** de comparações.
 - **Busca Binária:** No pior cenário, $\log_2(1.000.000)$ resulta em aproximadamente **20** comparações. A diferença de performance é brutal em grandes volumes de dados!
 
-### Próximos Passos (Atividade Extra)
+### Próximos Passos
 
 1. Modifique as funções de busca para retornar o **índice** do elemento encontrado em vez de Verdadeiro/Falso. Retorne `1` caso não encontre.
 2. Teste o que acontece se você passar um array não-ordenado para a Busca Binária (ele vai falhar sem dar erro de compilação!).

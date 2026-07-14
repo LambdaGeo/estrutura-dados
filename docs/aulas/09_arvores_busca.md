@@ -1,7 +1,7 @@
 # Árvores Binárias de Busca
 
 !!! note "Material de Apoio"
-    Você pode acompanhar esta aula utilizando os [Slides sobre Árvores Binárias](../slides/arvores_binarias.pdf).
+    Você pode acompanhar este capítulo utilizando os [Slides sobre Árvores Binárias](../slides/arvores_binarias.pdf).
 
 ## 1. Revisão Motivadora: Busca Binária em Vetores
 
@@ -105,7 +105,7 @@ Uma **Árvore Binária de Busca (ABB)** é uma árvore binária que satisfaz a s
 > **Teorema:** O percurso **em-ordem** (Esquerda → Raiz → Direita) de uma ABB retorna os elementos em **ordem crescente**.
 
 ```c
-// Percurso em-ordem (já visto na aula anterior)
+// Percurso em-ordem (já visto no capítulo anterior)
 void emOrdem(No* raiz) {
     if (raiz != NULL) {
         emOrdem(raiz->esquerda);
@@ -804,7 +804,7 @@ Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
 **Como resolver?**
 
 ```
-🔜 Próxima aula: Árvores Balanceadas
+🔜 Próximo capítulo: Árvores Balanceadas
 • AVL: balanceamento por fator de altura
 • Rubro-Negra: balanceamento por cores e regras de rotação
 • Ideia central: realizar rotações durante inserção/remoção
@@ -828,7 +828,7 @@ Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
 
 ---
 
-## 8. Resumo da Aula
+## 8. Resumo do Capítulo
 
 **Conexão com busca binária**
 
@@ -866,9 +866,9 @@ Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
 
 ---
 
-## 9. Próximos Passos (Para Estudo Autônomo)
+## 9. Próximos Passos
 
-**Tópicos da próxima aula: Árvores Balanceadas**
+**Tópicos do próximo capítulo: Árvores Balanceadas**
 
 - Fator de balanceamento e altura
 - Rotações simples e duplas (LL, RR, LR, RL)
