@@ -1,7 +1,6 @@
 # Algoritmos de Ordenação Avançados
 
 > *Continuação da aula sobre ordenação. Agora exploramos técnicas O(n log n) e estratégias sofisticadas de ordenação.*
-> 
 
 ---
 
@@ -10,7 +9,6 @@
 ### 1.1 O Limite Teórico da Comparação
 
 > **Teorema:** Qualquer algoritmo de ordenação baseado **apenas em comparações** tem limite inferior de **Ω(n log n)** comparações no pior caso.
-> 
 
 ```
 Para n = 1.000.000:
@@ -30,7 +28,6 @@ Diferença: 50.000× mais rápido!
 | **Incrementos Decrescentes** | Shell Sort | Generalizar Insertion Sort com "gaps" para mover elementos distantes rapidamente |
 
 > 💡 **Insight:** Não existe "melhor algoritmo universal". A escolha depende do contexto: tamanho dos dados, memória disponível, necessidade de estabilidade, padrão de entrada.
-> 
 
 ---
 
@@ -39,7 +36,6 @@ Diferença: 50.000× mais rápido!
 ### 2.1 Ideia Conceitual
 
 > **Analogia:** Organizar duas pilhas de cartas já ordenadas: compare o topo de cada pilha, pegue o menor, repita. O Merge Sort aplica essa ideia recursivamente.
-> 
 
 **Estratégia (Dividir e Conquistar):**
 
@@ -101,7 +97,6 @@ void merge(int vetor[], int esq, int mid, int dir) {
 ```
 
 > ✅ **Estabilidade:** O uso de `<=` (em vez de `<`) garante que elementos iguais mantenham sua ordem relativa.
-> 
 
 ### 2.3 Implementação Completa em C
 
@@ -160,7 +155,6 @@ k=3: copia 43        → [3,27,38,43] ✓
 - ❌ **Overhead recursivo**: chamadas de função podem impactar performance para n pequeno
 
 > 💡 **Dica prática:** Para vetores pequenos (n < 32), combine Merge Sort com Insertion Sort nos casos base para reduzir overhead.
-> 
 
 ---
 
@@ -169,7 +163,6 @@ k=3: copia 43        → [3,27,38,43] ✓
 ### 3.1 Ideia Conceitual
 
 > **Analogia:** Organizar livros em uma estante: escolha um livro como referência (pivô), coloque todos os menores à esquerda e os maiores à direita. Repita o processo em cada lado.
-> 
 
 **Estratégia (Dividir e Conquistar):**
 
@@ -301,7 +294,6 @@ void quickSortOtimizado(int vetor[], int esq, int dir) {
 - ❌ **Pior caso O(n²)**: mitigado com escolha inteligente de pivô
 
 > ⚠️ **Atenção:** O pior caso ocorre com vetores já ordenados quando o pivô é sempre o primeiro/último elemento. Use mediana-de-3 ou randomização para evitar.
-> 
 
 ---
 
@@ -310,7 +302,6 @@ void quickSortOtimizado(int vetor[], int esq, int dir) {
 ### 4.1 Ideia Conceitual
 
 > **Analogia:** Organizar uma fila de pessoas por altura: primeiro ajuste pessoas distantes (ex: posição 1 com 5, 2 com 6), depois reduza a distância. O Shell Sort generaliza o Insertion Sort permitindo comparações entre elementos distantes.
-> 
 
 **Estratégia:**
 
@@ -374,7 +365,6 @@ void shellSort(int vetor[], int n) {
 | **Tokuda** | ⌈(9×(9/4)ᵏ - 4)/5⌉ | O(n log² n) | ✅ Teoricamente superior |
 
 > 💡 **Recomendação prática:** Use a sequência de **Knuth** para implementação simples e eficiente. Para bibliotecas de produção, considere Sedgewick ou Tokuda.
-> 
 
 ### 4.4 Análise de Complexidade
 
@@ -399,7 +389,6 @@ void shellSort(int vetor[], int n) {
 ### 5.1 Conceito de Heap Binário
 
 > **Definição:** Um **Max-Heap** é uma árvore binária completa onde cada nó é **maior ou igual** a seus filhos. Em vetor, isso se traduz em: `vetor[i] >= vetor[2i+1]` e `vetor[i] >= vetor[2i+2]`.
-> 
 
 ```
 Max-Heap como vetor: [90, 80, 70, 30, 40, 50, 10]
@@ -510,7 +499,6 @@ Resultado: [1, 3, 4, 5, 10]
 - ❌ **Cache-unfriendly**: acesso não sequencial aos elementos (pula na árvore)
 
 > 💡 **Curiosidade:** Embora teoricamente O(n log n), Heap Sort costuma ser **mais lento na prática** que Quick Sort devido a mais comparações e acesso não-local à memória.
-> 
 
 ---
 
@@ -675,7 +663,6 @@ Heap Sort   :  0.421 ms | Ordenado? ✓
 ```
 
 > 📌 **Nota:** Os tempos variam conforme hardware e padrão de entrada. Quick Sort costuma liderar em dados aleatórios; Merge Sort é mais consistente.
-> 
 
 ---
 
@@ -693,9 +680,8 @@ Heap Sort   :  0.421 ms | Ordenado? ✓
 | **Simplicidade** | ⚠️ Médio | ⚠️ Médio | ✅ Simples | ❌ Complexo |
 
 > *Mitigado com escolha inteligente de pivô (mediana-de-3, randomização)
-> 
 
-### 🎯 Guia Prático de Seleção
+### Guia Prático de Seleção
 
 ```c
 ✅ Use Merge Sort se:
@@ -927,7 +913,6 @@ void hybridSort(int vetor[], int esq, int dir) {
 ```
 
 > 💡 **Lição:** Algoritmos de produção raramente usam uma única técnica pura. Combinações híbridas exploram os pontos fortes de cada abordagem.
-> 
 
 ### 9.3 Quando a Teoria Não Conta a História Completa
 

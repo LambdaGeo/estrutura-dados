@@ -19,11 +19,9 @@
 - **Definição Formal:**
     
     > "Um Tipo Abstrato de Dados (TAD) é uma forma de organizar uma coleção de dados junto com um conjunto de operações bem definidas, escondendo como essa coleção é realmente armazenada na memória."
-    > 
 - **Definição Simplificada (Para a turma):**
     
     > "Um TAD é como um 'container' de dados: ele define que tipo de dados você pode colocar dentro e quais operações faz sentido fazer com esse container, sem que o usuário precise saber os detalhes de implementação."
-    > 
 - **Ideias‑Chave:**
     1. **Abstração:** O usuário conhece a interface ("o que ela faz"), não o "como".
     2. **Encapsulamento:** O estado interno (ex.: o vetor, topo) fica "protegido"; o usuário só acessa por operações adequadas.
@@ -45,7 +43,6 @@
 - **Frase de Efeito:**
     
     > "Na pilha, o primeiro que entra pode ficar sepultado; o último que entra é o primeiro a sair."
-    > 
 
 ### 1.2.2 Política de Acesso: LIFO
 
@@ -76,7 +73,6 @@
 - **Mensagem Final aos Alunos:**
     
     > "Isso não é só teoria de aula; é algo que existe nos sistemas e nos programas que você já usa."
-    > 
 
 ---
 

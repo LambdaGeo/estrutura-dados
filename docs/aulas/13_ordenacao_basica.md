@@ -578,7 +578,7 @@ int main() {
 
 > *Com otimização de parada antecipada
 
-### 🎯 Regra Prática de Escolha
+### Regra Prática de Escolha
 
 ```
 ✅ Use Insertion Sort se:
@@ -680,7 +680,6 @@ Execute com vetores de tamanhos 10, 50 e 100 (aleatórios) e preencha a tabela:
 | 100 | ? | ? | ? |
 
 > 💡 **Objetivo:** Verificar empiricamente que o número de operações cresce quadraticamente.
-> 
 
 ---
 
@@ -745,7 +744,6 @@ void insertionSortAlunos(Aluno alunos[], int n) {
 ### 9.3 O Próximo Nível: Algoritmos O(n log n)
 
 > 🔜 **Próxima aula:** Merge Sort e Quick Sort — como quebrar a barreira O(n²) usando divisão e conquista.
-> 
 
 ```
 Comparação teórica para n = 10.000:
