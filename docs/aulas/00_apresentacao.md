@@ -1,139 +1,81 @@
-# Apresentação da disciplina
+# Apresentação da Disciplina
 
-**Professor:** Sérgio Souza Costa
+**Professor:** Sérgio Souza Costa · **Unidade I:** Memória e Estruturas Lineares
 
-**Unidade:** I — Memória e Estruturas Lineares
+Este capítulo apresenta o programa da disciplina de Estrutura de Dados e faz uma introdução prática à linguagem C, que será usada como ferramenta principal ao longo de todo o livro.
 
-**Tópico:** Apresentação, Programa da Disciplina e Introdução ao C.
+## 1. Visão Geral da Disciplina
 
-## 📋 1. Visão Geral da Disciplina
+A ementa cobre recursividade e Tipos Abstratos de Dados (TAD); estruturas lineares — pilhas, filas e listas encadeadas; estruturas hierárquicas — árvores de busca, árvores balanceadas e heaps; e algoritmos de ordenação e complexidade.
 
-### Ementa Resumida
+O conteúdo está organizado em três unidades.
 
-- Recursividade e Tipos Abstratos de Dados (TAD).
-- Estruturas Lineares: Pilhas, Filas, Listas Encadeadas.
-- Estruturas Hierárquicas: Árvores (Busca, Balanceadas, Heaps).
-- Algoritmos de Ordenação e Complexidade.
+**Unidade I — Memória e Estruturas Lineares.** Foco em ponteiros, alocação e na base das estruturas de dados.
 
-### Cronograma
+1. Apresentação da disciplina.
+2. Pilha Estática I: implementação básica com vetores globais.
+3. Pilha Estática II: funções, ponteiros e structs.
+4. Pilha Estática III: alocação dinâmica.
+5. Lista Estática: inserção/remoção em vetor e complexidade (melhor vs. pior caso).
+6. Lista Encadeada Dinâmica: nós, ponteiros e encadeamento físico.
+7. Fila I: o conceito FIFO em vetor.
+8. Fila II: fila circular (resolvendo o problema do deslocamento no vetor).
+9. Revisão da Unidade I: consolidação de ponteiros e estruturas lineares.
+10. Avaliação I (escrita).
 
-#### Unidade I: Memória e Estruturas Lineares
+**Unidade II — Busca e a Estrutura Hierárquica.** Foco na evolução da busca binária para a árvore, e no desafio do balanceamento.
 
-*Foco: Ponteiros, Alocação e a base das estruturas de dados.*
+1. Recursividade I: fundamentos, pilha de execução e exemplos clássicos.
+2. Recursividade II: exemplos clássicos e operações em listas usando recursão.
+3. Busca Sequencial e Binária: implementação iterativa e recursiva, e suas limitações.
+4. Busca Sequencial e Binária (continuação): exercícios práticos e discussão de complexidade.
+5. Árvores: fundamentos, teoria visual, nós e representação em C.
+6. Árvores Binárias de Busca (BST) I: inserção, busca e percursos recursivos.
+7. Árvores Binárias de Busca (BST) II: o desafio do algoritmo de remoção.
+8. Árvores Balanceadas I (conceitual): o problema da degeneração e rotações.
+9. Revisão da Unidade II: da recursividade até a lógica de árvores.
+10. Avaliação II (escrita).
 
-1. **Apresentação da disciplina**.
-2. **Pilha Estática I:** Implementação básica com vetores globais
-3. **Pilha Estática II:** Funções, Ponteiros e Structs 
-4. **Pilha Estática III:** Alocação dinâmica
-5. **Lista Estática:** Inserção/Remoção em vetor e **Complexidade** (Melhor vs Pior caso).
-6. **Lista Encadeada Dinâmica:** Nós, ponteiros e encadeamento físico.
-7. **Fila I:** O conceito FIFO em vetor.
-8. **Fila II:** Fila Circular (resolvendo o problema do deslocamento no vetor).
-9. **Revisão Unidade I:** Consolidação de ponteiros e estruturas lineares.
-10. **Avaliação I (Escrita).**
+**Unidade III — Balanceamento, Heaps e Ordenação.** Foco na estabilidade das árvores e nos grandes algoritmos de ordenação.
 
----
+1. Árvores Balanceadas II (implementação): codificando rotações e fator de balanceamento (AVL).
+2. Árvores Balanceadas III: finalização da AVL e testes de performance.
+3. Heaps e Fila de Prioridade I: representação em vetor e algoritmos de subida/descida.
+4. Heaps e Fila de Prioridade II: implementação da fila de prioridade.
+5. Ordenação I: algoritmos de troca — Bubble Sort e Selection Sort ($O(n^2)$).
+6. Ordenação II: Insertion Sort e a lógica de inserção ordenada.
+7. Ordenação III: Quick Sort (divisão e conquista, e a escolha do pivô).
+8. Ordenação IV: Merge Sort (complexidade $O(n \log n)$ e estabilidade).
+9. Revisão Final: comparativo de todas as estruturas (tabela de complexidade).
+10. Avaliação III / Projeto Prático.
 
-#### Unidade II: Busca e a Estrutura Hierárquica
+## 2. Por Que C, e Não Python?
 
-*Foco: A evolução da busca binária para a árvore e o desafio do balanceamento.*
-
-1. **Recursividade I:** Fundamentos, Pilha de Execução e exemplos clássicos.
-2. **Recursividade II:** Exemplos clássicos e operações em listas usando recursão.
-3. **Busca Sequencial e Binária:** Implementação iterativa e recursiva. Limitações
-4. **Busca Sequencial e Binária:** Implementação iterativa e recursiva. Limitações
-5. **Árvores: Fundamentos:** Teoria visual, nós e representação em C.
-6. **Árvores Binárias de Busca (BST) I:** Inserção, busca e percursos recursivos.
-7. **Árvores Binárias de Busca (BST) II:** O desafio do algoritmo de **Remoção**.
-8. **Árvores Balanceadas I (Conceitual):** O problema da degeneração e a aula visual de rotações.
-9. **Revisão Unidade II:** De Recursividade até a lógica de Árvores.
-10. **Avaliação II (Escrita).**
-
----
-
-#### Unidade III: Balanceamento, Heaps e Ordenação
-
-*Foco: Estabilidade das árvores e os grandes algoritmos de ordenação.*
-
-1. **Árvores Balanceadas II (Implementação):** Codificando rotações e fator de balanceamento (AVL).
-2. **Árvores Balanceadas III:** Finalização da AVL e testes de performance.
-3. **Heaps e Fila de Prioridade I:** Representação em vetor e algoritmos de subida/descida.
-4. **Heaps e Fila de Prioridade II:** Implementação da Fila de Prioridade.
-5. **Ordenação I:** Algoritmos de troca: Bubble Sort e Selection Sort ($O(n^2)$).
-6. **Ordenação II:** Insertion Sort e a lógica de inserção ordenada.
-7. **Ordenação III:** Quick Sort (Divisão e Conquista e a escolha do pivô).
-8. **Ordenação IV:** Merge Sort (Complexidade $O(n \log n)$ e estabilidade).
-9. **Revisão Final:** Comparativo de todas as estruturas (Tabela de Complexidade).
-10. **Avaliação III / Projeto Prático?**
-
----
-
-## 📚 Anotações do Encontro 01
-
-### Parte 1: Por que C e não Python? (50 min)
-
-### O Dilema da Abstração
-
-Muitos alunos questionam o uso de **C** quando linguagens como **Python** ou **Java** são mais concisas. A resposta está no **objetivo da disciplina**:
+É comum questionar o uso de C quando linguagens como Python ou Java são mais concisas. A resposta está no objetivo da disciplina: Python e Java escondem o gerenciamento de memória atrás de um coletor de lixo automático, e uma lista é apenas `list.append()` — uma caixa preta cujo custo real é difícil de enxergar. Em C, o gerenciamento de memória é manual (`malloc`/`free`), a estrutura de uma lista é explícita (vetor ou ponteiros) e o custo de cada operação é visível, porque o acesso à RAM é direto. O foco deixa de ser produtividade de desenvolvimento e passa a ser entendimento de computação.
 
 | Característica | Python / Java | Linguagem C |
 | --- | --- | --- |
-| **Gerenciamento de Memória** | Automático (Garbage Collector) | **Manual** (`malloc` / `free`) |
-| **Estrutura de Lista** | Oculta (`list.append()`) | **Explícita** (Vetor vs. Ponteiros) |
-| **Custo de Operação** | Difícil de medir (abstrato) | **Visível** (acesso direto à RAM) |
-| **Foco** | Produtividade de Desenvolvimento | **Entendimento de Computação** |
+| **Gerenciamento de Memória** | Automático (Garbage Collector) | Manual (`malloc` / `free`) |
+| **Estrutura de Lista** | Oculta (`list.append()`) | Explícita (Vetor vs. Ponteiros) |
+| **Custo de Operação** | Difícil de medir (abstrato) | Visível (acesso direto à RAM) |
+| **Foco** | Produtividade de Desenvolvimento | Entendimento de Computação |
 
-### O Exemplo Crítico: Listas Estáticas vs. Dinâmicas
-
-Em Python, uma lista parece fazer tudo magicamente. Em C, entendemos o custo real:
-
-1. **Lista Estática (Vetor/Array):**
-    - **Memória:** Contígua (blocos lado a lado).
-    - **Acesso:** Rápido $O(1)$ pelo índice.
-    - **Inserção:** Lenta $O(n)$ no meio (precisa deslocar elementos).
-    - **Tamanho:** Fixo (definido na compilação).
-2. **Lista Dinâmica (Encadeada/Linked List):**
-    - **Memória:** Esparsa (nós espalhados na Heap).
-    - **Acesso:** Lento $O(n)$ (precisa percorrer ponteiros).
-    - **Inserção:** Rápida $O(1)$ (se tiver o ponteiro do nó anterior).
-    - **Tamanho:** Flexível (cresce conforme `malloc`).
+Em Python, uma lista parece fazer tudo magicamente; em C, o custo real de cada operação fica exposto. Uma lista estática (vetor) ocupa memória contígua, tem acesso rápido — $O(1)$ pelo índice —, mas inserção lenta no meio — $O(n)$, pois é preciso deslocar elementos —, e seu tamanho é fixo, definido na compilação. Já uma lista dinâmica (encadeada) tem memória esparsa, com nós espalhados na heap; o acesso é lento — $O(n)$, pois é preciso percorrer ponteiros —, mas a inserção é rápida — $O(1)$, se já houver o ponteiro do nó anterior —, e o tamanho é flexível, crescendo conforme `malloc` é chamado.
 
 !!! note "Nota Importante"
-    Em Estrutura de Dados, não queremos apenas *usar* a estrutura, queremos entender **como ela é construída na memória**. C nos obriga a lidar com **ponteiros** e **endereços**, revelando o custo real de cada operação.
+    Em Estrutura de Dados, não queremos apenas *usar* a estrutura, queremos entender **como ela é construída na memória**. C obriga a lidar com **ponteiros** e **endereços**, revelando o custo real de cada operação.
 
-### Conceito Chave: Stack vs. Heap
+Essa exposição de custos depende de entender onde os dados vivem. A **stack** (pilha de execução) guarda variáveis locais e o escopo de funções, com gerenciamento automático em regime LIFO. A **heap** (monte) guarda dados alocados dinamicamente com `malloc`, com gerenciamento manual — e, portanto, risco de *memory leak* se o programador esquecer de liberar memória.
 
-- **Stack (Pilha):** Onde vivem variáveis locais e escopo de funções. Gerenciamento automático (LIFO).
-- **Heap (Monte):** Onde vivem dados dinâmicos (alocados com `malloc`). Gerenciamento manual (risco de *memory leak*).
+## 3. A Linguagem C: um Panorama Rápido
 
----
+C foi criada entre 1969 e 1973 nos Bell Labs, por Dennis Ritchie e Ken Thompson, com o objetivo original de reescrever o sistema operacional UNIX — até então implementado em Assembly. Seu legado é comparável ao do latim para as línguas modernas: é a base sintática de C++, Java, C#, JavaScript, PHP e mesmo do interpretador de Python (CPython é escrito em C).
 
-### Parte 2: A Linguagem C e Hello World (50 min)
+C continua no centro da infraestrutura de software atual: está nos kernels de sistemas operacionais (Linux, Windows, macOS, Android, iOS), nas engines de armazenamento de bancos de dados (PostgreSQL, MySQL, SQLite), em compiladores e interpretadores (GCC, LLVM, o próprio interpretador Python) e em sistemas embarcados — microcontroladores, IoT, dispositivos médicos — onde não há espaço para o *overhead* de linguagens mais abstratas.
 
-### Histórico e Importância
+Diferente de linguagens interpretadas, um programa em C passa por etapas explícitas antes de rodar: o pré-processamento processa diretivas como `#include` e `#define`; a compilação traduz o código para código de máquina; a montagem (*assembler*) gera arquivos objeto; e a linkagem junta bibliotecas e produz o executável final.
 
-- **Criação:** 1969-1973, Bell Labs.
-- **Autores:** Dennis Ritchie e Ken Thompson.
-- **Objetivo Original:** Reescrever o sistema operacional **UNIX** (antes feito em Assembly).
-- **Legado:** Considerada o "Latin" da programação. Sintaxe base para C++, Java, C#, JavaScript, PHP, Python (o interpretador CPython é escrito em C).
-
-### Onde o C é usado hoje?
-
-1. **Sistemas Operacionais:** Kernels (Linux, Windows, macOS, Android, iOS).
-2. **Banco de Dados:** Engines de armazenamento (PostgreSQL, MySQL, SQLite).
-3. **Compiladores/Interpretadores:** GCC, LLVM, Python Interpreter.
-4. **Sistemas Embarcados:** Microcontroladores, IoT, dispositivos médicos (onde não há espaço para *overhead*).
-
-### O Ciclo de Compilação
-
-Diferente de linguagens interpretadas, o C passa por etapas explícitas antes de rodar:
-
-1. **Pré-processamento:** Processa diretivas `#include` e `#define`.
-2. **Compilação:** Traduz para código de máquina.
-3. **Montagem (Assembler):** Gera arquivos objeto.
-4. **Linkagem:** Junta bibliotecas e cria o executável final.
-
-### Prática: Hello World
+O primeiro programa de qualquer curso de C é o clássico "Hello World":
 
 ```c
 #include <stdio.h>  // 1. Biblioteca Padrão de I/O
@@ -147,16 +89,9 @@ int main() {        // 2. Função principal (ponto de entrada)
 }
 ```
 
-### Dissecando o Código
+Cada linha carrega uma decisão de design da linguagem: `#include <stdio.h>` importa as funções de entrada/saída (`printf`, `scanf`) — sem isso o compilador não reconhece `printf`; todo programa C precisa de uma função `main()`; `printf()` é a função de impressão formatada; `\n` é o caractere de escape para nova linha; o ponto e vírgula é obrigatório ao final de cada instrução; e `return 0` é a convenção que indica que o programa terminou sem erros.
 
-- `#include <stdio.h>`: Importa funções de entrada/saída (`printf`, `scanf`). Sem isso, o compilador não reconhece o `printf`.
-- `int main()`: Todo programa C deve ter um `main`.
-- `printf()`: Função de impressão formatada.
-- `\n`: Caractere de escape para **nova linha** (newline).
-- `;`: Ponto e vírgula obrigatório ao fim de cada instrução.
-- `return 0`: Boa prática. Indica que o programa terminou sem erros.
-
-### Compilando no Terminal
+Para compilar e executar:
 
 ```bash
 # Compilar
@@ -169,34 +104,13 @@ gcc hello.c -o hello
 hello.exe
 ```
 
----
+## Síntese
 
-## 📝 Resumo e Próximos Passos
+C foi escolhida como ferramenta de ensino justamente por expor o gerenciamento de memória — ponteiros, stack, heap — que linguagens modernas escondem. Estrutura de Dados é, no fundo, uma disciplina sobre memória: entender como os dados são organizados na RAM importa mais do que decorar sintaxe. E C é a base de boa parte da infraestrutura de software do mundo: sistemas operacionais, bancos de dados, compiladores.
 
-### Takeaways da Aula
-
-1. **C é uma ferramenta de ensino:** Escolhida para expor o gerenciamento de memória (ponteiros, stack, heap) que linguagens modernas ocultam.
-2. **Estrutura de Dados é sobre Memória:** Entender como os dados são organizados na RAM é mais importante que a sintaxe.
-3. **Ecossistema C:** É a base da infraestrutura de software mundial (OS, DB, Compiladores).
-4. **Ciclo de Build:** Entender a diferença entre escrever o código (`.c`) e gerar o executável (`.exe`).
-
-### Tarefa de Casa
-
-1. **Instalação:** Garantir que o compilador (GCC) e editor (VS Code, CodeBlocks, etc.) estejam instalados e funcionais.
-2. **Prática:** Modificar o `hello.c` para:
-    - Imprimir seu nome completo.
-    - Imprimir seu número de matrícula.
-    - Usar duas linhas diferentes (dois `printf` ou um com `\n`).
-3. **Leitura:** Revisar conceitos básicos de variáveis e tipos em C (`int`, `float`, `char`).
-
-### Próxima Aula
-
-- **Tópico:** Pilha Estática e Memória.
-- **Foco:** Implementação básica de pilha com vetores globais e introdução prática a **Stack vs Heap**.
-
----
+Para praticar antes do próximo capítulo: garanta que o compilador (GCC) e um editor (VS Code, Code::Blocks, etc.) estejam instalados e funcionando; modifique o `hello.c` para imprimir seu nome completo e seu número de matrícula, em duas linhas diferentes; e revise conceitos básicos de variáveis e tipos em C (`int`, `float`, `char`). O próximo capítulo parte daí para a implementação básica de uma pilha com vetores globais, introduzindo na prática a diferença entre stack e heap.
 
 !!! question "Dúvida Comum"
     *"Preciso ser expert em C para passar?"*
 
-    **Resposta:** Não. Precisa entender a lógica de memória. A sintaxe de C é pequena; o desafio é a lógica de ponteiros. Vamos praticar juntos.
+    **Resposta:** Não. É preciso entender a lógica de memória. A sintaxe de C é pequena; o desafio é a lógica de ponteiros — e isso se constrói com prática ao longo do livro.

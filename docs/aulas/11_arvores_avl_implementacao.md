@@ -4,7 +4,7 @@
 
 ---
 
-Na aula passada, vimos que:
+No capítulo anterior, vimos que:
 
 | Situação | ABB Comum | AVL |
 | --- | --- | --- |
@@ -765,7 +765,7 @@ A altura só pode ser calculada APÓS as subárvores estarem prontas!
 
 ---
 
-## 11. Resumo da Aula
+## 11. Resumo do Capítulo
 
 **Estrutura do nó AVL:** campo `altura` é obrigatório para eficiência
 
@@ -797,7 +797,7 @@ A altura só pode ser calculada APÓS as subárvores estarem prontas!
 
 ## 12. Próximos Passos & Ferramentas
 
-**Tópicos para próxima aula:**
+**Tópicos para próximos capítulos:**
 
 - Remoção em AVL (mais complexa que inserção)
 - Balanceamento em remoção: casos adicionais

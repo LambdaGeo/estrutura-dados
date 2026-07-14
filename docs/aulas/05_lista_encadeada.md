@@ -1,20 +1,18 @@
 # Listas Encadeadas como TAD em C
 
-## Material de Consulta para o Aluno
-
 **Disciplina:** Estrutura de Dados
 
 **Tema:** Tipo Abstrato de Dados LISTA – Implementação Dinâmica (Encadeada) em C
 
-**Pré-requisitos:** Ponteiros, `malloc`/`free`, TAD LISTA estática (Encontro 5)
+**Pré-requisitos:** Ponteiros, `malloc`/`free`, TAD LISTA estática (capítulo anterior)
 
 ---
 
 ## 1. Revisão: O TAD LISTA e a Ideia de Independência de Implementação
 
-### 1.1 O Que Aprendemos no Encontro Anterior
+### 1.1 O Que Vimos no Capítulo Anterior
 
-No encontro sobre **listas estáticas**, implementamos o TAD LISTA usando um vetor de tamanho fixo:
+No capítulo anterior, sobre **listas estáticas**, implementamos o TAD LISTA usando um vetor de tamanho fixo:
 
 ```c
 /* Implementação estática (lista_estatica.c) */
@@ -136,7 +134,7 @@ Na implementação estática, definimos:
 | Estratégia | Como funciona | Exemplo |
 | --- | --- | --- |
 | **Vetor dinâmico** (`std::vector` em C++, `ArrayList` em Java) | Começa com capacidade pequena; quando enche, aloca um vetor maior (ex: 2×), copia os elementos e libera o antigo | Crescimento amortizado O(1) para inserção no final |
-| **Lista encadeada** (nossa abordagem hoje) | Cada elemento é alocado sob demanda; não há limite pré-definido | Inserção/remoção O(1) se já tivermos a posição |
+| **Lista encadeada** (abordagem deste capítulo) | Cada elemento é alocado sob demanda; não há limite pré-definido | Inserção/remoção O(1) se já tivermos a posição |
 | **Híbrido** (`std::deque`) | Combina blocos de vetor com encadeamento | Acesso por posição O(1), crescimento flexível |
 
 > **Insight:** Não existe "melhor estrutura" universal. A escolha depende do padrão de uso: muitas inserções no meio? Lista encadeada pode ser melhor. Muitos acessos por posição? Vetor é mais eficiente.
@@ -598,7 +596,7 @@ int main(void) {
 
 ## 9. Guia de Estudo e Prática
 
-### Antes da Próxima Aula
+### Exercícios Recomendados
 
 - [ ]  Implementar `insereFinal` com otimização O(1) adicionando `No* fim` na struct
 - [ ]  Criar um teste que insere 1000 elementos e mede tempo (estática vs. encadeada)
@@ -674,7 +672,7 @@ int removePos(Lista* l, int pos) {
 
 ---
 
-## 10. Ponte para Próximos Tópicos
+## 10. Continuando o Estudo
 
 ### 10.1 Otimizações Possíveis
 
@@ -698,7 +696,7 @@ int removePos(Lista* l, int pos) {
    • Memória é limitada e quer evitar desperdício
 ```
 
-### 10.3 Próximo Encontro: Filas e Pilhas com Listas
+### 10.3 Próximo Capítulo: Filas e Pilhas com Listas
 
 > "Agora que dominamos duas implementações do TAD LISTA, vamos aplicar esse conhecimento para implementar outros TADs: FILA e PILHA. Veremos como a escolha da estrutura subjacente (vetor vs. encadeada) impacta a eficiência de cada operação."
 
@@ -714,4 +712,4 @@ int removePos(Lista* l, int pos) {
 
 ---
 
-> **Nota:** Este material é para consulta após a aula. Para fixar os conceitos, implemente as operações você mesmo, execute os testes sugeridos e compare o comportamento das versões estática e encadeada. A prática com ponteiros é essencial para dominar listas encadeadas.
+> **Nota:** Para fixar os conceitos, implemente as operações você mesmo, execute os testes sugeridos e compare o comportamento das versões estática e encadeada. A prática com ponteiros é essencial para dominar listas encadeadas.

@@ -1,45 +1,14 @@
 # Pilha Estática II: Funções, Ponteiros e Structs
 
-**Disciplina:** Estrutura de Dados / Algoritmos
+Este capítulo dá continuidade à implementação de pilha em C, evoluindo a versão "nua" do capítulo anterior — baseada em variáveis globais — para uma versão organizada em torno de funções, `struct` e ponteiros. Ao final, teremos um TAD de pilha propriamente dito: com interface clara e estado interno protegido.
 
-**Unidade:** I — Memória e Estruturas Lineares
+Pré-requisitos: o conceito de pilha (LIFO), a implementação "nua" com variáveis globais vista no capítulo anterior, e sintaxe básica de C (variáveis, laços, condicionais).
 
-**Tema Central:** Evolução da implementação de Pilha em C (Funções, Structs e Ponteiros).
+Ao final deste capítulo, você deve ser capaz de: compreender o comportamento de funções em C (passagem por valor vs. referência); usar `struct` para agrupar dados e criar um tipo composto (`Pilha`); entender por que ponteiros são necessários para modificar estruturas dentro de funções; refatorar o código para respeitar o conceito de TAD (encapsulamento lógico); e reconhecer as limitações da alocação estática, preparando o terreno para a alocação dinâmica do próximo capítulo.
 
-**Duração Sugerida:** 2 aulas × 50 minutos (Continuação da Aula de Teoria e Pilha "Nua").
+## 1. Funções em C
 
-**Pré-requisitos:**
-
-- Conceito de Pilha (LIFO).
-- Implementação "nua" com variáveis globais (visto na aula anterior).
-- Sintaxe básica de C (variáveis, loops, condicionais).
-
----
-
-## 🎯 Objetivos de Aprendizagem
-
-1. Compreender o comportamento de **funções em C** (passagem por valor vs. referência).
-2. Utilizar **`struct`** para agrupar dados e criar um tipo composto (`Pilha`).
-3. Entender a necessidade de **ponteiros** para modificar estruturas dentro de funções.
-4. Refatorar o código para respeitar o conceito de **TAD** (encapsulamento lógico).
-5. Refletir sobre as limitações da alocação estática e preparar o terreno para alocação dinâmica.
-
----
-
-## 🕒 Parte 1 – Introdução às Funções em C (50 min)
-
-### 1.1 O Que é uma Função em C?
-
-**Definição Didática:**
-
-> Uma função em C é um **bloco de código** que recebe zero ou mais parâmetros, executa uma tarefa bem definida e pode retornar um único valor.
-
-**Frases para o Quadro:**
-
-- "Função = subrotina ou procedimento especializado."
-- "Divide um programa grande em pedaços menores e reutilizáveis."
-
-### 1.2 Sintaxe Básica
+Uma função em C é um bloco de código que recebe zero ou mais parâmetros, executa uma tarefa bem definida e pode retornar um único valor — uma subrotina especializada que divide um programa grande em pedaços menores e reutilizáveis. Sua sintaxe básica é:
 
 ```c
 tipo_retorno nome_da_funcao(tipo1 param1, tipo2 param2, ...) {
@@ -48,13 +17,7 @@ tipo_retorno nome_da_funcao(tipo1 param1, tipo2 param2, ...) {
 }
 ```
 
-**Destaque:**
-
-- `tipo_retorno`: `int`, `float`, `char`, `void`, etc.
-- `nome_da_funcao`: Deve ser descritivo (ex: `empilha`, `calculaMedia`).
-- `return`: Só aparece se o tipo de retorno não for `void`.
-
-### 1.3 Exemplo Simples: Função que Calcula o Dobro
+`tipo_retorno` pode ser `int`, `float`, `char`, `void`, entre outros; o nome da função deve ser descritivo (`empilha`, `calculaMedia`); e `return` só aparece se o tipo de retorno não for `void`. Um exemplo simples:
 
 ```c
 #include <stdio.h>
@@ -71,16 +34,7 @@ int main() {
 }
 ```
 
-**Pontos Didáticos:**
-
-- Tipo `int` e retorno `int`.
-- `n` é **copiado** para o parâmetro `x`.
-- `x` é uma **variável local** da função; alterar `x` não altera `n`.
-
-### 1.4 O Que é `void`?
-
-- `void` indica que **não há valor de retorno**.
-- Funções que só fazem algo (imprimir, inicializar, modificar estado) podem ser `void`.
+Aqui, `n` é copiado para o parâmetro `x`; `x` é uma variável local da função, e alterar `x` não altera `n`. Quando uma função não precisa retornar valor — apenas imprimir, inicializar ou modificar algum estado —, seu tipo de retorno é `void`:
 
 ```c
 void imprimirMensagem() {
@@ -88,13 +42,7 @@ void imprimirMensagem() {
 }
 ```
 
-### 1.5 Passagem por Valor (Passagem por Cópia)
-
-**Ideia-Chave:**
-
-> Em C, os parâmetros de função são **passados por valor (por cópia)**.
-
-**Exemplo do Erro Comum:**
+Isso leva a um ponto central: em C, os parâmetros de função são **passados por valor** (por cópia). O exemplo clássico do erro que essa regra causa é uma tentativa de trocar dois valores:
 
 ```c
 void trocaErrada(int a, int b) {
@@ -112,54 +60,17 @@ int main() {
 }
 ```
 
-**Conclusão para a Turma:**
+A troca não tem efeito nenhum sobre `x` e `y` no `main`, porque `a` e `b` são cópias locais. A conclusão é direta: se uma função precisa modificar o valor de uma variável original, copiar o valor não basta — é preciso passar a referência (o endereço) da variável.
 
-> Se a função precisa **modificar** o valor de uma variável original, **copiar o valor não basta**. Precisamos passar a **referência** (endereço) da variável.
+## 2. Revisitando o TAD Pilha
 
----
+O TAD "pilha" já foi apresentado como uma coleção de dados junto de um conjunto de operações bem definidas, que esconde a implementação. As operações típicas de uma pilha são: empilhar (`push`), desempilhar (`pop`), ver o topo sem remover (`top`/`peek`), testar se está vazia (`isEmpty`) e testar se está cheia (`isFull`).
 
-## 🕒 Parte 2 – Revisita à Pilha e ao TAD (50 min)
+C não tem um tipo `Pilha` nativo, mas oferece as ferramentas para construí-lo: tipos primitivos (`int`, `float`) e a possibilidade de compor tipos novos com `struct`. As operações, por sua vez, são naturalmente representadas por funções. Assim, o TAD de pilha que vamos construir tem duas partes: `struct pilha`, o tipo concreto que guarda os dados, e um conjunto de funções — `empilha()`, `desempilha()`, `pilhaVazia()` e outras — que definem o comportamento.
 
-### 2.1 Relembrando o TAD "Pilha"
+## 3. Criando o Tipo `Pilha` com `struct`
 
-Voltar ao conceito apresentado na Aula 1:
-
-> *Um TAD é uma coleção de dados + um conjunto de operações bem definidas, escondendo a implementação.*
-
-**Pergunta para a Turma:**
-
-> "Quais são as operações típicas que fazemos com uma pilha?"
-
-**Respostas Esperadas:**
-
-- **Empilhar (`push`)**
-- **Desempilhar (`pop`)**
-- **Ver o topo (`top`/`peek`)**
-- **Testar se está vazia (`isEmpty`)**
-- **Testar se está cheia (`isFull`)**
-
-### 2.2 Representando Essas Operações em C
-
-**Pergunta:**
-
-> "Como podemos representar essas operações em C? O que nos dá a linguagem?"
-
-**Resposta Guiada:**
-
-- C não tem um tipo `Pilha` nativo.
-- Temos tipos primitivos (`int`, `float`) e podemos construir tipos compostos com `struct`.
-- Operações podem ser representadas por **funções**.
-- **Nosso TAD de Pilha será:**
-    - `struct pilha` → o tipo concreto (dados).
-    - Funções → `empilha()`, `desempilha()`, `pilhaVazia()`, etc. (comportamento).
-
----
-
-## 🕒 Parte 3 – Criando o Tipo "Pilha" com `struct`
-
-### 3.1 Definição de Struct para Pilha
-
-**Código no Quadro:**
+A definição da struct agrupa o vetor de valores e o índice do topo em um único tipo:
 
 ```c
 #define MAX 100
@@ -171,17 +82,9 @@ typedef struct pilha {
 } Pilha;
 ```
 
-**Explicação:**
+`int valores[MAX]` armazena os elementos da pilha em um vetor estático; `int topo` guarda o índice do topo; e `typedef struct pilha { ... } Pilha;` cria um novo tipo `Pilha`, que passa a poder ser usado como `Pilha p1;` — assim como `int` ou `float`, só que composto por um vetor e um inteiro.
 
-- `int valores[MAX]`: Armazena os elementos da pilha (vetor estático).
-- `int topo`: Índice do topo da pilha.
-- `typedef struct pilha { ... } Pilha;`: Cria um novo **tipo** `Pilha` que pode ser usado como `Pilha p1;`.
-
-> **Observação:** Agora, `Pilha` é um tipo próprio, como `int` ou `float`, só que composto por um vetor e um `int`.
-
-### 3.2 Exemplo de Uso de `struct` Sem Funções
-
-Mostrar o uso direto de membros da `struct` no `main` (transição da aula anterior):
+Nada, porém, impede ainda que o código cliente acesse os membros da struct diretamente:
 
 ```c
 #include <stdio.h>
@@ -214,19 +117,13 @@ int main() {
 }
 ```
 
-**Pontos Didáticos:**
+O operador `.` acessa os campos da struct (`p.valores`, `p.topo`) — é essencialmente o mesmo código da pilha "nua" do capítulo anterior, apenas organizado dentro de um tipo `Pilha`. O problema persiste: o `main` ainda mexe diretamente no estado interno, violando o encapsulamento que um TAD deveria garantir.
 
-- Uso de `p.valores` e `p.topo` para acessar campos (operador `.`).
-- Mesmo código da pilha "nua", mas organizado em um tipo `Pilha`.
-- **Problema:** O `main` ainda mexe diretamente no estado interno (`p.valores`, `p.topo`), violando o encapsulamento do TAD.
+## 4. Funções para a Pilha
 
----
+### 4.1 Uma Tentativa (Errada) Sem Ponteiros
 
-## 🕒 Parte 4 – Introduzindo Funções para a Pilha
-
-### 4.1 Tentativa Sem Ponteiros (Passagem por Valor)
-
-**Objetivo:** Mostrar o erro conceitual antes de corrigir.
+Antes de corrigir o problema, vale ver o erro conceitual que aparece ao tentar resolvê-lo apenas com funções, sem ponteiros:
 
 ```c
 void empilha(int x, Pilha p) { // Recebe uma CÓPIA da struct
@@ -247,7 +144,7 @@ int main() {
     // Mesmo após empilha, p não foi alterado
     if (p.topo != -1) {
         printf("Valor no topo: %d\n", p.valores[p.topo]);
-        // ⚠️ IMPRIME ERRO ou PILHA VAZIA, pois topo continua -1
+        // IMPRIME ERRO ou PILHA VAZIA, pois topo continua -1
     } else {
         printf("Pilha vazia!\n");
     }
@@ -256,26 +153,11 @@ int main() {
 }
 ```
 
-**O Que Acontece e Por Que Discutir:**
+Como `Pilha p` é passado por valor, `empilha` recebe uma cópia inteira de `p`. A modificação de `p.topo` e `p.valores` ocorre apenas nessa cópia — ao voltar para o `main`, `p.topo` continua `-1` e o elemento empilhado simplesmente não aparece. É exatamente o mesmo problema da troca de valores da seção 1, agora em uma struct.
 
-- `Pilha p` é passado **por valor** → `empilha` recebe uma cópia de `p`.
-- A modificação de `p.topo` e `p.valores` ocorre na **cópia**, não no `p` original.
-- Ao voltar para `main`, `p.topo` ainda é `1` e o elemento não aparece.
+### 4.2 Ponteiros: Passando a Referência, Não a Cópia
 
-### 4.2 Introdução ao Conceito de Ponteiros
-
-**Pergunta para a Turma:**
-
-> "O que seria necessário para que a função `empilha` consiga realmente alterar a pilha passada? O que é o `p` que o `main` quer ver?"
-
-**Resposta Guiada:**
-
-- Precisamos que a função receba não uma **cópia** da pilha, mas uma **referência** para a pilha.
-- Em C, referência é feita com **ponteiros**.
-
-### 4.3 Operadores Básicos de Ponteiros em C
-
-**Mostrar no Quadro:**
+Para que `empilha` consiga de fato alterar a pilha do chamador, a função precisa receber não uma cópia, mas uma referência para a pilha original — e em C, referência é feita com ponteiros:
 
 ```c
 int x = 10;
@@ -285,15 +167,7 @@ int *ptr = &x;   // ptr guarda o endereço de x
 // * → operador de acesso ao valor apontado ("desreferenciar")
 ```
 
-**Frase de Memória:**
-
-> `&` → "Me dê o endereço"
-> 
-> - → "Me dê o valor que está nesse endereço"
-
-### 4.4 Modificação da Função `empilha` para Usar Ponteiro
-
-**Código Corrigido:**
+Uma forma simples de lembrar: `&` significa "me dê o endereço"; `*` significa "me dê o valor que está nesse endereço". Com isso, a função `empilha` pode ser reescrita para receber um ponteiro para `Pilha`:
 
 ```c
 void empilha(int x, Pilha *p) { // Recebe o ENDEREÇO da pilha
@@ -306,15 +180,11 @@ void empilha(int x, Pilha *p) { // Recebe o ENDEREÇO da pilha
 }
 ```
 
-**Explicação de `p->topo`:**
+Aqui `p` é um ponteiro para `Pilha`, e `p->topo` é equivalente a `(*p).topo`: primeiro desreferencia `p`, depois acessa o membro. Agora a função modifica o `Pilha` original apontado por `p`, não uma cópia.
 
-- `p` é um ponteiro para `Pilha`.
-- `p->topo` é equivalente a `(*p).topo` → primeiro desreferencia `p` e depois acessa o membro.
-- Agora a função modifica o `Pilha` original, não uma cópia.
+### 4.3 Código Completo do TAD
 
-### 4.5 Código Completo com TAD de Pilha Simples
-
-**Estado Desejado da Aula:**
+Juntando as peças, chegamos a uma interface de pilha completa, em que todo acesso ao estado interno passa por funções:
 
 ```c
 #include <stdio.h>
@@ -396,46 +266,10 @@ int main() {
 }
 ```
 
-**Pontos Didáticos:**
+Note que o `main` agora usa apenas as funções da interface — o estado interno (`valores`, `topo`) só é acessado por meio de ponteiro, dentro das próprias funções do TAD. Isso já se aproxima de um TAD "limpo": quem usa a pilha só precisa conhecer o tipo `Pilha` e o conjunto de funções disponíveis.
 
-- O `main` usa apenas as funções de interface.
-- O estado interno (`valores`, `topo`) é acessado só por meio de ponteiro dentro das funções.
-- Aproxima-se de um TAD "limpo": quem usa só vê o tipo `Pilha` e as funções.
+## 5. O Limite do Vetor Estático
 
----
+Mesmo com funções, ponteiros e passagem por referência resolvidos, resta uma limitação: o vetor `valores[MAX]` continua com tamanho fixo, definido em tempo de compilação. Não é possível criar uma pilha de tamanho arbitrário — 20, 30, 1000 elementos — com esse modelo, porque `MAX` é uma constante fixa no código-fonte. Se quisermos flexibilidade real, `valores` precisa deixar de ser um vetor estático e passar a ser alocado dinamicamente.
 
-## 🕒 Parte 5 – Reflexão Final e Próximos Passos
-
-### 5.1 Pergunta para a Turma
-
-> "Se já temos ponteiros, e o `main` pode criar ponteiros para `Pilha`, por que continuamos usando um vetor estático `int valores[MAX]` dentro da estrutura? O que acontece se quisermos várias pilhas de tamanhos diferentes?"
-
-**Resposta Esperada (Guiada):**
-
-- O vetor `valores[MAX]` é de tamanho **fixo em tempo de compilação**.
-- Não conseguimos criar uma pilha de tamanho arbitrário (20, 30, 1000) com esse modelo atual.
-- Se quisermos flexibilidade, o `valores` precisa ser **alocado dinamicamente**.
-
-### 5.2 Caminho para a Próxima Aula
-
-- Mostrar que, na próxima etapa, podemos:
-    1. Substituir `int valores[MAX];` por `int *valores;` em `struct pilha`.
-    2. Alocar `p->valores` com `malloc` de acordo com o tamanho desejado.
-    3. Criar funções `criaPilha(int capacidade)` e `liberaPilha(Pilha *p)`.
-
-> **Transição Didática:** "Hoje trabalhamos com funções, `struct`, ponteiros e passagem por referência. Na próxima aula, vamos usar **alocação dinâmica** para tornar a pilha verdadeiramente flexível e reutilizável para vários tamanhos."
-
----
-
-## 📝 Resumo da Aula (Para o Notion)
-
-| Etapa | Conceito Central | Código-Exemplo Central |
-| --- | --- | --- |
-| **Introdução às Funções** | Funções, `void`, passagem por valor | `int dobro(int x)` e `trocaErrada()` |
-| **TAD e Pilha** | Revisão de TAD e operações de pilha | Lista de operações (`empilha`, `desempilha`...) |
-| **`struct` Pilha** | Criando um tipo composto para pilha | `typedef struct pilha { int valores[MAX]; int topo; }` |
-| **Uso sem Funções** | Acessando membros diretamente com `.` | `p.valores[p.topo] = 10` |
-| **Funções sem Ponteiros** | Passagem por valor → Modificação não persiste | `empilha(x, p)` com `Pilha` por valor |
-| **Ponteiros e `->`** | `&` e `*`, passagem por referência | `empilha(x, &p)` e `p->topo` |
-| **TAD de Pilha** | Interface clara, estado interno protegido | `empilha`, `desempilha`, `pilhaCheia`... |
-| **Reflexão Final** | Limite do vetor estático; necessidade de `malloc` | `int *valores` e `criaPilha(int capacidade)` (Next Step) |
+Esse é o assunto do próximo capítulo: substituir `int valores[MAX];` por `int *valores;` dentro de `struct pilha`, alocar `p->valores` com `malloc` de acordo com a capacidade desejada, e introduzir funções como `criaPilha(int capacidade)` e `liberaPilha(Pilha *p)` para gerenciar essa memória — tornando a pilha verdadeiramente flexível e reutilizável para qualquer tamanho.

@@ -1,6 +1,6 @@
 # Algoritmos de Ordenação Avançados
 
-> *Continuação da aula sobre ordenação. Agora exploramos técnicas O(n log n) e estratégias sofisticadas de ordenação.*
+> *Continuação do capítulo anterior sobre ordenação. Agora exploramos técnicas O(n log n) e estratégias sofisticadas de ordenação.*
 
 ---
 
@@ -932,7 +932,7 @@ devido a melhor localidade de cache e menos cópias.
 
 ---
 
-## 10. Resumo da Aula
+## 10. Resumo do Capítulo
 
 ✅ **Merge Sort**
 
@@ -981,7 +981,7 @@ devido a melhor localidade de cache e menos cópias.
 
 ## 11. Próximos Passos & Ferramentas
 
-🔜 **Próxima aula:** Tópicos avançados em ordenação
+🔜 **Tópicos para próximos capítulos:** extensões avançadas em ordenação
 
 - Counting Sort, Radix Sort, Bucket Sort (ordenação não baseada em comparações)
 - Ordenação externa (dados maiores que a memória)

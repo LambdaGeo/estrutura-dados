@@ -1,93 +1,25 @@
-# Pilha Estática III: Alocação dinâmica
+# Pilha Estática III: Alocação Dinâmica
 
-**Disciplina:** Estrutura de Dados
+Este capítulo mostra como modelar o TAD de pilha em C como se fosse um objeto referenciado por um ponteiro — semelhante ao que acontece em Java ou Python — e evolui a implementação para uma pilha completamente dinâmica, com tamanho configurável em tempo de execução. O caminho passa por: tratar a pilha sempre como ponteiro (`Pilha *p`); entender a diferença entre `stack` e `heap`; usar `malloc`, `calloc` e `free` na prática; explorar a relação entre vetores e ponteiros (`v[i]` é equivalente a `*(v + i)`); e, por fim, alocar tanto a `struct` quanto o vetor interno dinamicamente, a partir de um parâmetro `size`.
 
-**Unidade:** I — Memória e Estruturas Lineares
+## 1. Pilha como Ponteiro: a Analogia com Java e Python
 
-**Tema Central:**
+Em C, `Pilha *p` é um ponteiro para a estrutura, não a estrutura em si — e isso é semelhante ao que acontece em linguagens como Java e Python. Quando se escreve `new Stack()` em Java ou `pilha = Pilha()` em Python, o objeto é criado no heap, e a variável é apenas um ponteiro ou referência para esse objeto. Trabalhar com `Pilha *p` em C é, portanto, tratar a pilha como referência, do mesmo jeito que essas linguagens fazem por baixo dos panos: `Pilha *p` é o equivalente conceitual ao "objeto no heap, acessado por referência".
 
-- Usar a pilha **sempre como ponteiro** (`Pilha *p`).
-- Analogia com Java/Python: variáveis como ponteiros para objetos alocados no `heap`.
-- Conceito de **alocação dinâmica**: `stack` vs `heap`.
-- `malloc`, `calloc` e `free` com exemplos práticos.
-- Relação entre **vetores e ponteiros**: `v[i]` é igual a `(v + i)`.
-- Implementação de `Pilha` com:
-    - `struct` alocada dinamicamente;
-    - primeiro vetor estático, depois vetor **dinâmico**, definido por parâmetro `size`.
+Isso também levanta uma questão sobre o tamanho do vetor interno da pilha: até aqui, `MAX` é fixo em tempo de compilação. Mas uma pilha é, no fundo, um container — e faz sentido que ela possa ter tamanhos diferentes em situações diferentes. É isso que este capítulo resolve.
 
-**Duração:** 2 aulas × 50 minutos
+## 2. Alocação Dinâmica: `Stack` vs `Heap`
 
-**Objetivo Didático:**
-
-- Mostrar que, em C, podemos modelar o TAD de pilha **como se fosse um objeto referenciado por um ponteiro**, como em Java/Python.
-- Introduzir alocação dinâmica, relação vetor/ponteiro e evoluir para uma pilha completamente dinâmica, com tamanho configurável.
-
----
-
-## Parte 1 – Pilha como Ponteiro: Analogia com Java e Python
-
-### 1.1 Pergunta Inicial para a Turma
-
-> "Se já estamos acostumados a usar `Pilha *p`, será que podemos lidar com **pilhas sempre como ponteiros**? Ou seja, sempre trabalhar com endereços de pilhas e nunca com cópias de `Pilha` no `main`?"
-
-**Resposta Guiada:**
-
-- Em C, `Pilha *p` é um **ponteiro para a estrutura**, não a estrutura em si.
-- Isso é semelhante ao que acontece em linguagens como **Java** e **Python**:
-    - Quando fazemos `new Stack()` ou `pilha = Pilha()`, na verdade estamos:
-        - Criando o objeto no **heap**;
-        - E a variável é apenas um **ponteiro/referência** para esse objeto.
-- Então, trabalhar com `Pilha *p` é como "tratar a pilha como referência", mesmo que a linguagem seja C.
-
-**Frase Didática para o Quadro:**
-
-> Em C, `Pilha *p` é o equivalente conceitual ao "objeto no heap, acessado por referência" em Java/Python.
-
----
-
-## Parte 2 – Pergunta Sobre o Tamanho do Vetor
-
-### 2.1 Outra Pergunta para a Turma
-
-> "E o tamanho do vetor interno da pilha? Até agora, `MAX` é fixo em tempo de compilação. Será que podemos definir o tamanho do vetor **dinamicamente**?"
-
-**Objetivo da Pergunta:**
-
-- Levar o aluno a perceber que:
-    - Uma pilha é um **container**;
-    - Faz sentido que ela possa ter **diferentes tamanhos** em diferentes situações.
-
----
-
-## Parte 3 – Alocação Dinâmica: `Stack` vs `Heap`
-
-### 3.1 Visão Geral da Memória
-
-Escrever no quadro uma visão simplificada:
+A memória de um programa em execução se divide, de forma simplificada, em duas áreas:
 
 | Área | Descrição | Gerenciamento |
 | --- | --- | --- |
 | **`stack`** (pilha de execução) | Espaço automático para variáveis locais | Cria e destrói automaticamente |
 | **`heap`** (área dinâmica) | Espaço para alocação explícita | Programador aloca e libera manualmente |
 
-**Características:**
+A `stack` guarda variáveis locais de funções; o espaço é criado e destruído automaticamente a cada chamada e retorno, e seu tamanho é limitado. Já a `heap` é usada para alocação explícita, via `malloc`, `calloc` ou `realloc`; o programador é responsável por liberar essa memória com `free`, e seu tamanho é limitado apenas pela memória disponível no sistema. Uma forma simples de lembrar: `stack` é memória "automática"; `heap` é memória "manual".
 
-- **`stack`:**
-    - Usado para variáveis locais de funções.
-    - Cria e destrói espaço automaticamente com chamadas/retornos.
-    - Tamanho limitado.
-- **`heap`:**
-    - Usado para alocação **explícita** via `malloc`, `calloc`, `realloc`.
-    - O programador aloca e **libera** com `free`.
-    - Tamanho limitado apenas pela memória do sistema.
-
-**Frase de Memória:**
-
-> `stack` → memória "automática"; `heap` → memória "manual".
-
----
-
-### 3.2 Funções de Alocação e Liberação
+As três funções centrais para trabalhar com a heap são:
 
 ```c
 #include <stdlib.h>
@@ -97,15 +29,9 @@ void *calloc(size_t n, size_t size);     // Aloca n elementos de size bytes (ini
 void free(void *ptr);                    // Liberta memória alocada
 ```
 
-**Regra de Ouro:**
+A regra de ouro é simples: toda vez que se usa `malloc` ou `calloc` com sucesso, mais cedo ou mais tarde é preciso usar `free` sobre o mesmo ponteiro.
 
-> Toda vez que se usa `malloc` ou `calloc`, mais cedo ou mais tarde se deve usar `free` (se `malloc` não falhar).
-
----
-
-### 3.3 Exemplo 1: Alocar um Único Inteiro
-
-**Código no Quadro:**
+### 2.1 Alocando um Único Inteiro
 
 ```c
 #include <stdio.h>
@@ -126,25 +52,14 @@ int main() {
 }
 ```
 
-**Pontos Didáticos:**
-
-- `sizeof(int)` → Tamanho em bytes de um `int` na arquitetura (geralmente 4 bytes).
-- `p` é um ponteiro na `stack`; o `int` de fato mora no `heap`.
-- `p` acessa o inteiro alocado (desreferência).
-- **Importante:** Sempre verificar se `malloc` retornou `NULL` (falha na alocação).
-
-**Visualização de Memória:**
+`sizeof(int)` dá o tamanho em bytes de um `int` na arquitetura (geralmente 4 bytes). O próprio `p` é um ponteiro que vive na `stack`, mas o `int` que ele aponta mora na `heap` — `*p` desreferencia o ponteiro para acessar esse valor. É essencial sempre verificar se `malloc` retornou `NULL`, o que indica falha na alocação. Visualmente, o resultado é:
 
 ```
 Stack:  [ p ] → contém endereço 0x1000
 Heap:   [ 0x1000 ] → contém valor 42
 ```
 
----
-
-### 3.4 Exemplo 2: Alocar um Vetor de Inteiros
-
-**Código no Quadro:**
+### 2.2 Alocando um Vetor de Inteiros
 
 ```c
 #include <stdio.h>
@@ -173,23 +88,13 @@ int main() {
 }
 ```
 
-**Relação Entre Vetor e Ponteiro:**
+Aqui `v` é um ponteiro para o primeiro elemento do vetor; `v + i` é o endereço do elemento de índice `i`; e `*(v + i)` é o valor armazenado nesse endereço. Para qualquer vetor `v`, vale a equivalência
 
-- `v` é um ponteiro para o primeiro elemento.
-- `v + i` é o endereço do elemento de índice `i`.
-- `(v + i)` é o valor nesse endereço.
+```
+v[i] ≡ *(v + i)
+```
 
-**Frase de Memória:**
-
-> Para qualquer vetor `v`, vale:
-> 
-> ```
-> v[i] ≡ *(v + i)
-> ```
-
-Isso mostra que **vetor e ponteiro são muito próximos em C**.
-
-**Demonstração Prática:**
+o que mostra o quanto vetor e ponteiro são próximos em C — as duas notações abaixo produzem exatamente o mesmo resultado:
 
 ```c
 printf("v[0] = %d\n", v[0]);      // Sintaxe de vetor
@@ -199,13 +104,9 @@ printf("v[1] = %d\n", v[1]);
 printf("*(v+1) = %d\n", *(v+1));  // Mesmo resultado
 ```
 
----
+## 3. A Struct `Pilha` Alocada na Heap
 
-## Parte 4 – Voltando à Função de Inicialização da Pilha
-
-### 4.1 Agora com `struct` Alocada em Tempo de Execução
-
-Recomeçar a partir da definição de `Pilha` com **vetor estático**, mas alocando a `struct` dinamicamente:
+O próximo passo é aplicar essas ideias à struct `Pilha` definida no capítulo anterior — começando pela própria `struct`, ainda com um vetor estático interno:
 
 ```c
 #define MAX 100
@@ -216,15 +117,7 @@ typedef struct pilha {
 } Pilha;
 ```
 
-**Pergunta para a Turma:**
-
-> "Se a pilha agora é alocada com `malloc`, como acessamos os seus membros via ponteiro? Lembre: `Pilha *self = malloc(sizeof(Pilha))`."
-
----
-
-### 4.2 Uso de `->` e Parênteses para Acesso a Membros
-
-Mostrar explicitamente:
+Se a pilha agora é alocada com `malloc` — `Pilha *self = malloc(sizeof(Pilha))` —, o acesso aos seus membros precisa passar pelo ponteiro:
 
 ```c
 Pilha *self = malloc(sizeof(Pilha));
@@ -236,38 +129,18 @@ if (self == NULL) {
 self->topo = -1;     // Equivalente, mais simples
 ```
 
-**Explorar a Ordem de Avaliação:**
+Em `(*self).topo`, primeiro `self` é desreferenciado, e só depois o membro `topo` é acessado. Note que `self.topo` não seria equivalente: o operador `.` tem precedência maior que `*`, então a expressão seria interpretada como `*(self.topo)` — um erro, já que `self.topo` não existe antes de `self` ser desreferenciado. A regra geral é: para acessar um membro de uma struct por meio de um ponteiro, usa-se `(*p).membro` ou `p->membro`.
 
-- `(*self).topo` → Primeiro `self` (desreferencia o ponteiro), depois acessa o membro `topo`.
-- A expressão `self.topo` **não é o que queremos**:
-    - O `.` tem precedência maior que o `*`, então seria `*(self.topo)` → erro, pois `self.topo` não existe antes de ser desreferenciado.
-
-**Regra Gramatical:**
-
-> Para acessar um membro de uma `struct` por meio de ponteiro, use `(*p).membro` ou `p->membro`.
-
----
-
-### 4.3 Introdução ao Operador `->`
-
-**Definir Formalmente:**
-
-> `p->membro` é **sintaxe abreviada** para `(*p).membro`.
-
-Mostrar:
+De fato, `p->membro` é apenas uma sintaxe abreviada para `(*p).membro`:
 
 ```c
 (*self).topo = -1;   // Forma longa
 self->topo = -1;     // Forma curta
 ```
 
-**Conclusão Didática:**
+O operador `->` é tão natural em C que a forma longa praticamente não aparece em código real.
 
-> `->` é só um atalho de sintaxe, mas é tão natural em C que quase nunca se vê `(*p).membro` em código real.
-
----
-
-### 4.4 Código Completo com `struct` no `heap` (Vetor Ainda Estático)
+Juntando as peças, a `struct` já mora na heap, ainda que o vetor interno permaneça estático:
 
 ```c
 #include <stdio.h>
@@ -333,23 +206,11 @@ int main() {
 }
 ```
 
-**Observações:**
+O `main` trabalha apenas com ponteiros — `pilhaVazia(p)`, `empilha(..., p)`, `desempilha(p)` —, e o estado interno da pilha (`valores`, `topo`) é manipulado só por funções, usando `p->...`. Falta apenas um passo: o vetor `valores` ainda é de tamanho fixo (`MAX`).
 
-- O `main` trabalha apenas com ponteiros: `pilhaVazia(p)`, `empilha(..., p)`, `desempilha(p)`.
-- O **estado interno da pilha** (`valores`, `topo`) é manipulado só por funções, usando `p->...`.
-- O vetor `valores` ainda é de tamanho fixo (`MAX`).
+## 4. Vetor Dinâmico: Tamanho Definido em Tempo de Execução
 
----
-
-## Parte 5 – Definir Dinamicamente o Tamanho do Vetor
-
-### 5.1 Pergunta Voltada para o Vetor Interno
-
-> "Se já conseguimos ter a `struct` no `heap`, e já vimos que `malloc` aceita parâmetros de tamanho, por que o próprio `valores` precisa ser fixo? Será que dá para passar o tamanho da pilha como parâmetro e alocar o vetor dinamicamente?"
-
----
-
-### 5.2 Definição de `Pilha` com Vetor Dinâmico
+Se a `struct` já mora na heap, e `malloc` aceita qualquer tamanho como parâmetro, não há motivo para o vetor `valores` continuar fixo — basta receber o tamanho da pilha como parâmetro e alocar o vetor dinamicamente também:
 
 ```c
 typedef struct pilha {
@@ -359,23 +220,9 @@ typedef struct pilha {
 } Pilha;
 ```
 
-**Explicação:**
+`valores` passa a ser um vetor alocado dinamicamente, e o novo campo `tamanho` guarda o tamanho máximo que essa pilha específica pode ter.
 
-- `int *valores;` → Vetor alocado dinamicamente.
-- `tamanho;` → Guarda o tamanho máximo que a pilha pode ter.
-
----
-
-### 5.3 Função `criaPilha` com Parâmetro `size`
-
-> "Criamos uma função `criaPilha` que recebe o tamanho desejado (`size`) e faz isso:
-> 
-> 1. Aloca a própria `struct Pilha` com `malloc(sizeof(Pilha))`.
-> 2. Inicializa `topo = -1` e `tamanho = size`.
-> 3. Aloca o vetor de `int` com `size * sizeof(int)`.
-> 4. Retorna o ponteiro `self` para essa pilha (ou `NULL` se algo falhar)."
-
-**Em Código:**
+A função `criaPilha` passa a receber um parâmetro `size` e realiza quatro passos: aloca a própria `struct Pilha` com `malloc(sizeof(Pilha))`; inicializa `topo = -1` e `tamanho = size`; aloca o vetor de inteiros com `size * sizeof(int)`; e retorna o ponteiro `self` para essa pilha, ou `NULL` se algo falhar.
 
 ```c
 Pilha *criaPilha(int size) {
@@ -400,18 +247,7 @@ Pilha *criaPilha(int size) {
 }
 ```
 
-**Frase de Transição para Usar em Sala:**
-
-> "Veja bem:
-> `Pilha *self = malloc(sizeof(Pilha));self->topo = -1;self->valores = malloc(sizeof(int) * size);return self;`
-> 
-> Agora tanto a estrutura quanto o vetor interno são alocados no `heap`, e o tamanho da pilha é definido em tempo de execução."
-
----
-
-### 5.4 Funções de Pilha Ajustadas para Vetor Dinâmico
-
-**Funções de Verificação e Operação:**
+Com isso, tanto a estrutura quanto o vetor interno são alocados na heap, e o tamanho da pilha passa a ser definido em tempo de execução — não mais fixado no código-fonte. As demais funções do TAD só precisam trocar a constante `MAX` pelo campo `self->tamanho`:
 
 ```c
 int pilhaCheia(Pilha *self) {
@@ -450,9 +286,9 @@ int topoPilha(Pilha *self) {
 }
 ```
 
----
+### 4.1 Liberando a Pilha Corretamente
 
-### 5.5 Função de Liberação Completa da Pilha
+Com dois blocos alocados — a struct e o vetor interno — a liberação também precisa de dois passos, na ordem certa:
 
 ```c
 void liberaPilha(Pilha *self) {
@@ -463,25 +299,35 @@ void liberaPilha(Pilha *self) {
 }
 ```
 
-**Regra de Ouro de Liberação:**
-
-> Libere primeiro o recurso mais "interno" (`valores`), depois o que o contém (`self`).
-
-**O Que Acontece se Fizer Errado:**
+A regra é liberar primeiro o recurso mais "interno" (`valores`), depois o que o contém (`self`). Inverter a ordem tem consequências sérias:
 
 ```c
-// ❌ ERRADO
+// ERRADO
 free(self);            // Perde o endereço de self->valores
 free(self->valores);   // Comportamento indefinido!
 
-// ✅ CORRETO
+// CORRETO
 free(self->valores);   // Libera o vetor primeiro
 free(self);            // Depois libera a struct
 ```
 
----
+O erro mais comum, porém, é mais sutil: esquecer de chamar `free(self->valores)` e liberar apenas `free(self)`. Nesse caso a `struct` desaparece, mas o bloco de memória do vetor fica "órfão" — inacessível, porém ainda ocupado —, um vazamento de memória (*memory leak*) clássico. Ferramentas como o `valgrind` ajudam a detectar esse tipo de falha na prática.
 
-### 5.6 Exemplo de Uso no `main`
+Visualmente, uma pilha criada com `criaPilha(50)` ocupa dois blocos distintos na heap:
+
+```
+Heap:
+┌─────────────────┐
+│  Pilha *self    │ → 0x1000 (struct)
+│  topo = -1      │
+│  tamanho = 50   │
+│  valores ───────┼──→ 0x2000 (vetor de 50 ints)
+└─────────────────┘
+```
+
+— o que deixa claro por que são necessárias duas chamadas a `free`, uma para cada bloco.
+
+### 4.2 Exemplo de Uso
 
 ```c
 int main() {
@@ -517,73 +363,10 @@ int main() {
 }
 ```
 
----
+`p1` e `p2` são duas pilhas completamente independentes, com tamanhos diferentes definidos em tempo de execução — exatamente o que a versão "nua" do primeiro capítulo era incapaz de oferecer.
 
-## 📝 Resumo da Aula (Para o Notion)
+## Síntese
 
-| Tópico | Conceito Central | Exemplo‑Chave |
-| --- | --- | --- |
-| **Pilha como ponteiro** | `Pilha *p` é como referência a objeto no heap | `Pilha *p = criaPilha(100);` |
-| **`stack` vs `heap`** | `stack` → automática; `heap` → manual | Desenho no quadro |
-| **`malloc`/`calloc`/`free`** | Alocação e liberação explícita | `malloc(100 * sizeof(int)); free(v);` |
-| **Exemplo inteiro** | Alocar um único valor | `int *p = malloc(sizeof(int)); *p = 42;` |
-| **Exemplo vetor** | Alocar array dinâmico | `int *v = malloc(n * sizeof(int));` |
-| **Relação vetor‑ponteiro** | `v[i] ≡ *(v + i)` | `v[0]` e `*(v+0)` são iguais |
-| **`struct` estática no heap** | `int valores[MAX];` + `malloc(sizeof(Pilha))` | `self->topo = -1;` |
-| **Uso de `*` e `->`** | `(*p).membro` vs `p->membro` | `self->topo` é mais simples |
-| **Pilha com vetor dinâmico** | `int *valores;` + `malloc(size * sizeof(int))` | `self->valores = malloc(...);` |
-| **`criaPilha` com `size`** | Tamanho definido em tempo de execução | `Pilha *p = criaPilha(50);` |
-| **`liberaPilha`** | Liberar vetor primeiro, depois `struct` | `free(self->valores); free(self);` |
-| **Verificação de `NULL`** | `malloc` pode falhar | `if (p == NULL) { ... }` |
+Neste capítulo, a pilha deixou de ser uma coleção de variáveis globais e passou a ser tratada sempre como ponteiro (`Pilha *p`), no mesmo espírito de uma referência a objeto em Java ou Python. A `struct` e, em seguida, o vetor interno passaram a ser alocados na heap com `malloc`, com o tamanho definido em tempo de execução por um parâmetro `size` — e cada `malloc` bem-sucedido tem sua contraparte em `free`, na ordem correta.
 
----
-
-## 💡 Dicas para o Professor
-
-### 1. Erro Comum de `free`
-
-Mostre no quadro o que acontece se esquecer de `free(self->valores);` e só chamar `free(self);`. Desenhar na memória: a `struct` some, mas o bloco do vetor fica "órfão", exemplificando bem o *memory leak*.
-
-### 2. Parênteses em `(*p).`
-
-Escreva `*p.topo` no quadro e pergunte o que acontece. Explique a precedência de operadores (`.` ganha de `*`). Isso justifica a existência do operador `->`.
-
-### 3. Visualização de Memória
-
-Ao mostrar `criaPilha`, desenhe dois blocos no Heap:
-
-```
-Heap:
-┌─────────────────┐
-│  Pilha *self    │ → 0x1000 (struct)
-│  topo = -1      │
-│  tamanho = 50   │
-│  valores ───────┼──→ 0x2000 (vetor de 50 ints)
-└─────────────────┘
-```
-
-Isso ajuda a entender por que precisamos de dois `free`.
-
-### 4. Verificação de NULL
-
-Sempre enfatize: `malloc` pode falhar. Em sistemas embarcados ou com memória limitada, isso é crítico.
-
-### 5. Consistência de Nomes
-
-Mantenha os nomes em português (`criaPilha`, `empilha`, `topo`) para não confundir com a sintaxe em inglês, já que o foco é a lógica de memória, não o vocabulário da linguagem.
-
-### 6. Demonstração de Vazamento
-
-Se possível, use uma ferramenta como `valgrind` para mostrar na prática o que acontece quando não se libera memória corretamente.
-
----
-
-## 🔜 Próximo Passo Sugerido
-
-> "E se a pilha preencher todo o vetor e ainda precisar crescer?
-Podemos usar `realloc` para aumentar o `self->valores` em tempo de execução, fazendo uma pilha que 'cresce sozinha' quando enche.
-Esse tópico pode virar uma aula avançada ou um estudo de caso."
-
-**Ou:**
-
-> "Na próxima aula, vamos aplicar esses mesmos conceitos (struct, ponteiros, malloc/free) para criar uma **Lista Encadeada**, onde cada elemento é alocado individualmente no heap."
+Uma pergunta natural fica em aberto: e se a pilha preencher todo o vetor e ainda precisar crescer? A função `realloc` permite aumentar `self->valores` em tempo de execução, criando uma pilha que "cresce sozinha" quando enche — um refinamento que fica como estudo adicional. O próximo capítulo aplica esses mesmos conceitos — `struct`, ponteiros, `malloc`/`free` — para construir uma **lista encadeada**, em que cada elemento é alocado individualmente na heap.

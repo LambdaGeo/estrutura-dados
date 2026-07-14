@@ -1,13 +1,13 @@
 # Árvores AVL: Conceito
 
 !!! note "Material de Apoio"
-    Você pode acompanhar esta aula utilizando os [Slides sobre Árvores AVL](../slides/arvores_avl.pdf).
+    Você pode acompanhar este capítulo utilizando os [Slides sobre Árvores AVL](../slides/arvores_avl.pdf).
 
 ---
 
 ## 1. Revisão & Motivação: O Problema da Degeneração
 
-Na aula anterior, vimos que a **Árvore Binária de Busca (ABB)** oferece busca, inserção e remoção em **O(h)**, onde `h` é a altura da árvore. Contudo, a ABB **não garante** que a árvore permaneça balanceada.
+No capítulo anterior, vimos que a **Árvore Binária de Busca (ABB)** oferece busca, inserção e remoção em **O(h)**, onde `h` é a altura da árvore. Contudo, a ABB **não garante** que a árvore permaneça balanceada.
 
 ### O que acontece com dados inseridos em ordem?
 
@@ -529,7 +529,7 @@ Para cada inserção:
 
 ---
 
-## 8. Resumo da Aula
+## 8. Resumo do Capítulo
 
 **Motivação:** ABBs degeneram com inserções ordenadas → perda de eficiência O(log n)
 
@@ -554,7 +554,7 @@ Para cada inserção:
 
 ## 9. Próximos Passos & Ferramentas Recomendadas
 
-**Próxima aula:** Implementação em C de AVLs (struct com campo `altura`, funções de rotação, inserção com rebalanceamento automático, remoção avançada).
+**Próximo capítulo:** Implementação em C de AVLs (struct com campo `altura`, funções de rotação, inserção com rebalanceamento automático, remoção avançada).
 
 **Prática sugerida (sem código):**
 

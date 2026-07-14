@@ -1,7 +1,7 @@
 # Árvores: Conceitos e Binária
 
 !!! note "Material de Apoio"
-    Você pode acompanhar esta aula utilizando os [Slides sobre Conceitos de Árvores](../slides/arvores_conceitos.pdf).
+    Você pode acompanhar este capítulo utilizando os [Slides sobre Conceitos de Árvores](../slides/arvores_conceitos.pdf).
 
 ## 1. Introdução: O que são Estruturas de Dados?
 
@@ -764,7 +764,7 @@ void imprimirArvore(No* raiz, int nivel) {
 
 ---
 
-## 10. Resumo da Aula
+## 10. Resumo do Capítulo
 
 **Conceitos de árvores gerais**
 
@@ -799,9 +799,9 @@ void imprimirArvore(No* raiz, int nivel) {
 
 ---
 
-## 11. Próximos Passos (Para Estudo Autônomo)
+## 11. Próximos Passos
 
-**Tópicos que serão abordados em aulas futuras:**
+**Tópicos abordados nos próximos capítulos:**
 
 - Árvores Binárias de Busca (ABB): inserção, busca e remoção com ordenação
 - Balanceamento de árvores (AVL, Rubro-Negra)
