@@ -10,11 +10,11 @@ Esta lista de exercícios foi elaborada para aprofundar e consolidar os conceito
 
 Para as questões a seguir, elabore respostas discursivas curtas, justificando-as com base nos princípios da linguagem C e nos conceitos estudados.
 
-### 1.1. Propósito dos Registros ()
+### 1.1. Propósito dos Registros (`struct`)
 
 Registros, ou `structs`, são descritos como "coleções de dados heterogêneos". Com base nesse conceito, explique com suas próprias palavras por que as `structs` são uma ferramenta poderosa na programação em C. Forneça um exemplo prático (diferente de `ponto` ou `aluno`) onde o uso de uma `struct` seria claramente mais vantajoso do que utilizar variáveis individuais para representar uma entidade.
 
-### 1.2. Acesso a Membros: Operador Ponto () vs. Operador Seta ()
+### 1.2. Acesso a Membros: Operador Ponto (`.`) vs. Operador Seta (`->`)
 
 Diferencie o uso do operador de acesso a membro (`.`) e o operador de acesso a membro via ponteiro (`->`). Explique em qual cenário cada um deve ser utilizado e por que a tentativa de usar um no lugar do outro resultaria em um erro de compilação. Justifique sua resposta com base na diferença entre uma variável do tipo `struct` e um ponteiro para uma `struct`.
 
@@ -25,7 +25,7 @@ Descreva o ciclo de vida da memória alocada dinamicamente com `malloc`. Em sua 
 1. Por que é crucial verificar se o ponteiro retornado por `malloc` é `NULL`?
 2. Qual é a principal consequência de não liberar a memória com a função `free()` após seu uso? (Explique o conceito de "vazamento de memória" ou *memory leak*).
 
-### 1.5. O Operador com Estruturas
+### 1.5. O Operador `sizeof` com Estruturas
 
 O operador `sizeof` é utilizado para determinar o tamanho, em bytes, de um tipo de dado ou variável. Explique a diferença entre o valor retornado por `sizeof(struct aluno)` e `sizeof(struct aluno *)`. Justifique essa diferença com base no que cada uma dessas expressões representa em termos de alocação de memória.
 
@@ -35,7 +35,7 @@ O operador `sizeof` é utilizado para determinar o tamanho, em bytes, de um tipo
 
 Para os exercícios a seguir, escreva o código em C correspondente, seguindo as melhores práticas de documentação e leiaute.
 
-### 2.1. Definição e Instanciação de um
+### 2.1. Definição e Instanciação de uma `struct`
 
 Defina uma `struct` chamada `Produto` para armazenar as seguintes informações:
 
@@ -45,11 +45,11 @@ Defina uma `struct` chamada `Produto` para armazenar as seguintes informações:
 
 Em seguida, escreva uma função `main` que declare uma variável do tipo `Produto`, inicialize seus campos com valores de sua escolha e, por fim, imprima os dados do produto na tela de forma organizada.
 
-### 2.2. Função com como Parâmetro (por Valor)
+### 2.2. Função com `struct` como Parâmetro (por Valor)
 
 Escreva uma função chamada `aplica_desconto`. Esta função deve receber como parâmetros uma variável do tipo `Produto` (definida no exercício anterior) e um valor `float` representando o percentual de desconto. A função deve calcular o novo preço e retornar uma **nova** estrutura `Produto` com o preço atualizado. A estrutura original passada como parâmetro **não** deve ser modificada.
 
-### 2.3. Função com Ponteiro para como Parâmetro
+### 2.3. Função com Ponteiro para `struct` como Parâmetro
 
 Escreva uma função chamada `atualiza_preco`. Diferentemente do exercício anterior, esta função deve receber um **ponteiro** para uma `struct` `Produto` e um valor `float` representando o percentual de aumento. A função deve modificar o preço do produto diretamente na memória, alterando o valor na estrutura original. A função deve ter retorno `void`.
 

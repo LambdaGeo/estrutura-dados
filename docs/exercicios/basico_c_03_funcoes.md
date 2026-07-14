@@ -1,12 +1,12 @@
 # Lista de exercícios - Funções
 
-### 🧠 **Lista de Exercícios: Funções em C**
+## 🧠 Lista de Exercícios: Funções em C
 
 Codifiquem as seguintes funções utilizando os conceitos aprendidos sobre **funções em C**. Para cada exercício, implemente a função conforme o protótipo e verifique seu funcionamento com testes no `main()`.
 
 ---
 
-### 1️⃣ **Somatório de 1 até N**
+### 1. Somatório de 1 até N
 
 Implemente uma função que retorne a soma de todos os inteiros de 1 até um número dado `n`.
 
@@ -20,7 +20,7 @@ int somatorio(int n);
 
 ---
 
-### 2️⃣ **Fatorial de um Número**
+### 2. Fatorial de um Número
 
 Implemente uma função que retorne o fatorial de um número inteiro positivo.
 
@@ -34,7 +34,7 @@ int fat(int n);
 
 ---
 
-### 3️⃣ **Número Perfeito**
+### 3. Número Perfeito
 
 Um número é dito **perfeito** quando ele é igual à soma de seus divisores (excluindo ele mesmo). Faça uma função que verifique essa propriedade.
 
@@ -49,7 +49,7 @@ int ehPerfeito(int n);
 
 ---
 
-### 4️⃣ **Raiz Quadrada com Subtrações Sucessivas**
+### 4. Raiz Quadrada com Subtrações Sucessivas
 
 Uma forma de calcular a raiz quadrada de um número é subtrair dele números ímpares consecutivos a partir de 1 até que o resultado seja menor ou igual a zero.
 
@@ -71,7 +71,7 @@ int raiz_quadrada(int x);
 
 ---
 
-### 5️⃣ **Divisão com Subtrações Sucessivas**
+### 5. Divisão com Subtrações Sucessivas
 
 Implemente uma função que faça a divisão de dois números inteiros usando apenas **subtrações sucessivas**.
 

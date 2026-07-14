@@ -1,4 +1,4 @@
-# 🧩 Lista Encadeada
+# Lista Encadeada
 
 Usando como base essa implementação, crie as operações propostas a seguir:
 
@@ -102,7 +102,7 @@ int main() {
 
 ## 📚 Lista de Exercícios – Lista Encadeada Dinâmica
 
-### 🟢 **Nível 1 – Operações básicas**
+### Nível 1 – Operações básicas
 
 1. **Função `vazia(Lista* l)`**
     - Retorna `1` se a lista estiver vazia, `0` caso contrário.
@@ -117,7 +117,7 @@ int main() {
 
 ---
 
-### 🟡 **Nível 2 – Inserções e remoções intermediárias**
+### Nível 2 – Inserções e remoções intermediárias
 
 1. **Função `inserir_pos(Lista* l, int valor, int pos)`**
     - Insere um novo nó na posição indicada (0 = início).
@@ -132,7 +132,7 @@ int main() {
 
 ---
 
-### 🔵 **Nível 3 – Manipulações avançadas**
+### Nível 3 – Manipulações avançadas
 
 1. **Função `inverter(Lista* l)`**
     - Inverta a ordem dos nós da lista (pode ser iterativa ou recursiva).
@@ -146,7 +146,7 @@ int main() {
 
 ---
 
-### 🔴 **Nível 4 – Desafios opcionais**
+### Nível 4 – Desafios opcionais
 
 1. **Função `maior_elemento(Lista* l)`**
     - Retorne o maior valor armazenado.
@@ -161,7 +161,6 @@ int main() {
 
 ---
 
-### 💡 Dica para os alunos
+### Dica para os alunos
 
-> Sempre desenhem o encadeamento dos nós no papel antes de codar — ajuda muito!Usem printf() e imprime(lista) após cada operação para conferir se a estrutura ainda está consistente.Cuidem para não perder referências aos nós (evita vazamento de memória).
->
+> Sempre desenhem o encadeamento dos nós no papel antes de codar — ajuda muito! Usem printf() e imprime(lista) após cada operação para conferir se a estrutura ainda está consistente. Cuidem para não perder referências aos nós (evita vazamento de memória).

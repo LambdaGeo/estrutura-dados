@@ -29,7 +29,6 @@
 ### 1.1 Pergunta Inicial para a Turma
 
 > "Se já estamos acostumados a usar `Pilha *p`, será que podemos lidar com **pilhas sempre como ponteiros**? Ou seja, sempre trabalhar com endereços de pilhas e nunca com cópias de `Pilha` no `main`?"
-> 
 
 **Resposta Guiada:**
 
@@ -43,7 +42,6 @@
 **Frase Didática para o Quadro:**
 
 > Em C, `Pilha *p` é o equivalente conceitual ao "objeto no heap, acessado por referência" em Java/Python.
-> 
 
 ---
 
@@ -52,7 +50,6 @@
 ### 2.1 Outra Pergunta para a Turma
 
 > "E o tamanho do vetor interno da pilha? Até agora, `MAX` é fixo em tempo de compilação. Será que podemos definir o tamanho do vetor **dinamicamente**?"
-> 
 
 **Objetivo da Pergunta:**
 
@@ -87,7 +84,6 @@ Escrever no quadro uma visão simplificada:
 **Frase de Memória:**
 
 > `stack` → memória "automática"; `heap` → memória "manual".
-> 
 
 ---
 
@@ -104,7 +100,6 @@ void free(void *ptr);                    // Liberta memória alocada
 **Regra de Ouro:**
 
 > Toda vez que se usa `malloc` ou `calloc`, mais cedo ou mais tarde se deve usar `free` (se `malloc` não falhar).
-> 
 
 ---
 
@@ -121,10 +116,10 @@ int main() {
 
     if (p != NULL) {
         *p = 42;
-        printf("Valor alocado: %d\\n", *p);
+        printf("Valor alocado: %d\n", *p);
         free(p);  // Libera a memória
     } else {
-        printf("Falha na alocação!\\n");
+        printf("Falha na alocação!\n");
     }
 
     return 0;
@@ -166,12 +161,12 @@ int main() {
         }
 
         // Acessa alguns valores
-        printf("v[0] = %d\\n", v[0]);
-        printf("v[50] = %d\\n", v[50]);
+        printf("v[0] = %d\n", v[0]);
+        printf("v[50] = %d\n", v[50]);
 
         free(v);  // Libera o vetor
     } else {
-        printf("Falha na alocação!\\n");
+        printf("Falha na alocação!\n");
     }
 
     return 0;
@@ -188,22 +183,20 @@ int main() {
 
 > Para qualquer vetor `v`, vale:
 > 
-> 
 > ```
 > v[i] ≡ *(v + i)
 > ```
-> 
 
 Isso mostra que **vetor e ponteiro são muito próximos em C**.
 
 **Demonstração Prática:**
 
 ```c
-printf("v[0] = %d\\n", v[0]);      // Sintaxe de vetor
-printf("*(v+0) = %d\\n", *(v+0));  // Sintaxe de ponteiro (mesmo resultado)
+printf("v[0] = %d\n", v[0]);      // Sintaxe de vetor
+printf("*(v+0) = %d\n", *(v+0));  // Sintaxe de ponteiro (mesmo resultado)
 
-printf("v[1] = %d\\n", v[1]);
-printf("*(v+1) = %d\\n", *(v+1));  // Mesmo resultado
+printf("v[1] = %d\n", v[1]);
+printf("*(v+1) = %d\n", *(v+1));  // Mesmo resultado
 ```
 
 ---
@@ -226,11 +219,10 @@ typedef struct pilha {
 **Pergunta para a Turma:**
 
 > "Se a pilha agora é alocada com `malloc`, como acessamos os seus membros via ponteiro? Lembre: `Pilha *self = malloc(sizeof(Pilha))`."
-> 
 
 ---
 
-### 4.2 Uso de  e Parênteses para Acesso a Membros
+### 4.2 Uso de `->` e Parênteses para Acesso a Membros
 
 Mostrar explicitamente:
 
@@ -248,21 +240,19 @@ self->topo = -1;     // Equivalente, mais simples
 
 - `(*self).topo` → Primeiro `self` (desreferencia o ponteiro), depois acessa o membro `topo`.
 - A expressão `self.topo` **não é o que queremos**:
-    - O `.` tem precedência maior que o , então seria `(self.topo)` → erro, pois `self.topo` não existe antes de ser desreferenciado.
+    - O `.` tem precedência maior que o `*`, então seria `*(self.topo)` → erro, pois `self.topo` não existe antes de ser desreferenciado.
 
 **Regra Gramatical:**
 
 > Para acessar um membro de uma `struct` por meio de ponteiro, use `(*p).membro` ou `p->membro`.
-> 
 
 ---
 
-### 4.3 Introdução ao Operador `>`
+### 4.3 Introdução ao Operador `->`
 
 **Definir Formalmente:**
 
 > `p->membro` é **sintaxe abreviada** para `(*p).membro`.
-> 
 
 Mostrar:
 
@@ -274,7 +264,6 @@ self->topo = -1;     // Forma curta
 **Conclusão Didática:**
 
 > `->` é só um atalho de sintaxe, mas é tão natural em C que quase nunca se vê `(*p).membro` em código real.
-> 
 
 ---
 
@@ -302,7 +291,7 @@ Pilha *criaPilha() {
 
 void empilha(int x, Pilha *self) {
     if (self->topo == MAX - 1) {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
         return;
     }
     self->topo++;
@@ -311,7 +300,7 @@ void empilha(int x, Pilha *self) {
 
 int desempilha(Pilha *self) {
     if (self->topo == -1) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
         return -1;
     }
     int valor = self->valores[self->topo];
@@ -326,7 +315,7 @@ int pilhaVazia(Pilha *self) {
 int main() {
     Pilha *p = criaPilha();
     if (p == NULL) {
-        printf("Falha ao criar pilha!\\n");
+        printf("Falha ao criar pilha!\n");
         return 1;
     }
 
@@ -335,7 +324,7 @@ int main() {
     empilha(30, p);
 
     while (!pilhaVazia(p)) {
-        printf("Desempilhando: %d\\n", desempilha(p));
+        printf("Desempilhando: %d\n", desempilha(p));
     }
 
     free(p);  // Libera a struct (vetor ainda estático)
@@ -357,7 +346,6 @@ int main() {
 ### 5.1 Pergunta Voltada para o Vetor Interno
 
 > "Se já conseguimos ter a `struct` no `heap`, e já vimos que `malloc` aceita parâmetros de tamanho, por que o próprio `valores` precisa ser fixo? Será que dá para passar o tamanho da pilha como parâmetro e alocar o vetor dinamicamente?"
-> 
 
 ---
 
@@ -415,11 +403,9 @@ Pilha *criaPilha(int size) {
 **Frase de Transição para Usar em Sala:**
 
 > "Veja bem:
-`Pilha *self = malloc(sizeof(Pilha));self->topo = -1;self->valores = malloc(sizeof(int) * size);return self;`
-> 
+> `Pilha *self = malloc(sizeof(Pilha));self->topo = -1;self->valores = malloc(sizeof(int) * size);return self;`
 > 
 > Agora tanto a estrutura quanto o vetor interno são alocados no `heap`, e o tamanho da pilha é definido em tempo de execução."
-> 
 
 ---
 
@@ -438,7 +424,7 @@ int pilhaVazia(Pilha *self) {
 
 void empilha(int x, Pilha *self) {
     if (pilhaCheia(self)) {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
         return;
     }
     self->topo++;
@@ -447,7 +433,7 @@ void empilha(int x, Pilha *self) {
 
 int desempilha(Pilha *self) {
     if (pilhaVazia(self)) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
         return -1;
     }
     int valor = self->valores[self->topo];
@@ -457,7 +443,7 @@ int desempilha(Pilha *self) {
 
 int topoPilha(Pilha *self) {
     if (pilhaVazia(self)) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
         return -1;
     }
     return self->valores[self->topo];
@@ -480,7 +466,6 @@ void liberaPilha(Pilha *self) {
 **Regra de Ouro de Liberação:**
 
 > Libere primeiro o recurso mais "interno" (`valores`), depois o que o contém (`self`).
-> 
 
 **O Que Acontece se Fizer Errado:**
 
@@ -502,13 +487,13 @@ free(self);            // Depois libera a struct
 int main() {
     Pilha *p1 = criaPilha(10);   // Pilha com 10 elementos
     if (p1 == NULL) {
-        printf("Falha ao criar pilha pequena!\\n");
+        printf("Falha ao criar pilha pequena!\n");
         return 1;
     }
 
     Pilha *p2 = criaPilha(1000); // Pilha grande
     if (p2 == NULL) {
-        printf("Falha ao criar pilha grande!\\n");
+        printf("Falha ao criar pilha grande!\n");
         liberaPilha(p1);
         return 1;
     }
@@ -518,10 +503,10 @@ int main() {
         empilha(i * 10, p1);
     }
 
-    printf("Topo de p1: %d\\n", topoPilha(p1));
+    printf("Topo de p1: %d\n", topoPilha(p1));
 
     while (!pilhaVazia(p1)) {
-        printf("Desempilhando: %d\\n", desempilha(p1));
+        printf("Desempilhando: %d\n", desempilha(p1));
     }
 
     // Libera ambas as pilhas
@@ -598,9 +583,7 @@ Se possível, use uma ferramenta como `valgrind` para mostrar na prática o que 
 > "E se a pilha preencher todo o vetor e ainda precisar crescer?
 Podemos usar `realloc` para aumentar o `self->valores` em tempo de execução, fazendo uma pilha que 'cresce sozinha' quando enche.
 Esse tópico pode virar uma aula avançada ou um estudo de caso."
-> 
 
 **Ou:**
 
 > "Na próxima aula, vamos aplicar esses mesmos conceitos (struct, ponteiros, malloc/free) para criar uma **Lista Encadeada**, onde cada elemento é alocado individualmente no heap."
->

@@ -20,7 +20,7 @@ Um código que funciona em pequena escala pode **falhar sob carga** se:
 - faltar encapsulamento
 - não existir controle do ciclo de vida da memória
 
-👉 O objetivo deste caderno é fazer você pensar como **arquiteto de software**, não apenas como programador.
+O objetivo deste caderno é fazer você pensar como **arquiteto de software**, não apenas como programador.
 
 ---
 
@@ -28,22 +28,22 @@ Um código que funciona em pequena escala pode **falhar sob carga** se:
 
 Para que uma solução seja considerada correta:
 
-### ✅ Segurança de Alocação
+### Segurança de Alocação
 
 - Sempre verificar o retorno de `malloc`, `calloc` ou `realloc`
 - `NULL` não tratado = **erro crítico**
 
-### ✅ Gestão de Memória (Accountability)
+### Gestão de Memória (Accountability)
 
 - Todo `malloc` deve ter um `free`
 - Vazamento de memória = falha grave
 
-### ✅ Encapsulamento
+### Encapsulamento
 
 - `main.c` deve usar apenas funções do `.h`
 - Acesso direto à struct = **violação de projeto**
 
-### ✅ Sem Variáveis Globais
+### Sem Variáveis Globais
 
 - Comunicação entre módulos → via parâmetros e retornos
 
@@ -51,7 +51,7 @@ Para que uma solução seja considerada correta:
 
 ## 3. 🧠 Parte I — Fundamentos Teóricos (11 Questões)
 
-### 📌 Conceito central
+### Conceito central
 
 Separar:
 
@@ -60,13 +60,13 @@ Separar:
 
 ---
 
-### 📝 Questões
+### Questões
 
 1. **Passagem por valor vs referência**
     
     Explique por que funções como `empilha(Pilha *p, int x)` usam ponteiros.
     
-    👉 O que aconteceria se a pilha fosse passada por valor?
+    O que aconteceria se a pilha fosse passada por valor?
     
 
 ---
@@ -78,9 +78,9 @@ Separar:
     - Stack (automática)
     - Heap (dinâmica)
     
-    👉 Quem gerencia cada uma?
+    Quem gerencia cada uma?
     
-    👉 Por que retornar variável local é perigoso?
+    Por que retornar variável local é perigoso?
     
 
 ---
@@ -89,7 +89,7 @@ Separar:
     
     Defina formalmente um TAD.
     
-    👉 Qual o papel do `.h`?
+    Qual o papel do `.h`?
     
 
 ---
@@ -113,7 +113,7 @@ Separar:
 v[i] == *(v + i)
 ```
 
-👉 Como o compilador calcula o endereço?
+Como o compilador calcula o endereço?
 
 ---
 
@@ -121,7 +121,7 @@ v[i] == *(v + i)
     
     Qual o custo da busca em lista não ordenada?
     
-    👉 Por que usamos pior caso?
+    Por que usamos pior caso?
     
 
 ---
@@ -185,7 +185,7 @@ push(30)
 push(40)
 ```
 
-👉 Desenhe a tabela de memória
+Desenhe a tabela de memória
 
 ---
 
@@ -195,7 +195,7 @@ Aqui começa o nível **engenharia real**: ponteiros mal usados = bugs graves.
 
 ---
 
-### 🛠️ Exercícios
+### Exercícios
 
 1. **Struct + Ponteiro**
     - Crie `struct Ponto`
@@ -278,7 +278,7 @@ Aqui começa o nível **engenharia real**: ponteiros mal usados = bugs graves.
 1. **Lista circular**
 - Último aponta para primeiro
     
-    👉 O `while (atual != NULL)` funciona?
+    O `while (atual != NULL)` funciona?
     
 
 ---
@@ -286,7 +286,7 @@ Aqui começa o nível **engenharia real**: ponteiros mal usados = bugs graves.
 1. **Reuso de funções (DRY)**
 - `removeValor` usando outras funções
     
-    👉 Qual a complexidade total?
+    Qual a complexidade total?
     
 
 ---
@@ -300,7 +300,7 @@ Aqui começa o nível **engenharia real**: ponteiros mal usados = bugs graves.
 *p.membro = 10;
 ```
 
-👉 Explique o erro
+Explique o erro
 
 ---
 
@@ -326,7 +326,7 @@ Desenvolva uma pilha com:
 - pop
 - **findMax() → O(1)**
 
-💡 Dica:
+Dica:
 
 Use uma **pilha auxiliar de máximos**
 
@@ -347,9 +347,7 @@ Antes de entregar:
 ## ⚠️ Regra de Ouro
 
 > Variáveis globais são proibidas.
-> 
-> 
+>
 > Controle de memória e escopo é responsabilidade do programador.
-> 
 
 ---

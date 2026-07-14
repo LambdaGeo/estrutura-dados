@@ -1,6 +1,6 @@
 # Listas Encadeadas como TAD em C
 
-### Material de Consulta para o Aluno
+## Material de Consulta para o Aluno
 
 **Disciplina:** Estrutura de Dados
 
@@ -46,8 +46,7 @@ int removePos(Lista* l, int pos);
 /* ... demais operações ... */
 ```
 
-> ✅ **Princípio fundamental:** O código cliente (`main.c`) que usa esta interface **não precisa mudar** quando trocamos a implementação interna. Isso é a essência de um TAD bem projetado.
-> 
+> **Princípio fundamental:** O código cliente (`main.c`) que usa esta interface **não precisa mudar** quando trocamos a implementação interna. Isso é a essência de um TAD bem projetado.
 
 ---
 
@@ -61,8 +60,7 @@ Quando implementamos operações como `inserePos` ou `buscaValor`, queremos sabe
 - **Qual o custo** no pior cenário possível?
 - **Vale a pena** usar esta estrutura para meu problema?
 
-> 🎯 **Objetivo:** Entender a **ordem de crescimento** do tempo de execução, sem fórmulas complexas.
-> 
+> **Objetivo:** Entender a **ordem de crescimento** do tempo de execução, sem fórmulas complexas.
 
 ### 2.2 Classes de Complexidade – Visualização Gráfica
 
@@ -104,8 +102,7 @@ int buscaValor(const Lista* l, int x) {
 | **Pior caso** | `x` não está na lista ou está no final | `n` (tamanho da lista) | **O(n)** |
 | **Caso médio** | `x` está distribuído uniformemente | `n/2` | **O(n)** |
 
-> 📌 **Convenção:** Quando dizemos que uma operação é **O(n)**, estamos nos referindo ao **pior caso**, a menos que especificado otherwise.
-> 
+> **Convenção:** Quando dizemos que uma operação é **O(n)**, estamos nos referindo ao **pior caso**, a menos que especificado o contrário.
 
 ### 2.4 Tabela de Complexidade – Lista Estática
 
@@ -142,8 +139,7 @@ Na implementação estática, definimos:
 | **Lista encadeada** (nossa abordagem hoje) | Cada elemento é alocado sob demanda; não há limite pré-definido | Inserção/remoção O(1) se já tivermos a posição |
 | **Híbrido** (`std::deque`) | Combina blocos de vetor com encadeamento | Acesso por posição O(1), crescimento flexível |
 
-> 💡 **Insight:** Não existe "melhor estrutura" universal. A escolha depende do padrão de uso: muitas inserções no meio? Lista encadeada pode ser melhor. Muitos acessos por posição? Vetor é mais eficiente.
-> 
+> **Insight:** Não existe "melhor estrutura" universal. A escolha depende do padrão de uso: muitas inserções no meio? Lista encadeada pode ser melhor. Muitos acessos por posição? Vetor é mais eficiente.
 
 ---
 
@@ -152,7 +148,6 @@ Na implementação estática, definimos:
 ### 4.1 Definição Recursiva
 
 > "Uma lista encadeada é definida recursivamente como:
-> 
 > - **Caso base:** uma lista vazia (`NULL`), ou
 > - **Caso recursivo:** um nó contendo um valor e um ponteiro para outra lista encadeada."
 
@@ -217,8 +212,7 @@ struct lista {
 };
 ```
 
-> ✅ **Nota:** Mantivemos o campo `tamanho` para que operações como `conta()` sejam O(1), assim como na versão estática.
-> 
+> **Nota:** Mantivemos o campo `tamanho` para que operações como `conta()` sejam O(1), assim como na versão estática.
 
 ---
 
@@ -268,7 +262,7 @@ int cheia(const Lista* l) {
 
 void imprime(const Lista* l) {
     if (vazia(l)) {
-        printf("Lista vazia.\\n");
+        printf("Lista vazia.\n");
         return;
     }
 
@@ -278,7 +272,7 @@ void imprime(const Lista* l) {
         printf("%d ", atual->valor);
         atual = atual->prox;
     }
-    printf("\\n");
+    printf("\n");
 }
 ```
 
@@ -336,8 +330,7 @@ int insereFinal(Lista* l, int x) {
 }
 ```
 
-> ⚠️ **Complexidade:** `insereFinal` é **O(n)** na lista encadeada simples, pois precisa percorrer até o final. Veremos depois como otimizar para O(1) com um ponteiro para o fim.
-> 
+> **Complexidade:** `insereFinal` é **O(n)** na lista encadeada simples, pois precisa percorrer até o final. Veremos depois como otimizar para O(1) com um ponteiro para o fim.
 
 ### 5.4 Inserção por Posição – Caso Geral
 
@@ -479,7 +472,6 @@ int removeValor(Lista* l, int x) {
 | Localidade de referência | **Alta** (vetor contíguo) | Baixa (nós espalhados na heap) | Vetor é mais cache-friendly |
 
 > \* Pode ser otimizado para O(1) adicionando um campo `No* fim` na struct `lista`.
-> 
 
 ---
 
@@ -540,7 +532,7 @@ clean:
 int main(void) {
     Lista* l = criaLista();
     if (l == NULL) {
-        fprintf(stderr, "Falha ao criar lista\\n");
+        fprintf(stderr, "Falha ao criar lista\n");
         return 1;
     }
 
@@ -550,10 +542,10 @@ int main(void) {
     insereFinal(l, 30);
     inserePos(l, 15, 1);      /* Inserir 15 na posição 1 */
 
-    printf("Lista após inserções:\\n");
+    printf("Lista após inserções:\n");
     imprime(l);               /* Esperado: 10 15 20 30 */
 
-    printf("Busca valor 20: posição %d\\n", buscaValor(l, 20));
+    printf("Busca valor 20: posição %d\n", buscaValor(l, 20));
 
     removeValor(l, 15);
     removePos(l, 1);
@@ -564,8 +556,7 @@ int main(void) {
 }
 ```
 
-> ✅ **Verificação:** Se `lista.h` não mudar, `main.c` **não precisa ser recompilado** quando trocamos de `lista_estatica.c` para `lista_encadeada.c`. Basta recompilar apenas o arquivo de implementação e relinkar.
-> 
+> **Verificação:** Se `lista.h` não mudar, `main.c` **não precisa ser recompilado** quando trocamos de `lista_estatica.c` para `lista_encadeada.c`. Basta recompilar apenas o arquivo de implementação e relinkar.
 
 ---
 
@@ -607,7 +598,7 @@ int main(void) {
 
 ## 9. Guia de Estudo e Prática
 
-### ✅ Antes da Próxima Aula
+### Antes da Próxima Aula
 
 - [ ]  Implementar `insereFinal` com otimização O(1) adicionando `No* fim` na struct
 - [ ]  Criar um teste que insere 1000 elementos e mede tempo (estática vs. encadeada)
@@ -618,7 +609,7 @@ int main(void) {
     ```
     
 
-### 🔍 Para Aprofundar
+### Para Aprofundar
 
 1. **Por que `buscaPos` é O(n) na encadeada e O(1) na estática?**
     
@@ -633,7 +624,7 @@ int main(void) {
     → Elementos contíguos na memória (vetor) são carregados juntos no cache da CPU, acelerando acesso sequencial.
     
 
-### 💻 Desafio Opcional
+### Desafio Opcional
 
 Implemente `inverte(Lista* l)` para lista encadeada **sem usar memória auxiliar** (apenas ajustando ponteiros).
 
@@ -654,7 +645,7 @@ void inverte(Lista* l) {
 }
 ```
 
-### 🐛 Debug Challenge
+### Debug Challenge
 
 O código abaixo tem um bug de vazamento de memória. Encontre e corrija:
 
@@ -668,7 +659,7 @@ int removePos(Lista* l, int pos) {
 }
 ```
 
-- 💡 Clique para ver a resposta
+- Clique para ver a resposta
     
     É necessário salvar o nó a ser removido em uma variável temporária, atualizar os ponteiros, e só então chamar `free()` no nó removido:
     
@@ -710,7 +701,6 @@ int removePos(Lista* l, int pos) {
 ### 10.3 Próximo Encontro: Filas e Pilhas com Listas
 
 > "Agora que dominamos duas implementações do TAD LISTA, vamos aplicar esse conhecimento para implementar outros TADs: FILA e PILHA. Veremos como a escolha da estrutura subjacente (vetor vs. encadeada) impacta a eficiência de cada operação."
-> 
 
 ---
 
@@ -724,5 +714,4 @@ int removePos(Lista* l, int pos) {
 
 ---
 
-> ℹ️ **Nota:** Este material é para consulta após a aula. Para fixar os conceitos, implemente as operações você mesmo, execute os testes sugeridos e compare o comportamento das versões estática e encadeada. A prática com ponteiros é essencial para dominar listas encadeadas.
->
+> **Nota:** Este material é para consulta após a aula. Para fixar os conceitos, implemente as operações você mesmo, execute os testes sugeridos e compare o comportamento das versões estática e encadeada. A prática com ponteiros é essencial para dominar listas encadeadas.

@@ -1,6 +1,6 @@
 # Filas como TAD em C
 
-### **Disciplina:** Estrutura de Dados
+**Disciplina:** Estrutura de Dados
 
 **Tema:** Tipo Abstrato de Dados FILA – Implementações Estática (Circular) e Dinâmica
 
@@ -13,7 +13,6 @@
 ### 1.1 Definição Abstrata
 
 > "Uma Fila (Queue) é uma estrutura de dados linear onde as inserções ocorrem em uma extremidade (final/rear) e as remoções ocorrem na outra extremidade (início/front). A ordem de processamento dos elementos é estritamente sequencial."
-> 
 
 Em notação matemática, assim como a Lista, a Fila é uma sequência finita de elementos `(x₁, x₂, ..., xₙ)`, mas com restrições rígidas de acesso:
 
@@ -62,8 +61,7 @@ Filas são essenciais sempre que há necessidade de **gerenciamento de ordem** o
 | **Sistemas de Atendimento** | Call centers, caixas de supermercado, triagem hospitalar. |
 | **Produtor-Consumidor** | Buffer entre threads que produzem dados e threads que os processam. |
 
-> 💡 **Insight:** Sempre que você vê um problema envolvendo "ordem de chegada" ou "espera", provavelmente uma Fila é a estrutura adequada.
-> 
+> **Insight:** Sempre que você vê um problema envolvendo "ordem de chegada" ou "espera", provavelmente uma Fila é a estrutura adequada.
 
 ---
 
@@ -248,8 +246,7 @@ int desenfileira(Fila* f) {
 }
 ```
 
-> ✅ **Complexidade:** Todas as operações são **O(1)**. Não há loops nem deslocamentos.
-> 
+> **Complexidade:** Todas as operações são **O(1)**. Não há loops nem deslocamentos.
 
 ---
 
@@ -414,13 +411,13 @@ int tamanho(const Fila* f) {
 
 ## 9. Guia de Estudo e Prática
 
-### ✅ Antes da Próxima Aula
+### Antes da Próxima Aula
 
 - [ ]  Implementar a Fila Circular estática sem usar o contador `n` (dica: use a condição `inicio == fim` para vazia e `(fim + 1) % MAX == inicio` para cheia, sacrificando uma posição).
 - [ ]  Desenhar o estado dos ponteiros `inicio` e `fim` após 5 enfileiramentos e 3 desenfileiramentos.
 - [ ]  Comparar o consumo de memória das duas implementações para 1000 elementos.
 
-### 🔍 Para Aprofundar
+### Para Aprofundar
 
 1. **Por que usar um contador `n` na fila circular?**
     
@@ -435,7 +432,7 @@ int tamanho(const Fila* f) {
     → *Double-ended queue*: permite inserção e remoção em ambas as extremidades.
     
 
-### 💻 Desafio Opcional
+### Desafio Opcional
 
 Implemente uma função `inverteFila(Fila* f)` que inverte a ordem dos elementos da fila **usando apenas uma Pilha como auxiliar**.
 
@@ -446,7 +443,7 @@ Implemente uma função `inverteFila(Fila* f)` que inverte a ordem dos elementos
 */
 ```
 
-### 🐛 Debug Challenge
+### Debug Challenge
 
 O código abaixo tem um bug crítico na implementação dinâmica. Encontre e corrija:
 
@@ -462,7 +459,7 @@ int desenfileira(Fila* f) {
 ```
 
 <details>
-<summary>💡 Clique para ver a resposta</summary>
+<summary>Clique para ver a resposta</summary>
 
 Falta atualizar o ponteiro `fim` quando a fila fica vazia. Se remover o último elemento, `f->inicio` vira `NULL`, mas `f->fim` ainda aponta para o nó liberado (dangling pointer).
 Correção:
@@ -490,7 +487,6 @@ Neste módulo, cobrimos as três estruturas lineares fundamentais:
 ### 10.2 Próximo Encontro: Estruturas Não-Lineares
 
 > "Até agora, todos os dados estavam organizados em uma única dimensão (sequência). No próximo encontro, sairemos da linearidade para explorar **Árvores**, onde cada elemento pode ter múltiplos sucessores, permitindo hierarquias e buscas mais eficientes (O(log n))."
-> 
 
 ### 10.3 Exercício de Consolidação
 
@@ -512,5 +508,4 @@ Crie um programa que simule um caixa de supermercado:
 
 ---
 
-> ℹ️ **Nota:** Este material é para consulta após a aula. Para fixar os conceitos, implemente as versões estática e dinâmica, execute testes de estresse (encher e esvaziar repetidamente) e compare o comportamento. O domínio de filas é essencial para algoritmos de grafos e sistemas concorrentes.
->
+> **Nota:** Este material é para consulta após a aula. Para fixar os conceitos, implemente as versões estática e dinâmica, execute testes de estresse (encher e esvaziar repetidamente) e compare o comportamento. O domínio de filas é essencial para algoritmos de grafos e sistemas concorrentes.

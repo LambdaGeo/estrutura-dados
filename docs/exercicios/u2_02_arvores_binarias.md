@@ -2,13 +2,12 @@
 
 ## *Foco: Conceitos, Percursos e Operações Estruturais*
 
-> ⚠️ **Atenção:** Esta lista trabalha **apenas com árvores binárias genéricas**.
-> 
-> 
-> **Não assuma propriedades de Árvore Binária de Busca (ABB)** — não há ordenação entre chaves.
-> 
-> Operações como inserção/remoção com base em comparação de valores **não são solicitadas aqui**.
-> 
+!!! warning "Atenção"
+    Esta lista trabalha **apenas com árvores binárias genéricas**.
+
+    **Não assuma propriedades de Árvore Binária de Busca (ABB)** — não há ordenação entre chaves.
+
+    Operações como inserção/remoção com base em comparação de valores **não são solicitadas aqui**.
 
 ---
 
@@ -180,9 +179,9 @@ Considere a árvore binária abaixo:
 
 ```
         1
-       / \\
+       / \
       2   3
-     /   / \\
+     /   / \
     4   5   6
 ```
 
@@ -193,8 +192,7 @@ b) `em_ordem(raiz)`
 
 c) `pos_ordem(raiz)`
 
-> ✅ Dica: Anote a ordem de visita passo a passo antes de responder.
-> 
+> Dica: Anote a ordem de visita passo a passo antes de responder.
 
 ---
 
@@ -257,8 +255,7 @@ void espelhar(Arvore* raiz);
 
 Inverte a árvore trocando subárvore esquerda ↔ direita em **todos** os nós (modificação *in-place*).
 
-> ✅ Teste: imprima o percurso em-ordem antes e depois para verificar.
-> 
+> Teste: imprima o percurso em-ordem antes e depois para verificar.
 
 ### Exercício 9 — Cópia Profunda de Árvore
 
@@ -270,8 +267,7 @@ Arvore* copiar_arvore(Arvore* raiz);
 
 Retorna um ponteiro para uma **nova árvore** com mesma estrutura e valores.
 
-> ⚠️ Os nós da cópia devem ocupar endereços de memória distintos dos originais.
-> 
+> Os nós da cópia devem ocupar endereços de memória distintos dos originais.
 
 ### Exercício 10 — Verificação: Estritamente Binária
 
@@ -303,8 +299,7 @@ Regra recursiva:
 - Uma `NULL` e outra não → não similares (`0`)
 - Ambas não-`NULL` → similares se **subárvores esquerdas forem similares** E **subárvores direitas forem similares**
 
-> ✅ Os valores dos nós **não** influenciam o resultado.
-> 
+> Os valores dos nós **não** influenciam o resultado.
 
 ### Exercício 12 — Igualdade Estrutural e de Valores
 
@@ -336,8 +331,7 @@ int contar_nos_no_nivel(Arvore* raiz, int nivel);
 
 Retorna quantos nós estão no nível informado (`raiz` está no nível 0).
 
-> ✅ Dica: use recursão com decremento de `nivel` a cada chamada.
-> 
+> Dica: use recursão com decremento de `nivel` a cada chamada.
 
 ### Exercício 15 — Impressão Formatada com Indentação
 
@@ -358,8 +352,7 @@ Imprime a árvore com indentação visual, ex.:
    └─ 60
 ```
 
-> ✅ Chame inicialmente com `imprimir_formatado(raiz, 0);`
-> 
+> Chame inicialmente com `imprimir_formatado(raiz, 0);`
 
 ---
 
@@ -385,8 +378,7 @@ int buscar_valor(Arvore* raiz, int alvo);
 
 Retorna `1` se `alvo` existe em algum nó da árvore; `0` caso contrário.
 
-> ⚠️ Como não é ABB, percorra **toda** a árvore se necessário.
-> 
+> Como não é ABB, percorra **toda** a árvore se necessário.
 
 ### Exercício B3 — Máximo Valor na Árvore
 
@@ -398,8 +390,7 @@ int valor_maximo(Arvore* raiz);
 
 Retorna o maior valor `int` armazenado.
 
-> ⚠️ Assuma que a árvore **não está vazia**. Dica: compare raiz, máximo da esquerda e máximo da direita.
-> 
+> Assuma que a árvore **não está vazia**. Dica: compare raiz, máximo da esquerda e máximo da direita.
 
 ---
 
@@ -463,9 +454,8 @@ int valor_maximo(Arvore* raiz);
 
 ---
 
-> 💡 **Dica para resolução:**
-> 
-> 1. Desenhe a árvore antes de codificar.
-> 2. Identifique o **caso base** da recursão (geralmente `raiz == NULL`).
-> 3. Pense: "O que faço com a raiz? E com as subárvores?"
-> 4. Teste incrementalmente: folha → árvore pequena → árvore complexa.
+!!! tip "Dica para resolução"
+    1. Desenhe a árvore antes de codificar.
+    2. Identifique o **caso base** da recursão (geralmente `raiz == NULL`).
+    3. Pense: "O que faço com a raiz? E com as subárvores?"
+    4. Teste incrementalmente: folha → árvore pequena → árvore complexa.

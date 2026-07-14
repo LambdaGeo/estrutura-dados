@@ -1,8 +1,8 @@
 # Recursão e Algoritmos de Busca
 
-# Recursão e Fundamentos de Busca
+## Recursão e Fundamentos de Busca
 
-## Roteiro
+### Roteiro
 
 1. Introdução à Recursão
 2. As Três Leis da Recursão
@@ -10,7 +10,7 @@
 4. Iteração vs Recursão (Soma de Array)
 5. Introdução aos Algoritmos de Busca (Busca Sequencial)
 
-## 1. Introdução à Recursão
+### 1. Introdução à Recursão
 
 **Recursão** é um método para resolver problemas que envolve quebrar o problema em subproblemas cada vez menores até atingir um problema simples o bastante, que possa ser resolvido trivialmente. Em geral, a recursão envolve uma função que chama a si mesma.
 
@@ -20,7 +20,7 @@
 - Ordenação por intercalação (Merge sort)
 - Muitas estruturas de dados são recursivas por natureza, como listas encadeadas e árvores.
 
-## 2. As Três Leis da Recursão
+### 2. As Três Leis da Recursão
 
 Todos os algoritmos recursivos devem obedecer a três leis importantes:
 
@@ -33,7 +33,7 @@ Todos os algoritmos recursivos devem obedecer a três leis importantes:
 - Qual o fatorial de 0? *(É 1)*
 - Quanto é um dado X multiplicado por 0? *(É 0)*
 
-## 3. Cálculo de Fatorial
+### 3. Cálculo de Fatorial
 
 A função fatorial de um inteiro não negativo pode ser definida como:
 
@@ -44,7 +44,7 @@ n \times (n-1)! & \text{se } n > 0
 \end{cases}
 $$
 
-### Implementação em C
+#### Implementação em C
 
 ```
 #include <stdio.h>
@@ -69,7 +69,7 @@ int main() {
 
 O computador resolve isso utilizando a **Pilha de Execução (Call Stack)**, onde cada chamada fica pausada aguardando o retorno da próxima até chegar ao caso base (`fat(0)`), quando então começa a desempilhar multiplicando os resultados de volta.
 
-## 4. Iteração para Recursão (Soma de Array)
+### 4. Iteração para Recursão (Soma de Array)
 
 Qual é a regra para somar os elementos de um array recursivamente?
 **"A soma de uma lista de números é o primeiro elemento mais a soma do restante da lista."**
@@ -89,13 +89,13 @@ int soma_array_rec(int numeros[], int tamanho) {
 }
 ```
 
-## 5. Introdução aos Algoritmos de Busca
+### 5. Introdução aos Algoritmos de Busca
 
 Por que busca é importante na computação? Pense no Google, uma das maiores empresas do mundo, criada fundamentalmente a partir de um poderoso algoritmo de busca!
 
 **Busca** é o processo algorítmico de encontrar um item específico numa coleção de itens. Geralmente devolvemos Verdadeiro/Falso (`true`/`false`) ou a posição do elemento.
 
-### A Busca Sequencial
+#### A Busca Sequencial
 
 Quando itens são armazenados em um array, eles têm uma relação linear. Na busca sequencial, começamos pelo primeiro item e visitamos elemento por elemento até achar o alvo ou chegar ao fim do array.
 
@@ -122,9 +122,9 @@ int main() {
 }
 ```
 
-# Busca Binária e Análise de Desempenho
+## Busca Binária e Análise de Desempenho
 
-## Roteiro
+### Roteiro
 
 1. O Problema da Busca Sequencial
 2. Busca Binária: O Conceito
@@ -132,12 +132,12 @@ int main() {
 4. Busca Binária: Implementação Recursiva
 5. Análise de Complexidade (Busca Binária vs Sequencial)
 
-## 1. O Problema da Busca Sequencial
+### 1. O Problema da Busca Sequencial
 
 Na busca sequencial, se o item que queremos for o último do array (ou se ele nem estiver lá), teremos que verificar **todos** os `N` elementos.
 Contudo, se os nossos dados estiverem **ordenados** (ex: ordem alfabética ou crescente), não precisamos olhar um por um. Podemos ser muito mais eficientes.
 
-## 2. Busca Binária: O Conceito
+### 2. Busca Binária: O Conceito
 
 Pense em procurar um nome numa lista telefônica ou dicionário. Você não lê da página 1 até a 500. Você abre no meio!
 
@@ -147,7 +147,7 @@ Pense em procurar um nome numa lista telefônica ou dicionário. Você não lê 
     - Se o alvo for **maior** que o meio, sabemos que ele necessariamente está na **metade superior**.
     - Se o alvo for **menor** que o meio, sabemos que ele necessariamente está na **metade inferior**.
 
-## 3. Busca Binária: Implementação Iterativa
+### 3. Busca Binária: Implementação Iterativa
 
 Nesta implementação em C, usamos duas variáveis de controle (`primeiro` e `ultimo`) para representar os "limites" de onde estamos procurando no array.
 
@@ -189,7 +189,7 @@ int main() {
 }
 ```
 
-## 4. Busca Binária: Implementação Recursiva
+### 4. Busca Binária: Implementação Recursiva
 
 Podemos unir a Aula 1 com a Aula 2! A busca binária é um algoritmo clássico de recursão.
 A cada chamada, o "estado modificado" é a redução do intervalo de busca (`primeiro` a `ultimo`).
@@ -232,7 +232,7 @@ int main() {
 
 *Nota sobre C:* Em linguagens como Python, poderíamos criar "fatias" da lista (`lista[:meio]`). Em C, é muito mais eficiente e seguro passar os índices `primeiro` e `ultimo` para indicar qual parte do array original estamos analisando.
 
-## 5. Análise de Desempenho (Sequencial vs Binária)
+### 5. Análise de Desempenho (Sequencial vs Binária)
 
 Para analisar a busca binária, precisamos ter em mente que cada comparação elimina cerca de metade dos itens restantes a serem considerados.
 
@@ -250,7 +250,7 @@ Dado essa característica, o número máximo de comparações para encontrar (ou
 - **Busca Sequencial:** No pior cenário, você fará **1.000.000** de comparações.
 - **Busca Binária:** No pior cenário, $\log_2(1.000.000)$ resulta em aproximadamente **20** comparações. A diferença de performance é brutal em grandes volumes de dados!
 
-## Próximos Passos (Atividade Extra)
+### Próximos Passos (Atividade Extra)
 
 1. Modifique as funções de busca para retornar o **índice** do elemento encontrado em vez de Verdadeiro/Falso. Retorne `1` caso não encontre.
 2. Teste o que acontece se você passar um array não-ordenado para a Busca Binária (ele vai falhar sem dar erro de compilação!).

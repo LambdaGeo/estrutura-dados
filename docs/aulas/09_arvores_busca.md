@@ -1,7 +1,7 @@
 # Árvores Binárias de Busca
 
-> [!NOTE]
-> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Árvores Binárias](../slides/arvores_binarias.pdf).
+!!! note "Material de Apoio"
+    Você pode acompanhar esta aula utilizando os [Slides sobre Árvores Binárias](../slides/arvores_binarias.pdf).
 
 ## 1. Revisão Motivadora: Busca Binária em Vetores
 
@@ -53,8 +53,7 @@ Passo 4: [16] → meio=16 → 15 < 16 → busca esquerda
 Passo 5: esq > dir → Não encontrado (4 comparações)
 ```
 
-> ✅ **Vantagem:** Em vez de verificar todos os `n` elementos, a busca binária elimina **metade** dos candidatos a cada comparação.
-> 
+> **Vantagem:** Em vez de verificar todos os `n` elementos, a busca binária elimina **metade** dos candidatos a cada comparação.
 
 ### 1.3 Limitação do Vetor para Inserções Dinâmicas
 
@@ -76,12 +75,11 @@ Passo 5: esq > dir → Não encontrado (4 comparações)
 | Remoção | O(n) ✗ | O(1)* ✓ |
 
 > *Considerando que já temos o ponteiro para a posição
-> 
 
 **Pergunta motivadora:** Existe uma estrutura que combine:
 
-- ✅ Busca eficiente como a binária (**O(log n)**)
-- ✅ Inserção/remoção dinâmica sem deslocamentos?
+- Busca eficiente como a binária (**O(log n)**)
+- Inserção/remoção dinâmica sem deslocamentos?
 
 **Resposta:** Sim! **Árvores Binárias de Busca (ABB)**.
 
@@ -94,7 +92,6 @@ Passo 5: esq > dir → Não encontrado (4 comparações)
 Uma **Árvore Binária de Busca (ABB)** é uma árvore binária que satisfaz a seguinte propriedade:
 
 > **Propriedade da ABB:** Para todo nó `v` da árvore:
-> 
 > - Todos os valores na **subárvore à esquerda** de `v` são **menores** que `v.info`
 > - Todos os valores na **subárvore à direita** de `v` são **maiores** que `v.info`
 > - As subárvores à esquerda e à direita também são ABBs (recursividade)
@@ -105,8 +102,7 @@ Uma **Árvore Binária de Busca (ABB)** é uma árvore binária que satisfaz a s
 
 ### 2.3 Consequência Importante: Percurso Em-Ordem
 
-> 💡 **Teorema:** O percurso **em-ordem** (Esquerda → Raiz → Direita) de uma ABB retorna os elementos em **ordem crescente**.
-> 
+> **Teorema:** O percurso **em-ordem** (Esquerda → Raiz → Direita) de uma ABB retorna os elementos em **ordem crescente**.
 
 ```c
 // Percurso em-ordem (já visto na aula anterior)
@@ -123,7 +119,6 @@ void emOrdem(No* raiz) {
 ```
 
 > Esta propriedade é extremamente útil para:
-> 
 > - Imprimir dados ordenados sem algoritmo de ordenação adicional
 > - Validar se uma árvore é uma ABB
 > - Obter o k-ésimo menor elemento com adaptações
@@ -154,7 +149,7 @@ typedef struct No {
 No* criarNo(int valor) {
     No* novo = (No*) malloc(sizeof(No));
     if (novo == NULL) {
-        fprintf(stderr, "Erro: falha ao alocar memória\\n");
+        fprintf(stderr, "Erro: falha ao alocar memória\n");
         exit(EXIT_FAILURE);
     }
     novo->valor = valor;
@@ -166,7 +161,7 @@ No* criarNo(int valor) {
 
 ### 3.3 Operação 1: Busca (Iterativa e Recursiva)
 
-### a) Versão Recursiva (mais elegante)
+#### a) Versão Recursiva (mais elegante)
 
 ```c
 // Busca recursiva: retorna ponteiro para o nó ou NULL se não encontrado
@@ -190,7 +185,7 @@ No* buscar(No* raiz, int chave) {
 }
 ```
 
-### b) Versão Iterativa (mais eficiente em espaço)
+#### b) Versão Iterativa (mais eficiente em espaço)
 
 ```c
 // Busca iterativa: mesma lógica, sem recursão
@@ -210,14 +205,14 @@ No* buscarIterativo(No* raiz, int chave) {
 }
 ```
 
-### c) Exemplo de Execução Passo a Passo
+#### c) Exemplo de Execução Passo a Passo
 
 ```
 ABB:
         20
-       /  \\
+       /  \
      10    30
-    /  \\   /  \\
+    /  \   /  \
    5   15 25  35
 
 Busca por 25:
@@ -235,7 +230,6 @@ Busca por 18:
 ### 3.4 Operação 2: Inserção
 
 > **Estratégia:** Sempre inserir como **folha**, na posição correta determinada pela propriedade da ABB.
-> 
 
 ```c
 // Insere um novo valor na ABB (versão recursiva)
@@ -262,25 +256,24 @@ No* inserir(No* raiz, int valor) {
 }
 ```
 
-### Exemplo Visual de Inserções Sequenciais
+#### Exemplo Visual de Inserções Sequenciais
 
 ![image.png](images/arvores_busca/image_1.png)
 
 ### 3.5 Operação 3: Remoção (Caso Mais Complexo)
 
 > **Desafio:** Remover um nó mantendo a propriedade da ABB.
-> 
 
 Existem **três casos** a considerar:
 
-### Caso 1: Nó é uma folha (sem filhos)
+#### Caso 1: Nó é uma folha (sem filhos)
 
 ```
 Antes:              Depois (remover 5):
     20                  20
-   /  \\                /  \\
+   /  \                /  \
  10    30            10    30
- /  \\   /  \\         \\   /  \\
+ /  \   /  \         \   /  \
 5   15 25  35         15 25  35
 ↑
 remover
@@ -288,14 +281,14 @@ remover
 // Implementação: simplesmente libera o nó e retorna NULL
 ```
 
-### Caso 2: Nó tem um único filho
+#### Caso 2: Nó tem um único filho
 
 ```
 Antes:              Depois (remover 10):
     20                  20
-   /  \\                /  \\
+   /  \                /  \
  10    30            15    30
-   \\   /  \\          /    /  \\
+   \   /  \          /    /  \
    15 25  35        5    25  35
   /
  5
@@ -305,34 +298,33 @@ remover
 // Implementação: "puxa" o filho para o lugar do pai
 ```
 
-### Caso 3: Nó tem dois filhos (mais complexo)
+#### Caso 3: Nó tem dois filhos (mais complexo)
 
 > **Estratégia:** Substituir o valor do nó a ser removido pelo:
-> 
 > - **Sucessor**: menor valor da subárvore à direita (mais à esquerda), **ou**
 > - **Antecessor**: maior valor da subárvore à esquerda (mais à direita)
 
 ```
 Antes (remover 20):     Passo 1: encontrar sucessor (25):
         20                      20
-       /  \\                    /  \\
+       /  \                    /  \
 	     10    30                10    30
-    /  \\   /  \\             /  \\   /  \\
+    /  \   /  \             /  \   /  \
    5   15 25  35           5   15 25  35
                                    ↑
                               sucessor = 25
 
 Passo 2: substituir 20 por 25:   Passo 3: remover o nó 25 original:
         25                              25
-       /  \\                            /  \\
+       /  \                            /  \
 	     10    30                        10    30
-    /  \\   /  \\                     /  \\    \\
+    /  \   /  \                     /  \    \
    5   15 25  35                   5   15    35
            ↑
       (agora duplicado)
 ```
 
-### Implementação Completa da Remoção
+#### Implementação Completa da Remoção
 
 ```c
 // Função auxiliar: encontra o nó com menor valor (mais à esquerda)
@@ -407,7 +399,7 @@ void imprimirABB(No* raiz, int nivel) {
 
     // Imprime identação e valor
     for (int i = 0; i < nivel; i++) printf("    ");
-    printf("%d\\n", raiz->valor);
+    printf("%d\n", raiz->valor);
 
     // Imprime subárvore esquerda
     imprimirABB(raiz->esquerda, nivel + 1);
@@ -444,7 +436,7 @@ typedef struct No {
 
 No* criarNo(int valor) {
     No* novo = (No*) malloc(sizeof(No));
-    if (!novo) { fprintf(stderr, "Erro de alocação\\n"); exit(1); }
+    if (!novo) { fprintf(stderr, "Erro de alocação\n"); exit(1); }
     novo->valor = valor;
     novo->esquerda = novo->direita = NULL;
     return novo;
@@ -507,7 +499,7 @@ void imprimirABB(No* raiz, int nivel) {
     if (!raiz) return;
     imprimirABB(raiz->direita, nivel + 1);
     for (int i = 0; i < nivel; i++) printf("    ");
-    printf("%d\\n", raiz->valor);
+    printf("%d\n", raiz->valor);
     imprimirABB(raiz->esquerda, nivel + 1);
 }
 
@@ -528,33 +520,33 @@ int main() {
         raiz = inserir(raiz, valores[i]);
     }
 
-    printf("Árvore após inserções (visualização rotacionada 90°):\\n");
+    printf("Árvore após inserções (visualização rotacionada 90°):\n");
     imprimirABB(raiz, 0);
 
-    printf("\\nPercurso em-ordem (deve sair ordenado): ");
+    printf("\nPercurso em-ordem (deve sair ordenado): ");
     emOrdem(raiz);
-    printf("\\n");
+    printf("\n");
 
     // Testando busca
     int chave = 25;
     if (buscar(raiz, chave))
-        printf("✓ %d encontrado na árvore\\n", chave);
+        printf("✓ %d encontrado na árvore\n", chave);
     else
-        printf("✗ %d não encontrado\\n", chave);
+        printf("✗ %d não encontrado\n", chave);
 
     // Removendo um nó com dois filhos
-    printf("\\nRemovendo 20 (nó com dois filhos)...\\n");
+    printf("\nRemovendo 20 (nó com dois filhos)...\n");
     raiz = remover(raiz, 20);
     imprimirABB(raiz, 0);
 
-    printf("\\nEm-ordem após remoção: ");
+    printf("\nEm-ordem após remoção: ");
     emOrdem(raiz);
-    printf("\\n");
+    printf("\n");
 
     // Estatísticas
-    printf("\\nEstatísticas:\\n");
-    printf("  Nós: %d\\n", contarNos(raiz));
-    printf("  Altura: %d\\n", altura(raiz));
+    printf("\nEstatísticas:\n");
+    printf("  Nós: %d\n", contarNos(raiz));
+    printf("  Altura: %d\n", altura(raiz));
 
     liberarABB(raiz);
     return 0;
@@ -616,9 +608,9 @@ Melhor Caso: Árvore Balanceada (cheia/completa)
 
         Exemplo (n=7, h=2):
                 •
-               / \\
+               / \
               •   •
-             / \\ / \\
+             / \ / \
             •  ••  •
 
 Pior Caso: Árvore Degenerada (linear)
@@ -627,13 +619,13 @@ Pior Caso: Árvore Degenerada (linear)
 
         Exemplo (inserção em ordem crescente):
             1
-             \\
+             \
               2
-               \\
+               \
                 3
-                 \\
+                 \
                   4
-                   \\
+                   \
                     5
 ```
 
@@ -648,7 +640,6 @@ Pior Caso: Árvore Degenerada (linear)
 | ABB (degenerada) | O(n) | O(n) | O(n) | ✓ |
 
 > *Inserção no final; **Considerando ponteiro para a posição
-> 
 
 ---
 
@@ -667,14 +658,14 @@ c) Escreva o percurso em-ordem (deve sair ordenado).
 d) Quantas comparações são necessárias para buscar o valor `10`?
 
 <details>
-<summary>💡 Gabarito parcial</summary>
+<summary>Gabarito parcial</summary>
 
 ```
 a) Árvore final:
            50
-         /    \\
+         /    \
        30      70
-      /  \\    /  \\
+      /  \    /  \
     20   40  60  80
    /
  10
@@ -704,11 +695,10 @@ Implemente uma função que verifique se uma árvore binária qualquer é uma AB
 bool ehABB(No* raiz);
 ```
 
-> 💡 **Dica:** Não basta verificar `esquerda < raiz < direita` localmente. É necessário garantir que **todos** os nós da subárvore esquerda sejam menores que a raiz, e **todos** da direita sejam maiores. Uma abordagem eficiente usa limites mínimos e máximos propagados recursivamente.
-> 
+> **Dica:** Não basta verificar `esquerda < raiz < direita` localmente. É necessário garantir que **todos** os nós da subárvore esquerda sejam menores que a raiz, e **todos** da direita sejam maiores. Uma abordagem eficiente usa limites mínimos e máximos propagados recursivamente.
 
 <details>
-<summary>💡 Esboço de solução</summary>
+<summary>Esboço de solução</summary>
 
 ```c
 bool ehABBAux(No* raiz, int min, int max) {
@@ -736,7 +726,7 @@ b) Qual a **maior altura possível**? Qual sequência de inserções produz essa
 c) Calcule a diferença no número máximo de comparações para busca entre os dois casos.
 
 <details>
-<summary>💡 Respostas</summary>
+<summary>Respostas</summary>
 
 ```
 a) Menor altura: h = ⌊log₂(15)⌋ = 3 (árvore cheia/completa)
@@ -773,26 +763,26 @@ Considere inserir os valores **em ordem crescente**: `[1, 2, 3, 4, 5, 6, 7]`
 ```
 Passo 1: [1]          Passo 4: [1,2,3,4]
   1                        1
-                            \\
+                            \
                              2
-                              \\
+                              \
                                3
-                                \\
+                                \
                                  4
 
 Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
 1
- \\
+ \
   2
-   \\
+   \
     3
-     \\
+     \
       4
-       \\
+       \
         5
-         \\
+         \
           6
-           \\
+           \
             7
 ```
 
@@ -803,15 +793,13 @@ Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
 | Altura | ≈ log₂(7) = 2~3 | 6 |
 | Busca (pior caso) | 3 comparações | 7 comparações |
 | Inserção | O(log n) | O(n) |
-| Uso de memória (pilha recursiva) | O(log n) | O(n) ⚠️ risco de estouro |
+| Uso de memória (pilha recursiva) | O(log n) | O(n) — risco de estouro |
 
-> ❗ **Problema:** A ABB **não garante** balanceamento automaticamente. A estrutura final depende da **ordem de inserção** dos dados.
-> 
+> **Problema:** A ABB **não garante** balanceamento automaticamente. A estrutura final depende da **ordem de inserção** dos dados.
 
 ### 7.3 Pergunta para Reflexão
 
 > Se inserirmos dados já ordenados (comum em aplicações reais: registros por timestamp, IDs sequenciais, etc.), a ABB degenera para uma estrutura linear, perdendo sua vantagem de **O(log n)**.
-> 
 
 **Como resolver?**
 
@@ -828,9 +816,9 @@ Exemplo de rotação simples (AVL):
 
 Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
         A                                                B
-         \\                                              / \\
+         \                                              / \
           B                                            A   C
-           \\
+           \
             C
 
 • A altura diminui de 2 para 1
@@ -842,36 +830,36 @@ Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
 
 ## 8. Resumo da Aula
 
-✅ **Conexão com busca binária**
+**Conexão com busca binária**
 
 - ABB generaliza a busca binária para estrutura dinâmica
 - Mantém dados "virtualmente ordenados" sem necessidade de vetor contíguo
 
-✅ **Propriedade fundamental da ABB**
+**Propriedade fundamental da ABB**
 
 - Esquerda < Raiz < Direita (para todos os nós, recursivamente)
 - Percurso em-ordem retorna elementos ordenados
 
-✅ **Operações básicas em C**
+**Operações básicas em C**
 
 - `buscar()`: O(h) — recursiva ou iterativa
 - `inserir()`: O(h) — sempre como folha, mantendo a propriedade
 - `remover()`: O(h) — três casos (0, 1 ou 2 filhos), uso do sucessor/antecessor
 
-✅ **Análise de complexidade**
+**Análise de complexidade**
 
 - Depende da altura `h`: O(h) para operações pontuais
 - Melhor caso (balanceada): h ≈ log n → O(log n)
 - Pior caso (degenerada): h = n-1 → O(n)
 
-✅ **Boas práticas**
+**Boas práticas**
 
 - Sempre verificar `malloc`
 - Liberar memória com `free()` em pós-ordem
 - Evitar duplicatas (ou definir política de tratamento)
 - Considerar altura ao projetar aplicações críticas
 
-✅ **Limitação importante**
+**Limitação importante**
 
 - ABB **não se auto-balanceia** → ordem de inserção impacta desempenho
 - Gancho para estudo de **árvores AVL e Rubro-Negras**
@@ -880,19 +868,19 @@ Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
 
 ## 9. Próximos Passos (Para Estudo Autônomo)
 
-🔜 **Tópicos da próxima aula: Árvores Balanceadas**
+**Tópicos da próxima aula: Árvores Balanceadas**
 
 - Fator de balanceamento e altura
 - Rotações simples e duplas (LL, RR, LR, RL)
 - Inserção e remoção em AVL com rebalanceamento
 - Comparação prática: ABB vs. AVL em cenários reais
 
-📚 **Leitura recomendada:**
+**Leitura recomendada:**
 
 - ZIVIANI, N. *Projeto de Algoritmos*. Seção 5.3: Árvores Binárias de Busca.
 - CORMEN et al. *Introduction to Algorithms*. Capítulo 12: Binary Search Trees.
 
-💻 **Prática sugerida:**
+**Prática sugerida:**
 
 1. Compile e teste o código completo da Seção 4
 2. Implemente a função `ehABB()` do Exercício 3
@@ -901,8 +889,7 @@ Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
 
 ---
 
-> 📌 **Dica para provas:** Ao desenhar ABBs, sempre verifique a propriedade "esquerda < raiz < direita" para **todos** os nós, não apenas os vizinhos. Um erro comum é validar apenas localmente e esquecer que um nó na subárvore esquerda deve ser menor que **todos** os ancestrais à direita.
-> 
+> **Dica para provas:** Ao desenhar ABBs, sempre verifique a propriedade "esquerda < raiz < direita" para **todos** os nós, não apenas os vizinhos. Um erro comum é validar apenas localmente e esquecer que um nó na subárvore esquerda deve ser menor que **todos** os ancestrais à direita.
 
 ---
 

@@ -1,4 +1,4 @@
-# 🧩 Lista Estática
+# Lista Estática
 
 Usando como base essa implementação, crie as operações propostas a seguir:
 
@@ -92,7 +92,7 @@ int main() {
 
 ## 📚 Lista de Exercícios – Lista Estática
 
-### 🟢 **Nível 1 – Operações básicas**
+### Nível 1 – Operações básicas
 
 1. **Função `buscar(Lista* l, int valor)`**
     - Percorra a lista e retorne o índice do valor procurado.
@@ -115,7 +115,7 @@ int main() {
 
 ---
 
-### 🟡 **Nível 2 – Manipulação intermediária**
+### Nível 2 – Manipulação intermediária
 
 1. **Função `inverter(Lista* l)`**
     - Inverta a ordem dos elementos *dentro do próprio vetor*.
@@ -132,7 +132,7 @@ int main() {
 
 ---
 
-### 🔵 **Nível 3 – Operações avançadas**
+### Nível 3 – Operações avançadas
 
 1. **Função `concatenar(Lista* l1, Lista* l2)`**
     - Insira todos os elementos de `l2` no final de `l1`.
@@ -145,7 +145,7 @@ int main() {
 
 ---
 
-### 🔴 **Nível 4 – Desafios opcionais**
+### Nível 4 – Desafios opcionais
 
 1. **Função `intercalar(Lista* l1, Lista* l2, Lista* resultado)`**
     - Intercale os elementos de `l1` e `l2` em uma nova lista.
@@ -166,10 +166,8 @@ int main() {
 
 ---
 
-### 💡 Dica para os alunos
+### Dica para os alunos
 
 > Ao finalizar cada função, testem com printf() e imprime(lista) para confirmar que o comportamento está correto.
-> 
-> 
-> É interessante que façam também testes com listas vazias, listas cheias e posições inválidas.
 >
+> É interessante que façam também testes com listas vazias, listas cheias e posições inválidas.

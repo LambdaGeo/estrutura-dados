@@ -1,23 +1,23 @@
 # Apresentação da disciplina
 
-**👨‍🏫 Professor:** Sérgio Souza Costa
+**Professor:** Sérgio Souza Costa
 
-**🏫 Unidade:**I — Memória e Estruturas Lineares
+**Unidade:** I — Memória e Estruturas Lineares
 
-**📍 Tópico:** Apresentação, Programa da Disciplina e Introdução ao C.
+**Tópico:** Apresentação, Programa da Disciplina e Introdução ao C.
 
-## **📋 1. Visão Geral da Disciplina**
+## 📋 1. Visão Geral da Disciplina
 
-### **🎯 Ementa Resumida**
+### Ementa Resumida
 
 - Recursividade e Tipos Abstratos de Dados (TAD).
 - Estruturas Lineares: Pilhas, Filas, Listas Encadeadas.
 - Estruturas Hierárquicas: Árvores (Busca, Balanceadas, Heaps).
 - Algoritmos de Ordenação e Complexidade.
 
-### **🗓️ Cronograma**
+### Cronograma
 
-### **Unidade I: Memória e Estruturas Lineares**
+#### Unidade I: Memória e Estruturas Lineares
 
 *Foco: Ponteiros, Alocação e a base das estruturas de dados.*
 
@@ -34,7 +34,7 @@
 
 ---
 
-### **Unidade II: Busca e a Estrutura Hierárquica**
+#### Unidade II: Busca e a Estrutura Hierárquica
 
 *Foco: A evolução da busca binária para a árvore e o desafio do balanceamento.*
 
@@ -51,7 +51,7 @@
 
 ---
 
-### **Unidade III: Balanceamento, Heaps e Ordenação**
+#### Unidade III: Balanceamento, Heaps e Ordenação
 
 *Foco: Estabilidade das árvores e os grandes algoritmos de ordenação.*
 
@@ -59,26 +59,20 @@
 2. **Árvores Balanceadas III:** Finalização da AVL e testes de performance.
 3. **Heaps e Fila de Prioridade I:** Representação em vetor e algoritmos de subida/descida.
 4. **Heaps e Fila de Prioridade II:** Implementação da Fila de Prioridade.
-5. **Ordenação I:** Algoritmos de troca: Bubble Sort e Selection Sort (*O*(*n*2)).
-    
-    O(n2)
-    
+5. **Ordenação I:** Algoritmos de troca: Bubble Sort e Selection Sort ($O(n^2)$).
 6. **Ordenação II:** Insertion Sort e a lógica de inserção ordenada.
 7. **Ordenação III:** Quick Sort (Divisão e Conquista e a escolha do pivô).
-8. **Ordenação IV:** Merge Sort (Complexidade *O*(*n*log*n*) e estabilidade).
-    
-    O(nlog⁡n)
-    
+8. **Ordenação IV:** Merge Sort (Complexidade $O(n \log n)$ e estabilidade).
 9. **Revisão Final:** Comparativo de todas as estruturas (Tabela de Complexidade).
-10. **Avaliação III / Projeto Prático?.**
+10. **Avaliação III / Projeto Prático?**
 
 ---
 
 ## 📚 Anotações do Encontro 01
 
-### 🕒 Parte 1: Por que C e não Python? (50 min)
+### Parte 1: Por que C e não Python? (50 min)
 
-### 🤔 O Dilema da Abstração
+### O Dilema da Abstração
 
 Muitos alunos questionam o uso de **C** quando linguagens como **Python** ou **Java** são mais concisas. A resposta está no **objetivo da disciplina**:
 
@@ -89,7 +83,7 @@ Muitos alunos questionam o uso de **C** quando linguagens como **Python** ou **J
 | **Custo de Operação** | Difícil de medir (abstrato) | **Visível** (acesso direto à RAM) |
 | **Foco** | Produtividade de Desenvolvimento | **Entendimento de Computação** |
 
-### 💡 O Exemplo Crítico: Listas Estáticas vs. Dinâmicas
+### O Exemplo Crítico: Listas Estáticas vs. Dinâmicas
 
 Em Python, uma lista parece fazer tudo magicamente. Em C, entendemos o custo real:
 
@@ -104,33 +98,33 @@ Em Python, uma lista parece fazer tudo magicamente. Em C, entendemos o custo rea
     - **Inserção:** Rápida $O(1)$ (se tiver o ponteiro do nó anterior).
     - **Tamanho:** Flexível (cresce conforme `malloc`).
 
-> **💡 Nota Importante:** Em Estrutura de Dados, não queremos apenas *usar* a estrutura, queremos entender **como ela é construída na memória**. C nos obriga a lidar com **ponteiros** e **endereços**, revelando o custo real de cada operação.
-> 
+!!! note "Nota Importante"
+    Em Estrutura de Dados, não queremos apenas *usar* a estrutura, queremos entender **como ela é construída na memória**. C nos obriga a lidar com **ponteiros** e **endereços**, revelando o custo real de cada operação.
 
-### 🧠 Conceito Chave: Stack vs. Heap
+### Conceito Chave: Stack vs. Heap
 
 - **Stack (Pilha):** Onde vivem variáveis locais e escopo de funções. Gerenciamento automático (LIFO).
 - **Heap (Monte):** Onde vivem dados dinâmicos (alocados com `malloc`). Gerenciamento manual (risco de *memory leak*).
 
 ---
 
-### 🕒 Parte 2: A Linguagem C e Hello World (50 min)
+### Parte 2: A Linguagem C e Hello World (50 min)
 
-### 📜 Histórico e Importância
+### Histórico e Importância
 
 - **Criação:** 1969-1973, Bell Labs.
 - **Autores:** Dennis Ritchie e Ken Thompson.
 - **Objetivo Original:** Reescrever o sistema operacional **UNIX** (antes feito em Assembly).
 - **Legado:** Considerada o "Latin" da programação. Sintaxe base para C++, Java, C#, JavaScript, PHP, Python (o interpretador CPython é escrito em C).
 
-### 🏗️ Onde o C é usado hoje?
+### Onde o C é usado hoje?
 
 1. **Sistemas Operacionais:** Kernels (Linux, Windows, macOS, Android, iOS).
 2. **Banco de Dados:** Engines de armazenamento (PostgreSQL, MySQL, SQLite).
 3. **Compiladores/Interpretadores:** GCC, LLVM, Python Interpreter.
 4. **Sistemas Embarcados:** Microcontroladores, IoT, dispositivos médicos (onde não há espaço para *overhead*).
 
-### ⚙️ O Ciclo de Compilação
+### O Ciclo de Compilação
 
 Diferente de linguagens interpretadas, o C passa por etapas explícitas antes de rodar:
 
@@ -139,7 +133,7 @@ Diferente de linguagens interpretadas, o C passa por etapas explícitas antes de
 3. **Montagem (Assembler):** Gera arquivos objeto.
 4. **Linkagem:** Junta bibliotecas e cria o executável final.
 
-### 💻 Prática: Hello World
+### Prática: Hello World
 
 ```c
 #include <stdio.h>  // 1. Biblioteca Padrão de I/O
@@ -147,22 +141,22 @@ Diferente de linguagens interpretadas, o C passa por etapas explícitas antes de
 int main() {        // 2. Função principal (ponto de entrada)
 
     // 3. Saída de dados para o console
-    printf("Ola, Estrutura de Dados!\\n");
+    printf("Ola, Estrutura de Dados!\n");
 
     return 0;       // 4. Retorna 0 indicando sucesso ao SO
 }
 ```
 
-### 🔍 Dissecando o Código
+### Dissecando o Código
 
 - `#include <stdio.h>`: Importa funções de entrada/saída (`printf`, `scanf`). Sem isso, o compilador não reconhece o `printf`.
 - `int main()`: Todo programa C deve ter um `main`.
 - `printf()`: Função de impressão formatada.
-- `\\n`: Caractere de escape para **nova linha** (newline).
+- `\n`: Caractere de escape para **nova linha** (newline).
 - `;`: Ponto e vírgula obrigatório ao fim de cada instrução.
 - `return 0`: Boa prática. Indica que o programa terminou sem erros.
 
-### 🚀 Compilando no Terminal
+### Compilando no Terminal
 
 ```bash
 # Compilar
@@ -179,31 +173,30 @@ hello.exe
 
 ## 📝 Resumo e Próximos Passos
 
-### ✅ Takeaways da Aula
+### Takeaways da Aula
 
 1. **C é uma ferramenta de ensino:** Escolhida para expor o gerenciamento de memória (ponteiros, stack, heap) que linguagens modernas ocultam.
 2. **Estrutura de Dados é sobre Memória:** Entender como os dados são organizados na RAM é mais importante que a sintaxe.
 3. **Ecossistema C:** É a base da infraestrutura de software mundial (OS, DB, Compiladores).
 4. **Ciclo de Build:** Entender a diferença entre escrever o código (`.c`) e gerar o executável (`.exe`).
 
-### 🏠 Tarefa de Casa
+### Tarefa de Casa
 
 1. **Instalação:** Garantir que o compilador (GCC) e editor (VS Code, CodeBlocks, etc.) estejam instalados e funcionais.
 2. **Prática:** Modificar o `hello.c` para:
     - Imprimir seu nome completo.
     - Imprimir seu número de matrícula.
-    - Usar duas linhas diferentes (dois `printf` ou um com `\\n`).
+    - Usar duas linhas diferentes (dois `printf` ou um com `\n`).
 3. **Leitura:** Revisar conceitos básicos de variáveis e tipos em C (`int`, `float`, `char`).
 
-### 🔜 Próxima Aula
+### Próxima Aula
 
 - **Tópico:** Pilha Estática e Memória.
 - **Foco:** Implementação básica de pilha com vetores globais e introdução prática a **Stack vs Heap**.
 
 ---
 
-> **⚠️ Dúvida Comum:** *"Preciso ser expert em C para passar?"*
-> 
-> 
-> **Resposta:** Não. Precisa entender a lógica de memória. A sintaxe de C é pequena; o desafio é a lógica de ponteiros. Vamos praticar juntos.
->
+!!! question "Dúvida Comum"
+    *"Preciso ser expert em C para passar?"*
+
+    **Resposta:** Não. Precisa entender a lógica de memória. A sintaxe de C é pequena; o desafio é a lógica de ponteiros. Vamos praticar juntos.

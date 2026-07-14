@@ -1,12 +1,12 @@
 # Lista de exercícios - Ponteiros
 
-### 🧩 **Lista de Exercícios - Ponteiros em C**
+## 🧩 Lista de Exercícios - Ponteiros em C
 
 Estes exercícios ajudarão você a praticar conceitos fundamentais sobre ponteiros, manipulação de endereços e passagem de parâmetros por referência. Vamos lá?
 
 ---
 
-### 🔹 **1. Análise de Código com Ponteiro**
+### 1. Análise de Código com Ponteiro
 
 **Pergunta:** Qual será a saída deste programa, supondo que `i` ocupa o endereço `4094` na memória?
 
@@ -22,7 +22,7 @@ int main() {
 
 ---
 
-### 🔹 **2. Modificando Valor via Ponteiro**
+### 2. Modificando Valor via Ponteiro
 
 **Tarefa:** Crie um programa que:
 
@@ -30,33 +30,27 @@ int main() {
 - Use um ponteiro `ptr` para modificar o valor de `numero`;
 - Exiba mensagens antes e depois da modificação, utilizando apenas o ponteiro.
 
-📌 **Saída esperada (exemplo):**
+**Saída esperada (exemplo):**
 
-> O ponteiro ptr armazena o endereço ___ que,
-> 
-> 
-> por sua vez, armazena o valor ___.
-> 
-> Agora, o ponteiro ptr armazena o endereço ___ que,
-> 
-> por sua vez, armazena o valor ___.
-> 
+> O ponteiro ptr armazena o endereço ___ que, por sua vez, armazena o valor ___.
+>
+> Agora, o ponteiro ptr armazena o endereço ___ que, por sua vez, armazena o valor ___.
 
 ---
 
-### 🔹 **3. Função `troca()`**
+### 3. Função `troca()`
 
 **Objetivo:** Implemente uma função `troca()` que receba dois ponteiros e troque os valores armazenados nas variáveis apontadas por eles.
 
 ---
 
-### 🔹 **4. Endereço de uma Variável**
+### 4. Endereço de uma Variável
 
 Escreva uma função que receba uma variável como parâmetro e imprima o seu endereço de memória.
 
 ---
 
-### 🔹 **5. Definição de Ponteiro**
+### 5. Definição de Ponteiro
 
 O que é um ponteiro?
 
@@ -68,11 +62,11 @@ c) O valor de uma variável
 
 d) Um indicador da próxima variável acessada
 
-✅ **Resposta esperada:** ___
+**Resposta esperada:** ___
 
 ---
 
-### 🔹 **6. Avaliação de Expressões com Ponteiros**
+### 6. Avaliação de Expressões com Ponteiros
 
 Considere o código:
 
@@ -96,7 +90,7 @@ d) `3 * - *p / (*q) + 7`
 
 ---
 
-### 🔹 **7. Análise de Código II**
+### 7. Análise de Código II
 
 **Pergunta:** Qual será a saída deste programa, supondo que `i` ocupa o endereço `4094`?
 
@@ -111,7 +105,7 @@ int main() {
 
 ---
 
-### 🔹 **8. Expressões Legais e Ilegais**
+### 8. Expressões Legais e Ilegais
 
 Se `i` e `j` são inteiros, e `p` e `q` são ponteiros para int, analise:
 
@@ -131,4 +125,4 @@ g) `q = *p;`
 
 h) `i = (*p)++ + *q`
 
-⚠️ Identifique quais dessas expressões **são ilegais**.
+Identifique quais dessas expressões **são ilegais**.

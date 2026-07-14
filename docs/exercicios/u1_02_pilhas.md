@@ -2,7 +2,7 @@
 
 ---
 
-## **1️⃣ O que será impresso na tela**
+## 1. O que será impresso na tela
 
 Considerando a implementação do TAD Pilha baseada em ponteiros e alocação dinâmica vista em aula, analise o código abaixo:
 
@@ -39,11 +39,11 @@ int main() {
 }
 ```
 
-👉 **Pergunta:** Qual será a saída impressa no console ao final da execução?
+**Pergunta:** Qual será a saída impressa no console ao final da execução?
 
 ---
 
-## **2️⃣ Verificação de expressão balanceada**
+## 2. Verificação de expressão balanceada
 
 No material da disciplina, a **Pilha** foi apresentada como a estrutura ideal para avaliar expressões. Um exemplo clássico é o código que verifica se uma expressão formada por parênteses está balanceada.
 
@@ -58,7 +58,7 @@ Caso contrário, corrija o algoritmo para analisar **apenas o balanceamento dos 
 
 ---
 
-## **3️⃣ Simulação da avaliação de uma expressão pós-fixa**
+## 3. Simulação da avaliação de uma expressão pós-fixa
 
 A avaliação de expressões em notação pós-fixa (polonesa reversa) é uma das principais aplicações práticas do conceito LIFO (*Last In, First Out*) de uma Pilha.
 
@@ -82,7 +82,7 @@ Preencha a tabela de rastreio mostrando o estado da pilha passo a passo:
 
 ---
 
-## **4️⃣ Avaliação pós-fixa com números de múltiplos dígitos**
+## 4. Avaliação pós-fixa com números de múltiplos dígitos
 
 Modifique a implementação em C da **avaliação pós-fixa** para suportar:
 

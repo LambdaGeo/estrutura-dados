@@ -49,17 +49,17 @@ Diferença: 50.000× mais rápido!
 
 ```
                     [38, 27, 43, 3, 9, 82, 10, 4]
-                              /        \\
+                              /        \
               [38, 27, 43, 3]            [9, 82, 10, 4]
-                   /    \\                    /    \\
+                   /    \                    /    \
            [38, 27]      [43, 3]      [9, 82]      [10, 4]
-             /  \\          /  \\         /  \\          /  \\
+             /  \          /  \         /  \          /  \
           [38]  [27]    [43]  [3]    [9]  [82]    [10]  [4]
-             \\  /          \\  /         \\  /          \\  /
+             \  /          \  /         \  /          \  /
           [27,38]        [3,43]       [9,82]        [4,10]
-                \\          /               \\          /
+                \          /               \          /
               [3,27,38,43]                [4,9,10,82]
-                          \\                      /
+                          \                      /
                     [3,4,9,10,27,38,43,82] ✓
 ```
 
@@ -406,9 +406,9 @@ Max-Heap como vetor: [90, 80, 70, 30, 40, 50, 10]
 
 Representação em árvore:
            90
-         /    \\
+         /    \
        80      70
-      /  \\    /  \\
+      /  \    /  \
     30   40  50  10
 
 Propriedade: pai >= filhos em todos os níveis ✓
@@ -527,7 +527,7 @@ Resultado: [1, 3, 4, 5, 10]
 void imprimirVetor(int vetor[], int n, const char* mensagem) {
     printf("%s", mensagem);
     for (int i = 0; i < n; i++) printf("%d ", vetor[i]);
-    printf("\\n");
+    printf("\n");
 }
 
 void copiarVetor(int origem[], int destino[], int n) {
@@ -646,7 +646,7 @@ int main() {
     // Gera vetor aleatório
     for (int i = 0; i < n; i++) original[i] = rand() % 10000;
 
-    printf("=== Algoritmos Avançados de Ordenação (n = %d) ===\\n\\n", n);
+    printf("=== Algoritmos Avançados de Ordenação (n = %d) ===\n\n", n);
 
     const char* nomes[] = {"Merge Sort", "Quick Sort", "Shell Sort", "Heap Sort"};
     void (*algoritmos[])(int[], int) = {mergeSort, quickSort, shellSort, heapSort};
@@ -654,7 +654,7 @@ int main() {
     for (int i = 0; i < 4; i++) {
         copiarVetor(original, vetor, n);
         double t = medirTempo(algoritmos[i], vetor, n);
-        printf("%-12s: %6.3f ms | Ordenado? %s\\n",
+        printf("%-12s: %6.3f ms | Ordenado? %s\n",
                nomes[i], t, estaOrdenado(vetor, n) ? "✓" : "✗");
     }
 

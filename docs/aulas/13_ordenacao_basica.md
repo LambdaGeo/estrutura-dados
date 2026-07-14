@@ -1,12 +1,11 @@
 # Algoritmos de Ordenação Básicos
 
-> [!NOTE]
-> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Algoritmos de Ordenação Básicos](../slides/ordenacao_algoritmos_basicos.pdf).
+!!! note "Material de Apoio"
+    Você pode acompanhar esta aula utilizando os [Slides sobre Algoritmos de Ordenação Básicos](../slides/ordenacao_algoritmos_basicos.pdf).
 
-### 1.1 O Que É Ordenação?
+## 1.1 O Que É Ordenação?
 
 > **Definição:** Ordenação é o processo de rearranjar os elementos de uma coleção em uma sequência específica, geralmente **crescente** ou **decrescente**, com base em uma chave de comparação.
-> 
 
 ```c
 // Exemplo: vetor não ordenado → ordenado (crescente)
@@ -24,8 +23,8 @@ Saída:    [11, 12, 22, 25, 34, 64, 90]
 | Processamento de bancos de dados | Índices ordenados aceleram consultas |
 | Algoritmos de união/interseção | Operações em conjuntos tornam-se lineares |
 
-> 💡 **Insight:** Muitos algoritmos complexos assumem dados ordenados como pré-condição. Ordenar pode ser o "custo inicial" que viabiliza operações eficientes depois.
-> 
+!!! tip "Insight"
+    Muitos algoritmos complexos assumem dados ordenados como pré-condição. Ordenar pode ser o "custo inicial" que viabiliza operações eficientes depois.
 
 ---
 
@@ -46,7 +45,6 @@ Qual usar para 1 milhão de elementos?
 ### 2.2 Notação Big O: Medindo Crescimento
 
 > **Big O** descreve o **comportamento assintótico** de um algoritmo: como o tempo/espaço cresce quando `n → ∞`.
-> 
 
 | Notação | Nome | Exemplo Prático |
 | --- | --- | --- |
@@ -65,8 +63,8 @@ Qual usar para 1 milhão de elementos?
 | **Pior caso** | Entrada que maximiza operações | Vetor em ordem inversa → O(n²) |
 | **Caso médio** | Comportamento esperado em entradas aleatórias | Vetor aleatório → O(n²) |
 
-> ⚠️ **Importante:** Em sistemas críticos, planeje sempre para o **pior caso**. O "caso médio" pode não ocorrer quando você mais precisa.
-> 
+!!! warning "Importante"
+    Em sistemas críticos, planeje sempre para o **pior caso**. O "caso médio" pode não ocorrer quando você mais precisa.
 
 ### 2.4 Como Contar Operações? (Exemplo Prático)
 
@@ -96,7 +94,6 @@ for (int i = 0; i < n; i++) {          // Executa n+1 vezes (incluindo teste fin
 ### 3.1 Ideia Conceitual
 
 > **Analogia:** Imagine bolhas de ar em um líquido: as menores "sobem" mais rápido. No Bubble Sort, os maiores elementos "flutuam" para o final do vetor a cada passagem.
-> 
 
 **Estratégia:**
 
@@ -174,15 +171,15 @@ void bubbleSortOtimizado(int vetor[], int n) {
 
         // Se não houve troca, vetor já está ordenado
         if (!trocou) {
-            printf("  → Parada antecipada na passada %d\\n", i + 1);
+            printf("  → Parada antecipada na passada %d\n", i + 1);
             break;
         }
     }
 }
 ```
 
-> ✅ **Ganho:** Se o vetor já estiver ordenado, o algoritmo termina em **O(n)** com apenas uma passada de verificação.
-> 
+!!! success "Ganho"
+    Se o vetor já estiver ordenado, o algoritmo termina em **O(n)** com apenas uma passada de verificação.
 
 ### 3.5 Análise de Complexidade
 
@@ -201,7 +198,6 @@ void bubbleSortOtimizado(int vetor[], int n) {
 ### 4.1 Ideia Conceitual
 
 > **Analogia:** Organizar cartas na mão: procure a menor carta, coloque-a na primeira posição; depois procure a segunda menor, coloque na segunda posição; e assim por diante.
-> 
 
 **Estratégia:**
 
@@ -274,8 +270,8 @@ void selectionSort(int vetor[], int n) {
 
 **Espaço:** O(1) — ordenação *in-place*.
 
-> 💡 **Vantagem do Selection Sort:** Número de trocas é **sempre ≤ n-1**, útil quando trocar elementos é custoso (ex: registros grandes em disco).
-> 
+!!! tip "Vantagem do Selection Sort"
+    Número de trocas é **sempre ≤ n-1**, útil quando trocar elementos é custoso (ex: registros grandes em disco).
 
 ---
 
@@ -284,7 +280,6 @@ void selectionSort(int vetor[], int n) {
 ### 5.1 Ideia Conceitual
 
 > **Analogia:** Organizar cartas na mão durante um jogo: pegue uma carta por vez e insira-a na posição correta entre as cartas já ordenadas.
-> 
 
 **Estratégia:**
 
@@ -369,11 +364,10 @@ void insertionSort(int vetor[], int n) {
 
 **Espaço:** O(1) — ordenação *in-place*.
 
-> 💡 **Vantagem do Insertion Sort:**
-> 
-> - Estável (mantém ordem relativa de elementos iguais)
-> - Adaptativo: eficiente quando o vetor já está "quase ordenado"
-> - Online: pode ordenar elementos à medida que chegam
+!!! tip "Vantagem do Insertion Sort"
+    - Estável (mantém ordem relativa de elementos iguais)
+    - Adaptativo: eficiente quando o vetor já está "quase ordenado"
+    - Online: pode ordenar elementos à medida que chegam
 
 ---
 
@@ -391,7 +385,7 @@ void imprimirVetor(int vetor[], int n, const char* mensagem) {
     for (int i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
-    printf("\\n");
+    printf("\n");
 }
 
 void copiarVetor(int origem[], int destino[], int n) {
@@ -470,7 +464,7 @@ int main() {
     int n = sizeof(original) / sizeof(original[0]);
     int vetor[100];  // buffer para cópias
 
-    printf("=== Algoritmos de Ordenação Básicos ===\\n\\n");
+    printf("=== Algoritmos de Ordenação Básicos ===\n\n");
 
     // Teste 1: Vetor aleatório pequeno
     printf("1. Vetor original: ");
@@ -481,57 +475,57 @@ int main() {
     double t1 = medirTempo(bubbleSort, vetor, n);
     printf("   Bubble Sort:   ");
     imprimirVetor(vetor, n, "");
-    printf("   Tempo: %.3f ms | Ordenado? %s\\n\\n", t1, estaOrdenado(vetor, n) ? "✓" : "✗");
+    printf("   Tempo: %.3f ms | Ordenado? %s\n\n", t1, estaOrdenado(vetor, n) ? "✓" : "✗");
 
     // Selection Sort
     copiarVetor(original, vetor, n);
     double t2 = medirTempo(selectionSort, vetor, n);
     printf("   Selection Sort:");
     imprimirVetor(vetor, n, "");
-    printf("   Tempo: %.3f ms | Ordenado? %s\\n\\n", t2, estaOrdenado(vetor, n) ? "✓" : "✗");
+    printf("   Tempo: %.3f ms | Ordenado? %s\n\n", t2, estaOrdenado(vetor, n) ? "✓" : "✗");
 
     // Insertion Sort
     copiarVetor(original, vetor, n);
     double t3 = medirTempo(insertionSort, vetor, n);
     printf("   Insertion Sort:");
     imprimirVetor(vetor, n, "");
-    printf("   Tempo: %.3f ms | Ordenado? %s\\n\\n", t3, estaOrdenado(vetor, n) ? "✓" : "✗");
+    printf("   Tempo: %.3f ms | Ordenado? %s\n\n", t3, estaOrdenado(vetor, n) ? "✓" : "✗");
 
     // Teste 2: Vetor já ordenado (melhor caso para Insertion/Bubble otimizado)
-    printf("2. Melhor caso (vetor já ordenado):\\n");
+    printf("2. Melhor caso (vetor já ordenado):\n");
     for (int i = 0; i < n; i++) original[i] = i + 1;
 
     copiarVetor(original, vetor, n);
     t1 = medirTempo(bubbleSort, vetor, n);
-    printf("   Bubble Sort:   %.3f ms\\n", t1);
+    printf("   Bubble Sort:   %.3f ms\n", t1);
 
     copiarVetor(original, vetor, n);
     t2 = medirTempo(selectionSort, vetor, n);
-    printf("   Selection Sort: %.3f ms\\n", t2);
+    printf("   Selection Sort: %.3f ms\n", t2);
 
     copiarVetor(original, vetor, n);
     t3 = medirTempo(insertionSort, vetor, n);
-    printf("   Insertion Sort: %.3f ms ← mais rápido neste cenário!\\n\\n", t3);
+    printf("   Insertion Sort: %.3f ms ← mais rápido neste cenário!\n\n", t3);
 
     // Teste 3: Vetor invertido (pior caso)
-    printf("3. Pior caso (vetor invertido):\\n");
+    printf("3. Pior caso (vetor invertido):\n");
     for (int i = 0; i < n; i++) original[i] = n - i;
 
     copiarVetor(original, vetor, n);
     t1 = medirTempo(bubbleSort, vetor, n);
-    printf("   Bubble Sort:   %.3f ms\\n", t1);
+    printf("   Bubble Sort:   %.3f ms\n", t1);
 
     copiarVetor(original, vetor, n);
     t2 = medirTempo(selectionSort, vetor, n);
-    printf("   Selection Sort: %.3f ms\\n", t2);
+    printf("   Selection Sort: %.3f ms\n", t2);
 
     copiarVetor(original, vetor, n);
     t3 = medirTempo(insertionSort, vetor, n);
-    printf("   Insertion Sort: %.3f ms\\n\\n", t3);
+    printf("   Insertion Sort: %.3f ms\n\n", t3);
 
-    printf("✅ Todos os algoritmos produziram resultados corretos!\\n");
-    printf("📌 Observação: Para vetores pequenos, as diferenças são mínimas.\\n");
-    printf("   Para n grande (>1000), algoritmos O(n²) tornam-se inviáveis.\\n");
+    printf("✅ Todos os algoritmos produziram resultados corretos!\n");
+    printf("📌 Observação: Para vetores pequenos, as diferenças são mínimas.\n");
+    printf("   Para n grande (>1000), algoritmos O(n²) tornam-se inviáveis.\n");
 
     return 0;
 }
@@ -583,7 +577,6 @@ int main() {
 | **Indicado para** | Ensino, vetores muito pequenos | Quando trocas são custosas | Vetores pequenos ou quase ordenados |
 
 > *Com otimização de parada antecipada
-> 
 
 ### 🎯 Regra Prática de Escolha
 

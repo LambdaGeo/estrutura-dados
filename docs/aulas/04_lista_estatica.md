@@ -38,7 +38,6 @@ struct Ponto {
 ### 1.2 Tipo Abstrato de Dados (TAD) – Definição Formal
 
 > "Um Tipo Abstrato de Dados (ADT) é um modelo matemático definido por seu comportamento (semântica) do ponto de vista do usuário, especificando os valores possíveis e as operações sobre esses valores, independentemente de como são implementados."
-> 
 
 Em notação matemática, um TAD pode ser visto como uma tupla **(V, O)**, onde:
 
@@ -48,7 +47,6 @@ Em notação matemática, um TAD pode ser visto como uma tupla **(V, O)**, onde:
 ### 1.3 Definição Intuitiva
 
 > "Um TAD é um 'container' de dados que especifica **o que** pode ser armazenado e **quais operações** podem ser realizadas, escondendo **como** tudo isso é implementado na memória."
-> 
 
 **Ideias-chave:**
 
@@ -80,10 +78,9 @@ A **Pilha** é tradicionalmente usada na literatura para ilustrar o conceito de 
 
 ### 2.2 Exemplo de Uso em Artigo Científico
 
-Em materiais acadêmicos sobre estruturas de dados, a pilha aparece como exemplo clássico de como separar "o que faz" (contrato das operações) do "como faz" (implementação com vetor vs. lista encadeada) [.
+Em materiais acadêmicos sobre estruturas de dados, a pilha aparece como exemplo clássico de como separar "o que faz" (contrato das operações) do "como faz" (implementação com vetor vs. lista encadeada).
 
 > "Abstract data types are the basis of an emerging methodology of computer programming. The stack is one of the fundamental data structures used to illustrate ADT concepts."
-> 
 
 ### 2.3 Implementação Anterior (Tudo em Um Arquivo)
 
@@ -159,7 +156,6 @@ C não possui classes, mas podemos simular TADs usando:
     - `.c` (implementação): contém o código real, escondido do cliente
 
 > "In C, abstract data types are implemented using two files: a .h file that contains the interface, and a .c file that contains the implementation."
-> 
 
 ---
 
@@ -168,7 +164,6 @@ C não possui classes, mas podemos simular TADs usando:
 ### 4.1 Lista Linear – Definição Matemática
 
 > "Uma lista linear é uma sequência finita de zero ou mais elementos `x₁, x₂, ..., xₙ`, onde cada `xᵢ` é de um tipo definido e `n ≥ 0` é o tamanho da lista. Se `n ≥ 1`, então `x₁` é o primeiro elemento, `xₙ` é o último, e para `1 < i < n`, `xᵢ₋₁` precede `xᵢ` e `xᵢ₊₁` sucede `xᵢ`."
-> 
 
 **Propriedades fundamentais:**
 
@@ -195,8 +190,8 @@ O **mesmo TAD LISTA** pode ser implementado de formas diferentes:
 | **Dinâmica (lista encadeada)** | Elementos em nós com ponteiros; alocação sob demanda | Quando o tamanho é imprevisível ou muda frequentemente |
 | **Vetor dinâmico** | Array que cresce/reduz com `realloc` | Compromisso entre acesso rápido e flexibilidade |
 
-> ⚠️ **Importante:** Nesta aula, focaremos na **implementação estática com vetor**. Em um encontro futuro, implementaremos o **mesmo TAD** com lista encadeada, mantendo a mesma interface. Isso demonstra o poder da abstração: o código cliente não precisa mudar quando a implementação interna muda.
-> 
+!!! warning "Importante"
+    Nesta aula, focaremos na **implementação estática com vetor**. Em um encontro futuro, implementaremos o **mesmo TAD** com lista encadeada, mantendo a mesma interface. Isso demonstra o poder da abstração: o código cliente não precisa mudar quando a implementação interna muda.
 
 ---
 
@@ -308,7 +303,6 @@ projeto_lista/
 | **Colaboração** | Uma pessoa pode desenvolver a interface, outra a implementação, outra o cliente |
 
 > "The .h file documents the agreement between both parties: the ADT developer and the client programmer." [[3]]
-> 
 
 ---
 
@@ -369,14 +363,14 @@ int cheia(const Lista* l) {
 
 void imprime(const Lista* l) {
     if (vazia(l)) {
-        printf("Lista vazia.\\n");
+        printf("Lista vazia.\n");
         return;
     }
     printf("Lista [%d elementos]: ", conta(l));
     for (int i = 0; i <= l->ultimo; i++) {
         printf("%d ", l->valores[i]);
     }
-    printf("\\n");
+    printf("\n");
 }
 ```
 
@@ -483,7 +477,7 @@ int main(void) {
     /* 1. Criar lista */
     Lista* l = criaLista();
     if (l == NULL) {
-        fprintf(stderr, "Falha ao criar lista\\n");
+        fprintf(stderr, "Falha ao criar lista\n");
         return 1;
     }
 
@@ -498,9 +492,9 @@ int main(void) {
     imprime(l);  /* Saída: Lista [4 elementos]: 10 15 20 30 */
 
     /* 4. Consultas */
-    printf("Tamanho: %d\\n", conta(l));                    /* 4 */
-    printf("Valor na pos 2: %d\\n", buscaPos(l, 2));       /* 20 */
-    printf("Pos do valor 30: %d\\n", buscaValor(l, 30));   /* 3 */
+    printf("Tamanho: %d\n", conta(l));                    /* 4 */
+    printf("Valor na pos 2: %d\n", buscaPos(l, 2));       /* 20 */
+    printf("Pos do valor 30: %d\n", buscaValor(l, 30));   /* 3 */
 
     /* 5. Remoções */
     removeValor(l, 15);   /* Remove primeira ocorrência de 15 */
@@ -559,7 +553,7 @@ int main(void) {
 
 ## 10. Guia de Estudo e Prática
 
-### ✅ Antes da Próxima Aula
+### Antes da Próxima Aula
 
 - [ ]  Reimplementar `inserePos` sem consultar o código
 - [ ]  Criar um teste que cause "posição inválida" e validar a mensagem de erro
@@ -570,7 +564,7 @@ int main(void) {
     ```
     
 
-### 🔍 Para Aprofundar
+### Para Aprofundar
 
 1. **Por que `removeValor` chama `buscaValor` e `removePos`?**
     
@@ -585,7 +579,7 @@ int main(void) {
     → `insereFinal` não faria sentido; `inserePos` teria que encontrar a posição correta para manter a ordem.
     
 
-### 💻 Desafio Opcional
+### Desafio Opcional
 
 Implemente `inverte(Lista* l)` que inverte a ordem dos elementos **sem usar vetor auxiliar**.
 
@@ -606,7 +600,7 @@ void inverte(Lista* l) {
 }
 ```
 
-### 🐛 Debug Challenge
+### Debug Challenge
 
 O código abaixo tem um bug sutil. Encontre e corrija:
 
@@ -621,7 +615,7 @@ int removePos(Lista* l, int pos) {
 ```
 
 <details>
-<summary>💡 Clique para ver a resposta</summary>
+<summary>Clique para ver a resposta</summary>
 
 Falta atualizar `l->ultimo--` após o deslocamento. Sem isso, a lista reporta um elemento a mais do que realmente possui.
 </details>
@@ -658,8 +652,8 @@ typedef struct lista Lista;  /* Tipo opaco */
 | Inserção/remoção no meio | O(n) – deslocar elementos | O(1) – ajustar ponteiros (se já tiver a posição) |
 | Uso de memória | Pode desperdiçar espaço | Usa apenas o necessário + overhead de ponteiros |
 
-> 🎯 **Mensagem final:** *"Hoje vocês dominaram a lista estática. Na próxima aula, vamos libertar a lista do limite MAX – e descobrir por que, às vezes, pagar o custo de ponteiros vale a pena."*
-> 
+!!! tip "Mensagem Final"
+    *"Hoje vocês dominaram a lista estática. Na próxima aula, vamos libertar a lista do limite MAX – e descobrir por que, às vezes, pagar o custo de ponteiros vale a pena."*
 
 ---
 
@@ -673,5 +667,5 @@ typedef struct lista Lista;  /* Tipo opaco */
 
 ---
 
-> ℹ️ **Nota:** Este material é para consulta após a aula. Em caso de dúvidas, revise os exemplos de código, execute os testes sugeridos e consulte as referências. A prática com código é essencial para fixar os conceitos de TAD e encapsulamento.
->
+!!! note "Nota"
+    Este material é para consulta após a aula. Em caso de dúvidas, revise os exemplos de código, execute os testes sugeridos e consulte as referências. A prática com código é essencial para fixar os conceitos de TAD e encapsulamento.

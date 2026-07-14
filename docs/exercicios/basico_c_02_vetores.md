@@ -1,18 +1,18 @@
 # Lista de Exercícios - Vetores em C
 
-### 📊 **Lista de Exercícios – Vetores em C**
+## 📊 Lista de Exercícios – Vetores em C
 
 Os vetores permitem armazenar e manipular coleções de dados em C. Nesta lista, você vai trabalhar com leitura, processamento, substituições, contagens e manipulações de índices.
 
 ---
 
-### 1️⃣ **Menor Elemento e sua Posição**
+### 1. Menor Elemento e sua Posição
 
-📌 **Tarefa:**
+**Tarefa:**
 
 Leia um vetor `N[20]`, encontre o **menor valor** armazenado e a **posição** desse valor no vetor.
 
-🧪 **Saída esperada (exemplo):**
+**Saída esperada (exemplo):**
 
 ```
 O menor elemento de N é 3 e sua posição dentro do vetor é: 6
@@ -21,13 +21,13 @@ O menor elemento de N é 3 e sua posição dentro do vetor é: 6
 
 ---
 
-### 2️⃣ **Troca de Elementos Pares e Ímpares**
+### 2. Troca de Elementos Pares e Ímpares
 
-📌 **Tarefa:**
+**Tarefa:**
 
 Leia um vetor `K[30]` e troque todos os elementos de **índice ímpar** com o **elemento par imediatamente posterior**.
 
-🔁 Exemplo:
+Exemplo:
 
 - Posição 1 ↔ 2
 - Posição 3 ↔ 4
@@ -38,21 +38,21 @@ Leia um vetor `K[30]` e troque todos os elementos de **índice ímpar** com o **
 
 ---
 
-### 3️⃣ **Multiplicação de Vetor por uma Variável**
+### 3. Multiplicação de Vetor por uma Variável
 
-📌 **Tarefa:**
+**Tarefa:**
 
 Leia um vetor `S[20]` e uma variável `A`. Em seguida, imprima o **produto de A por cada elemento** do vetor.
 
-🧮 **Exemplo:**
+**Exemplo:**
 
 Se `A = 2` e `S = {1, 2, 3}`, a saída deve ser `2, 4, 6`.
 
 ---
 
-### 4️⃣ **Contar Números Pares em um Vetor**
+### 4. Contar Números Pares em um Vetor
 
-📌 **Tarefa:**
+**Tarefa:**
 
 Leia um vetor com 20 números inteiros e mostre:
 
@@ -61,9 +61,9 @@ Leia um vetor com 20 números inteiros e mostre:
 
 ---
 
-### 5️⃣ **Análise de Código – Inversão de Vetor**
+### 5. Análise de Código – Inversão de Vetor
 
-📌 **Contexto:**
+**Contexto:**
 
 Dado o vetor:
 
@@ -71,7 +71,7 @@ Dado o vetor:
 int vet[] = {7, 3, 1, 5, 13, 11, 9, 15};
 ```
 
-🧪 **Código:**
+**Código:**
 
 ```c
 int x, i;
@@ -83,6 +83,6 @@ for (i = 0; i < 8; i++) {
 
 ```
 
-📌 **Pergunta:**
+**Pergunta:**
 
 Qual será a **configuração final** do vetor após a execução do código?

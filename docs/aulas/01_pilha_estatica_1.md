@@ -117,7 +117,7 @@ int main() {
         topo++;
         pilha[topo] = 10;
     } else {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
     }
 
     // Empilha 20
@@ -125,7 +125,7 @@ int main() {
         topo++;
         pilha[topo] = 20;
     } else {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
     }
 
     // Empilha 30
@@ -133,23 +133,23 @@ int main() {
         topo++;
         pilha[topo] = 30;
     } else {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
     }
 
     // 2. Ver o topo (sem remover)
     if (topo == -1) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
     } else {
-        printf("Topo: %d\\n", pilha[topo]);
+        printf("Topo: %d\n", pilha[topo]);
     }
 
     // 3. Desempilha (pop)
     if (topo == -1) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
     } else {
         int valor = pilha[topo];
         topo--;
-        printf("Desempilhado: %d\\n", valor);
+        printf("Desempilhado: %d\n", valor);
     }
 
     // 4. Empilha novamente um valor
@@ -157,14 +157,14 @@ int main() {
         topo++;
         pilha[topo] = 40;
     } else {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
     }
 
     // 5. Desempilha até ficar vazia (simples)
     while (topo != -1) {
         int valor = pilha[topo];
         topo--;
-        printf("Desempilhando %d\\n", valor);
+        printf("Desempilhando %d\n", valor);
     }
 
     return 0;
@@ -191,7 +191,7 @@ if (topo < MAX - 1) {
     topo++;           // 1. Avança o indicador
     pilha[topo] = x;  // 2. Guarda o valor na nova posição
 } else {
-    printf("Pilha cheia!\\n");
+    printf("Pilha cheia!\n");
 }
 ```
 
@@ -201,11 +201,11 @@ if (topo < MAX - 1) {
 
 ```c
 if (topo == -1) {
-    printf("Pilha vazia!\\n");
+    printf("Pilha vazia!\n");
 } else {
     int valor = pilha[topo]; // 1. Salva o valor atual
     topo--;                  // 2. Decrementa o indicador (esquece o elemento)
-    printf("Desempilhado: %d\\n", valor);
+    printf("Desempilhado: %d\n", valor);
 }
 ```
 

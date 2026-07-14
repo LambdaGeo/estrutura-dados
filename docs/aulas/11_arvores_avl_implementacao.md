@@ -1,6 +1,6 @@
 # AVL - Implementação
 
-# 1. Revisão Rápida: Por Que Implementar AVL?
+## 1. Revisão Rápida: Por Que Implementar AVL?
 
 ---
 
@@ -9,14 +9,15 @@ Na aula passada, vimos que:
 | Situação | ABB Comum | AVL |
 | --- | --- | --- |
 | Inserção ordenada `[1,2,3,4,5]` | Degenera → O(n) | Balanceada → O(log n) |
-| Fator de balanceamento | Não verifica | ` |
+| Fator de balanceamento | Não verifica | Verifica automaticamente (`\|FB\| ≤ 1`) |
 | Rebalanceamento | Não faz | Rotações automáticas |
 
-> 🔑 **Ideia central da implementação:** A cada inserção, devemos:
-> 
-> 1. Inserir como em uma ABB normal
-> 2. **Atualizar a altura** dos nós ancestrais
-> 3. **Verificar o FB** e aplicar rotação se necessário
+!!! question "Ideia central da implementação"
+    A cada inserção, devemos:
+
+    1. Inserir como em uma ABB normal
+    2. **Atualizar a altura** dos nós ancestrais
+    3. **Verificar o FB** e aplicar rotação se necessário
 
 ---
 
@@ -37,11 +38,10 @@ typedef struct No {
 } No;
 ```
 
-> 💡 **Por que armazenar a altura?**
-> 
-> - Calcular altura recursivamente a cada verificação seria O(n)
-> - Armazenando o valor, atualizamos em O(1) durante a subida da recursão
-> - Trade-off: +4 bytes por nó vs. eficiência garantida
+!!! tip "Por que armazenar a altura?"
+    - Calcular altura recursivamente a cada verificação seria O(n)
+    - Armazenando o valor, atualizamos em O(1) durante a subida da recursão
+    - Trade-off: +4 bytes por nó vs. eficiência garantida
 
 ---
 
@@ -58,8 +58,8 @@ int altura(No *n) {
 }
 ```
 
-> ⚠️ **Importante:** Esta função protege contra acesso a ponteiro NULL. Sempre use `altura(no)` em vez de `no->altura` diretamente.
-> 
+!!! warning "Importante"
+    Esta função protege contra acesso a ponteiro NULL. Sempre use `altura(no)` em vez de `no->altura` diretamente.
 
 ### 3.2 Função `max` Simples
 
@@ -78,7 +78,7 @@ No* novoNo(int chave) {
     No* no = (No*) malloc(sizeof(No));
 
     if (no == NULL) {
-        fprintf(stderr, "Erro: falha ao alocar memória\\n");
+        fprintf(stderr, "Erro: falha ao alocar memória\n");
         exit(EXIT_FAILURE);
     }
 
@@ -91,10 +91,9 @@ No* novoNo(int chave) {
 }
 ```
 
-> ✅ **Boas práticas:**
-> 
-> - Sempre verificar retorno de `malloc`
-> - Inicializar todos os campos, especialmente `altura = 1`
+!!! success "Boas práticas"
+    - Sempre verificar retorno de `malloc`
+    - Inicializar todos os campos, especialmente `altura = 1`
 
 ### 3.4 Calcular Fator de Balanceamento
 
@@ -124,11 +123,11 @@ int fatorBalanceamento(No *n) {
 ```
 Antes (FB = +2, caso LL):        Depois:
        z                              y
-      / \\                            / \\
+      / \                            / \
      y   T4                        x   z
-    / \\                            / \\ / \\
+    / \                            / \ / \
    x   T3                        T1 T2 T3 T4
-  / \\
+  / \
  T1  T2
 ```
 
@@ -153,8 +152,8 @@ No* rotacaoDireita(No *y) {
 }
 ```
 
-> 🔁 **Ordem de atualização:** Sempre atualize o nó que "desceu" primeiro (y), depois o que "subiu" (x).
-> 
+!!! note "Ordem de atualização"
+    Sempre atualize o nó que "desceu" primeiro (y), depois o que "subiu" (x).
 
 ### 4.2 Rotação Simples à Esquerda (Caso RR)
 
@@ -163,11 +162,11 @@ No* rotacaoDireita(No *y) {
 ```
 Antes (FB = -2, caso RR):      Depois:
    z                              y
-  / \\                            / \\
+  / \                            / \
  T1  y                          z   x
-    / \\                        / \\ / \\
+    / \                        / \ / \
    T2  x                     T1 T2 T3 T4
-      / \\
+      / \
     T3  T4
 ```
 
@@ -243,7 +242,7 @@ No* inserir(No* no, int chave) {
 }
 ```
 
-### 5.2 💡 Por Que Atualizar a Altura **Antes** de Verificar o FB?
+### 5.2 Por Que Atualizar a Altura **Antes** de Verificar o FB?
 
 ```
 ❌ ERRADO:
@@ -258,8 +257,8 @@ No* inserir(No* no, int chave) {
 4. Decidir rotação com base em FB preciso
 ```
 
-> 🎯 **Analogia:** É como medir a temperatura antes de decidir se liga o ar-condicionado. Medir depois não faz sentido!
-> 
+!!! tip "Analogia"
+    É como medir a temperatura antes de decidir se liga o ar-condicionado. Medir depois não faz sentido!
 
 ### 5.3 Por Que a Função Retorna `No*`?
 
@@ -276,9 +275,9 @@ Antes da rotação:        Após rotação em B:
       A                        A
      /                        /
     B  ← rotaciona          C  ← nova raiz da subárvore
-   / \\                      / \\
+   / \                      / \
   C   T2                  B   T2
- / \\                     / \\
+ / \                     / \
 T1 T3                  T1 T3
 
 Sem a atribuição: A->esq ainda apontaria para B (antigo, agora filho)
@@ -314,7 +313,7 @@ void imprimirArvore(No *raiz, int nivel) {
 
     // Imprime identação e valor [chave:altura, FB]
     for (int i = 0; i < nivel; i++) printf("    ");
-    printf("[%d:h%d,FB%d]\\n", raiz->chave, raiz->altura, fatorBalanceamento(raiz));
+    printf("[%d:h%d,FB%d]\n", raiz->chave, raiz->altura, fatorBalanceamento(raiz));
 
     // Imprime subárvore esquerda
     imprimirArvore(raiz->esq, nivel + 1);
@@ -375,7 +374,7 @@ int max(int a, int b) {
 
 No* novoNo(int chave) {
     No* no = (No*) malloc(sizeof(No));
-    if (!no) { fprintf(stderr, "Erro de alocação\\n"); exit(1); }
+    if (!no) { fprintf(stderr, "Erro de alocação\n"); exit(1); }
     no->chave = chave;
     no->esq = no->dir = NULL;
     no->altura = 1;
@@ -465,7 +464,7 @@ void imprimirArvore(No *raiz, int nivel) {
     if (!raiz) return;
     imprimirArvore(raiz->dir, nivel + 1);
     for (int i = 0; i < nivel; i++) printf("    ");
-    printf("[%d:h%d,FB%d]\\n", raiz->chave, raiz->altura, fatorBalanceamento(raiz));
+    printf("[%d:h%d,FB%d]\n", raiz->chave, raiz->altura, fatorBalanceamento(raiz));
     imprimirArvore(raiz->esq, nivel + 1);
 }
 
@@ -483,22 +482,22 @@ int main() {
     int valores[] = {10, 20, 30, 40, 50, 25};
     int n = sizeof(valores) / sizeof(valores[0]);
 
-    printf("=== Inserção AVL passo a passo ===\\n\\n");
+    printf("=== Inserção AVL passo a passo ===\n\n");
 
     for (int i = 0; i < n; i++) {
-        printf("Inserindo %d:\\n", valores[i]);
+        printf("Inserindo %d:\n", valores[i]);
         raiz = inserir(raiz, valores[i]);
         imprimirArvore(raiz, 0);
-        printf("\\n");
+        printf("\n");
     }
 
     printf("Percurso em-ordem (deve sair ordenado): ");
     emOrdem(raiz);
-    printf("\\n\\n");
+    printf("\n\n");
 
-    printf("Estatísticas finais:\\n");
-    printf("  Altura da raiz: %d\\n", altura(raiz));
-    printf("  FB da raiz: %d\\n", fatorBalanceamento(raiz));
+    printf("Estatísticas finais:\n");
+    printf("  Altura da raiz: %d\n", altura(raiz));
+    printf("  FB da raiz: %d\n", fatorBalanceamento(raiz));
 
     liberarAVL(raiz);
     return 0;
@@ -509,14 +508,14 @@ int main() {
 
 ## 8. Execução Passo a Passo: Exemplo `[10, 20, 30, 40, 50, 25]`
 
-### 🔹 Inserção 10
+### Inserção 10
 
 ```
 [10:h1,FB0]
 → Árvore com 1 nó, balanceada ✓
 ```
 
-### 🔹 Inserção 20
+### Inserção 20
 
 ```
     [20:h2,FB-1]
@@ -524,7 +523,7 @@ int main() {
 → FB(20) = 0-1 = -1 ✓ (dentro de [-1,1])
 ```
 
-### 🔹 Inserção 30 → **Desbalanceamento RR!**
+### Inserção 30 → **Desbalanceamento RR!**
 
 ```
 Antes da rotação:
@@ -534,71 +533,71 @@ Antes da rotação:
 
 Após rotação esquerda em 10:
         [20:h2,FB0]
-        /        \\
+        /        \
     [10:h1,FB0]  [30:h1,FB0]
 → Balanceada! ✓
 ```
 
-### 🔹 Inserção 40
+### Inserção 40
 
 ```
         [20:h3,FB-1]
-        /        \\
+        /        \
     [10:h1,FB0]  [30:h2,FB-1]
-                    \\
+                    \
                     [40:h1,FB0]
 → FB(20) = 1-2 = -1 ✓, FB(30) = 0-1 = -1 ✓
 ```
 
-### 🔹 Inserção 50 → **Desbalanceamento RR em 30!**
+### Inserção 50 → **Desbalanceamento RR em 30!**
 
 ```
 Antes:
         [20:h3,FB-2]  ← FB = -2 ❌
-        /        \\
+        /        \
     [10:h1]    [30:h3,FB-2]  ← FB = -2 ❌
-                    \\
+                    \
                     [40:h2,FB-1]
-                        \\
+                        \
                         [50:h1]
 
 Rotação esquerda em 30:
         [20:h3,FB-1]
-        /        \\
+        /        \
     [10:h1]    [40:h2,FB0]
-                /    \\
+                /    \
             [30:h1] [50:h1]
 → Balanceada! ✓
 ```
 
-### 🔹 Inserção 25 → **Desbalanceamento RL em 20!**
+### Inserção 25 → **Desbalanceamento RL em 20!**
 
 ```
 Antes:
                 [40:h3,FB1]
-              /            \\
+              /            \
         [20:h2,FB2]      [50:h1]   ← FB(20) = +2 ❌
-        /      \\
+        /      \
     [10:h1]  [30:h1,FB-1]
-                \\
+                \
                 [25:h1]    ← inserido aqui
 
 Caminho: 20 → Dir(30) → Esq(25) → Caso RL
 
 Passo 1: Rotação direita em 30:
                 [40:h3]
-              /        \\
+              /        \
         [20:h2]      [50:h1]
-        /     \\
+        /     \
     [10:h1] [25:h2,FB1]
-                \\
+                \
                 [30:h1]
 
 Passo 2: Rotação esquerda em 20:
                 [40:h3,FB0]
-              /            \\
+              /            \
         [25:h2,FB0]      [50:h1]
-        /      \\
+        /      \
     [20:h1]  [30:h1]
     /
 [10:h1]
@@ -606,7 +605,7 @@ Passo 2: Rotação esquerda em 20:
 → Balanceada! ✓
 ```
 
-### 🔹 Saída Final
+### Saída Final
 
 ```
 Percurso em-ordem: 10 20 25 30 40 50  ← Ordenado! ✓
@@ -616,8 +615,8 @@ Estatísticas:
   FB da raiz: 0
 ```
 
-> ✅ **Verificação no VisuAlgo:** Acesse [https://visualgo.net/en/bst](https://visualgo.net/en/bst), selecione "AVL", insira `[10,20,30,40,50,25]` e compare com nossa execução.
-> 
+!!! success "Verificação no VisuAlgo"
+    Acesse [https://visualgo.net/en/bst](https://visualgo.net/en/bst), selecione "AVL", insira `[10,20,30,40,50,25]` e compare com nossa execução.
 
 ---
 
@@ -633,7 +632,7 @@ b) Todos os nós têm `|FB| ≤ 1`?
 c) Qual a altura final da árvore?
 
 <details>
-<summary>💡 Gabarito esperado</summary>
+<summary>Gabarito esperado</summary>
 
 ```
 a) Saída em-ordem: 1 3 4 5 6 7 8 ✓
@@ -654,7 +653,7 @@ b) Qual a altura final da AVL?
 c) Compare com a altura que uma ABB comum teria com a mesma sequência.
 
 <details>
-<summary>💡 Resposta</summary>
+<summary>Resposta</summary>
 
 ```
 a) Rotações:
@@ -682,7 +681,7 @@ No* buscar(No* raiz, int chave);
 Teste buscando valores presentes e ausentes na árvore do Exercício 1.
 
 <details>
-<summary>💡 Esboço de solução</summary>
+<summary>Esboço de solução</summary>
 
 ```c
 No* buscar(No* raiz, int chave) {
@@ -723,7 +722,7 @@ Qual sequência exige mais rotações? Por quê?
 
 ## 10. Discussão: Por Que a Altura é Essencial na Inserção?
 
-### 🎯 Cenário Hipotético: E Se Não Atualizássemos a Altura?
+### Cenário Hipotético: E Se Não Atualizássemos a Altura?
 
 ```c
 // ❌ VERSÃO COM ERRO (não atualiza altura):
@@ -749,7 +748,7 @@ No* inserirErrado(No* no, int chave) {
 3. A árvore pode **permanecer desbalanceada** → perda da garantia O(log n)
 4. Em casos extremos, pode causar **loop infinito** ou **corrupção de estrutura**
 
-### ✅ Por Que Atualizar na Subida da Recursão?
+### Por Que Atualizar na Subida da Recursão?
 
 ```
 Inserção é recursiva: inserir(raiz, chave)
@@ -761,68 +760,73 @@ Inserção é recursiva: inserir(raiz, chave)
 A altura só pode ser calculada APÓS as subárvores estarem prontas!
 ```
 
-> 🧠 **Analogia da construção:** Você não pode medir a altura de um prédio enquanto ainda está construindo o andar de cima. Primeiro termina os andares superiores, depois mede de baixo para cima.
-> 
+!!! tip "Analogia da construção"
+    Você não pode medir a altura de um prédio enquanto ainda está construindo o andar de cima. Primeiro termina os andares superiores, depois mede de baixo para cima.
 
 ---
 
 ## 11. Resumo da Aula
 
-✅ **Estrutura do nó AVL:** campo `altura` é obrigatório para eficiência
+**Estrutura do nó AVL:** campo `altura` é obrigatório para eficiência
 
-✅ **Funções auxiliares:** `altura()`, `max()`, `novoNo()`, `fatorBalanceamento()`
+**Funções auxiliares:** `altura()`, `max()`, `novoNo()`, `fatorBalanceamento()`
 
-✅ **Rotações implementadas:**
+**Rotações implementadas:**
 
 - `rotacaoDireita()`: caso LL
 - `rotacaoEsquerda()`: caso RR
 - Casos LR/RL: composição das duas simples
-✅ **Inserção AVL:**
+
+**Inserção AVL:**
+
 1. Inserir como ABB
 2. Atualizar altura do nó atual
 3. Calcular FB
 4. Aplicar rotação conforme caso
 5. Retornar nova raiz da subárvore
-✅ **Importância crítica:** Atualizar altura **antes** de calcular FB
-✅ **Retorno de ponteiro:** Necessário para reconectar subárvores após rotação
-✅ **Validação:** Uso de `emOrdem()` e `imprimirArvore()` para depuração
-✅ **Boas práticas:** Verificar `malloc`, liberar memória com `free()`
+
+**Importância crítica:** Atualizar altura **antes** de calcular FB
+
+**Retorno de ponteiro:** Necessário para reconectar subárvores após rotação
+
+**Validação:** Uso de `emOrdem()` e `imprimirArvore()` para depuração
+
+**Boas práticas:** Verificar `malloc`, liberar memória com `free()`
 
 ---
 
 ## 12. Próximos Passos & Ferramentas
 
-🔜 **Tópicos para próxima aula:**
+**Tópicos para próxima aula:**
 
 - Remoção em AVL (mais complexa que inserção)
 - Balanceamento em remoção: casos adicionais
 - Comparação de desempenho: AVL vs. ABB vs. Hash Table
 
-🛠️ **Prática sugerida:**
+**Prática sugerida:**
 
 1. **Compile e execute** o código completo da Seção 7
 2. **Use o VisuAlgo** ([https://visualgo.net/en/bst](https://visualgo.net/en/bst)) para validar suas execuções
 3. **Modifique o código** para imprimir mensagens quando uma rotação ocorrer:
     
     ```c
-    printf("  → Rotação DIREITA em %d\\n", no->chave);
+    printf("  → Rotação DIREITA em %d\n", no->chave);
     ```
     
 4. **Teste casos extremos**: inserção ordenada, inversa, aleatória
 
-📚 **Leitura complementar:**
+**Leitura complementar:**
 
 - ZIVIANI, N. *Projeto de Algoritmos*. Seção 5.4: Implementação de AVL.
 - CORMEN et al. *Introduction to Algorithms*. Capítulo 13: Red-Black Trees (próximo nível de balanceamento).
 
 ---
 
-> 📌 **Dica para provas e trabalhos:**
-> 
-> - Sempre desenhe a árvore **antes** de codificar
-> - Anote alturas e FB ao lado de cada nó durante a simulação manual
-> - Use `printf` estratégicos para rastrear a execução passo a passo
-> - Valide no VisuAlgo para ganhar confiança no raciocínio
+!!! note "Dica para provas e trabalhos"
+    - Sempre desenhe a árvore **antes** de codificar
+    - Anote alturas e FB ao lado de cada nó durante a simulação manual
+    - Use `printf` estratégicos para rastrear a execução passo a passo
+    - Valide no VisuAlgo para ganhar confiança no raciocínio
 
 ---
 

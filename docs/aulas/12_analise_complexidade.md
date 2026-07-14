@@ -1,6 +1,6 @@
 # Complexidade de Algoritmos & Análise de Desempenho (gcov e gprof)
 
-### **Disciplina:** Estrutura de Dados
+**Disciplina:** Estrutura de Dados
 
 Neste capítulo, estudaremos a **análise de algoritmos** sob duas perspectivas: a **teórica** (notação Big-O) e a **empírica** (ferramentas práticas de profiling e cobertura em C, como `gcov` e `gprof`). Essas ferramentas ajudam a visualizar quais partes do código consomem mais tempo de execução ou quais caminhos não foram devidamente testados.
 

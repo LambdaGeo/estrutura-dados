@@ -33,7 +33,6 @@
 **Definição Didática:**
 
 > Uma função em C é um **bloco de código** que recebe zero ou mais parâmetros, executa uma tarefa bem definida e pode retornar um único valor.
-> 
 
 **Frases para o Quadro:**
 
@@ -67,7 +66,7 @@ int dobro(int x) {
 int main() {
     int n = 5;
     int resultado = dobro(n);
-    printf("O dobro de %d é %d\\n", n, resultado);
+    printf("O dobro de %d é %d\n", n, resultado);
     return 0;
 }
 ```
@@ -85,7 +84,7 @@ int main() {
 
 ```c
 void imprimirMensagem() {
-    printf("Olá de uma função void!\\n");
+    printf("Olá de uma função void!\n");
 }
 ```
 
@@ -94,7 +93,6 @@ void imprimirMensagem() {
 **Ideia-Chave:**
 
 > Em C, os parâmetros de função são **passados por valor (por cópia)**.
-> 
 
 **Exemplo do Erro Comum:**
 
@@ -109,7 +107,7 @@ void trocaErrada(int a, int b) {
 int main() {
     int x = 10, y = 20;
     trocaErrada(x, y);
-    printf("x=%d y=%d\\n", x, y); // Saída: x=10 y=20
+    printf("x=%d y=%d\n", x, y); // Saída: x=10 y=20
     return 0;
 }
 ```
@@ -117,7 +115,6 @@ int main() {
 **Conclusão para a Turma:**
 
 > Se a função precisa **modificar** o valor de uma variável original, **copiar o valor não basta**. Precisamos passar a **referência** (endereço) da variável.
-> 
 
 ---
 
@@ -128,12 +125,10 @@ int main() {
 Voltar ao conceito apresentado na Aula 1:
 
 > *Um TAD é uma coleção de dados + um conjunto de operações bem definidas, escondendo a implementação.*
-> 
 
 **Pergunta para a Turma:**
 
 > "Quais são as operações típicas que fazemos com uma pilha?"
-> 
 
 **Respostas Esperadas:**
 
@@ -148,7 +143,6 @@ Voltar ao conceito apresentado na Aula 1:
 **Pergunta:**
 
 > "Como podemos representar essas operações em C? O que nos dá a linguagem?"
-> 
 
 **Resposta Guiada:**
 
@@ -184,7 +178,6 @@ typedef struct pilha {
 - `typedef struct pilha { ... } Pilha;`: Cria um novo **tipo** `Pilha` que pode ser usado como `Pilha p1;`.
 
 > **Observação:** Agora, `Pilha` é um tipo próprio, como `int` ou `float`, só que composto por um vetor e um `int`.
-> 
 
 ### 3.2 Exemplo de Uso de `struct` Sem Funções
 
@@ -213,7 +206,7 @@ int main() {
     // Desempilha (Acesso direto)
     if (p.topo != -1) {
         int valor = p.valores[p.topo];
-        printf("Desempilhado: %d\\n", valor);
+        printf("Desempilhado: %d\n", valor);
         p.topo--;
     }
 
@@ -241,7 +234,7 @@ void empilha(int x, Pilha p) { // Recebe uma CÓPIA da struct
         p.topo++;
         p.valores[p.topo] = x;
     } else {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
     }
 }
 
@@ -253,10 +246,10 @@ int main() {
 
     // Mesmo após empilha, p não foi alterado
     if (p.topo != -1) {
-        printf("Valor no topo: %d\\n", p.valores[p.topo]);
+        printf("Valor no topo: %d\n", p.valores[p.topo]);
         // ⚠️ IMPRIME ERRO ou PILHA VAZIA, pois topo continua -1
     } else {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
     }
 
     return 0;
@@ -274,7 +267,6 @@ int main() {
 **Pergunta para a Turma:**
 
 > "O que seria necessário para que a função `empilha` consiga realmente alterar a pilha passada? O que é o `p` que o `main` quer ver?"
-> 
 
 **Resposta Guiada:**
 
@@ -309,7 +301,7 @@ void empilha(int x, Pilha *p) { // Recebe o ENDEREÇO da pilha
         p->topo++;
         p->valores[p->topo] = x;
     } else {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
     }
 }
 ```
@@ -357,7 +349,7 @@ int pilhaCheia(Pilha *p) {
 
 void empilha(int x, Pilha *p) {
     if (pilhaCheia(p)) {
-        printf("Pilha cheia!\\n");
+        printf("Pilha cheia!\n");
         return;
     }
     p->topo++;
@@ -366,7 +358,7 @@ void empilha(int x, Pilha *p) {
 
 int desempilha(Pilha *p) {
     if (pilhaVazia(p)) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
         return -1; // Valor de erro
     }
     int valor = p->valores[p->topo];
@@ -376,7 +368,7 @@ int desempilha(Pilha *p) {
 
 int topoPilha(Pilha *p) {
     if (pilhaVazia(p)) {
-        printf("Pilha vazia!\\n");
+        printf("Pilha vazia!\n");
         return -1;
     }
     return p->valores[p->topo];
@@ -391,13 +383,13 @@ int main() {
     empilha(20, &p);
     empilha(30, &p);
 
-    printf("Topo: %d\\n", topoPilha(&p));
-    printf("Desempilhado: %d\\n", desempilha(&p));
+    printf("Topo: %d\n", topoPilha(&p));
+    printf("Desempilhado: %d\n", desempilha(&p));
 
     empilha(40, &p);
 
     while (!pilhaVazia(&p)) {
-        printf("Desempilhando: %d\\n", desempilha(&p));
+        printf("Desempilhando: %d\n", desempilha(&p));
     }
 
     return 0;
@@ -417,7 +409,6 @@ int main() {
 ### 5.1 Pergunta para a Turma
 
 > "Se já temos ponteiros, e o `main` pode criar ponteiros para `Pilha`, por que continuamos usando um vetor estático `int valores[MAX]` dentro da estrutura? O que acontece se quisermos várias pilhas de tamanhos diferentes?"
-> 
 
 **Resposta Esperada (Guiada):**
 
@@ -433,7 +424,6 @@ int main() {
     3. Criar funções `criaPilha(int capacidade)` e `liberaPilha(Pilha *p)`.
 
 > **Transição Didática:** "Hoje trabalhamos com funções, `struct`, ponteiros e passagem por referência. Na próxima aula, vamos usar **alocação dinâmica** para tornar a pilha verdadeiramente flexível e reutilizável para vários tamanhos."
-> 
 
 ---
 

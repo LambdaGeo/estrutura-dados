@@ -1,14 +1,13 @@
-# Árvores : Conceitos e Binária
+# Árvores: Conceitos e Binária
 
-> [!NOTE]
-> **Material de Apoio:** Você pode acompanhar esta aula utilizando os [Slides sobre Conceitos de Árvores](../slides/arvores_conceitos.pdf).
+!!! note "Material de Apoio"
+    Você pode acompanhar esta aula utilizando os [Slides sobre Conceitos de Árvores](../slides/arvores_conceitos.pdf).
 
-# 1. Introdução: O que são Estruturas de Dados?
+## 1. Introdução: O que são Estruturas de Dados?
 
 ---
 
 > **Definição:** Organização de dados e operações (algoritmos) que podem ser aplicadas sobre esses dados como forma de apoio à solução de problemas. Estruturas de dados podem ser utilizadas para representar **Tipos Abstratos de Dados (TADs)** em alguma linguagem de programação.
-> 
 
 ### Exemplos de Estruturas de Dados:
 
@@ -46,8 +45,7 @@ Uma **árvore enraizada** *T*, ou simplesmente árvore, é um conjunto finito de
 - **r** é um nó especial chamado **raiz**
 - Os demais nós formam conjuntos disjuntos *T₁, T₂, ..., Tₙ*, chamados de **subárvores** de *r*, cada qual uma árvore
 
-> ⚠️ **Note a recursividade da definição:** uma árvore é definida em termos de outras árvores menores.
-> 
+> **Note a recursividade da definição:** uma árvore é definida em termos de outras árvores menores.
 
 ### 2.2 Exemplos de Árvores no Mundo Real
 
@@ -75,7 +73,7 @@ Alunos
 
 ### 2.3 Representações de Árvores
 
-### a) Representação Textual (aninhamento de chaves)
+#### a) Representação Textual (aninhamento de chaves)
 
 As sequências de chaves `{` e `}` representam as relações entre os nós; o rótulo de cada nó é inserido imediatamente à direita do `{` correspondente.
 
@@ -87,7 +85,7 @@ Tb = {B, {A}}
 Tc = {D, {E, {F}}, {G, {H, {I}}, {J, {K}, {L}}, {M}}}
 ```
 
-### b) Representação por Identação
+#### b) Representação por Identação
 
 ```
 Tc = {D, {E, {F}}, {G, {H, {I}}, {J, {K}, {L}}, {M}}}
@@ -104,15 +102,15 @@ D
    └─ M
 ```
 
-### c) Representação Gráfica (como grafo)
+#### c) Representação Gráfica (como grafo)
 
 ```
         D
-       / \\
+       / \
       E   G
-     /   /|\\
+     /   /|\
     F   H J M
-         / \\
+         / \
         K   L
 ```
 
@@ -124,9 +122,9 @@ Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
 ```
         A  ← raiz (nível 0)
-       / \\
+       / \
       B   C  ← filhos de A (nível 1)
-     / \\   \\
+     / \   \
     D   E   F  ← folhas (nível 2)
 ```
 
@@ -145,9 +143,9 @@ Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
 ```
         A  ← grau(A) = 2
-       / \\
+       / \
       B   C  ← grau(B) = 2, grau(C) = 1
-     / \\   \\
+     / \   \
     D   E   F  ← grau(D) = grau(E) = grau(F) = 0 → FOLHAS
 ```
 
@@ -170,8 +168,7 @@ Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 | **Altura de um nó** | Tamanho do maior caminho desse nó até uma folha descendente | `D,E,F`: altura 0; `B,C`: altura 1; `A`: altura 2 |
 | **Altura da árvore** | Altura da raiz | `altura(T) = 2` |
 
-> 💡 **Dica:** Raiz tem nível 0; folhas têm altura 0.
-> 
+> **Dica:** Raiz tem nível 0; folhas têm altura 0.
 
 ---
 
@@ -192,17 +189,16 @@ Uma **árvore binária** *T* é um conjunto finito de elementos, denominados nó
 - **r** é um nó especial chamado **raiz**
 - **Tₑ** e **Tₑ** são conjuntos disjuntos (podem ser vazios), chamados **subárvore à esquerda** e **subárvore à direita** de **r**, cada qual uma árvore binária
 
-> ⚠️ **Diferença crucial:** Em árvores binárias, a ordem das subárvores importa! Subárvore esquerda ≠ subárvore direita.
-> 
+> **Diferença crucial:** Em árvores binárias, a ordem das subárvores importa! Subárvore esquerda ≠ subárvore direita.
 
 ### 4.2 Comparação: Árvore Geral vs. Árvore Binária
 
 ```
 Árvore Geral (n filhos)      Árvore Binária (máx. 2 filhos)
         •                              •
-     /  |  \\                          / \\
+     /  |  \                          / \
     •   •   •                        •   •
-   / \\                               /   / \\
+   / \                               /   / \
   •   •                             •   •   •
 
 - Ordem dos filhos não importa    - Esquerda e direita são distintos
@@ -244,7 +240,7 @@ No* criarNo(char valor) {
 
     // Boa prática: verificar se a alocação foi bem-sucedida
     if (novo == NULL) {
-        fprintf(stderr, "Erro: falha ao alocar memória para nó '%c'\\n", valor);
+        fprintf(stderr, "Erro: falha ao alocar memória para nó '%c'\n", valor);
         exit(EXIT_FAILURE);  // Encerra o programa com código de erro
     }
 
@@ -257,8 +253,7 @@ No* criarNo(char valor) {
 }
 ```
 
-> ✅ **Boas práticas demonstradas:**
-> 
+> **Boas práticas demonstradas:**
 > - Verificação de `malloc` para evitar *segmentation fault*
 > - Inicialização explícita dos ponteiros com `NULL`
 > - Mensagem de erro descritiva em `stderr`
@@ -278,9 +273,9 @@ int main() {
     // Passo 2: Conectar os nós para formar a estrutura da árvore
     // Representação gráfica da árvore montada:
     //        A
-    //       / \\
+    //       / \
     //      B   C
-    //     / \\   \\
+    //     / \   \
     //    D   E   F
 
     A->esquerda = B;    // B é filho à esquerda de A
@@ -310,13 +305,12 @@ void liberarArvore(No* raiz) {
         // Depois libera o nó atual
         free(raiz);
         // Opcional: mensagem de debug
-        // printf("Nó liberado: %c\\n", raiz->valor);
+        // printf("Nó liberado: %c\n", raiz->valor);
     }
 }
 ```
 
-> ⚠️ **Importante:** Sempre chame `liberarArvore(raiz)` no final do `main()` para evitar *memory leaks*.
-> 
+> **Importante:** Sempre chame `liberarArvore(raiz)` no final do `main()` para evitar *memory leaks*.
 
 ---
 
@@ -325,14 +319,13 @@ void liberarArvore(No* raiz) {
 ### 6.1 Árvore Estritamente Binária
 
 > **Definição:** Cada nó tem grau **0 ou 2** (ou seja, todo nó tem exatamente 0 ou 2 filhos).
-> 
 
 ```
 a) Estritamente binária        b) NÃO estritamente binária
           •                               •
-         / \\                             / \\
+         / \                             / \
         •   •                           •   •
-       / \\                                 /
+       / \                                 /
       •   •                               •
 
 ✓ Todos os nós têm 0 ou 2 filhos    ✗ Nó com 1 filho (violando a regra)
@@ -341,16 +334,15 @@ a) Estritamente binária        b) NÃO estritamente binária
 ### 6.2 Árvore Binária Completa
 
 > **Definição:** Árvore estritamente binária na qual todo nó que apresente alguma subárvore vazia está localizado no **último ou penúltimo nível** da árvore.
-> 
 
 ```
 a) Completa                      b) NÃO completa
           •                               •
-         / \\                             / \\
+         / \                             / \
         •   •                           •   •
-       / \\   /                         /   / \\
+       / \   /                         /   / \
       •   • •                         •   •   •
-     /                                   \\
+     /                                   \
     •                                     •
 
 ✓ Nós com subárvores vazias        ✗ Nó com subárvore vazia
@@ -360,13 +352,12 @@ a) Completa                      b) NÃO completa
 ### 6.3 Árvore Binária Cheia (Full)
 
 > **Definição:** Todos os nós internos têm grau 2 e **todas as folhas estão no mesmo nível**.
-> 
 
 ```
         •
-       / \\
+       / \
       •   •
-     / \\ / \\
+     / \ / \
     •  ••  •
 
 ✓ Todos os nós internos têm 2 filhos
@@ -398,7 +389,6 @@ Seja *k* o nível máximo (altura) da árvore:
 ### 7.1 Conceito de Percurso
 
 > **Percorrer** uma árvore significa **visitar cada nó exatamente uma vez**. "Visitar" pode ser:
-> 
 > - Imprimir o valor do nó
 > - Somar valores numéricos
 > - Contar nós
@@ -421,13 +411,13 @@ Considere a árvore de exemplo:
 
 ```
         A
-       / \\
+       / \
       B   C
-     / \\   \\
+     / \   \
     D   E   F
 ```
 
-### a) Pré-ordem (Pre-order)
+#### a) Pré-ordem (Pre-order)
 
 ```c
 // Pré-ordem: Raiz, Esquerda, Direita
@@ -457,7 +447,7 @@ preOrdem(A)
 
 **Saída:** `A B D E C F`
 
-### b) Em-ordem (In-order)
+#### b) Em-ordem (In-order)
 
 ```c
 // Em-ordem: Esquerda, Raiz, Direita
@@ -472,10 +462,9 @@ void emOrdem(No* raiz) {
 
 **Saída para o mesmo exemplo:** `D B E A C F`
 
-> 💡 **Observação:** Em Árvores Binárias de Busca (ABB), o percurso em-ordem retorna os elementos **ordenados crescentemente**.
-> 
+> **Observação:** Em Árvores Binárias de Busca (ABB), o percurso em-ordem retorna os elementos **ordenados crescentemente**.
 
-### c) Pós-ordem (Post-order)
+#### c) Pós-ordem (Post-order)
 
 ```c
 // Pós-ordem: Esquerda, Direita, Raiz
@@ -490,8 +479,7 @@ void posOrdem(No* raiz) {
 
 **Saída para o mesmo exemplo:** `D E B F C A`
 
-> 💡 **Aplicação:** Útil para liberar memória (deletar a árvore) ou avaliar expressões pós-fixas (notação polonesa reversa).
-> 
+> **Aplicação:** Útil para liberar memória (deletar a árvore) ou avaliar expressões pós-fixas (notação polonesa reversa).
 
 ### 7.4 Código Completo de Exemplo
 
@@ -508,7 +496,7 @@ typedef struct No {
 No* criarNo(char valor) {
     No* novo = (No*) malloc(sizeof(No));
     if (novo == NULL) {
-        fprintf(stderr, "Erro de alocação\\n");
+        fprintf(stderr, "Erro de alocação\n");
         exit(EXIT_FAILURE);
     }
     novo->valor = valor;
@@ -563,13 +551,13 @@ int main() {
 
     // Execução dos percursos
     printf("Pre-ordem:  ");
-    preOrdem(A);  printf("\\n");
+    preOrdem(A);  printf("\n");
 
     printf("Em-ordem:   ");
-    emOrdem(A);  printf("\\n");
+    emOrdem(A);  printf("\n");
 
     printf("Pos-ordem:  ");
-    posOrdem(A); printf("\\n");
+    posOrdem(A); printf("\n");
 
     // Liberação de memória
     liberarArvore(A);
@@ -653,9 +641,9 @@ void espelhar(No* raiz) {
 ```
 Antes:              Depois (espelhada):
     A                   A
-   / \\                 / \\
+   / \                 / \
   B   C               C   B
- / \\   \\             /   / \\
+ / \   \             /   / \
 D   E   F           F   E   D
 ```
 
@@ -678,14 +666,14 @@ b) Escreva o código C para montá-la usando `criarNo()`.
 c) Imprima os três percursos (pré, em, pós-ordem).
 
 <details>
-<summary>💡 Gabarito parcial (clique para expandir)</summary>
+<summary>Gabarito parcial (clique para expandir)</summary>
 
 ```
 a) Representação gráfica:
        X
-      / \\
+      / \
      Y   W
-    /     \\
+    /     \
    Z       V
 
 b) Montagem em C:
@@ -745,7 +733,7 @@ A
 ```
 
 <details>
-<summary>💡 Dica de implementação</summary>
+<summary>Dica de implementação</summary>
 
 ```c
 void imprimirArvore(No* raiz, int nivel) {
@@ -753,7 +741,7 @@ void imprimirArvore(No* raiz, int nivel) {
 
     // Imprime espaços para identação
     for (int i = 0; i < nivel; i++) printf("   ");
-    printf("%c\\n", raiz->valor);
+    printf("%c\n", raiz->valor);
 
     // Chama recursivamente para filhos
     if (raiz->esquerda != NULL || raiz->direita != NULL) {
@@ -778,34 +766,34 @@ void imprimirArvore(No* raiz, int nivel) {
 
 ## 10. Resumo da Aula
 
-✅ **Conceitos de árvores gerais**
+**Conceitos de árvores gerais**
 
 - Definição recursiva: `T = {r} ∪ {T₁} ∪ ... ∪ {Tₙ}`
 - Representações: textual `{}`, identação, gráfica
 - Terminologia: raiz, filho, pai, grau, folha, ancestral, nível, altura
 
-✅ **Árvores binárias: especificidades**
+**Árvores binárias: especificidades**
 
 - Definição: `T = {r} ∪ {Tₑ} ∪ {Tₑ}` (ordem importa!)
 - Implementação em C com `struct`, ponteiros e alocação dinâmica
 - Tipos: estritamente binária, completa, cheia
 - Propriedades matemáticas da árvore cheia
 
-✅ **Percursos (Traversal)**
+**Percursos (Traversal)**
 
 - Pré-ordem: Raiz → Esq → Dir
 - Em-ordem: Esq → Raiz → Dir
 - Pós-ordem: Esq → Dir → Raiz
 - Implementação recursiva em C
 
-✅ **Boas práticas de programação**
+**Boas práticas de programação**
 
 - Verificar retorno de `malloc`
 - Inicializar ponteiros com `NULL`
 - Liberar memória com `free()` em pós-ordem
 - Usar recursão com caso base bem definido
 
-✅ **Funções utilitárias**
+**Funções utilitárias**
 
 - `contarNos()`, `altura()`, `espelhar()`, `liberarArvore()`
 
@@ -813,18 +801,18 @@ void imprimirArvore(No* raiz, int nivel) {
 
 ## 11. Próximos Passos (Para Estudo Autônomo)
 
-🔜 **Tópicos que serão abordados em aulas futuras:**
+**Tópicos que serão abordados em aulas futuras:**
 
 - Árvores Binárias de Busca (ABB): inserção, busca e remoção com ordenação
 - Balanceamento de árvores (AVL, Rubro-Negra)
 - Aplicações práticas: expressões aritméticas, índices de banco de dados, compressão (Huffman)
 
-📚 **Leitura recomendada:**
+**Leitura recomendada:**
 
 - ZIVIANI, N. *Projeto de Algoritmos*. Capítulo 5: Árvores.
 - GOODRICH, M. T. *Data Structures and Algorithms in C*. Seção 7: Trees.
 
-💻 **Prática sugerida:**
+**Prática sugerida:**
 
 1. Compile e execute o código completo da Seção 7.4
 2. Modifique o programa para aceitar entrada do usuário
@@ -833,8 +821,7 @@ void imprimirArvore(No* raiz, int nivel) {
 
 ---
 
-> 📌 **Dica para provas:** Desenhe a árvore antes de codificar! Visualizar a estrutura ajuda a entender a recursão dos percursos e a lógica das operações.
-> 
+> **Dica para provas:** Desenhe a árvore antes de codificar! Visualizar a estrutura ajuda a entender a recursão dos percursos e a lógica das operações.
 
 ---
 

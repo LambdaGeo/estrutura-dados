@@ -1,14 +1,14 @@
-# Laboratório - Um REPL para uma máquina baseada em pilha
+# Laboratório: um REPL para uma máquina baseada em pilha
 
-**Objetivo**: implementar um interpretador para uma máquina baseada em pilha.
+**Objetivo:** implementar um interpretador para uma máquina abstrata baseada em pilha.
 
-**Contexto**: Diversas linguagens de programação são compiladas para uma máquina abstrata baseada em Pilha. Nessa máquina, os operandos e os resultados das operações são armazenados em um pilha.
+**Contexto:** diversas linguagens de programação são compiladas para uma máquina abstrata baseada em pilha. Nessa máquina, os operandos e os resultados das operações são armazenados em uma pilha.
 
-Nessa atividade iremos implementar um REPL (Read Eval Print Loop) similar ao que vocês utilizam quando interagem com o Python, porém interpretando comandos para uma máquina baseada em Pilha, como explicado no vídeo abaixo:
+Nesta atividade vamos implementar um REPL (Read Eval Print Loop) similar ao que vocês utilizam ao interagir com o Python, porém interpretando comandos para uma máquina baseada em pilha, como explicado neste vídeo:
 
-[https://www.youtube.com/watch?v=_j3jzoZaSbc](https://www.youtube.com/watch?v=_j3jzoZaSbc)
+[Máquina baseada em pilha (YouTube)](https://www.youtube.com/watch?v=_j3jzoZaSbc)
 
-Deixarei disponível em https://github.com/profsergiocosta/lab-stackinterpreter o código fonte base para o desenvolvimento. Abaixo está o código que implementa o REPL. Esse código já está interagindo e lendo as entradas do usuário e passando para o interpretador.
+O código-fonte base para o desenvolvimento está disponível em [profsergiocosta/lab-stackinterpreter](https://github.com/profsergiocosta/lab-stackinterpreter). Abaixo está o código que implementa o REPL. Ele já interage com o usuário, lê as entradas e passa cada linha para o interpretador:
 
 ```c
 #include <stdio.h>
@@ -39,7 +39,7 @@ int main () {
 }
 ```
 
-Nó código base já tem o arquivo de cabeçalho do interpretador:
+O código base já traz o arquivo de cabeçalho do interpretador:
 
 ```c
 #ifndef interprete_h
@@ -50,10 +50,9 @@ void interpret (const char *source) ;
 #endif
 ```
 
-E também  já está disponível a implementação da extração do comando e o argumento passado pelo usuário.
+E também já está disponível a implementação da extração do comando e do argumento passados pelo usuário:
 
 ```c
-
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -63,70 +62,49 @@ E também  já está disponível a implementação da extração do comando e o 
 
 void interpret (const char *source) {
 
-		char op[10];
+    char op[10];
     char arg[10];
 
     sscanf (source, "%s%s", op, arg);
     printf("operação: %s\n", op);
     printf("argumento: %s\n",  arg);
-
 }
 ```
 
-Então, quando o usuário digitar:
+Assim, quando o usuário digitar:
 
 ```c
 > push 10
 ```
 
-O comando será push, e o argumento a constante 10. Você ja pode compilar e experimentar.
+o comando será `push`, e o argumento a constante `10`. Você já pode compilar e experimentar.
 
-Ao desenvolver esse laboratório, é importante que façam em duas etapas. Na primeira dê suporte apenas a constantes e na segunda etapa inclue suporte a variáveis.
+Desenvolvam este laboratório em duas etapas: na primeira, apenas suporte a constantes; na segunda, suporte a variáveis.
 
-### **Descrição da Etapa 1**
+## Etapa 1 — Constantes
 
-Vocês devem implementar um interpretador que funcione no formato REPL, aceitando comandos digitados pelo usuário, interpretando e executando as operações usando uma **pilha**.
+Implementem um interpretador que funcione no formato REPL, aceitando comandos digitados pelo usuário, interpretando e executando as operações usando uma **pilha**.
 
-### 📋 **Comandos a serem implementados nesta etapa:**
+### Comandos a implementar nesta etapa
 
-1. `push <valor>`
-    - Empilha um número inteiro na pilha.
-    - Exemplo: `push 20`
-2. `add`
-    - Desempilha dois valores da pilha, soma, e empilha o resultado.
-    - Exemplo:
-        
-        Entrada:
-        
-        ```
-        push 5
-        push 3
-        add
-        
-        ```
-        
-        Resultado na pilha: `8`
-        
-3. `sub`
-    - Desempilha dois valores, subtrai o segundo do primeiro, e empilha o resultado.
-4. `mul`
-    - Desempilha dois valores, multiplica, e empilha o resultado.
-5. `div`
-    - Desempilha dois valores, divide o primeiro pelo segundo (divisão inteira), e empilha o resultado.
-6. `print`
-    - Desempilha um valor e imprime imediatamente no console.
+1. `push <valor>` — empilha um número inteiro na pilha.
+      - Exemplo: `push 20`
+2. `add` — desempilha dois valores, soma, e empilha o resultado.
+      - Exemplo: `push 5`, `push 3`, `add` → resultado na pilha: `8`
+3. `sub` — desempilha dois valores, subtrai o segundo do primeiro, e empilha o resultado.
+4. `mul` — desempilha dois valores, multiplica, e empilha o resultado.
+5. `div` — desempilha dois valores, divide o primeiro pelo segundo (divisão inteira), e empilha o resultado.
+6. `print` — desempilha um valor e imprime imediatamente no console.
 
-### ✅ **Regras e Observações**
+### Regras e observações
 
 - A pilha deve ser mantida em memória enquanto o programa estiver rodando.
 - O REPL deve continuar executando até que o usuário digite um comando de parada (como `exit`).
-- Não é necessário, nesta etapa, trabalhar com variáveis, apenas valores inteiros.
+- Não é necessário, nesta etapa, trabalhar com variáveis — apenas valores inteiros.
 
----
+### Exemplo de interação
 
-### 🧪 **Exemplo d Interação**
-
-```
+```text
 > push 10
 > push 5
 > add
@@ -138,61 +116,48 @@ Vocês devem implementar um interpretador que funcione no formato REPL, aceitand
 > print
 4
 > exit
-
 ```
 
----
+### Organização esperada do projeto
 
-### 📂 **Organização Esperada do Projeto**
-
-```
-
+```text
 /maquina-pilha
-│
 ├── main.c            // Loop principal REPL
 ├── interpret.c       // Processamento dos comandos
 ├── interpret.h
 ├── stack.c           // Implementação da pilha
 ├── stack.h
-├── README.md
+└── README.md
 ```
 
----
-
-### 💡 **Sugestões**
+### Sugestões
 
 - Usem listas para implementar a pilha.
 - Dividam as responsabilidades do código: uma parte para o REPL, outra para a lógica da pilha.
 - Tratem erros simples, como tentar desempilhar de uma pilha vazia.
 
----
+[Demonstração da Etapa 1 (YouTube)](https://www.youtube.com/watch?v=92Aqp95Dw64)
 
-Demonstração etapa 1
+## Etapa 2 — Variáveis
 
-[https://www.youtube.com/watch?v=92Aqp95Dw64](https://www.youtube.com/watch?v=92Aqp95Dw64)
+Ampliem a funcionalidade do interpretador, implementando uma **memória de variáveis** usando uma **lista encadeada**. Esta etapa introduz o uso de variáveis nomeadas e operações entre elas.
 
-## **Etapa 2**
+**Conceitos praticados:**
 
-Ampliar a funcionalidade do interpretador da máquina virtual baseado em pilha, implementando uma **memória de variáveis** usando uma **lista encadeada**. Esta etapa introduz o uso de variáveis nomeadas e operações entre elas.
-
-**Conceitos Praticados**
-
-- Implementação e uso de **lista encadeada**
+- Implementação e uso de lista encadeada
 - Armazenamento e atualização de variáveis
-- Integração entre estruturas de dados: **pilha** e **lista**
+- Integração entre estruturas de dados: pilha e lista
 
-**Novos Comandos**
+### Novos comandos
 
 `push <valor | nome_variável>`
 
 - Se for um número inteiro: empilha normalmente.
-- Se for o nome de uma variável:
-    - Busca na **lista encadeada** pelo nome.
-    - Se encontrada, empilha o valor.
-    - Se não encontrada, exibe erro: `Variável não encontrada`.
+- Se for o nome de uma variável: busca na lista encadeada pelo nome.
+      - Se encontrada, empilha o valor.
+      - Se não encontrada, exibe erro: `Variável não encontrada`.
 
 ```c
-
 push a
 ```
 
@@ -206,9 +171,7 @@ push a
 pop resultado
 ```
 
----
-
-### 🧵 **Estrutura da Lista (em `lista.h`)**
+### Estrutura da lista (em `lista.h`)
 
 ```c
 struct node {
@@ -220,24 +183,20 @@ struct node {
 struct list {
     struct node* first;
 };
-
 ```
 
-### Funções sugeridas (em `lista.c`):
+Funções sugeridas (em `lista.c`):
 
 ```c
 void set_variable(struct list* l, const char* key, int value);
 int get_variable(struct list* l, const char* key, int* found);
-
 ```
 
----
-
-### 🧪 **Exemplo de Código Interpretado**
+### Exemplo de código interpretado
 
 O interpretador deve ser capaz de ler e executar comandos como:
 
-```
+```text
 push 42
 push 5
 add
@@ -254,10 +213,9 @@ add
 push 6
 add
 print
-
 ```
 
-**Explicação resumida do que esse código faz:**
+Explicação resumida do que esse código faz:
 
 - Empilha 42 e 5 → soma = 47
 - Empilha 8 → subtrai: 47 - 8 = 39 → guarda em `a`
@@ -266,13 +224,10 @@ print
 - Empilha 6 → soma final = 109
 - Imprime: `109`
 
----
+### Estrutura esperada do projeto
 
-### 🗂️ **Estrutura Esperada do Projeto**
-
-```
+```text
 /maquina-pilha
-│
 ├── main.c             // REPL principal
 ├── interpret.c        // Interpretador de comandos
 ├── interpret.h
@@ -280,13 +235,10 @@ print
 ├── stack.h
 ├── lista.c            // Lista encadeada (variáveis)
 ├── lista.h
-├── README.md
-
+└── README.md
 ```
 
----
-
-### ✅ **Critérios de Avaliação**
+### Critérios de avaliação
 
 - Implementação correta da lista encadeada
 - Manipulação correta das variáveis com `push` e `pop`
@@ -294,6 +246,4 @@ print
 - Código limpo e modular
 - README claro e completo
 
----
-
-[https://www.youtube.com/watch?v=WpFQuXFjyNQ](https://www.youtube.com/watch?v=WpFQuXFjyNQ)
+[Demonstração da Etapa 2 (YouTube)](https://www.youtube.com/watch?v=WpFQuXFjyNQ)

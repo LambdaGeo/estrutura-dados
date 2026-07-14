@@ -1,6 +1,6 @@
 # Exercícios sobre Árvores AVL
 
-**1.** Qual é o requisito fundamental para que uma árvore binária de busca seja considerada uma árvore AVL? Explique também como é calculado o fator de balanceamento de um nó, considerando a definição: `FB = Altura(SAD) – Altura(SAE)`.
+**1.** Qual é o requisito fundamental para que uma árvore binária de busca seja considerada uma árvore AVL? Explique também como é calculado o fator de balanceamento de um nó, considerando a definição: `FB = Altura(SAD) - Altura(SAE)`.
 
 **2.** Para cada uma das árvores binárias de busca abaixo (representadas em notação parentética), calcule o fator de balanceamento de todos os nós e justifique quais são AVL e quais não são:
 
@@ -22,9 +22,9 @@ Mostre a estrutura da árvore após cada operação que causar desbalanceamento,
 
 ```
       30
-     /  \\
+     /  \
     20   40
-   / \\   / \\
+   / \   / \
   10 25 35 50
 ```
 
@@ -42,7 +42,7 @@ Construa a árvore AVL passo a passo, indicando explicitamente o tipo de rotaç�
 
 - ( ) Toda árvore AVL é uma árvore binária de busca perfeitamente balanceada (altura mínima absoluta).
 - ( ) A altura máxima de uma AVL com `n` nós é limitada por `≈ 1.44·log₂(n+2)`.
-- ( ) Se o fator de balanceamento de um nó for `2` ou `2`, a árvore deixa de ser AVL até que uma rotação seja aplicada.
+- ( ) Se o fator de balanceamento de um nó for `2` ou `-2`, a árvore deixa de ser AVL até que uma rotação seja aplicada.
 - ( ) A remoção de um nó em uma AVL pode exigir mais de uma rotação para reequilibrar a estrutura.
 
 **8.** Uma árvore AVL contém os nós `{8, 4, 12, 2, 6, 10, 14}`.
@@ -62,9 +62,9 @@ c) Após as inserções, apresente a árvore final e a sequência em **pós-orde
 
 ---
 
-### 💡 Dicas para resolução:
+## 💡 Dicas para resolução
 
-- Use a definição solicitada: `FB = Altura(SAD) – Altura(SAE)`. Valores válidos em uma AVL: `1, 0, 1`.
+- Use a definição solicitada: `FB = Altura(SAD) - Altura(SAE)`. Valores válidos em uma AVL: `-1, 0, 1`.
 - Rotações: `LL` → rotação simples à direita; `RR` → rotação simples à esquerda; `LR` → rotação dupla (esquerda-direita); `RL` → rotação dupla (direita-esquerda).
 - Pós-ordem: visite a subárvore esquerda, depois a direita, e por fim a raiz.
 - Desenhe passo a passo. A maioria dos erros vem de pular a atualização de alturas após rotações ou remoções.

@@ -2,15 +2,12 @@
 
 ## *Foco: Inserção, Busca, Remoção e Propriedades de Ordenação*
 
-> ⚠️ **Atenção:** Esta lista assume a **propriedade de Árvore Binária de Busca**:
-> 
-> 
-> Para todo nó `N`, todos os valores na subárvore **esquerda** são **menores** que `N->valor`,
-> 
-> e todos os valores na subárvore **direita** são **maiores** que `N->valor`.
-> 
-> Valores duplicados **não são permitidos** nesta lista.
-> 
+!!! warning "Atenção"
+    Esta lista assume a **propriedade de Árvore Binária de Busca**:
+
+    Para todo nó `N`, todos os valores na subárvore **esquerda** são **menores** que `N->valor`, e todos os valores na subárvore **direita** são **maiores** que `N->valor`.
+
+    Valores duplicados **não são permitidos** nesta lista.
 
 ---
 
@@ -60,9 +57,9 @@ Para cada árvore abaixo, indique se **é ou não** uma ABB válida. Justifique 
 ```
 a)          b)          c)
     5           5           10
-   / \\         / \\         /  \\
+   / \         / \         /  \
   3   8       3   8       5    15
- / \\   \\     /   / \\     / \\   / \\
+ / \   \     /   / \     / \   / \
 1   4   9   2   7   9   3  7  12 20
 ```
 
@@ -72,9 +69,9 @@ Considere a ABB abaixo:
 
 ```
         50
-       /  \\
+       /  \
      30    70
-    /  \\   / \\
+    /  \   / \
   20  40 60  80
 ```
 
@@ -106,12 +103,11 @@ Insere `valor` na ABB mantendo a propriedade de busca.
 
 Retorna a raiz da árvore (pode mudar apenas na primeira inserção).
 
-> ✅ **Dica recursiva:**
-> 
-> - Se `raiz == NULL`: crie e retorne novo nó
-> - Se `valor < raiz->valor`: insira à esquerda
-> - Se `valor > raiz->valor`: insira à direita
-> - Se igual: ignore (sem duplicatas)
+!!! tip "Dica recursiva"
+    - Se `raiz == NULL`: crie e retorne novo nó
+    - Se `valor < raiz->valor`: insira à esquerda
+    - Se `valor > raiz->valor`: insira à direita
+    - Se igual: ignore (sem duplicatas)
 
 ### Exercício 5 — Busca em ABB
 
@@ -123,8 +119,7 @@ Arvore* buscar_abr(Arvore* raiz, int alvo);
 
 Retorna ponteiro para o nó com `alvo`, ou `NULL` se não existir.
 
-> ✅ Aproveite a propriedade ABB para **não percorrer toda a árvore**.
-> 
+> Aproveite a propriedade ABB para **não percorrer toda a árvore**.
 
 ### Exercício 6 — Menor e Maior Valor
 
@@ -135,8 +130,7 @@ int minimo_abr(Arvore* raiz);   // Assume árvore não-vazia
 int maximo_abr(Arvore* raiz);   // Assume árvore não-vazia
 ```
 
-> 💡 Dica: o mínimo está sempre no nó mais à esquerda; o máximo, no mais à direita.
-> 
+> Dica: o mínimo está sempre no nó mais à esquerda; o máximo, no mais à direita.
 
 ### Exercício 7 — Validação de ABB
 
@@ -148,15 +142,14 @@ int eh_abr(Arvore* raiz);
 
 Retorna `1` se a árvore satisfaz a propriedade de busca, `0` caso contrário.
 
-> ⚠️ **Cuidado:** Não basta verificar `esq->valor < raiz->valor < dir->valor`.
-> 
-> 
-> Todos os valores da subárvore esquerda devem ser menores que a raiz, e todos da direita, maiores.
-> 
-> 💡 **Dica:** Use uma função auxiliar com limites:
-> 
-> `int eh_abr_aux(Arvore* raiz, int min, int max);`
-> 
+!!! warning "Cuidado"
+    Não basta verificar `esq->valor < raiz->valor < dir->valor`.
+
+    Todos os valores da subárvore esquerda devem ser menores que a raiz, e todos da direita, maiores.
+
+    **Dica:** Use uma função auxiliar com limites:
+
+    `int eh_abr_aux(Arvore* raiz, int min, int max);`
 
 ---
 
@@ -174,13 +167,11 @@ Remove o nó com `valor` da ABB, mantendo a propriedade de busca.
 
 Retorna a nova raiz da árvore.
 
-> ✅ **Casos a considerar:**
-> 
-> 1. Nó não encontrado → retorna `raiz`
-> 2. Nó é folha → libera e retorna `NULL`
-> 3. Nó tem um filho → retorna o filho no lugar
-> 4. Nó tem dois filhos → substitua pelo **sucessor** (menor da subárvore direita)
-> ou pelo **antecessor** (maior da subárvore esquerda), e remova recursivamente esse substituto.
+!!! note "Casos a considerar"
+    1. Nó não encontrado → retorna `raiz`
+    2. Nó é folha → libera e retorna `NULL`
+    3. Nó tem um filho → retorna o filho no lugar
+    4. Nó tem dois filhos → substitua pelo **sucessor** (menor da subárvore direita) ou pelo **antecessor** (maior da subárvore esquerda), e remova recursivamente esse substituto.
 
 ### Exercício 9 — Sucessor e Antecessor
 
@@ -195,8 +186,7 @@ Arvore* antecessor_abr(Arvore* raiz, int valor); // Retorna nó com o antecessor
 - **Antecessor**: maior valor **menor** que `valor` na árvore
 - Retorna `NULL` se não existir.
 
-> 💡 Dica: use busca em ABB + lógica de "último candidato válido".
-> 
+> Dica: use busca em ABB + lógica de "último candidato válido".
 
 ### Exercício 10 — Contagem de Nós em Intervalo
 
@@ -208,11 +198,10 @@ int contar_no_intervalo(Arvore* raiz, int min, int max);
 
 Retorna quantos nós possuem valores `min <= valor <= max`.
 
-> ✅ **Otimização ABB:** Se `raiz->valor < min`, não percorra a esquerda.
-> 
-> 
-> Se `raiz->valor > max`, não percorra a direita.
-> 
+!!! tip "Otimização ABB"
+    Se `raiz->valor < min`, não percorra a esquerda.
+
+    Se `raiz->valor > max`, não percorra a direita.
 
 ---
 
@@ -241,8 +230,7 @@ Arvore* construir_abr_balanceada(int vet[], int inicio, int fim);
 
 Dado um vetor **já ordenado**, construa uma ABB com **altura mínima** (balanceada).
 
-> 💡 Estratégia: escolha o elemento do meio como raiz, recursivamente construa esquerda e direita.
-> 
+> Estratégia: escolha o elemento do meio como raiz, recursivamente construa esquerda e direita.
 
 ### Exercício 13 — Verificação de Subárvore ABB
 
@@ -272,8 +260,7 @@ Nível 1: 30 70
 Nível 2: 20 40 60 80
 ```
 
-> 💡 Use uma fila (pode implementar com vetor circular ou lista encadeada).
-> 
+> Use uma fila (pode implementar com vetor circular ou lista encadeada).
 
 ### Exercício 15 — Contagem de Nós por Faixa de Altura
 
@@ -336,8 +323,7 @@ NoLista* abr_para_lista(Arvore* raiz);
 
 Retorna uma lista encadeada com os valores da ABB em ordem crescente.
 
-> ✅ Dica: use `em_ordem` para percorrer e construir a lista.
-> 
+> Dica: use `em_ordem` para percorrer e construir a lista.
 
 ---
 
@@ -404,8 +390,8 @@ void imprimir_por_niveis(Arvore* raiz);
 
 ---
 
-> 🌳 **Próximo passo sugerido**: Após dominar esta lista, explore **árvores AVL** ou **Rubro-Negras** para entender balanceamento automático e garantia de altura logarítmica.
-> 
+!!! tip "Próximo passo sugerido"
+    Após dominar esta lista, explore **árvores AVL** ou **Rubro-Negras** para entender balanceamento automático e garantia de altura logarítmica.
 
 *Material elaborado para a disciplina de Estrutura de Dados — Curso de Engenharia de Computação*
 
