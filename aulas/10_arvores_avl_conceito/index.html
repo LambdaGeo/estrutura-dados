@@ -1,0 +1,3101 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Estrutura de Dados: Recursividade, TAD, Listas, Pilhas, Filas, Árvores (BST, AVL, Heaps) e Ordenação.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../09_arvores_busca/">
+      
+      
+        <link rel="next" href="../11_arvores_avl_implementacao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>10. Árvores AVL: Conceito - Estruturas de Dados</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arvores-avl-conceito" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Estruturas de Dados" class="md-header__button md-logo" aria-label="Estruturas de Dados" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Estruturas de Dados
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10. Árvores AVL: Conceito
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Estruturas de Dados" class="md-nav__button md-logo" aria-label="Estruturas de Dados" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Estruturas de Dados
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Pilhas, Listas e Filas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Pilhas, Listas e Filas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aulas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aulas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_apresentacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Apresentação da Disciplina
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_pilha_estatica_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Pilha Estática I: Vetores Globais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_pilha_estatica_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Pilha Estática II: Funções, Ponteiros e Structs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_pilha_estatica_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Pilha Estática III: Alocação Dinâmica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_lista_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Listas Estáticas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_lista_encadeada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Listas Encadeadas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_fila_tad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Filas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercícios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exercícios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_01_expressoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Expressões e Comandos (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_02_vetores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vetores em C (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_03_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Funções (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_04_ponteiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ponteiros (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_05_strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_01_estruturas_heterogeneas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas Heterogêneas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_02_pilhas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pilhas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_8" id="__nav_2_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercícios com Listas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exercícios com Listas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_03_listas_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_03_listas_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lista Estática
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_03_listas_encadeada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lista Encadeada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_04_caderno_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caderno de Exercícios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Árvores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Árvores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aulas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aulas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_recursao_busca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Recursão e Algoritmos de Busca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_arvores_conceitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Árvores: Conceitos e Binária
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_arvores_busca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Árvores Binárias de Busca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Árvores AVL: Conceito
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Árvores AVL: Conceito
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-revisao-motivacao-o-problema-da-degeneracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Revisão &amp; Motivação: O Problema da Degeneração
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Revisão &amp; Motivação: O Problema da Degeneração">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-acontece-com-dados-inseridos-em-ordem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece com dados inseridos em ordem?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-ideal-arvore-balanceada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O ideal: Árvore Balanceada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-arvores-avl-definicao-formal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Árvores AVL: Definição Formal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Árvores AVL: Definição Formal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-fator-de-balanceamento-fb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Fator de Balanceamento (FB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-exemplo-de-verificacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Exemplo de Verificação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-rotacoes-o-mecanismo-de-rebalanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rotações: O Mecanismo de Rebalanceamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Rotações: O Mecanismo de Rebalanceamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-rotacao-simples-a-direita-caso-ll" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Rotação Simples à Direita (Caso LL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rotacao-simples-a-esquerda-caso-rr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Rotação Simples à Esquerda (Caso RR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-rotacao-dupla-esquerda-direita-caso-lr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Rotação Dupla Esquerda-Direita (Caso LR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-rotacao-dupla-direita-esquerda-caso-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Rotação Dupla Direita-Esquerda (Caso RL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algoritmo-conceitual-de-insercao-em-avl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Algoritmo Conceitual de Inserção em AVL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-exemplos-visuais-passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Exemplos Visuais Passo a Passo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Exemplos Visuais Passo a Passo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-1-insercao-de-10-20-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 1: Inserção de [10, 20, 30]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-2-insercao-de-30-10-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 2: Inserção de [30, 10, 20]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-3-insercao-de-10-30-20-40-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 3: Inserção de [10, 30, 20, 40, 35]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-ferramenta-interativa-visualgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ferramenta Interativa: VisuAlgo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Ferramenta Interativa: VisuAlgo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acesse-httpsvisualgonetenbst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acesse: https://visualgo.net/en/bst
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-usar-para-estudar-avl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como usar para estudar AVL:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-exercicios-para-fixacao-manipulacao-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Exercícios para Fixação (Manipulação Visual)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Exercícios para Fixação (Manipulação Visual)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-1-calculo-de-fb-e-identificacao-de-desbalanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 1 — Cálculo de FB e Identificação de Desbalanceamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-2-insercao-sequencial-com-rebalanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 2 — Inserção Sequencial com Rebalanceamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-3-identificacao-de-rotacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 3 — Identificação de Rotação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-4-desafio-visual-degeneracao-vs-balanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 4 — Desafio Visual: Degeneração vs. Balanceamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-5-pratica-guiada-com-visualgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 5 — Prática Guiada com VisuAlgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-resumo-do-capitulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Resumo do Capítulo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-proximos-passos-ferramentas-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Próximos Passos &amp; Ferramentas Recomendadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_arvores_avl_implementacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Árvores AVL: Implementação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercícios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exercícios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_01_recursividade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursividade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_02_arvores_binarias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árvores Binárias (Estruturais)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_03_arvores_busca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árvores Binárias de Busca (ABB)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_04_arvores_avl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árvores AVL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Ordenação
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Ordenação
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aulas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aulas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_analise_complexidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Complexidade & Profiling (gcov/gprof)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_ordenacao_basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Algoritmos de Ordenação Básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_ordenacao_avancada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Algoritmos de Ordenação Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboratórios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Laboratórios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laboratorios/01_repl_pilha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboratório: REPL Baseado em Pilha
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laboratorios/02_trabalho_pratico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: Algoritmos de Ordenação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-revisao-motivacao-o-problema-da-degeneracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Revisão &amp; Motivação: O Problema da Degeneração
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Revisão &amp; Motivação: O Problema da Degeneração">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-acontece-com-dados-inseridos-em-ordem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece com dados inseridos em ordem?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-ideal-arvore-balanceada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O ideal: Árvore Balanceada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-arvores-avl-definicao-formal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Árvores AVL: Definição Formal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Árvores AVL: Definição Formal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-fator-de-balanceamento-fb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Fator de Balanceamento (FB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-exemplo-de-verificacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Exemplo de Verificação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-rotacoes-o-mecanismo-de-rebalanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rotações: O Mecanismo de Rebalanceamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Rotações: O Mecanismo de Rebalanceamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-rotacao-simples-a-direita-caso-ll" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Rotação Simples à Direita (Caso LL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rotacao-simples-a-esquerda-caso-rr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Rotação Simples à Esquerda (Caso RR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-rotacao-dupla-esquerda-direita-caso-lr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Rotação Dupla Esquerda-Direita (Caso LR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-rotacao-dupla-direita-esquerda-caso-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Rotação Dupla Direita-Esquerda (Caso RL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algoritmo-conceitual-de-insercao-em-avl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Algoritmo Conceitual de Inserção em AVL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-exemplos-visuais-passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Exemplos Visuais Passo a Passo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Exemplos Visuais Passo a Passo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-1-insercao-de-10-20-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 1: Inserção de [10, 20, 30]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-2-insercao-de-30-10-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 2: Inserção de [30, 10, 20]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-3-insercao-de-10-30-20-40-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 3: Inserção de [10, 30, 20, 40, 35]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-ferramenta-interativa-visualgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ferramenta Interativa: VisuAlgo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Ferramenta Interativa: VisuAlgo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acesse-httpsvisualgonetenbst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acesse: https://visualgo.net/en/bst
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-usar-para-estudar-avl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como usar para estudar AVL:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-exercicios-para-fixacao-manipulacao-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Exercícios para Fixação (Manipulação Visual)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Exercícios para Fixação (Manipulação Visual)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-1-calculo-de-fb-e-identificacao-de-desbalanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 1 — Cálculo de FB e Identificação de Desbalanceamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-2-insercao-sequencial-com-rebalanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 2 — Inserção Sequencial com Rebalanceamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-3-identificacao-de-rotacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 3 — Identificação de Rotação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-4-desafio-visual-degeneracao-vs-balanceamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 4 — Desafio Visual: Degeneração vs. Balanceamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-5-pratica-guiada-com-visualgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercício 5 — Prática Guiada com VisuAlgo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-resumo-do-capitulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Resumo do Capítulo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-proximos-passos-ferramentas-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Próximos Passos &amp; Ferramentas Recomendadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="arvores-avl-conceito">Árvores AVL: Conceito<a class="headerlink" href="#arvores-avl-conceito" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Material de Apoio</p>
+<p>Você pode acompanhar este capítulo utilizando os <a href="../../slides/arvores_avl.pdf">Slides sobre Árvores AVL</a>.</p>
+</div>
+<hr />
+<h2 id="1-revisao-motivacao-o-problema-da-degeneracao">1. Revisão &amp; Motivação: O Problema da Degeneração<a class="headerlink" href="#1-revisao-motivacao-o-problema-da-degeneracao" title="Permanent link">&para;</a></h2>
+<p>No capítulo anterior, vimos que a <strong>Árvore Binária de Busca (ABB)</strong> oferece busca, inserção e remoção em <strong>O(h)</strong>, onde <code>h</code> é a altura da árvore. Contudo, a ABB <strong>não garante</strong> que a árvore permaneça balanceada.</p>
+<h3 id="o-que-acontece-com-dados-inseridos-em-ordem">O que acontece com dados inseridos em ordem?<a class="headerlink" href="#o-que-acontece-com-dados-inseridos-em-ordem" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Sequência: [1, 2, 3, 4, 5, 6, 7]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ABB resultante:
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>1
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a> \
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  2
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   \
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    3
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     \
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      4
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>       \
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        5
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>         \
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>          6
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>           \
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            7
+</code></pre></div>
+<ul>
+<li><strong>Altura:</strong> <code>h = 6</code> (para <code>n = 7</code>)</li>
+<li><strong>Complexidade de busca:</strong> <code>O(n)</code> → Equivale a uma lista encadeada!</li>
+<li><strong>Conclusão:</strong> O desempenho da ABB depende criticamente da <strong>ordem de inserção</strong>.</li>
+</ul>
+<h3 id="o-ideal-arvore-balanceada">O ideal: Árvore Balanceada<a class="headerlink" href="#o-ideal-arvore-balanceada" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Mesmos dados, mas balanceados:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>      4
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     / \
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    2   6
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>   / \ / \
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  1  3 5  7
+</code></pre></div>
+<ul>
+<li><strong>Altura:</strong> <code>h = 2</code></li>
+<li><strong>Complexidade de busca:</strong> <code>O(log n)</code></li>
+<li><strong>Vantagem:</strong> Garantia teórica de eficiência, independente da ordem de entrada.</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Pergunta chave</p>
+<p>Como manter a árvore balanceada automaticamente durante inserções e remoções?</p>
+</div>
+<hr />
+<h2 id="2-arvores-avl-definicao-formal">2. Árvores AVL: Definição Formal<a class="headerlink" href="#2-arvores-avl-definicao-formal" title="Permanent link">&para;</a></h2>
+<p>Criada em 1962 por <strong>Adelson-Velsky e Landis</strong>, a <strong>Árvore AVL</strong> é uma ABB com uma restrição adicional de balanceamento:</p>
+<blockquote>
+<p><strong>Definição:</strong> Uma árvore binária de busca é uma <strong>AVL</strong> se, para <strong>todo nó</strong> da árvore, a diferença entre as alturas de suas subárvores esquerda e direita for, no máximo, <strong>1 unidade</strong>.</p>
+</blockquote>
+<h3 id="21-fator-de-balanceamento-fb">2.1 Fator de Balanceamento (FB)<a class="headerlink" href="#21-fator-de-balanceamento-fb" title="Permanent link">&para;</a></h3>
+<p>Para medir essa diferença, calculamos o <strong>Fator de Balanceamento</strong> de cada nó:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>FB(nó) = altura(SAE) − altura(SAD)
+</code></pre></div>
+<p>Onde:</p>
+<ul>
+<li><code>SAE</code> = Subárvore à Esquerda</li>
+<li><code>SAD</code> = Subárvore à Direita</li>
+<li><code>altura(∅) = -1</code> (convenção usual) ou <code>0</code> (conforme material de referência). <em>Usaremos altura de folha = 0 para facilitar a contagem manual.</em></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Valor do FB</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-1</code></td>
+<td>Subárvore direita é 1 nível mais profunda</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>Subárvores com mesma altura (perfeitamente balanceado)</td>
+</tr>
+<tr>
+<td><code>+1</code></td>
+<td>Subárvore esquerda é 1 nível mais profunda</td>
+</tr>
+<tr>
+<td><code>≤ -2</code> ou <code>≥ +2</code></td>
+<td><strong>Nó desbalanceado</strong> → requer rotação</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-exemplo-de-verificacao">2.2 Exemplo de Verificação<a class="headerlink" href="#22-exemplo-de-verificacao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Árvore A:                    Árvore B:
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>      20                           20
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>     /  \                         /  \
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>   10    30                     10    30
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  /  \   /  \                  /     /  \
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a> 5   15 25  35                5     25  35
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                  \
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                   30
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Alturas (folha=0):             Alturas (folha=0):
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>FB(5)=0, FB(15)=0              FB(5)=0, FB(30)=0
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>FB(10)=0-0=0                   FB(10)=0-1=-1 ✓
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>FB(25)=0, FB(35)=0             FB(25)=0-0=0
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>FB(30)=0-0=0                   FB(35)=0
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>FB(20)=0-0=0 ✓ (AVL!)          FB(20)=1-2=-1 ✓ (AVL!)
+</code></pre></div>
+<p>Ambas são AVLs válidas. A diferença está na distribuição, mas nenhuma viola <code>|FB| ≤ 1</code>.</p>
+<hr />
+<h2 id="3-rotacoes-o-mecanismo-de-rebalanceamento">3. Rotações: O Mecanismo de Rebalanceamento<a class="headerlink" href="#3-rotacoes-o-mecanismo-de-rebalanceamento" title="Permanent link">&para;</a></h2>
+<p>Quando um nó fica com <code>|FB| ≥ 2</code>, aplicamos <strong>rotações</strong>. Rotações são rearranjos locais de ponteiros que:</p>
+<ol>
+<li><strong>Preservam a propriedade da ABB</strong> (esquerda &lt; raiz &lt; direita)</li>
+<li><strong>Reduzem a altura</strong> da subárvore afetada</li>
+<li><strong>Restauram</strong> <code>|FB| ≤ 1</code></li>
+</ol>
+<p>Existem <strong>4 configurações</strong> e <strong>4 rotações</strong> correspondentes:</p>
+<h3 id="31-rotacao-simples-a-direita-caso-ll">3.1 Rotação Simples à Direita (Caso LL)<a class="headerlink" href="#31-rotacao-simples-a-direita-caso-ll" title="Permanent link">&para;</a></h3>
+<p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>esquerda</strong> e o filho à esquerda também está "pesado" na <strong>esquerda</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Antes (FB = +2):          Depois da Rotação à Direita:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>      C                         B
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>     / \                       / \
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    B   E     →              A   C
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>   / \                           / \
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  A   D                         D   E
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>• B sobe, C desce para a direita
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>• D (filho direito de B) passa a ser filho esquerdo de C
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>• Propriedade ABB mantida: A &lt; B &lt; D &lt; C &lt; E
+</code></pre></div>
+<h3 id="32-rotacao-simples-a-esquerda-caso-rr">3.2 Rotação Simples à Esquerda (Caso RR)<a class="headerlink" href="#32-rotacao-simples-a-esquerda-caso-rr" title="Permanent link">&para;</a></h3>
+<p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>direita</strong> e o filho à direita também está "pesado" na <strong>direita</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Antes (FB = -2):          Depois da Rotação à Esquerda:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    A                           B
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   / \                         / \
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  D   B        →             A   C
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>     / \                    / \
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    C   E                  D   C
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>                              \
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                               E
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>• B sobe, A desce para a esquerda
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>• C (filho esquerdo de B) passa a ser filho direito de A
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>• Ordem mantida: A &lt; C &lt; B &lt; E
+</code></pre></div>
+<h3 id="33-rotacao-dupla-esquerda-direita-caso-lr">3.3 Rotação Dupla Esquerda-Direita (Caso LR)<a class="headerlink" href="#33-rotacao-dupla-esquerda-direita-caso-lr" title="Permanent link">&para;</a></h3>
+<p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>esquerda</strong>, mas o filho esquerdo está "pesado" na <strong>direita</strong>.
+<strong>Solução:</strong> Duas rotações simples:</p>
+<ol>
+<li>Rotação à <strong>esquerda</strong> no filho esquerdo</li>
+<li>Rotação à <strong>direita</strong> no nó desbalanceado</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Antes:                  Passo 1 (Rotação Esq em B):    Passo 2 (Rotação Dir em C):
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>      C                         C                             B
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>     / \                       / \                           / \
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    B   E     →              A   E         →              A   C
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>     \                       /                           / \   \
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>      D                     B                           D   B   E
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>                             \
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>                              D
+</code></pre></div>
+<h3 id="34-rotacao-dupla-direita-esquerda-caso-rl">3.4 Rotação Dupla Direita-Esquerda (Caso RL)<a class="headerlink" href="#34-rotacao-dupla-direita-esquerda-caso-rl" title="Permanent link">&para;</a></h3>
+<p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>direita</strong>, mas o filho direito está "pesado" na <strong>esquerda</strong>.
+<strong>Solução:</strong></p>
+<ol>
+<li>Rotação à <strong>direita</strong> no filho direito</li>
+<li>Rotação à <strong>esquerda</strong> no nó desbalanceado</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Antes:                  Passo 1 (Rotação Dir em C):    Passo 2 (Rotação Esq em A):
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    A                           A                             B
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>   / \                         / \                           / \
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  D   C        →             D   B         →              A   C
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>     / \                         \                       / \   \
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    B   E                         C                     D   B   E
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Regra prática para identificar a rotação</p>
+<p>Siga o caminho do nó inserido até a raiz. O primeiro nó com <code>|FB| ≥ 2</code> é o <strong>nó desbalanceado</strong>. Olhe para os dois primeiros passos do caminho a partir dele:</p>
+<ul>
+<li><code>Esquerda → Esquerda</code> → Rotação Simples à Direita</li>
+<li><code>Direita → Direita</code> → Rotação Simples à Esquerda</li>
+<li><code>Esquerda → Direita</code> → Rotação Dupla (Esq-Dir)</li>
+<li><code>Direita → Esquerda</code> → Rotação Dupla (Dir-Esq)</li>
+</ul>
+</div>
+<hr />
+<h2 id="4-algoritmo-conceitual-de-insercao-em-avl">4. Algoritmo Conceitual de Inserção em AVL<a class="headerlink" href="#4-algoritmo-conceitual-de-insercao-em-avl" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Insira</strong> o novo nó exatamente como em uma ABB comum (sempre como folha).</li>
+<li><strong>Suba</strong> da folha inserida em direção à raiz, recalculando alturas e FB de cada ancestral.</li>
+<li>No <strong>primeiro nó</strong> onde <code>|FB| ≥ 2</code>:<ul>
+<li>Identifique o tipo de desbalanceamento (LL, RR, LR, RL)</li>
+<li>Aplique a rotação correspondente</li>
+<li>Atualize alturas/FB dos nós envolvidos</li>
+</ul>
+</li>
+<li><strong>Pare</strong> (uma única rotação é suficiente para rebalancear toda a árvore após uma inserção).</li>
+<li>Continue verificando se necessário (em remoções, pode exigir mais de uma rotação, mas em inserções, uma basta).</li>
+</ol>
+<hr />
+<h2 id="5-exemplos-visuais-passo-a-passo">5. Exemplos Visuais Passo a Passo<a class="headerlink" href="#5-exemplos-visuais-passo-a-passo" title="Permanent link">&para;</a></h2>
+<h3 id="exemplo-1-insercao-de-10-20-30">Exemplo 1: Inserção de <code>[10, 20, 30]</code><a class="headerlink" href="#exemplo-1-insercao-de-10-20-30" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>1. Inserir 10:      2. Inserir 20:      3. Inserir 30:
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>   10                  10                   10
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                        \                    \
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>                         20                    20
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>                                                \
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>                                                 30
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>FB: 10 → 0-1 = -1      FB: 10 → 0-1 = -1     FB: 10 → 0-2 = -2 ❌
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>OK                     OK                    Desbalanceado! (Caso RR)
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>→ Aplicar Rotação Simples à Esquerda em 10:
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        20
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>       /  \
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>     10    30
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>FB atualizados: 10→0, 30→0, 20→0. Árvore balanceada! ✓
+</code></pre></div>
+<h3 id="exemplo-2-insercao-de-30-10-20">Exemplo 2: Inserção de <code>[30, 10, 20]</code><a class="headerlink" href="#exemplo-2-insercao-de-30-10-20" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>1. 30      2. 30         3. 30
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>          /             /
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        10            10
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                        \
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>                         20
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>FB(30) = 2-0 = +2 ❌ → Nó desbalanceado. Caminho: 30 → Esq(10) → Dir(20)
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>Tipo: LR (Esquerda-Direita)
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>Passo 1: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        30
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>       /
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>     20
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    /
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  10
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>Passo 2: Rotação Dir em 30 → 20 sobe, 30 desce à direita
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        20
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>       /  \
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>     10    30
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>FB: todos 0. AVL válida! ✓
+</code></pre></div>
+<h3 id="exemplo-3-insercao-de-10-30-20-40-35">Exemplo 3: Inserção de <code>[10, 30, 20, 40, 35]</code><a class="headerlink" href="#exemplo-3-insercao-de-10-30-20-40-35" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Inserimos: 10 → 30 → 20 → 40
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        10
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>       /  \
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>      .    30
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>          /  \
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        20    40
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>FB(10) = 0-2 = -2 ❌ → Caminho: 10 → Dir(30) → Esq(20)
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>Tipo: RL (Direita-Esquerda)
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>Passo 1: Rotação Dir em 30 → 20 sobe, 30 desce à direita
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        10
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>         \
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>          20
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>           \
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>            30
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>             \
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>              40
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>Passo 2: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        20
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>       /  \
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>     10    30
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>            \
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>             40
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>FB: 10→0, 40→0, 30→-1, 20→0. Balanceada! ✓
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>Agora inserimos 35:
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>        20
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>       /  \
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>     10    30
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>            \
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>             40
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>            /
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>          35
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>FB(30) = -1-1 = -2 ❌ → Caminho: 30 → Dir(40) → Esq(35)
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>Tipo: RL novamente!
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>Rotação Dir em 40 → 35 sobe, 40 desce à direita
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>        20
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>       /  \
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>     10    30
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>            \
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>             35
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>            /  \
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>          .    40
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>Rotação Esq em 30 → 35 sobe, 30 desce à esquerda
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>        20
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>       /  \
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>     10    35
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>          /  \
+<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>        30    40
+<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>
+<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>FB: todos ≤1. AVL válida! ✓
+</code></pre></div>
+<hr />
+<h2 id="6-ferramenta-interativa-visualgo">6. Ferramenta Interativa: VisuAlgo<a class="headerlink" href="#6-ferramenta-interativa-visualgo" title="Permanent link">&para;</a></h2>
+<h3 id="acesse-httpsvisualgonetenbst">Acesse: <strong><a href="https://visualgo.net/en/bst">https://visualgo.net/en/bst</a></strong><a class="headerlink" href="#acesse-httpsvisualgonetenbst" title="Permanent link">&para;</a></h3>
+<p>O <strong>VisuAlgo</strong> é uma ferramenta visual interativa que permite:</p>
+<ul>
+<li>Inserir e remover elementos em ABBs e AVLs</li>
+<li><strong>Visualizar automaticamente</strong> as rotações acontecendo em tempo real</li>
+<li>Ver os fatores de balanceamento calculados automaticamente</li>
+<li>Comparar seu resultado manual com a solução correta</li>
+<li>Estudar diferentes sequências de inserção</li>
+</ul>
+<h3 id="como-usar-para-estudar-avl">Como usar para estudar AVL:<a class="headerlink" href="#como-usar-para-estudar-avl" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Acesse o site</strong> e selecione o modo "AVL" (não apenas BST)</li>
+<li><strong>Insira os valores</strong> um por um na caixa de texto</li>
+<li><strong>Observe</strong> como a árvore se reorganiza automaticamente</li>
+<li><strong>Compare</strong> com seus desenhos feitos no papel</li>
+<li><strong>Teste</strong> sequências ordenadas <code>[1,2,3,4,5]</code> vs aleatórias <code>[3,1,4,2,5]</code></li>
+<li><strong>Verifique</strong> se identificou corretamente o tipo de rotação necessária</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Dica de estudo</p>
+<ul>
+<li>Primeiro resolva os exercícios no papel</li>
+<li>Depois valide no VisuAlgo</li>
+<li>Se houver diferença, analise passo a passo onde errou</li>
+<li>Preste atenção nas alturas e FB mostrados visualmente</li>
+</ul>
+</div>
+<hr />
+<h2 id="7-exercicios-para-fixacao-manipulacao-visual">7. Exercícios para Fixação (Manipulação Visual)<a class="headerlink" href="#7-exercicios-para-fixacao-manipulacao-visual" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Instrução</p>
+<p>Utilize papel, lápis e borracha. Não é necessário código. Desenhe as árvores, calcule alturas e FB, e aplique rotações quando necessário. <strong>Valide suas respostas no VisuAlgo (<a href="https://visualgo.net/en/bst">https://visualgo.net/en/bst</a>)</strong>.</p>
+</div>
+<h3 id="exercicio-1-calculo-de-fb-e-identificacao-de-desbalanceamento">Exercício 1 — Cálculo de FB e Identificação de Desbalanceamento<a class="headerlink" href="#exercicio-1-calculo-de-fb-e-identificacao-de-desbalanceamento" title="Permanent link">&para;</a></h3>
+<p>Dada a árvore abaixo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>        50
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>       /  \
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>     30    70
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    /  \     \
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  20   40    80
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> /           /
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>10          75
+</code></pre></div>
+<p>a) Calcule a altura de cada nó.</p>
+<p>b) Calcule o FB de cada nó.</p>
+<p>c) Há algum nó desbalanceado? Se sim, qual?</p>
+<p>d) Qual tipo de rotação seria necessária?</p>
+<details>
+<summary>Gabarito</summary>
+
+a) Alturas (folha=0): 10→0, 20→1, 40→0, 75→0, 80→1, 30→2, 70→2, 50→3
+
+b) FB: 10→0, 20→1-0=1, 40→0, 75→0, 80→0-1=-1, 30→1-0=1, 70→0-2=-2, 50→2-2=0
+
+c) Sim: nó **70** tem FB = -2
+
+d) Caminho do nó inserido (75): 70 → Dir(80) → Esq(75) → **Caso RL** → Rotação Dupla Direita-Esquerda
+
+**Valide no VisuAlgo:** Insira [50,30,70,20,40,80,10,75] e observe o desbalanceamento
+</details>
+
+<hr />
+<h3 id="exercicio-2-insercao-sequencial-com-rebalanceamento">Exercício 2 — Inserção Sequencial com Rebalanceamento<a class="headerlink" href="#exercicio-2-insercao-sequencial-com-rebalanceamento" title="Permanent link">&para;</a></h3>
+<p>Insira os valores na ordem: <code>[20, 10, 30, 5, 15, 25, 35, 3]</code> em uma AVL inicialmente vazia.</p>
+<ul>
+<li>Desenhe a árvore após cada inserção.</li>
+<li>Marque o FB de cada nó.</li>
+<li>Sempre que <code>|FB| ≥ 2</code>, aplique a rotação necessária antes de continuar.</li>
+</ul>
+<details>
+<summary>Dica de resolução</summary>
+
+- Após `20,10,30`: balanceada (20 raiz)
+- Após `5`: 20 FB=1, 10 FB=1, 30 FB=0 ✓
+- Após `15`: 20 FB=1-0=1, 10 FB=1-1=0, 15 FB=0, 5 FB=0 ✓
+- Após `25,35`: 20 FB=1-2=-1, 30 FB=0-1=-1, 35 FB=0 ✓
+- Após `3`: 10 FB=2-0=2 ❌ → Caso LL (caminho 10→Esq(5)→Esq(3)) → Rotação Simples à Direita em 10
+- Árvore final balanceada:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>        20
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>       /  \
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>     10    30
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    / \   /  \
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>   5  15 25  35
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  /
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a> 3
+</code></pre></div>
+
+**Valide no VisuAlgo:** Insira a sequência completa e compare com seu desenho
+</details>
+
+<hr />
+<h3 id="exercicio-3-identificacao-de-rotacao">Exercício 3 — Identificação de Rotação<a class="headerlink" href="#exercicio-3-identificacao-de-rotacao" title="Permanent link">&para;</a></h3>
+<p>Para cada situação abaixo, identifique:</p>
+<ol>
+<li>Qual nó está desbalanceado?</li>
+<li>Qual o tipo de desbalanceamento (LL, RR, LR, RL)?</li>
+<li>Qual rotação deve ser aplicada?</li>
+</ol>
+<p><strong>Situação A:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>      40
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>     /
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>   20
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  /  \
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> 10  30
+</code></pre></div>
+<p><strong>Situação B:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>      50
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>        \
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>         80
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>        /  \
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>      70    90
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>     /
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>   60
+</code></pre></div>
+<details>
+<summary>Gabarito</summary>
+
+Situação A:
+
+1. Nó 40 (FB = +2)
+2. Caminho: 40 → Esq(20) → Dir(30) → **LR**
+3. Rotação Dupla Esquerda-Direita (Esq em 20, depois Dir em 40)
+
+Situação B:
+
+1. Nó 50 (FB = -2)
+2. Caminho: 50 → Dir(80) → Esq(70) → **RL**
+3. Rotação Dupla Direita-Esquerda (Dir em 80, depois Esq em 50)
+
+**Valide no VisuAlgo:** Recrie cada situação e observe a rotação sugerida
+</details>
+
+<hr />
+<h3 id="exercicio-4-desafio-visual-degeneracao-vs-balanceamento">Exercício 4 — Desafio Visual: Degeneração vs. Balanceamento<a class="headerlink" href="#exercicio-4-desafio-visual-degeneracao-vs-balanceamento" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Desenhe a ABB resultante da inserção de <code>[1, 2, 3, 4, 5, 6, 7]</code> em ordem crescente.</li>
+<li>Desenhe a AVL resultante da mesma sequência.</li>
+<li>Compare altura, número de comparações máximas para busca e eficiência geral.</li>
+<li>Explique por que a AVL nunca degenera, mesmo com dados ordenados.</li>
+</ol>
+<details>
+<summary>Resposta esperada</summary>
+
+1. ABB: Lista encadeada à direita. Altura = 6. Busca pior caso = 7 comparações.
+2. AVL:
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>        4
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>       / \
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>      2   6
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>     / \ / \
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    1  3 5  7
+</code></pre></div>
+
+Altura = 2. Busca pior caso = 3 comparações.
+3. Diferença drástica: O(n) vs O(log n). A AVL realiza rotações automáticas que redistribuem os nós, mantendo a altura próxima de log₂(n).
+4. Porque a propriedade `|FB| ≤ 1` força rearranjos locais sempre que a diferença de alturas ameaça crescer, impedindo o crescimento linear.
+
+**Valide no VisuAlgo:**
+
+- Modo BST: insira [1,2,3,4,5,6,7] → veja a degeneração
+- Modo AVL: insira [1,2,3,4,5,6,7] → veja o balanceamento automático
+</details>
+
+<hr />
+<h3 id="exercicio-5-pratica-guiada-com-visualgo">Exercício 5 — Prática Guiada com VisuAlgo<a class="headerlink" href="#exercicio-5-pratica-guiada-com-visualgo" title="Permanent link">&para;</a></h3>
+<p><strong>Sequência:</strong> <code>[50, 25, 75, 10, 30, 60, 90, 5, 15, 28, 55, 65]</code></p>
+<p>Para cada inserção:</p>
+<ol>
+<li>Pause o VisuAlgo antes de inserir</li>
+<li>Desenhe no papel como você acha que a árvore ficará</li>
+<li>Preveja se haverá rotação e qual tipo</li>
+<li>Clique em "Insert" no VisuAlgo</li>
+<li>Compare com sua previsão</li>
+<li>Anote eventuais erros de raciocínio</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Objetivo</p>
+<p>Desenvolver intuição para prever quando e qual rotação ocorrerá.</p>
+</div>
+<hr />
+<h2 id="8-resumo-do-capitulo">8. Resumo do Capítulo<a class="headerlink" href="#8-resumo-do-capitulo" title="Permanent link">&para;</a></h2>
+<p><strong>Motivação:</strong> ABBs degeneram com inserções ordenadas → perda de eficiência O(log n)</p>
+<p><strong>Definição AVL:</strong> ABB com <code>|altura(SAE) − altura(SAD)| ≤ 1</code> para todos os nós</p>
+<p><strong>Fator de Balanceamento (FB):</strong> Ferramenta para medir desbalanceamento. Valores válidos: <code>-1, 0, +1</code></p>
+<p><strong>Rotações:</strong> 4 tipos para restaurar equilíbrio mantendo a propriedade ABB:</p>
+<ul>
+<li>LL → Rotação Simples à Direita</li>
+<li>RR → Rotação Simples à Esquerda</li>
+<li>LR → Rotação Dupla (Esq-Dir)</li>
+<li>RL → Rotação Dupla (Dir-Esq)</li>
+</ul>
+<p><strong>Algoritmo de Inserção:</strong> Inserir como ABB → subir atualizando FB → rotacionar no primeiro <code>|FB| ≥ 2</code></p>
+<p><strong>Garantia:</strong> Altura sempre <code>O(log n)</code> → operações sempre eficientes</p>
+<p><strong>Ferramenta de estudo:</strong> <strong><a href="https://visualgo.net/en/bst">https://visualgo.net/en/bst</a></strong> para validação e prática interativa</p>
+<hr />
+<h2 id="9-proximos-passos-ferramentas-recomendadas">9. Próximos Passos &amp; Ferramentas Recomendadas<a class="headerlink" href="#9-proximos-passos-ferramentas-recomendadas" title="Permanent link">&para;</a></h2>
+<p><strong>Próximo capítulo:</strong> Implementação em C de AVLs (struct com campo <code>altura</code>, funções de rotação, inserção com rebalanceamento automático, remoção avançada).</p>
+<p><strong>Prática sugerida (sem código):</strong></p>
+<ul>
+<li>Utilize o simulador interativo: <a href="https://visualgo.net/en/bst">https://visualgo.net/en/bst</a></li>
+<li>Selecione o modo "AVL"</li>
+<li>Insira sequências aleatórias e observe as rotações acontecendo em tempo real</li>
+<li>Tente prever a rotação antes de clicar em "Inserir"</li>
+<li>Teste casos extremos: dados ordenados, dados em ordem inversa, dados aleatórios</li>
+<li>Compare o comportamento do modo "BST" vs "AVL" com as mesmas sequências</li>
+</ul>
+<p><strong>Leitura complementar:</strong></p>
+<ul>
+<li>ZIVIANI, N. <em>Projeto de Algoritmos</em>. Seção 5.4: Árvores AVL.</li>
+<li>GOODRICH, M. T. <em>Data Structures and Algorithms in C</em>. Capítulo 11: Balanced Search Trees.</li>
+</ul>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Dica para provas</p>
+<p>Ao resolver exercícios de AVL no papel, <strong>sempre escreva as alturas e FB ao lado de cada nó</strong>. Isso evita erros de contagem e facilita a identificação imediata do caso de rotação. <strong>Use o VisuAlgo para treinar e validar seu raciocínio!</strong></p>
+</div>
+<hr />
+<p><em>Material elaborado para a disciplina de Estrutura de Dados — Curso de Engenharia de Computação</em></p>
+<p><em>Prof. Sérgio Souza Costa | Atualizado: 2026</em></p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

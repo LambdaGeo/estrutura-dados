@@ -1,0 +1,3691 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Estrutura de Dados: Recursividade, TAD, Listas, Pilhas, Filas, Árvores (BST, AVL, Heaps) e Ordenação.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../03_pilha_estatica_3/">
+      
+      
+        <link rel="next" href="../05_lista_encadeada/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>4. Listas Estáticas como TAD em C - Estruturas de Dados</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#listas-estaticas-como-tad-em-c" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Estruturas de Dados" class="md-header__button md-logo" aria-label="Estruturas de Dados" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Estruturas de Dados
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Listas Estáticas como TAD em C
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Estruturas de Dados" class="md-nav__button md-logo" aria-label="Estruturas de Dados" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Estruturas de Dados
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Pilhas, Listas e Filas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Pilhas, Listas e Filas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aulas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aulas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_apresentacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Apresentação da Disciplina
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_pilha_estatica_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Pilha Estática I: Vetores Globais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_pilha_estatica_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Pilha Estática II: Funções, Ponteiros e Structs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_pilha_estatica_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Pilha Estática III: Alocação Dinâmica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Listas Estáticas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Listas Estáticas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-revisao-tipos-de-dados-e-tipos-abstratos-de-dados-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Revisão: Tipos de Dados e Tipos Abstratos de Dados (TAD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Revisão: Tipos de Dados e Tipos Abstratos de Dados (TAD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-tipos-de-dados-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Tipos de Dados em C
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-tipo-abstrato-de-dados-tad-definicao-formal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Tipo Abstrato de Dados (TAD) – Definição Formal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-definicao-intuitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Definição Intuitiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pilha-como-exemplo-de-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Pilha como Exemplo de TAD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Pilha como Exemplo de TAD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-relembrando-a-pilha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Relembrando a Pilha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-exemplo-de-uso-em-artigo-cientifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Exemplo de Uso em Artigo Científico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-implementacao-anterior-tudo-em-um-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Implementação Anterior (Tudo em Um Arquivo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tads-e-classes-em-orientacao-a-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. TADs e Classes em Orientação a Objetos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. TADs e Classes em Orientação a Objetos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-relacao-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Relação Conceitual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-e-em-c-como-implementar-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 E em C, Como Implementar TAD?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-conceito-formal-de-lista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Conceito Formal de LISTA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Conceito Formal de LISTA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-lista-linear-definicao-matematica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Lista Linear – Definição Matemática
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-analogias-com-o-mundo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Analogias com o Mundo Real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-representacoes-possiveis-para-o-mesmo-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Representações Possíveis para o Mesmo TAD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-interface-do-tad-lista-de-inteiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Interface do TAD LISTA de Inteiros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Interface do TAD LISTA de Inteiros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-operacoes-definidas-versao-simplificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Operações Definidas (Versão Simplificada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-arquivo-de-interface-listah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Arquivo de Interface: lista.h
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-compilacao-separada-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Compilação Separada em C
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Compilação Separada em C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-estrutura-de-arquivos-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Estrutura de Arquivos do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-como-funciona-a-compilacao-separada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Como Funciona a Compilação Separada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-vantagens-da-abordagem-modular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Vantagens da Abordagem Modular
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-implementacao-estatica-listac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Implementação Estática: lista.c
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Implementação Estática: lista.c">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-estrutura-interna-escondida-do-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Estrutura Interna (Escondida do Cliente)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-criacao-e-destruicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Criação e Destruição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-operacoes-de-consulta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Operações de Consulta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-insercoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Inserções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-remocoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Remoções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-buscas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Buscas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-codigo-cliente-exemplo-mainc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Código Cliente Exemplo: main.c
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-folha-de-referencia-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Folha de Referência Rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-guia-de-estudo-e-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Guia de Estudo e Prática
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Guia de Estudo e Prática">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicios-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercícios Recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#para-aprofundar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Aprofundar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desafio-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desafio Opcional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug Challenge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-continuando-o-estudo-listas-dinamicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Continuando o Estudo: Listas Dinâmicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Continuando o Estudo: Listas Dinâmicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pergunta-para-reflexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pergunta para Reflexão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparativo-estatica-vs-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparativo: Estática vs. Dinâmica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-e-leitura-complementar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Referências e Leitura Complementar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_lista_encadeada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Listas Encadeadas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_fila_tad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Filas como TAD em C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercícios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exercícios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_01_expressoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Expressões e Comandos (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_02_vetores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vetores em C (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_03_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Funções (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_04_ponteiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ponteiros (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/basico_c_05_strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strings (C Básico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_01_estruturas_heterogeneas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas Heterogêneas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_02_pilhas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pilhas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_8" id="__nav_2_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercícios com Listas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exercícios com Listas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_03_listas_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_03_listas_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lista Estática
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_03_listas_encadeada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lista Encadeada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u1_04_caderno_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caderno de Exercícios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Árvores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Árvores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aulas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aulas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_recursao_busca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Recursão e Algoritmos de Busca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_arvores_conceitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Árvores: Conceitos e Binária
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_arvores_busca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Árvores Binárias de Busca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_arvores_avl_conceito/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Árvores AVL: Conceito
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_arvores_avl_implementacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Árvores AVL: Implementação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercícios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exercícios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_01_recursividade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursividade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_02_arvores_binarias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árvores Binárias (Estruturais)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_03_arvores_busca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árvores Binárias de Busca (ABB)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exercicios/u2_04_arvores_avl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Árvores AVL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Ordenação
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Ordenação
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aulas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aulas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_analise_complexidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Complexidade & Profiling (gcov/gprof)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_ordenacao_basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Algoritmos de Ordenação Básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_ordenacao_avancada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Algoritmos de Ordenação Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboratórios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Laboratórios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laboratorios/01_repl_pilha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laboratório: REPL Baseado em Pilha
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laboratorios/02_trabalho_pratico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: Algoritmos de Ordenação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-revisao-tipos-de-dados-e-tipos-abstratos-de-dados-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Revisão: Tipos de Dados e Tipos Abstratos de Dados (TAD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Revisão: Tipos de Dados e Tipos Abstratos de Dados (TAD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-tipos-de-dados-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Tipos de Dados em C
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-tipo-abstrato-de-dados-tad-definicao-formal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Tipo Abstrato de Dados (TAD) – Definição Formal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-definicao-intuitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Definição Intuitiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pilha-como-exemplo-de-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Pilha como Exemplo de TAD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Pilha como Exemplo de TAD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-relembrando-a-pilha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Relembrando a Pilha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-exemplo-de-uso-em-artigo-cientifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Exemplo de Uso em Artigo Científico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-implementacao-anterior-tudo-em-um-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Implementação Anterior (Tudo em Um Arquivo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tads-e-classes-em-orientacao-a-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. TADs e Classes em Orientação a Objetos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. TADs e Classes em Orientação a Objetos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-relacao-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Relação Conceitual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-e-em-c-como-implementar-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 E em C, Como Implementar TAD?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-conceito-formal-de-lista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Conceito Formal de LISTA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Conceito Formal de LISTA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-lista-linear-definicao-matematica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Lista Linear – Definição Matemática
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-analogias-com-o-mundo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Analogias com o Mundo Real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-representacoes-possiveis-para-o-mesmo-tad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Representações Possíveis para o Mesmo TAD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-interface-do-tad-lista-de-inteiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Interface do TAD LISTA de Inteiros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Interface do TAD LISTA de Inteiros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-operacoes-definidas-versao-simplificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Operações Definidas (Versão Simplificada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-arquivo-de-interface-listah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Arquivo de Interface: lista.h
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-compilacao-separada-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Compilação Separada em C
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Compilação Separada em C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-estrutura-de-arquivos-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Estrutura de Arquivos do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-como-funciona-a-compilacao-separada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Como Funciona a Compilação Separada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-vantagens-da-abordagem-modular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Vantagens da Abordagem Modular
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-implementacao-estatica-listac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Implementação Estática: lista.c
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Implementação Estática: lista.c">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-estrutura-interna-escondida-do-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Estrutura Interna (Escondida do Cliente)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-criacao-e-destruicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Criação e Destruição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-operacoes-de-consulta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Operações de Consulta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-insercoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Inserções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-remocoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Remoções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-buscas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Buscas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-codigo-cliente-exemplo-mainc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Código Cliente Exemplo: main.c
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-folha-de-referencia-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Folha de Referência Rápida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-guia-de-estudo-e-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Guia de Estudo e Prática
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Guia de Estudo e Prática">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicios-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercícios Recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#para-aprofundar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Aprofundar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desafio-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desafio Opcional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug Challenge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-continuando-o-estudo-listas-dinamicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Continuando o Estudo: Listas Dinâmicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Continuando o Estudo: Listas Dinâmicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pergunta-para-reflexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pergunta para Reflexão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparativo-estatica-vs-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparativo: Estática vs. Dinâmica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-e-leitura-complementar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Referências e Leitura Complementar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="listas-estaticas-como-tad-em-c">Listas Estáticas como TAD em C<a class="headerlink" href="#listas-estaticas-como-tad-em-c" title="Permanent link">&para;</a></h1>
+<p><strong>Disciplina:</strong> Estrutura de Dados</p>
+<p><strong>Tema:</strong> Tipo Abstrato de Dados LISTA – Implementação Estática em C</p>
+<p><strong>Pré-requisitos:</strong> Variáveis, structs, ponteiros e funções em C</p>
+<hr />
+<h2 id="1-revisao-tipos-de-dados-e-tipos-abstratos-de-dados-tad">1. Revisão: Tipos de Dados e Tipos Abstratos de Dados (TAD)<a class="headerlink" href="#1-revisao-tipos-de-dados-e-tipos-abstratos-de-dados-tad" title="Permanent link">&para;</a></h2>
+<h3 id="11-tipos-de-dados-em-c">1.1 Tipos de Dados em C<a class="headerlink" href="#11-tipos-de-dados-em-c" title="Permanent link">&para;</a></h3>
+<p>Um <strong>tipo de dado</strong> define:</p>
+<ul>
+<li>O conjunto de valores que uma variável pode armazenar</li>
+<li>As operações válidas sobre esses valores</li>
+</ul>
+<p><strong>Exemplos em C:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Exemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipos simples</td>
+<td><code>int</code>, <code>float</code>, <code>double</code>, <code>char</code>, <code>bool</code></td>
+</tr>
+<tr>
+<td>Tipos estruturados</td>
+<td><code>struct</code>, <code>union</code>, <code>enum</code></td>
+</tr>
+<tr>
+<td>Tipos derivados</td>
+<td>arrays, ponteiros</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Exemplo: tipo estruturado</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Ponto</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">};</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">// Valores: qualquer par (x, y) de inteiros</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// Operações: acesso a campos, atribuição, passar como parâmetro</span>
+</code></pre></div>
+<h3 id="12-tipo-abstrato-de-dados-tad-definicao-formal">1.2 Tipo Abstrato de Dados (TAD) – Definição Formal<a class="headerlink" href="#12-tipo-abstrato-de-dados-tad-definicao-formal" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>"Um Tipo Abstrato de Dados (ADT) é um modelo matemático definido por seu comportamento (semântica) do ponto de vista do usuário, especificando os valores possíveis e as operações sobre esses valores, independentemente de como são implementados."</p>
+</blockquote>
+<p>Em notação matemática, um TAD pode ser visto como uma tupla <strong>(V, O)</strong>, onde:</p>
+<ul>
+<li><strong>V</strong> = conjunto de valores possíveis</li>
+<li><strong>O</strong> = conjunto de operações válidas sobre V [[3]]</li>
+</ul>
+<h3 id="13-definicao-intuitiva">1.3 Definição Intuitiva<a class="headerlink" href="#13-definicao-intuitiva" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>"Um TAD é um 'container' de dados que especifica <strong>o que</strong> pode ser armazenado e <strong>quais operações</strong> podem ser realizadas, escondendo <strong>como</strong> tudo isso é implementado na memória."</p>
+</blockquote>
+<p><strong>Ideias-chave:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Abstração</strong></td>
+<td>O usuário conhece a interface (assinaturas e comportamento), não os detalhes internos</td>
+</tr>
+<tr>
+<td><strong>Encapsulamento</strong></td>
+<td>O estado interno (vetor, índices, ponteiros) é protegido; acesso apenas via operações válidas</td>
+</tr>
+<tr>
+<td><strong>Reusabilidade</strong></td>
+<td>O mesmo TAD pode ser usado em múltiplos programas sem reescrever a estrutura</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-pilha-como-exemplo-de-tad">2. Pilha como Exemplo de TAD<a class="headerlink" href="#2-pilha-como-exemplo-de-tad" title="Permanent link">&para;</a></h2>
+<h3 id="21-relembrando-a-pilha">2.1 Relembrando a Pilha<a class="headerlink" href="#21-relembrando-a-pilha" title="Permanent link">&para;</a></h3>
+<p>A <strong>Pilha</strong> é tradicionalmente usada na literatura para ilustrar o conceito de TAD, pois possui uma interface simples e comportamento bem definido [[2]][[9]].</p>
+<p><strong>TAD PILHA de inteiros (abstrato):</strong></p>
+<ul>
+<li><strong>Valores:</strong> Todas as sequências finitas de inteiros <code>(x₁, x₂, ..., xₙ)</code></li>
+<li><strong>Operações típicas:</strong><ul>
+<li><code>criaPilha()</code>: cria pilha vazia</li>
+<li><code>empilha(x, p)</code>: insere <code>x</code> no topo</li>
+<li><code>desempilha(p)</code>: remove e retorna valor do topo</li>
+<li><code>pilhaVazia(p)</code>: verifica se está vazia</li>
+<li><code>topo(p)</code>: observa o topo sem remover</li>
+</ul>
+</li>
+</ul>
+<p><strong>Política de acesso:</strong> <strong>LIFO</strong> (<em>Last In, First Out</em>) – o último elemento inserido é o primeiro a ser removido.</p>
+<h3 id="22-exemplo-de-uso-em-artigo-cientifico">2.2 Exemplo de Uso em Artigo Científico<a class="headerlink" href="#22-exemplo-de-uso-em-artigo-cientifico" title="Permanent link">&para;</a></h3>
+<p>Em materiais acadêmicos sobre estruturas de dados, a pilha aparece como exemplo clássico de como separar "o que faz" (contrato das operações) do "como faz" (implementação com vetor vs. lista encadeada).</p>
+<blockquote>
+<p>"Abstract data types are the basis of an emerging methodology of computer programming. The stack is one of the fundamental data structures used to illustrate ADT concepts."</p>
+</blockquote>
+<h3 id="23-implementacao-anterior-tudo-em-um-arquivo">2.3 Implementação Anterior (Tudo em Um Arquivo)<a class="headerlink" href="#23-implementacao-anterior-tudo-em-um-arquivo" title="Permanent link">&para;</a></h3>
+<p>No capítulo sobre pilha, implementamos algo assim:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// pilha_tudo_em_um.c</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="cp">#define MAX 100</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pilha</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valores</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">topo</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span><span class="w"> </span><span class="n">Pilha</span><span class="p">;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">Pilha</span><span class="o">*</span><span class="w"> </span><span class="nf">criaPilha</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="kt">void</span><span class="w"> </span><span class="nf">empilha</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Pilha</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">desempilha</span><span class="p">(</span><span class="n">Pilha</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="kt">int</span><span class="w"> </span><span class="nf">pilhaVazia</span><span class="p">(</span><span class="n">Pilha</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="n">Pilha</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criaPilha</span><span class="p">();</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="n">empilha</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="c1">// ... uso da pilha ...</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Limitação:</strong> Interface e implementação misturadas. Para reutilizar em outro projeto, precisaríamos copiar todo o código.</p>
+<hr />
+<h2 id="3-tads-e-classes-em-orientacao-a-objetos">3. TADs e Classes em Orientação a Objetos<a class="headerlink" href="#3-tads-e-classes-em-orientacao-a-objetos" title="Permanent link">&para;</a></h2>
+<h3 id="31-relacao-conceitual">3.1 Relação Conceitual<a class="headerlink" href="#31-relacao-conceitual" title="Permanent link">&para;</a></h3>
+<p>Em linguagens OO (Java, C++, C#), uma <strong>classe</strong> é a forma natural de implementar um TAD:</p>
+<table>
+<thead>
+<tr>
+<th>TAD (conceito)</th>
+<th>Classe em OO (implementação)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conjunto de valores</td>
+<td>Atributos (privados)</td>
+</tr>
+<tr>
+<td>Operações</td>
+<td>Métodos (públicos)</td>
+</tr>
+<tr>
+<td>Encapsulamento</td>
+<td>Modificadores <code>private</code>/<code>public</code></td>
+</tr>
+<tr>
+<td>Interface</td>
+<td>Assinaturas dos métodos públicos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplo: TAD PILHA ↔ Classe <code>Stack</code></strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Java - Classe como implementação de TAD</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Stack</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">valores</span><span class="p">;</span><span class="w">  </span><span class="c1">// estado interno (privado)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">topo</span><span class="p">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Stack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* criaPilha */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">push</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* empilha */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">pop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* desempilha */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* pilhaVazia */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="c1">// Cliente usa apenas métodos públicos, sem ver internals</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="32-e-em-c-como-implementar-tad">3.2 E em C, Como Implementar TAD?<a class="headerlink" href="#32-e-em-c-como-implementar-tad" title="Permanent link">&para;</a></h3>
+<p>C não possui classes, mas podemos simular TADs usando:</p>
+<ol>
+<li><strong><code>struct</code></strong> para representar o estado interno</li>
+<li><strong>Funções</strong> que recebem ponteiros para a <code>struct</code> como operações</li>
+<li><strong>Arquivos separados</strong>:<ul>
+<li><code>.h</code> (header): expõe apenas a interface (protótipos)</li>
+<li><code>.c</code> (implementação): contém o código real, escondido do cliente</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>"In C, abstract data types are implemented using two files: a .h file that contains the interface, and a .c file that contains the implementation."</p>
+</blockquote>
+<hr />
+<h2 id="4-conceito-formal-de-lista">4. Conceito Formal de LISTA<a class="headerlink" href="#4-conceito-formal-de-lista" title="Permanent link">&para;</a></h2>
+<h3 id="41-lista-linear-definicao-matematica">4.1 Lista Linear – Definição Matemática<a class="headerlink" href="#41-lista-linear-definicao-matematica" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>"Uma lista linear é uma sequência finita de zero ou mais elementos <code>x₁, x₂, ..., xₙ</code>, onde cada <code>xᵢ</code> é de um tipo definido e <code>n ≥ 0</code> é o tamanho da lista. Se <code>n ≥ 1</code>, então <code>x₁</code> é o primeiro elemento, <code>xₙ</code> é o último, e para <code>1 &lt; i &lt; n</code>, <code>xᵢ₋₁</code> precede <code>xᵢ</code> e <code>xᵢ₊₁</code> sucede <code>xᵢ</code>."</p>
+</blockquote>
+<p><strong>Propriedades fundamentais:</strong></p>
+<ul>
+<li>Elementos têm <strong>posição relativa</strong> (ordem importa)</li>
+<li>Acesso permitido a <strong>qualquer posição</strong> (diferente da pilha)</li>
+<li>Tamanho pode variar dinamicamente (em implementações adequadas)</li>
+</ul>
+<h3 id="42-analogias-com-o-mundo-real">4.2 Analogias com o Mundo Real<a class="headerlink" href="#42-analogias-com-o-mundo-real" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Analogia</th>
+<th>Mapeamento para Lista</th>
+<th>Operações Típicas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lista de compras</strong></td>
+<td>Itens em ordem de adição</td>
+<td>Inserir no final, remover quando comprado</td>
+</tr>
+<tr>
+<td><strong>Playlist de músicas</strong></td>
+<td>Faixas numeradas (0, 1, 2...)</td>
+<td>Inserir em posição específica, pular para posição X</td>
+</tr>
+<tr>
+<td><strong>Fila do banco com senha</strong></td>
+<td>Pessoas com número de ordem</td>
+<td>Buscar posição da sua senha, remover quando chamado</td>
+</tr>
+<tr>
+<td><strong>Histórico de navegação</strong></td>
+<td>Páginas visitadas em ordem</td>
+<td>Acessar página 3 do histórico, remover página específica</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-representacoes-possiveis-para-o-mesmo-tad">4.3 Representações Possíveis para o Mesmo TAD<a class="headerlink" href="#43-representacoes-possiveis-para-o-mesmo-tad" title="Permanent link">&para;</a></h3>
+<p>O <strong>mesmo TAD LISTA</strong> pode ser implementado de formas diferentes:</p>
+<table>
+<thead>
+<tr>
+<th>Representação</th>
+<th>Características</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Estática (vetor)</strong></td>
+<td>Elementos em posições contíguas; tamanho fixo definido em compilação</td>
+<td>Quando o tamanho máximo é conhecido e não muda muito</td>
+</tr>
+<tr>
+<td><strong>Dinâmica (lista encadeada)</strong></td>
+<td>Elementos em nós com ponteiros; alocação sob demanda</td>
+<td>Quando o tamanho é imprevisível ou muda frequentemente</td>
+</tr>
+<tr>
+<td><strong>Vetor dinâmico</strong></td>
+<td>Array que cresce/reduz com <code>realloc</code></td>
+<td>Compromisso entre acesso rápido e flexibilidade</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>Neste capítulo, focaremos na <strong>implementação estática com vetor</strong>. No próximo capítulo, implementaremos o <strong>mesmo TAD</strong> com lista encadeada, mantendo a mesma interface. Isso demonstra o poder da abstração: o código cliente não precisa mudar quando a implementação interna muda.</p>
+</div>
+<hr />
+<h2 id="5-interface-do-tad-lista-de-inteiros">5. Interface do TAD LISTA de Inteiros<a class="headerlink" href="#5-interface-do-tad-lista-de-inteiros" title="Permanent link">&para;</a></h2>
+<h3 id="51-operacoes-definidas-versao-simplificada">5.1 Operações Definidas (Versão Simplificada)<a class="headerlink" href="#51-operacoes-definidas-versao-simplificada" title="Permanent link">&para;</a></h3>
+<p>Para esta primeira versão, trabalhamos com:</p>
+<ul>
+<li><strong>Tipo de elemento:</strong> <code>int</code> (apenas valores, sem chave-valor)</li>
+<li><strong>Lista não ordenada:</strong> elementos mantêm ordem de inserção</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Operação</th>
+<th>Descrição</th>
+<th>Retorno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Criação</strong></td>
+<td><code>criaLista()</code></td>
+<td>Cria lista vazia</td>
+<td><code>Lista*</code> ou <code>NULL</code> se falhar</td>
+</tr>
+<tr>
+<td></td>
+<td><code>destroiLista(l)</code></td>
+<td>Libera memória da lista</td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><strong>Consultas</strong></td>
+<td><code>conta(l)</code></td>
+<td>Retorna número de elementos</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>vazia(l)</code></td>
+<td>Verifica se lista está vazia</td>
+<td><code>1</code> se vazia, <code>0</code> caso contrário</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cheia(l)</code></td>
+<td>Verifica se lista atingiu capacidade máxima</td>
+<td><code>1</code> se cheia, <code>0</code> caso contrário</td>
+</tr>
+<tr>
+<td></td>
+<td><code>imprime(l)</code></td>
+<td>Exibe elementos na saída padrão</td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><strong>Inserções</strong></td>
+<td><code>insereFinal(l, x)</code></td>
+<td>Adiciona <code>x</code> ao final da lista</td>
+<td><code>1</code> se sucesso, <code>0</code> se falha</td>
+</tr>
+<tr>
+<td></td>
+<td><code>inserePos(l, x, pos)</code></td>
+<td>Adiciona <code>x</code> na posição <code>pos</code> (0 ≤ pos ≤ tamanho)</td>
+<td><code>1</code> se sucesso, <code>0</code> se falha</td>
+</tr>
+<tr>
+<td><strong>Remoções</strong></td>
+<td><code>removePos(l, pos)</code></td>
+<td>Remove elemento da posição <code>pos</code></td>
+<td><code>1</code> se removeu, <code>0</code> se falha</td>
+</tr>
+<tr>
+<td></td>
+<td><code>removeValor(l, x)</code></td>
+<td>Remove primeira ocorrência do valor <code>x</code></td>
+<td><code>1</code> se removeu, <code>0</code> se não encontrado</td>
+</tr>
+<tr>
+<td><strong>Buscas</strong></td>
+<td><code>buscaPos(l, pos)</code></td>
+<td>Retorna valor na posição <code>pos</code></td>
+<td>Valor ou <code>-1</code> se posição inválida</td>
+</tr>
+<tr>
+<td></td>
+<td><code>buscaValor(l, x)</code></td>
+<td>Retorna posição da primeira ocorrência de <code>x</code></td>
+<td>Posição ou <code>-1</code> se não encontrado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-arquivo-de-interface-listah">5.2 Arquivo de Interface: <code>lista.h</code><a class="headerlink" href="#52-arquivo-de-interface-listah" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/* lista.h – Interface do TAD LISTA estática de inteiros */</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cp">#ifndef LISTA_H</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cp">#define LISTA_H</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="cp">#define MAX 100  </span><span class="cm">/* Limite estático – pode ser alterado sem mudar o cliente */</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="cm">/* Tipo opaco: o cliente só vê o ponteiro, não a struct interna */</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lista</span><span class="w"> </span><span class="n">Lista</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="cm">/* ========== CRIAÇÃO/DESTRUIÇÃO ========== */</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="nf">criaLista</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="kt">void</span><span class="w"> </span><span class="nf">destroiLista</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="cm">/* ========== CONSULTAS BÁSICAS ========== */</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="kt">int</span><span class="w"> </span><span class="nf">conta</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="kt">int</span><span class="w"> </span><span class="nf">vazia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="kt">int</span><span class="w"> </span><span class="nf">cheia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="kt">void</span><span class="w"> </span><span class="nf">imprime</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="cm">/* ========== INSERÇÕES ========== */</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="kt">int</span><span class="w"> </span><span class="nf">insereFinal</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="kt">int</span><span class="w"> </span><span class="nf">inserePos</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">);</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="cm">/* ========== REMOÇÕES ========== */</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="kt">int</span><span class="w"> </span><span class="nf">removePos</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">);</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="kt">int</span><span class="w"> </span><span class="nf">removeValor</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="cm">/* ========== BUSCAS ========== */</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscaPos</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">);</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscaValor</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="cp">#endif</span>
+</code></pre></div>
+<p><strong>Por que usar <code>typedef struct lista Lista;</code> sem expor os campos?</strong></p>
+<ul>
+<li><strong>Encapsulamento forte</strong>: o cliente não pode acessar <code>l-&gt;valores</code> ou <code>l-&gt;ultimo</code> diretamente</li>
+<li><strong>Independência de implementação</strong>: se mudarmos a struct interna, o código cliente não precisa ser alterado</li>
+<li><strong>Contrato claro</strong>: o cliente só interage via funções declaradas</li>
+</ul>
+<hr />
+<h2 id="6-compilacao-separada-em-c">6. Compilação Separada em C<a class="headerlink" href="#6-compilacao-separada-em-c" title="Permanent link">&para;</a></h2>
+<h3 id="61-estrutura-de-arquivos-do-projeto">6.1 Estrutura de Arquivos do Projeto<a class="headerlink" href="#61-estrutura-de-arquivos-do-projeto" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>projeto_lista/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── lista.h      /* Interface pública – o cliente #include este arquivo */
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── lista.c      /* Implementação privada – NÃO é incluído pelo cliente */
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>├── main.c       /* Código cliente – usa apenas a interface */
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>└── Makefile     /* Opcional: automatiza compilação */
+</code></pre></div>
+<h3 id="62-como-funciona-a-compilacao-separada">6.2 Como Funciona a Compilação Separada<a class="headerlink" href="#62-como-funciona-a-compilacao-separada" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Pré-processamento</strong>: <code>#include "lista.h"</code> copia o conteúdo do header para <code>main.c</code></li>
+<li>
+<p><strong>Compilação individual</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>gcc<span class="w"> </span>-c<span class="w"> </span>lista.c<span class="w"> </span>-o<span class="w"> </span>lista.o<span class="w">    </span><span class="c1"># Compila implementação para objeto</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>gcc<span class="w"> </span>-c<span class="w"> </span>main.c<span class="w"> </span>-o<span class="w"> </span>main.o<span class="w">      </span><span class="c1"># Compila cliente para objeto</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Linkagem</strong>: Junta os objetos para criar o executável</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>gcc<span class="w"> </span>lista.o<span class="w"> </span>main.o<span class="w"> </span>-o<span class="w"> </span>programa
+</code></pre></div>
+</li>
+</ol>
+<h3 id="63-vantagens-da-abordagem-modular">6.3 Vantagens da Abordagem Modular<a class="headerlink" href="#63-vantagens-da-abordagem-modular" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Vantagem</th>
+<th>Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reusabilidade</strong></td>
+<td><code>lista.h</code> e <code>lista.c</code> podem ser usados em múltiplos projetos</td>
+</tr>
+<tr>
+<td><strong>Manutenção</strong></td>
+<td>Alterações na implementação (<code>lista.c</code>) não exigem recompilar <code>main.c</code>, apenas relinkar</td>
+</tr>
+<tr>
+<td><strong>Encapsulamento</strong></td>
+<td>Cliente não vê detalhes internos; erros de implementação ficam isolados</td>
+</tr>
+<tr>
+<td><strong>Colaboração</strong></td>
+<td>Uma pessoa pode desenvolver a interface, outra a implementação, outra o cliente</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>"The .h file documents the agreement between both parties: the ADT developer and the client programmer." [[3]]</p>
+</blockquote>
+<hr />
+<h2 id="7-implementacao-estatica-listac">7. Implementação Estática: <code>lista.c</code><a class="headerlink" href="#7-implementacao-estatica-listac" title="Permanent link">&para;</a></h2>
+<h3 id="71-estrutura-interna-escondida-do-cliente">7.1 Estrutura Interna (Escondida do Cliente)<a class="headerlink" href="#71-estrutura-interna-escondida-do-cliente" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cm">/* lista.c – Implementação estática do TAD LISTA */</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lista.h&quot;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="cm">/* Definição concreta – NÃO exposta no .h */</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">struct</span><span class="w"> </span><span class="nc">lista</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valores</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span><span class="w">  </span><span class="cm">/* Vetor estático */</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ultimo</span><span class="p">;</span><span class="w">        </span><span class="cm">/* Índice do último elemento: -1 = lista vazia */</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">};</span>
+</code></pre></div>
+<p><strong>Convenções de estado:</strong></p>
+<ul>
+<li><code>ultimo == -1</code> → lista vazia (0 elementos)</li>
+<li><code>ultimo == n - 1</code> → lista com <code>n</code> elementos</li>
+<li><code>ultimo == MAX - 1</code> → lista cheia</li>
+</ul>
+<h3 id="72-criacao-e-destruicao">7.2 Criação e Destruição<a class="headerlink" href="#72-criacao-e-destruicao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="nf">criaLista</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Lista</span><span class="p">));</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Falha na alocação */</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">               </span><span class="cm">/* Inicializa como vazia */</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="p">;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="kt">void</span><span class="w"> </span><span class="nf">destroiLista</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="n">free</span><span class="p">(</span><span class="n">l</span><span class="p">);</span><span class="w">  </span><span class="cm">/* Libera memória alocada */</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="73-operacoes-de-consulta">7.3 Operações de Consulta<a class="headerlink" href="#73-operacoes-de-consulta" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">conta</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Se ultimo=-1 → 0; se ultimo=2 → 3 elementos */</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">vazia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">cheia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="p">}</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="kt">void</span><span class="w"> </span><span class="nf">imprime</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vazia</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Lista vazia.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Lista [%d elementos]: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">conta</span><span class="p">(</span><span class="n">l</span><span class="p">));</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="74-insercoes">7.4 Inserções<a class="headerlink" href="#74-insercoes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">insereFinal</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">cheia</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">}</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">inserePos</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="cm">/* Validações */</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">cheia</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="cm">/* Caso especial: inserir no final → delega */</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">insereFinal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">    </span><span class="cm">/* Caso geral: deslocar elementos para a direita */</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">pos</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">        </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">    </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">    </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Visualização de <code>inserePos(l, 15, 1)</code> em <code>[10, 20, 30]</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Estado inicial: [10, 20, 30]  (ultimo = 2)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Passo 1: i=2 → valores[3] = valores[2] → [10, 20, 30, 30]
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Passo 2: i=1 → valores[2] = valores[1] → [10, 20, 20, 30]
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>Passo 3: i=0 → PARA (i &lt; pos)
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>Passo 4: valores[1] = 15 → [10, 15, 20, 30]
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>Passo 5: ultimo++ → ultimo = 3
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>Resultado: [10, 15, 20, 30] ✓
+</code></pre></div>
+<h3 id="75-remocoes">7.5 Remoções<a class="headerlink" href="#75-remocoes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">removePos</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">vazia</span><span class="p">(</span><span class="n">l</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="cm">/* Deslocar elementos para a esquerda */</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="o">--</span><span class="p">;</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">}</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">removeValor</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscaValor</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="cm">/* Reusa busca! */</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">removePos</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">pos</span><span class="p">);</span><span class="w">    </span><span class="cm">/* Reusa remoção por posição! */</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="76-buscas">7.6 Buscas<a class="headerlink" href="#76-buscas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscaPos</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Posição inválida */</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">}</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscaValor</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Encontrou */</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Não encontrou */</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="8-codigo-cliente-exemplo-mainc">8. Código Cliente Exemplo: <code>main.c</code><a class="headerlink" href="#8-codigo-cliente-exemplo-mainc" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cm">/* main.c – Usa o TAD LISTA sem conhecer a implementação */</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lista.h&quot;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="cm">/* 1. Criar lista */</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criaLista</span><span class="p">();</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Falha ao criar lista</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="cm">/* 2. Inserções básicas */</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">    </span><span class="n">insereFinal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="n">insereFinal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">    </span><span class="n">insereFinal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">    </span><span class="n">imprime</span><span class="p">(</span><span class="n">l</span><span class="p">);</span><span class="w">  </span><span class="cm">/* Saída: Lista [3 elementos]: 10 20 30 */</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">    </span><span class="cm">/* 3. Inserção por posição */</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">    </span><span class="n">inserePos</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">    </span><span class="n">imprime</span><span class="p">(</span><span class="n">l</span><span class="p">);</span><span class="w">  </span><span class="cm">/* Saída: Lista [4 elementos]: 10 15 20 30 */</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">    </span><span class="cm">/* 4. Consultas */</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tamanho: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">conta</span><span class="p">(</span><span class="n">l</span><span class="p">));</span><span class="w">                    </span><span class="cm">/* 4 */</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Valor na pos 2: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">buscaPos</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span><span class="w">       </span><span class="cm">/* 20 */</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Pos do valor 30: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">buscaValor</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">));</span><span class="w">   </span><span class="cm">/* 3 */</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="w">    </span><span class="cm">/* 5. Remoções */</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="w">    </span><span class="n">removeValor</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span><span class="w">   </span><span class="cm">/* Remove primeira ocorrência de 15 */</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="w">    </span><span class="n">imprime</span><span class="p">(</span><span class="n">l</span><span class="p">);</span><span class="w">           </span><span class="cm">/* Lista [3 elementos]: 10 20 30 */</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="w">    </span><span class="n">removePos</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">      </span><span class="cm">/* Remove elemento na posição 1 (20) */</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="w">    </span><span class="n">imprime</span><span class="p">(</span><span class="n">l</span><span class="p">);</span><span class="w">           </span><span class="cm">/* Lista [2 elementos]: 10 30 */</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="w">    </span><span class="cm">/* 6. Cleanup */</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a><span class="w">    </span><span class="n">destroiLista</span><span class="p">(</span><span class="n">l</span><span class="p">);</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a><span class="p">}</span>
+</code></pre></div>
+<p>✅ <strong>Verificação importante:</strong> <code>main.c</code> <strong>nunca</strong> acessa <code>l-&gt;valores</code> ou <code>l-&gt;ultimo</code>. Todo acesso é feito via funções da interface. Isso é <strong>encapsulamento em ação</strong>.</p>
+<hr />
+<h2 id="9-folha-de-referencia-rapida">9. Folha de Referência Rápida<a class="headerlink" href="#9-folha-de-referencia-rapida" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>┌─────────────────────────────────────┐
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>│ LISTA ESTÁTICA EM C – CHEAT SHEET   │
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>├─────────────────────────────────────┤
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>│ REPRESENTAÇÃO INTERNA               │
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>│ • struct { int valores[MAX];        │
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>│            int ultimo; }            │
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>│ • vazia ⇔ ultimo == -1              │
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>│ • cheia ⇔ ultimo == MAX-1           │
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>│ • n elementos ⇔ ultimo == n-1       │
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>├─────────────────────────────────────┤
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>│ OPERAÇÕES – ASSINATURAS             │
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>│ Criação:  Lista* criaLista()        │
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>│           void destroiLista(Lista*) │
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>│ Consultas: int conta(), vazia()...  │
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>│ Inserções: insereFinal(), inserePos()│
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>│ Remoções:  removePos(), removeValor()│
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>│ Buscas:    buscaPos(), buscaValor() │
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>├─────────────────────────────────────┤
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>│ COMPLEXIDADE (para reflexão)       │
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>│ • Acesso por posição: O(1) ✓       │
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>│ • Inserção/remoção no fim: O(1) ✓  │
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>│ • Inserção/remoção no meio: O(n) ⚠ │
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>│ • Busca por valor: O(n) ⚠          │
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>├─────────────────────────────────────┤
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>│ ERROS COMUNS – CHECKLIST           │
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>│ □ Validar ponteiro NULL antes de usar│
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>│ □ Checar limites: 0 ≤ pos ≤ ultimo │
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>│ □ Atualizar &#39;ultimo&#39; após modificar│
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>│ □ Não acessar valores[i] sem validar│
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>│ □ Lembrar: ultimo = -1 → vazia!    │
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>└─────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h2 id="10-guia-de-estudo-e-pratica">10. Guia de Estudo e Prática<a class="headerlink" href="#10-guia-de-estudo-e-pratica" title="Permanent link">&para;</a></h2>
+<h3 id="exercicios-recomendados">Exercícios Recomendados<a class="headerlink" href="#exercicios-recomendados" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ]  Reimplementar <code>inserePos</code> sem consultar o código</li>
+<li>[ ]  Criar um teste que cause "posição inválida" e validar a mensagem de erro</li>
+<li>
+<p>[ ]  Desenhar o estado da memória após esta sequência:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>insereFinal(5) → inserePos(3, 0) → removePos(1) → buscaValor(5)
+</code></pre></div>
+</li>
+</ul>
+<h3 id="para-aprofundar">Para Aprofundar<a class="headerlink" href="#para-aprofundar" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Por que <code>removeValor</code> chama <code>buscaValor</code> e <code>removePos</code>?</strong></p>
+<p>→ Princípio <strong>DRY</strong> (<em>Don't Repeat Yourself</em>): reutilizar código testado reduz bugs.</p>
+</li>
+<li>
+<p><strong>Como adaptar o TAD para <code>float</code>? E para <code>struct Pessoa</code>?</strong></p>
+<p>→ Substituir <code>int</code> pelo tipo desejado nos parâmetros e no vetor interno.</p>
+</li>
+<li>
+<p><strong>O que mudaria se a lista fosse ORDENADA?</strong></p>
+<p>→ <code>insereFinal</code> não faria sentido; <code>inserePos</code> teria que encontrar a posição correta para manter a ordem.</p>
+</li>
+</ol>
+<h3 id="desafio-opcional">Desafio Opcional<a class="headerlink" href="#desafio-opcional" title="Permanent link">&para;</a></h3>
+<p>Implemente <code>inverte(Lista* l)</code> que inverte a ordem dos elementos <strong>sem usar vetor auxiliar</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="cm">/* Dica: use dois índices (inicio, fim) e troque os valores */</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">inverte</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">;</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">inicio</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">        </span><span class="cm">/* Trocar valores[inicio] com valores[fim] */</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">inicio</span><span class="p">];</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">        </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">inicio</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">fim</span><span class="p">];</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">        </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">fim</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">        </span><span class="n">inicio</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">        </span><span class="n">fim</span><span class="o">--</span><span class="p">;</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="debug-challenge">Debug Challenge<a class="headerlink" href="#debug-challenge" title="Permanent link">&para;</a></h3>
+<p>O código abaixo tem um bug sutil. Encontre e corrija:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">removePos</span><span class="p">(</span><span class="n">Lista</span><span class="o">*</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">ultimo</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">        </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="cm">/* O que falta aqui? */</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">}</span>
+</code></pre></div>
+<details>
+<summary>Clique para ver a resposta</summary>
+
+Falta atualizar `l->ultimo--` após o deslocamento. Sem isso, a lista reporta um elemento a mais do que realmente possui.
+</details>
+
+<hr />
+<h2 id="11-continuando-o-estudo-listas-dinamicas">11. Continuando o Estudo: Listas Dinâmicas<a class="headerlink" href="#11-continuando-o-estudo-listas-dinamicas" title="Permanent link">&para;</a></h2>
+<h3 id="pergunta-para-reflexao">Pergunta para Reflexão<a class="headerlink" href="#pergunta-para-reflexao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="cm">/* lista.h (INALTERADO) */</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lista</span><span class="w"> </span><span class="n">Lista</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Tipo opaco */</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="cm">/*</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="cm"> * Nesta implementação usamos:</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="cm"> *   struct lista { int valores[MAX]; int ultimo; }</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="cm"> *</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="cm"> * Desafio: Como reescreveríamos a struct para remover</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="cm"> * o limite MAX e alocar memória sob demanda,</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="cm"> * mantendo a MESMA interface lista.h?</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="cm"> *</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="cm"> * Dica: pense em &quot;nós&quot; com ponteiros...</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="cm"> */</span>
+</code></pre></div>
+<h3 id="comparativo-estatica-vs-dinamica">Comparativo: Estática vs. Dinâmica<a class="headerlink" href="#comparativo-estatica-vs-dinamica" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Lista Estática (Atual)</th>
+<th>Lista Encadeada (Próximo Capítulo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alocação</td>
+<td>Tempo de compilação (<code>MAX</code>)</td>
+<td>Tempo de execução (<code>malloc</code>)</td>
+</tr>
+<tr>
+<td>Crescimento</td>
+<td>Fixo</td>
+<td>Ilimitado (até memória acabar)</td>
+</tr>
+<tr>
+<td>Acesso por posição</td>
+<td>O(1) – direto no vetor</td>
+<td>O(n) – percorrer ponteiros</td>
+</tr>
+<tr>
+<td>Inserção/remoção no meio</td>
+<td>O(n) – deslocar elementos</td>
+<td>O(1) – ajustar ponteiros (se já tiver a posição)</td>
+</tr>
+<tr>
+<td>Uso de memória</td>
+<td>Pode desperdiçar espaço</td>
+<td>Usa apenas o necessário + overhead de ponteiros</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Mensagem Final</p>
+<p><em>"Neste capítulo, dominamos a lista estática. No próximo capítulo, vamos libertar a lista do limite MAX – e descobrir por que, às vezes, pagar o custo de ponteiros vale a pena."</em></p>
+</div>
+<hr />
+<h2 id="referencias-e-leitura-complementar">🔗 Referências e Leitura Complementar<a class="headerlink" href="#referencias-e-leitura-complementar" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Abstract Data Types – Wikipedia</strong>: Definição formal e exemplos [[31]]</li>
+<li><strong>Array Implementation of List ADT – e-PG Pathshala</strong>: Implementação detalhada com exemplos [[25]]</li>
+<li><strong>COMP2521 – Abstract Data Types (UNSW)</strong>: Slides com exemplos de Stack, Queue, Set em C [[3]]</li>
+<li><strong>Celes, W. et al. – Introdução a Estruturas de Dados</strong>: Capítulos sobre TADs e compilação separada em C</li>
+<li><strong>GeeksforGeeks – Implementation of Stack Using Array in C</strong>: Exemplo prático de ADT estático [[23]]</li>
+</ol>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Em caso de dúvidas, revise os exemplos de código, execute os testes sugeridos e consulte as referências. A prática com código é essencial para fixar os conceitos de TAD e encapsulamento.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
