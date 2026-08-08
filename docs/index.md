@@ -50,23 +50,13 @@ Ao final desta disciplina, você será capaz de compreender, implementar e anali
 
 ## Listas de Exercícios
 
-**Básico de C**
+!!! info "Pré-requisito: fundamentos de C"
+    Estes exercícios assumem que você já sabe a sintaxe básica de C (expressões, condicionais, laços, funções, vetores, strings, structs e ponteiros). Se precisar revisar, comece por **[C para Programadores Python e VisuAlg](https://lambdageo.github.io/introducao-c/)** — cada capítulo tem sua própria lista de exercícios.
 
-- [Expressões e Comandos](exercicios/basico_c_01_expressoes.md)
-- [Vetores em C](exercicios/basico_c_02_vetores.md)
-- [Funções](exercicios/basico_c_03_funcoes.md)
-- [Ponteiros](exercicios/basico_c_04_ponteiros.md)
-- [Strings](exercicios/basico_c_05_strings.md)
 
-**Unidade 1**
-
-- [Estruturas Heterogêneas](exercicios/u1_01_estruturas_heterogeneas.md)
 - [Pilhas](exercicios/u1_02_pilhas.md)
 - [Exercícios de implementação com listas](exercicios/u1_03_listas_index.md)
 - [Caderno de Exercícios](exercicios/u1_04_caderno_exercicios.md)
-
-**Unidade 2**
-
 - [Recursividade](exercicios/u2_01_recursividade.md)
 - [Árvores Binárias (Estruturais)](exercicios/u2_02_arvores_binarias.md)
 - [Árvores Binárias de Busca (ABB)](exercicios/u2_03_arvores_busca.md)
