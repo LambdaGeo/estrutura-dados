@@ -108,7 +108,7 @@ hello.exe
 
 C foi escolhida como ferramenta de ensino justamente por expor o gerenciamento de memória — ponteiros, stack, heap — que linguagens modernas escondem. Estrutura de Dados é, no fundo, uma disciplina sobre memória: entender como os dados são organizados na RAM importa mais do que decorar sintaxe. E C é a base de boa parte da infraestrutura de software do mundo: sistemas operacionais, bancos de dados, compiladores.
 
-Para praticar antes do próximo capítulo: garanta que o compilador (GCC) e um editor (VS Code, Code::Blocks, etc.) estejam instalados e funcionando; modifique o `hello.c` para imprimir seu nome completo e seu número de matrícula, em duas linhas diferentes; e revise conceitos básicos de variáveis e tipos em C (`int`, `float`, `char`). O próximo capítulo parte daí para a implementação básica de uma pilha com vetores globais, introduzindo na prática a diferença entre stack e heap.
+Para praticar antes do próximo capítulo: garanta que o compilador (GCC) e um editor (VS Code, Code::Blocks, etc.) estejam instalados e funcionando; modifique o `hello.c` para imprimir seu nome completo e seu número de matrícula, em duas linhas diferentes; e revise conceitos básicos de variáveis, tipos, expressões, condicionais, laços, funções, vetores, strings e ponteiros em C. Se precisar rever esses fundamentos com calma, o livro **[C para Programadores Python e VisuAlg](https://lambdageo.github.io/introducao-c/)** cobre exatamente isso, com exercícios por capítulo. O próximo capítulo parte daí para a implementação básica de uma pilha com vetores globais, introduzindo na prática a diferença entre stack e heap.
 
 !!! question "Dúvida Comum"
     *"Preciso ser expert em C para passar?"*

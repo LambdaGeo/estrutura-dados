@@ -66,6 +66,7 @@ extra_javascript:
 
 nav:
   - Apresentação: index.md
+  - "Pré-requisito: C para Programadores Python e VisuAlg": https://lambdageo.github.io/introducao-c/
   
   - Unidade 1 — Pilhas, Listas e Filas:
     - Aulas:
@@ -77,12 +78,6 @@ nav:
       - "5. Listas Encadeadas como TAD em C": aulas/05_lista_encadeada.md
       - "6. Filas como TAD em C": aulas/06_fila_tad.md
     - Exercícios:
-      - "Expressões e Comandos (C Básico)": exercicios/basico_c_01_expressoes.md
-      - "Vetores em C (C Básico)": exercicios/basico_c_02_vetores.md
-      - "Funções (C Básico)": exercicios/basico_c_03_funcoes.md
-      - "Ponteiros (C Básico)": exercicios/basico_c_04_ponteiros.md
-      - "Strings (C Básico)": exercicios/basico_c_05_strings.md
-      - "Estruturas Heterogêneas": exercicios/u1_01_estruturas_heterogeneas.md
       - "Pilhas": exercicios/u1_02_pilhas.md
       - "Exercícios com Listas":
         - "Visão Geral": exercicios/u1_03_listas_index.md
