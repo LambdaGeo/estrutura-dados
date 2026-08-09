@@ -104,14 +104,17 @@ D
 
 #### c) Representação Gráfica (como grafo)
 
-```
-        D
-       / \
-      E   G
-     /   /|\
-    F   H J M
-         / \
-        K   L
+```mermaid
+graph TD
+    D((D)) --> E((E))
+    D --> G((G))
+    E --> F((F))
+    G --> H((H))
+    G --> J((J))
+    G --> M((M))
+    H --> I((I))
+    J --> K((K))
+    J --> L((L))
 ```
 
 ---
@@ -120,12 +123,13 @@ D
 
 Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
-```
-        A  ← raiz (nível 0)
-       / \
-      B   C  ← filhos de A (nível 1)
-     / \   \
-    D   E   F  ← folhas (nível 2)
+```mermaid
+graph TD
+    A["A ← raiz (nível 0)"] --> B["B ← nível 1"]
+    A --> C["C ← nível 1"]
+    B --> D["D ← folha (nível 2)"]
+    B --> E["E ← folha (nível 2)"]
+    C --> F["F ← folha (nível 2)"]
 ```
 
 ### 3.1 Relações Genealógicas
@@ -141,12 +145,13 @@ Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
 ### 3.2 Grau, Folhas e Altura
 
-```
-        A  ← grau(A) = 2
-       / \
-      B   C  ← grau(B) = 2, grau(C) = 1
-     / \   \
-    D   E   F  ← grau(D) = grau(E) = grau(F) = 0 → FOLHAS
+```mermaid
+graph TD
+    A["A — grau 2"] --> B["B — grau 2"]
+    A --> C["C — grau 1"]
+    B --> D["D — grau 0 (folha)"]
+    B --> E["E — grau 0 (folha)"]
+    C --> F["F — grau 0 (folha)"]
 ```
 
 - **Grau de um nó**: número de filhos que ele possui
@@ -193,16 +198,26 @@ Uma **árvore binária** *T* é um conjunto finito de elementos, denominados nó
 
 ### 4.2 Comparação: Árvore Geral vs. Árvore Binária
 
-```
-Árvore Geral (n filhos)      Árvore Binária (máx. 2 filhos)
-        •                              •
-     /  |  \                          / \
-    •   •   •                        •   •
-   / \                               /   / \
-  •   •                             •   •   •
+**Árvore Geral (n filhos):** ordem dos filhos não importa, grau arbitrário.
 
-- Ordem dos filhos não importa    - Esquerda e direita são distintos
-- Grau arbitrário                 - Grau máximo = 2
+```mermaid
+graph TD
+    R1((•)) --> A1((•))
+    R1 --> A2((•))
+    R1 --> A3((•))
+    A1 --> B1((•))
+    A1 --> B2((•))
+```
+
+**Árvore Binária (máx. 2 filhos):** esquerda e direita são distintos, grau máximo = 2.
+
+```mermaid
+graph TD
+    R2((•)) --> A4((•))
+    R2 --> A5((•))
+    A5 --> B3((•))
+    A5 --> B4((•))
+    B4 --> C1((•))
 ```
 
 ---
@@ -320,49 +335,69 @@ void liberarArvore(No* raiz) {
 
 > **Definição:** Cada nó tem grau **0 ou 2** (ou seja, todo nó tem exatamente 0 ou 2 filhos).
 
-```
-a) Estritamente binária        b) NÃO estritamente binária
-          •                               •
-         / \                             / \
-        •   •                           •   •
-       / \                                 /
-      •   •                               •
+**a) Estritamente binária** — todos os nós têm 0 ou 2 filhos ✓
 
-✓ Todos os nós têm 0 ou 2 filhos    ✗ Nó com 1 filho (violando a regra)
+```mermaid
+graph TD
+    A1((•)) --> B1((•))
+    A1 --> B2((•))
+    B1 --> C1((•))
+    B1 --> C2((•))
+```
+
+**b) NÃO estritamente binária** — nó com 1 filho, violando a regra ✗
+
+```mermaid
+graph TD
+    A2((•)) --> B3((•))
+    A2 --> B4((•))
+    B3 --> C3((•))
 ```
 
 ### 6.2 Árvore Binária Completa
 
 > **Definição:** Árvore estritamente binária na qual todo nó que apresente alguma subárvore vazia está localizado no **último ou penúltimo nível** da árvore.
 
-```
-a) Completa                      b) NÃO completa
-          •                               •
-         / \                             / \
-        •   •                           •   •
-       / \   /                         /   / \
-      •   • •                         •   •   •
-     /                                   \
-    •                                     •
+**a) Completa** — nós com subárvores vazias apenas nos últimos níveis ✓
 
-✓ Nós com subárvores vazias        ✗ Nó com subárvore vazia
-  apenas nos últimos níveis            em nível intermediário
+```mermaid
+graph TD
+    A1((•)) --> B1((•))
+    A1 --> B2((•))
+    B1 --> C1((•))
+    B1 --> C2((•))
+    B2 --> C3((•))
+    C1 --> D1((•))
+```
+
+**b) NÃO completa** — nó com subárvore vazia em nível intermediário ✗
+
+```mermaid
+graph TD
+    A2((•)) --> B3((•))
+    A2 --> B4((•))
+    B3 --> C4((•))
+    B4 --> C5((•))
+    B4 --> C6((•))
+    C5 --> D2((•))
 ```
 
 ### 6.3 Árvore Binária Cheia (Full)
 
 > **Definição:** Todos os nós internos têm grau 2 e **todas as folhas estão no mesmo nível**.
 
+```mermaid
+graph TD
+    A((•)) --> B((•))
+    A --> C((•))
+    B --> D((•))
+    B --> E((•))
+    C --> F((•))
+    C --> G((•))
 ```
-        •
-       / \
-      •   •
-     / \ / \
-    •  ••  •
 
 ✓ Todos os nós internos têm 2 filhos
 ✓ Todas as folhas estão no nível 2
-```
 
 ### 6.4 Propriedades da Árvore Binária Cheia
 
@@ -409,12 +444,13 @@ Não existe um único percurso correto. A escolha depende da aplicação.
 
 Considere a árvore de exemplo:
 
-```
-        A
-       / \
-      B   C
-     / \   \
-    D   E   F
+```mermaid
+graph TD
+    A((A)) --> B((B))
+    A --> C((C))
+    B --> D((D))
+    B --> E((E))
+    C --> F((F))
 ```
 
 #### a) Pré-ordem (Pre-order)
@@ -638,13 +674,26 @@ void espelhar(No* raiz) {
 
 **Antes e depois:**
 
+**Antes:**
+
+```mermaid
+graph TD
+    A1((A)) --> B1((B))
+    A1 --> C1((C))
+    B1 --> D1((D))
+    B1 --> E1((E))
+    C1 --> F1((F))
 ```
-Antes:              Depois (espelhada):
-    A                   A
-   / \                 / \
-  B   C               C   B
- / \   \             /   / \
-D   E   F           F   E   D
+
+**Depois (espelhada):**
+
+```mermaid
+graph TD
+    A2((A)) --> C2((C))
+    A2 --> B2((B))
+    C2 --> F2((F))
+    B2 --> E2((E))
+    B2 --> D2((D))
 ```
 
 ---

@@ -11,23 +11,18 @@ No capítulo anterior, vimos que a **Árvore Binária de Busca (ABB)** oferece b
 
 ### O que acontece com dados inseridos em ordem?
 
-```
-Sequência: [1, 2, 3, 4, 5, 6, 7]
+Sequência: `[1, 2, 3, 4, 5, 6, 7]`
 
 ABB resultante:
-1
- \
-  2
-   \
-    3
-     \
-      4
-       \
-        5
-         \
-          6
-           \
-            7
+
+```mermaid
+graph TD
+    N1((1)) --> N2((2))
+    N2 --> N3((3))
+    N3 --> N4((4))
+    N4 --> N5((5))
+    N5 --> N6((6))
+    N6 --> N7((7))
 ```
 
 - **Altura:** `h = 6` (para `n = 7`)
@@ -36,13 +31,16 @@ ABB resultante:
 
 ### O ideal: Árvore Balanceada
 
-```
 Mesmos dados, mas balanceados:
-      4
-     / \
-    2   6
-   / \ / \
-  1  3 5  7
+
+```mermaid
+graph TD
+    N4((4)) --> N2((2))
+    N4 --> N6((6))
+    N2 --> N1((1))
+    N2 --> N3((3))
+    N6 --> N5((5))
+    N6 --> N7((7))
 ```
 
 - **Altura:** `h = 2`
@@ -83,23 +81,39 @@ Onde:
 
 ### 2.2 Exemplo de Verificação
 
-```
-Árvore A:                    Árvore B:
-      20                           20
-     /  \                         /  \
-   10    30                     10    30
-  /  \   /  \                  /     /  \
- 5   15 25  35                5     25  35
-                                  \
-                                   30
+**Árvore A:**
 
-Alturas (folha=0):             Alturas (folha=0):
-FB(5)=0, FB(15)=0              FB(5)=0, FB(30)=0
-FB(10)=0-0=0                   FB(10)=0-1=-1 ✓
-FB(25)=0, FB(35)=0             FB(25)=0-0=0
-FB(30)=0-0=0                   FB(35)=0
-FB(20)=0-0=0 ✓ (AVL!)          FB(20)=1-2=-1 ✓ (AVL!)
+```mermaid
+graph TD
+    A20((20)) --> A10((10))
+    A20 --> A30((30))
+    A10 --> A5((5))
+    A10 --> A15((15))
+    A30 --> A25((25))
+    A30 --> A35((35))
 ```
+
+**Árvore B:**
+
+```mermaid
+graph TD
+    B20((20)) --> B10((10))
+    B20 --> B30((30))
+    B10 --> B5((5))
+    B30 --> B25((25))
+    B30 --> B35((35))
+    B35 --> B40((40))
+```
+
+Alturas (folha = 0):
+
+| Árvore A | Árvore B |
+| --- | --- |
+| FB(5)=0, FB(15)=0 | FB(5)=0 |
+| FB(10)=0-0=0 | FB(10)=0-(-1)=1 ✓ |
+| FB(25)=0, FB(35)=0 | FB(25)=0 |
+| FB(30)=0-0=0 | FB(35)=1-(-1)=1 ✓ |
+| FB(20)=0-0=0 ✓ (AVL!) | FB(20)=2-1=1 ✓ (AVL!) |
 
 Ambas são AVLs válidas. A diferença está na distribuição, mas nenhuma viola `|FB| ≤ 1`.
 
@@ -119,36 +133,57 @@ Existem **4 configurações** e **4 rotações** correspondentes:
 
 **Ocorre quando:** Desbalanceamento na **esquerda** e o filho à esquerda também está "pesado" na **esquerda**.
 
-```
-Antes (FB = +2):          Depois da Rotação à Direita:
-      C                         B
-     / \                       / \
-    B   E     →              A   C
-   / \                           / \
-  A   D                         D   E
+**Antes (FB = +2):**
 
-• B sobe, C desce para a direita
-• D (filho direito de B) passa a ser filho esquerdo de C
-• Propriedade ABB mantida: A < B < D < C < E
+```mermaid
+graph TD
+    C((C)) --> B((B))
+    C --> E((E))
+    B --> A((A))
+    B --> D((D))
 ```
+
+**Depois da Rotação à Direita:**
+
+```mermaid
+graph TD
+    B2((B)) --> A2((A))
+    B2 --> C2((C))
+    C2 --> D2((D))
+    C2 --> E2((E))
+```
+
+- B sobe, C desce para a direita
+- D (filho direito de B) passa a ser filho esquerdo de C
+- Propriedade ABB mantida: A < B < D < C < E
 
 ### 3.2 Rotação Simples à Esquerda (Caso RR)
 
 **Ocorre quando:** Desbalanceamento na **direita** e o filho à direita também está "pesado" na **direita**.
 
+**Antes (FB = -2):**
+
+```mermaid
+graph TD
+    A((A)) --> D((D))
+    A --> B((B))
+    B --> C((C))
+    B --> E((E))
 ```
-Antes (FB = -2):          Depois da Rotação à Esquerda:
-    A                           B
-   / \                         / \
-  D   B        →             A   C
-     / \                    / \
-    C   E                  D   C
-                              \
-                               E
-• B sobe, A desce para a esquerda
-• C (filho esquerdo de B) passa a ser filho direito de A
-• Ordem mantida: A < C < B < E
+
+**Depois da Rotação à Esquerda:**
+
+```mermaid
+graph TD
+    B2((B)) --> A2((A))
+    B2 --> E2((E))
+    A2 --> D2((D))
+    A2 --> C2((C))
 ```
+
+- B sobe, A desce para a esquerda
+- C (filho esquerdo de B) passa a ser filho direito de A
+- Ordem mantida: A < C < B < E
 
 ### 3.3 Rotação Dupla Esquerda-Direita (Caso LR)
 
@@ -158,15 +193,31 @@ Antes (FB = -2):          Depois da Rotação à Esquerda:
 1. Rotação à **esquerda** no filho esquerdo
 2. Rotação à **direita** no nó desbalanceado
 
+**Antes:**
+
+```mermaid
+graph TD
+    C((C)) --> B((B))
+    C --> E((E))
+    B --> D((D))
 ```
-Antes:                  Passo 1 (Rotação Esq em B):    Passo 2 (Rotação Dir em C):
-      C                         C                             B
-     / \                       / \                           / \
-    B   E     →              A   E         →              A   C
-     \                       /                           / \   \
-      D                     B                           D   B   E
-                             \
-                              D
+
+**Passo 1 (Rotação Esquerda em B):**
+
+```mermaid
+graph TD
+    C2((C)) --> D2((D))
+    C2 --> E2((E))
+    D2 --> B2((B))
+```
+
+**Passo 2 (Rotação Direita em C):**
+
+```mermaid
+graph TD
+    D3((D)) --> B3((B))
+    D3 --> C3((C))
+    C3 --> E3((E))
 ```
 
 ### 3.4 Rotação Dupla Direita-Esquerda (Caso RL)
@@ -177,13 +228,34 @@ Antes:                  Passo 1 (Rotação Esq em B):    Passo 2 (Rotação Dir 
 1. Rotação à **direita** no filho direito
 2. Rotação à **esquerda** no nó desbalanceado
 
+**Antes:**
+
+```mermaid
+graph TD
+    A((A)) --> D((D))
+    A --> C((C))
+    C --> B((B))
+    C --> E((E))
 ```
-Antes:                  Passo 1 (Rotação Dir em C):    Passo 2 (Rotação Esq em A):
-    A                           A                             B
-   / \                         / \                           / \
-  D   C        →             D   B         →              A   C
-     / \                         \                       / \   \
-    B   E                         C                     D   B   E
+
+**Passo 1 (Rotação Direita em C):**
+
+```mermaid
+graph TD
+    A2((A)) --> D2((D))
+    A2 --> B2((B))
+    B2 --> C2((C))
+    C2 --> E2((E))
+```
+
+**Passo 2 (Rotação Esquerda em A):**
+
+```mermaid
+graph TD
+    B3((B)) --> A3((A))
+    B3 --> C3((C))
+    A3 --> D3((D))
+    C3 --> E3((E))
 ```
 
 !!! tip "Regra prática para identificar a rotação"
@@ -213,113 +285,154 @@ Antes:                  Passo 1 (Rotação Dir em C):    Passo 2 (Rotação Esq 
 
 ### Exemplo 1: Inserção de `[10, 20, 30]`
 
-```
-1. Inserir 10:      2. Inserir 20:      3. Inserir 30:
-   10                  10                   10
-                        \                    \
-                         20                    20
-                                                \
-                                                 30
+**1. Inserir 10:**
 
-FB: 10 → 0-1 = -1      FB: 10 → 0-1 = -1     FB: 10 → 0-2 = -2 ❌
-OK                     OK                    Desbalanceado! (Caso RR)
+```mermaid
+graph TD
+    S1_10((10))
+```
+
+FB: 10 → OK
+
+**2. Inserir 20:**
+
+```mermaid
+graph TD
+    S2_10((10)) --> S2_20((20))
+```
+
+FB: 10 → 0-1 = -1, OK
+
+**3. Inserir 30:**
+
+```mermaid
+graph TD
+    S3_10((10)) --> S3_20((20))
+    S3_20 --> S3_30((30))
+```
+
+FB: 10 → 0-2 = -2 ❌ Desbalanceado! (Caso RR)
 
 → Aplicar Rotação Simples à Esquerda em 10:
-        20
-       /  \
-     10    30
+
+```mermaid
+graph TD
+    F20((20)) --> F10((10))
+    F20 --> F30((30))
+```
 
 FB atualizados: 10→0, 30→0, 20→0. Árvore balanceada! ✓
-```
 
 ### Exemplo 2: Inserção de `[30, 10, 20]`
 
+**1. Insere 30:**
+
+```mermaid
+graph TD
+    E1_30((30))
 ```
-1. 30      2. 30         3. 30
-          /             /
-        10            10
-                        \
-                         20
 
-FB(30) = 2-0 = +2 ❌ → Nó desbalanceado. Caminho: 30 → Esq(10) → Dir(20)
-Tipo: LR (Esquerda-Direita)
+**2. Insere 10:**
 
-Passo 1: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda
-        30
-       /
-     20
-    /
-  10
+```mermaid
+graph TD
+    E2_30((30)) --> E2_10((10))
+```
 
-Passo 2: Rotação Dir em 30 → 20 sobe, 30 desce à direita
-        20
-       /  \
-     10    30
+**3. Insere 20:**
+
+```mermaid
+graph TD
+    E3_30((30)) --> E3_10((10))
+    E3_10 --> E3_20((20))
+```
+
+FB(30) = 2-0 = +2 ❌ → Nó desbalanceado. Caminho: 30 → Esq(10) → Dir(20). Tipo: **LR (Esquerda-Direita)**
+
+**Passo 1: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda**
+
+```mermaid
+graph TD
+    P1_30((30)) --> P1_20((20))
+    P1_20 --> P1_10((10))
+```
+
+**Passo 2: Rotação Dir em 30 → 20 sobe, 30 desce à direita**
+
+```mermaid
+graph TD
+    P2_20((20)) --> P2_10((10))
+    P2_20 --> P2_30((30))
+```
 
 FB: todos 0. AVL válida! ✓
-```
 
 ### Exemplo 3: Inserção de `[10, 30, 20, 40, 35]`
 
-```
 Inserimos: 10 → 30 → 20 → 40
-        10
-       /  \
-      .    30
-          /  \
-        20    40
 
-FB(10) = 0-2 = -2 ❌ → Caminho: 10 → Dir(30) → Esq(20)
-Tipo: RL (Direita-Esquerda)
+```mermaid
+graph TD
+    A10((10)) --> A30((30))
+    A30 --> A20((20))
+    A30 --> A40((40))
+```
 
-Passo 1: Rotação Dir em 30 → 20 sobe, 30 desce à direita
-        10
-         \
-          20
-           \
-            30
-             \
-              40
+FB(10) = 0-2 = -2 ❌ → Caminho: 10 → Dir(30) → Esq(20). Tipo: **RL (Direita-Esquerda)**
 
-Passo 2: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda
-        20
-       /  \
-     10    30
-            \
-             40
+**Passo 1: Rotação Dir em 30 → 20 sobe, 30 desce à direita**
+
+```mermaid
+graph TD
+    B10((10)) --> B20((20))
+    B20 --> B30((30))
+    B30 --> B40((40))
+```
+
+**Passo 2: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda**
+
+```mermaid
+graph TD
+    C20((20)) --> C10((10))
+    C20 --> C30((30))
+    C30 --> C40((40))
+```
 
 FB: 10→0, 40→0, 30→-1, 20→0. Balanceada! ✓
 
-Agora inserimos 35:
-        20
-       /  \
-     10    30
-            \
-             40
-            /
-          35
+**Agora inserimos 35:**
 
-FB(30) = -1-1 = -2 ❌ → Caminho: 30 → Dir(40) → Esq(35)
-Tipo: RL novamente!
+```mermaid
+graph TD
+    D20((20)) --> D10((10))
+    D20 --> D30((30))
+    D30 --> D40((40))
+    D40 --> D35((35))
+```
 
-Rotação Dir em 40 → 35 sobe, 40 desce à direita
-        20
-       /  \
-     10    30
-            \
-             35
-            /  \
-          .    40
+FB(30) = -1-1 = -2 ❌ → Caminho: 30 → Dir(40) → Esq(35). Tipo: **RL novamente!**
 
-Rotação Esq em 30 → 35 sobe, 30 desce à esquerda
-        20
-       /  \
-     10    35
-          /  \
-        30    40
+**Rotação Dir em 40 → 35 sobe, 40 desce à direita**
+
+```mermaid
+graph TD
+    E20((20)) --> E10((10))
+    E20 --> E30((30))
+    E30 --> E35((35))
+    E35 --> E40((40))
+```
+
+**Rotação Esq em 30 → 35 sobe, 30 desce à esquerda**
+
+```mermaid
+graph TD
+    F20((20)) --> F10((10))
+    F20 --> F35((35))
+    F35 --> F30((30))
+    F35 --> F40((40))
+```
 
 FB: todos ≤1. AVL válida! ✓
-```
 
 ---
 
@@ -361,14 +474,15 @@ O **VisuAlgo** é uma ferramenta visual interativa que permite:
 
 Dada a árvore abaixo:
 
-```
-        50
-       /  \
-     30    70
-    /  \     \
-  20   40    80
- /           /
-10          75
+```mermaid
+graph TD
+    N50((50)) --> N30((30))
+    N50 --> N70((70))
+    N30 --> N20((20))
+    N30 --> N40((40))
+    N70 --> N80((80))
+    N20 --> N10((10))
+    N80 --> N75((75))
 ```
 
 a) Calcule a altura de cada nó.
@@ -413,14 +527,15 @@ Insira os valores na ordem: `[20, 10, 30, 5, 15, 25, 35, 3]` em uma AVL inicialm
 - Após `3`: 10 FB=2-0=2 ❌ → Caso LL (caminho 10→Esq(5)→Esq(3)) → Rotação Simples à Direita em 10
 - Árvore final balanceada:
 
-```
-        20
-       /  \
-     10    30
-    / \   /  \
-   5  15 25  35
-  /
- 3
+```mermaid
+graph TD
+    N20((20)) --> N5((5))
+    N20 --> N30((30))
+    N5 --> N3((3))
+    N5 --> N10((10))
+    N10 --> N15((15))
+    N30 --> N25((25))
+    N30 --> N35((35))
 ```
 
 **Valide no VisuAlgo:** Insira a sequência completa e compare com seu desenho
@@ -438,24 +553,21 @@ Para cada situação abaixo, identifique:
 
 **Situação A:**
 
-```
-      40
-     /
-   20
-  /  \
- 10  30
+```mermaid
+graph TD
+    A40((40)) --> A20((20))
+    A20 --> A10((10))
+    A20 --> A30((30))
 ```
 
 **Situação B:**
 
-```
-      50
-        \
-         80
-        /  \
-      70    90
-     /
-   60
+```mermaid
+graph TD
+    B50((50)) --> B80((80))
+    B80 --> B70((70))
+    B80 --> B90((90))
+    B70 --> B60((60))
 ```
 
 <details>
@@ -491,12 +603,14 @@ Situação B:
 1. ABB: Lista encadeada à direita. Altura = 6. Busca pior caso = 7 comparações.
 2. AVL:
 
-```
-        4
-       / \
-      2   6
-     / \ / \
-    1  3 5  7
+```mermaid
+graph TD
+    N4((4)) --> N2((2))
+    N4 --> N6((6))
+    N2 --> N1((1))
+    N2 --> N3((3))
+    N6 --> N5((5))
+    N6 --> N7((7))
 ```
 
 Altura = 2. Busca pior caso = 3 comparações.

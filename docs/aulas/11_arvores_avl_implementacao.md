@@ -120,15 +120,28 @@ int fatorBalanceamento(No *n) {
 
 **Situação visual:**
 
+**Antes (FB = +2, caso LL):**
+
+```mermaid
+graph TD
+    z((z)) --> y((y))
+    z --> T4[T4]
+    y --> x((x))
+    y --> T3[T3]
+    x --> T1[T1]
+    x --> T2[T2]
 ```
-Antes (FB = +2, caso LL):        Depois:
-       z                              y
-      / \                            / \
-     y   T4                        x   z
-    / \                            / \ / \
-   x   T3                        T1 T2 T3 T4
-  / \
- T1  T2
+
+**Depois:**
+
+```mermaid
+graph TD
+    y2((y)) --> x2((x))
+    y2 --> z2((z))
+    x2 --> T1b[T1]
+    x2 --> T2b[T2]
+    z2 --> T3b[T3]
+    z2 --> T4b[T4]
 ```
 
 **Implementação:**
@@ -159,15 +172,28 @@ No* rotacaoDireita(No *y) {
 
 **Situação visual:**
 
+**Antes (FB = -2, caso RR):**
+
+```mermaid
+graph TD
+    z((z)) --> T1[T1]
+    z --> y((y))
+    y --> T2[T2]
+    y --> x((x))
+    x --> T3[T3]
+    x --> T4[T4]
 ```
-Antes (FB = -2, caso RR):      Depois:
-   z                              y
-  / \                            / \
- T1  y                          z   x
-    / \                        / \ / \
-   T2  x                     T1 T2 T3 T4
-      / \
-    T3  T4
+
+**Depois:**
+
+```mermaid
+graph TD
+    y2((y)) --> z2((z))
+    y2 --> x2((x))
+    z2 --> T1b[T1]
+    z2 --> T2b[T2]
+    x2 --> T3b[T3]
+    x2 --> T4b[T4]
 ```
 
 **Implementação:**
@@ -270,19 +296,29 @@ no->esq = inserir(no->esq, chave);  // ← Atribuição importante!
 - O retorno da função é o **novo topo** da subárvore balanceada
 - A atribuição `no->esq = ...` ou `no->dir = ...` reconecta a árvore corretamente
 
-```
-Antes da rotação:        Após rotação em B:
-      A                        A
-     /                        /
-    B  ← rotaciona          C  ← nova raiz da subárvore
-   / \                      / \
-  C   T2                  B   T2
- / \                     / \
-T1 T3                  T1 T3
+**Antes da rotação:**
 
-Sem a atribuição: A->esq ainda apontaria para B (antigo, agora filho)
-Com a atribuição: A->esq = C (novo topo) ✓
+```mermaid
+graph TD
+    A((A)) --> B["B ← rotaciona"]
+    B --> C((C))
+    B --> T2[T2]
+    C --> T1[T1]
+    C --> T3[T3]
 ```
+
+**Após rotação em B:**
+
+```mermaid
+graph TD
+    A2((A)) --> C2["C ← nova raiz da subárvore"]
+    C2 --> B2((B))
+    C2 --> T2b[T2]
+    B2 --> T1b[T1]
+    B2 --> T3b[T3]
+```
+
+Sem a atribuição: `A->esq` ainda apontaria para B (antigo, agora filho). Com a atribuição: `A->esq = C` (novo topo) ✓
 
 ---
 
@@ -510,100 +546,110 @@ int main() {
 
 ### Inserção 10
 
-```
-[10:h1,FB0]
-→ Árvore com 1 nó, balanceada ✓
-```
+`[10:h1,FB0]` → Árvore com 1 nó, balanceada ✓
 
 ### Inserção 20
 
+```mermaid
+graph TD
+    N20["20:h2,FB-1"] --> N10["10:h1,FB0"]
 ```
-    [20:h2,FB-1]
-        [10:h1,FB0]
+
 → FB(20) = 0-1 = -1 ✓ (dentro de [-1,1])
-```
 
 ### Inserção 30 → **Desbalanceamento RR!**
 
-```
-Antes da rotação:
-        [30:h3,FB-2]  ← FB = -2 ❌
-            [20:h2,FB-1]
-                [10:h1,FB0]
+**Antes da rotação:**
 
-Após rotação esquerda em 10:
-        [20:h2,FB0]
-        /        \
-    [10:h1,FB0]  [30:h1,FB0]
-→ Balanceada! ✓
+```mermaid
+graph TD
+    N10["10:h3,FB-2 ❌"] --> N20["20:h2,FB-1"]
+    N20 --> N30["30:h1,FB0"]
 ```
+
+**Após rotação esquerda em 10:**
+
+```mermaid
+graph TD
+    M20["20:h2,FB0"] --> M10["10:h1,FB0"]
+    M20 --> M30["30:h1,FB0"]
+```
+
+→ Balanceada! ✓
 
 ### Inserção 40
 
+```mermaid
+graph TD
+    N20["20:h3,FB-1"] --> N10["10:h1,FB0"]
+    N20 --> N30["30:h2,FB-1"]
+    N30 --> N40["40:h1,FB0"]
 ```
-        [20:h3,FB-1]
-        /        \
-    [10:h1,FB0]  [30:h2,FB-1]
-                    \
-                    [40:h1,FB0]
+
 → FB(20) = 1-2 = -1 ✓, FB(30) = 0-1 = -1 ✓
-```
 
 ### Inserção 50 → **Desbalanceamento RR em 30!**
 
-```
-Antes:
-        [20:h3,FB-2]  ← FB = -2 ❌
-        /        \
-    [10:h1]    [30:h3,FB-2]  ← FB = -2 ❌
-                    \
-                    [40:h2,FB-1]
-                        \
-                        [50:h1]
+**Antes:**
 
-Rotação esquerda em 30:
-        [20:h3,FB-1]
-        /        \
-    [10:h1]    [40:h2,FB0]
-                /    \
-            [30:h1] [50:h1]
-→ Balanceada! ✓
+```mermaid
+graph TD
+    N20["20:h3,FB-2 ❌"] --> N10["10:h1"]
+    N20 --> N30["30:h3,FB-2 ❌"]
+    N30 --> N40["40:h2,FB-1"]
+    N40 --> N50["50:h1"]
 ```
+
+**Rotação esquerda em 30:**
+
+```mermaid
+graph TD
+    M20["20:h3,FB-1"] --> M10["10:h1"]
+    M20 --> M40["40:h2,FB0"]
+    M40 --> M30["30:h1"]
+    M40 --> M50["50:h1"]
+```
+
+→ Balanceada! ✓
 
 ### Inserção 25 → **Desbalanceamento RL em 20!**
 
+**Antes:**
+
+```mermaid
+graph TD
+    N40["40:h3,FB1"] --> N20["20:h2,FB2 ❌"]
+    N40 --> N50["50:h1"]
+    N20 --> N10["10:h1"]
+    N20 --> N30["30:h1,FB-1"]
+    N30 --> N25["25:h1 ← inserido aqui"]
 ```
-Antes:
-                [40:h3,FB1]
-              /            \
-        [20:h2,FB2]      [50:h1]   ← FB(20) = +2 ❌
-        /      \
-    [10:h1]  [30:h1,FB-1]
-                \
-                [25:h1]    ← inserido aqui
 
 Caminho: 20 → Dir(30) → Esq(25) → Caso RL
 
-Passo 1: Rotação direita em 30:
-                [40:h3]
-              /        \
-        [20:h2]      [50:h1]
-        /     \
-    [10:h1] [25:h2,FB1]
-                \
-                [30:h1]
+**Passo 1: Rotação direita em 30:**
 
-Passo 2: Rotação esquerda em 20:
-                [40:h3,FB0]
-              /            \
-        [25:h2,FB0]      [50:h1]
-        /      \
-    [20:h1]  [30:h1]
-    /
-[10:h1]
+```mermaid
+graph TD
+    M40["40:h3"] --> M20["20:h2"]
+    M40 --> M50["50:h1"]
+    M20 --> M10["10:h1"]
+    M20 --> M25["25:h2,FB1"]
+    M25 --> M30["30:h1"]
+```
+
+**Passo 2: Rotação esquerda em 20:**
+
+```mermaid
+graph TD
+    F40["40:h3,FB0"] --> F25["25:h2,FB0"]
+    F40 --> F50["50:h1"]
+    F25 --> F20["20:h2"]
+    F25 --> F30["30:h1"]
+    F20 --> F10["10:h1"]
+```
 
 → Balanceada! ✓
-```
 
 ### Saída Final
 

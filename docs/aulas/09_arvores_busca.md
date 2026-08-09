@@ -207,25 +207,30 @@ No* buscarIterativo(No* raiz, int chave) {
 
 #### c) Exemplo de Execução Passo a Passo
 
-```
-ABB:
-        20
-       /  \
-     10    30
-    /  \   /  \
-   5   15 25  35
+**ABB:**
 
-Busca por 25:
+```mermaid
+graph TD
+    N20((20)) --> N10((10))
+    N20 --> N30((30))
+    N10 --> N5((5))
+    N10 --> N15((15))
+    N30 --> N25((25))
+    N30 --> N35((35))
+```
+
+**Busca por 25:**
+
 1. raiz=20 → 25 > 20 → vai para direita
 2. atual=30 → 25 < 30 → vai para esquerda
 3. atual=25 → 25 == 25 ✓ Encontrado! (3 comparações)
 
-Busca por 18:
+**Busca por 18:**
+
 1. raiz=20 → 18 < 20 → vai para esquerda
 2. atual=10 → 18 > 10 → vai para direita
 3. atual=15 → 18 > 15 → vai para direita
 4. atual=NULL → ✗ Não encontrado (4 comparações)
-```
 
 ### 3.4 Operação 2: Inserção
 
@@ -268,35 +273,57 @@ Existem **três casos** a considerar:
 
 #### Caso 1: Nó é uma folha (sem filhos)
 
-```
-Antes:              Depois (remover 5):
-    20                  20
-   /  \                /  \
- 10    30            10    30
- /  \   /  \         \   /  \
-5   15 25  35         15 25  35
-↑
-remover
+**Antes (remover o nó 5, marcado com ↑):**
 
-// Implementação: simplesmente libera o nó e retorna NULL
+```mermaid
+graph TD
+    A20((20)) --> A10((10))
+    A20 --> A30((30))
+    A10 --> A5["5 ← remover"]
+    A10 --> A15((15))
+    A30 --> A25((25))
+    A30 --> A35((35))
 ```
+
+**Depois:**
+
+```mermaid
+graph TD
+    B20((20)) --> B10((10))
+    B20 --> B30((30))
+    B10 --> B15((15))
+    B30 --> B25((25))
+    B30 --> B35((35))
+```
+
+Implementação: simplesmente libera o nó e retorna `NULL`.
 
 #### Caso 2: Nó tem um único filho
 
-```
-Antes:              Depois (remover 10):
-    20                  20
-   /  \                /  \
- 10    30            15    30
-   \   /  \          /    /  \
-   15 25  35        5    25  35
-  /
- 5
-↑
-remover
+**Antes (remover o nó 10, marcado com ↑):**
 
-// Implementação: "puxa" o filho para o lugar do pai
+```mermaid
+graph TD
+    A20((20)) --> A10["10 ← remover"]
+    A20 --> A30((30))
+    A10 --> A15((15))
+    A15 --> A5((5))
+    A30 --> A25((25))
+    A30 --> A35((35))
 ```
+
+**Depois:**
+
+```mermaid
+graph TD
+    B20((20)) --> B15((15))
+    B20 --> B30((30))
+    B15 --> B5((5))
+    B30 --> B25((25))
+    B30 --> B35((35))
+```
+
+Implementação: "puxa" o filho para o lugar do pai.
 
 #### Caso 3: Nó tem dois filhos (mais complexo)
 
@@ -304,24 +331,41 @@ remover
 > - **Sucessor**: menor valor da subárvore à direita (mais à esquerda), **ou**
 > - **Antecessor**: maior valor da subárvore à esquerda (mais à direita)
 
-```
-Antes (remover 20):     Passo 1: encontrar sucessor (25):
-        20                      20
-       /  \                    /  \
-	     10    30                10    30
-    /  \   /  \             /  \   /  \
-   5   15 25  35           5   15 25  35
-                                   ↑
-                              sucessor = 25
+**Passo 0 — Antes (remover o nó 20):**
 
-Passo 2: substituir 20 por 25:   Passo 3: remover o nó 25 original:
-        25                              25
-       /  \                            /  \
-	     10    30                        10    30
-    /  \   /  \                     /  \    \
-   5   15 25  35                   5   15    35
-           ↑
-      (agora duplicado)
+```mermaid
+graph TD
+    S20["20 ← remover"] --> S10((10))
+    S20 --> S30((30))
+    S10 --> S5((5))
+    S10 --> S15((15))
+    S30 --> S25["25 ← sucessor"]
+    S30 --> S35((35))
+```
+
+O **sucessor** de 20 é o menor valor da subárvore direita: 25.
+
+**Passo 1 — substituir 20 por 25 (duplicado temporário):**
+
+```mermaid
+graph TD
+    T25a((25)) --> T10((10))
+    T25a --> T30((30))
+    T10 --> T5((5))
+    T10 --> T15((15))
+    T30 --> T25b["25 ← duplicado"]
+    T30 --> T35((35))
+```
+
+**Passo 2 — remover o nó 25 original (agora duplicado):**
+
+```mermaid
+graph TD
+    F25((25)) --> F10((10))
+    F25 --> F30((30))
+    F10 --> F5((5))
+    F10 --> F15((15))
+    F30 --> F35((35))
 ```
 
 #### Implementação Completa da Remoção
@@ -601,32 +645,36 @@ Todas as operações básicas (busca, inserção, remoção) dependem do **camin
 
 ### 5.2 Melhor Caso vs. Pior Caso
 
+**Melhor Caso: Árvore Balanceada (cheia/completa)**
+
+- Altura `h ≈ log₂(n)`
+- Complexidade: `O(log n)` ✓
+
+Exemplo (n=7, h=2):
+
+```mermaid
+graph TD
+    A((•)) --> B((•))
+    A --> C((•))
+    B --> D((•))
+    B --> E((•))
+    C --> F((•))
+    C --> G((•))
 ```
-Melhor Caso: Árvore Balanceada (cheia/completa)
-            • Altura h ≈ log₂(n)
-            • Complexidade: O(log n) ✓
 
-        Exemplo (n=7, h=2):
-                •
-               / \
-              •   •
-             / \ / \
-            •  ••  •
+**Pior Caso: Árvore Degenerada (linear)**
 
-Pior Caso: Árvore Degenerada (linear)
-            • Altura h = n-1
-            • Complexidade: O(n) ✗ (equivalente a lista encadeada)
+- Altura `h = n-1`
+- Complexidade: `O(n)` ✗ (equivalente a lista encadeada)
 
-        Exemplo (inserção em ordem crescente):
-            1
-             \
-              2
-               \
-                3
-                 \
-                  4
-                   \
-                    5
+Exemplo (inserção em ordem crescente):
+
+```mermaid
+graph TD
+    N1((1)) --> N2((2))
+    N2 --> N3((3))
+    N3 --> N4((4))
+    N4 --> N5((5))
 ```
 
 ### 5.3 Tabela Comparativa: ABB vs. Outras Estruturas
@@ -660,20 +708,24 @@ d) Quantas comparações são necessárias para buscar o valor `10`?
 <details>
 <summary>Gabarito parcial</summary>
 
+**a) Árvore final:**
+
+```mermaid
+graph TD
+    N50((50)) --> N30((30))
+    N50 --> N70((70))
+    N30 --> N20((20))
+    N30 --> N40((40))
+    N70 --> N60((60))
+    N70 --> N80((80))
+    N20 --> N10((10))
 ```
-a) Árvore final:
-           50
-         /    \
-       30      70
-      /  \    /  \
-    20   40  60  80
-   /
- 10
 
 b) Altura = 3 (caminho 50→30→20→10)
+
 c) Em-ordem: 10 20 30 40 50 60 70 80
+
 d) Busca por 10: 50→30→20→10 = 4 comparações
-```
 
 </details>
 
@@ -760,30 +812,32 @@ Compare a altura das duas árvores resultantes.
 
 Considere inserir os valores **em ordem crescente**: `[1, 2, 3, 4, 5, 6, 7]`
 
-```
-Passo 1: [1]          Passo 4: [1,2,3,4]
-  1                        1
-                            \
-                             2
-                              \
-                               3
-                                \
-                                 4
+**Passo 1** — insere `1`:
 
-Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
-1
- \
-  2
-   \
-    3
-     \
-      4
-       \
-        5
-         \
-          6
-           \
-            7
+```mermaid
+graph TD
+    P1((1))
+```
+
+**Passo 4** — insere `1,2,3,4`:
+
+```mermaid
+graph TD
+    P4_1((1)) --> P4_2((2))
+    P4_2 --> P4_3((3))
+    P4_3 --> P4_4((4))
+```
+
+**Passo 7** — insere `1,2,3,4,5,6,7` → árvore degenerada:
+
+```mermaid
+graph TD
+    F1((1)) --> F2((2))
+    F2 --> F3((3))
+    F3 --> F4((4))
+    F4 --> F5((5))
+    F5 --> F6((6))
+    F6 --> F7((7))
 ```
 
 ### 7.2 Consequências
@@ -811,20 +865,27 @@ Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
   para manter a altura próxima de log₂(n)
 ```
 
-```
-Exemplo de rotação simples (AVL):
+**Exemplo de rotação simples (AVL):**
 
-Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
-        A                                                B
-         \                                              / \
-          B                                            A   C
-           \
-            C
+Antes da rotação (desbalanceada à direita):
 
-• A altura diminui de 2 para 1
-• A propriedade da ABB é preservada
-• Operações continuam em O(log n) garantido
+```mermaid
+graph TD
+    A((A)) --> B((B))
+    B --> C((C))
 ```
+
+Após rotação à esquerda:
+
+```mermaid
+graph TD
+    B2((B)) --> A2((A))
+    B2 --> C2((C))
+```
+
+- A altura diminui de 2 para 1
+- A propriedade da ABB é preservada
+- Operações continuam em O(log n) garantido
 
 ---
 

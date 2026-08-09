@@ -177,12 +177,13 @@ c) Libere toda a memória ao final.
 
 Considere a árvore binária abaixo:
 
-```
-        1
-       / \
-      2   3
-     /   / \
-    4   5   6
+```mermaid
+graph TD
+    N1((1)) --> N2((2))
+    N1 --> N3((3))
+    N2 --> N4((4))
+    N3 --> N5((5))
+    N3 --> N6((6))
 ```
 
 Sem executar código, determine a sequência de valores impressos por:

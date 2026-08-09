@@ -54,25 +54,52 @@ void pos_ordem(Arvore* raiz);
 
 Para cada árvore abaixo, indique se **é ou não** uma ABB válida. Justifique brevemente.
 
+**a)**
+
+```mermaid
+graph TD
+    A5((5)) --> A3((3))
+    A5 --> A8((8))
+    A3 --> A1((1))
+    A3 --> A4((4))
+    A8 --> A9((9))
 ```
-a)          b)          c)
-    5           5           10
-   / \         / \         /  \
-  3   8       3   8       5    15
- / \   \     /   / \     / \   / \
-1   4   9   2   7   9   3  7  12 20
+
+**b)**
+
+```mermaid
+graph TD
+    B5((5)) --> B3((3))
+    B5 --> B8((8))
+    B3 --> B2((2))
+    B8 --> B7((7))
+    B8 --> B9((9))
+```
+
+**c)**
+
+```mermaid
+graph TD
+    C10((10)) --> C5((5))
+    C10 --> C15((15))
+    C5 --> C3((3))
+    C5 --> C7((7))
+    C15 --> C12((12))
+    C15 --> C20((20))
 ```
 
 ### Exercício 2 — Previsão de `em_ordem`
 
 Considere a ABB abaixo:
 
-```
-        50
-       /  \
-     30    70
-    /  \   / \
-  20  40 60  80
+```mermaid
+graph TD
+    N50((50)) --> N30((30))
+    N50 --> N70((70))
+    N30 --> N20((20))
+    N30 --> N40((40))
+    N70 --> N60((60))
+    N70 --> N80((80))
 ```
 
 a) Qual sequência será impressa por `em_ordem(raiz)`?
