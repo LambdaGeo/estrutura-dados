@@ -2542,12 +2542,7 @@ a) Crie a árvore do Exercício 1 usando <strong>apenas</strong> a função <cod
 <p>c) Libere toda a memória ao final.</p>
 <h3 id="exercicio-3-previsao-de-percursos">Exercício 3 — Previsão de Percursos<a class="headerlink" href="#exercicio-3-previsao-de-percursos" title="Permanent link">&para;</a></h3>
 <p>Considere a árvore binária abaixo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>        1
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>       / \
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>      2   3
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>     /   / \
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    4   5   6
-</code></pre></div>
+<p><img alt="Árvore binária para os exercícios de percurso: raiz 1, com 2 e 3 como filhos" src="../images/arvores_binarias/percursos_exercicio3.svg" /></p>
 <p>Sem executar código, determine a sequência de valores impressos por:
 a) <code>pre_ordem(raiz)</code></p>
 <p>b) <code>em_ordem(raiz)</code></p>
@@ -2559,12 +2554,12 @@ a) <code>pre_ordem(raiz)</code></p>
 <h2 id="nivel-2-funcoes-recursivas-basicas">🔹 Nível 2: Funções Recursivas Básicas<a class="headerlink" href="#nivel-2-funcoes-recursivas-basicas" title="Permanent link">&para;</a></h2>
 <h3 id="exercicio-4-contagem-de-nos">Exercício 4 — Contagem de Nós<a class="headerlink" href="#exercicio-4-contagem-de-nos" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna o número total de nós. Teste com: árvore vazia, folha única e árvore com múltiplos níveis.</p>
 <h3 id="exercicio-5-calculo-de-altura">Exercício 5 — Cálculo de Altura<a class="headerlink" href="#exercicio-5-calculo-de-altura" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">altura</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">altura</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna a altura da árvore, considerando:</p>
 <ul>
@@ -2573,19 +2568,19 @@ a) <code>pre_ordem(raiz)</code></p>
 </ul>
 <h3 id="exercicio-6-contagem-de-folhas">Exercício 6 — Contagem de Folhas<a class="headerlink" href="#exercicio-6-contagem-de-folhas" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_folhas</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_folhas</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna quantos nós são folhas (ambos os filhos são <code>NULL</code>).</p>
 <h3 id="exercicio-7-soma-de-valores">Exercício 7 — Soma de Valores<a class="headerlink" href="#exercicio-7-soma-de-valores" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">soma_valores</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">soma_valores</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna a soma de todos os valores <code>int</code> armazenados na árvore.</p>
 <hr />
 <h2 id="nivel-3-operacoes-estruturais-e-transformacoes">🔹 Nível 3: Operações Estruturais e Transformações<a class="headerlink" href="#nivel-3-operacoes-estruturais-e-transformacoes" title="Permanent link">&para;</a></h2>
 <h3 id="exercicio-8-espelhamento-reflexao">Exercício 8 — Espelhamento (Reflexão)<a class="headerlink" href="#exercicio-8-espelhamento-reflexao" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">espelhar</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">espelhar</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Inverte a árvore trocando subárvore esquerda ↔ direita em <strong>todos</strong> os nós (modificação <em>in-place</em>).</p>
 <blockquote>
@@ -2593,7 +2588,7 @@ a) <code>pre_ordem(raiz)</code></p>
 </blockquote>
 <h3 id="exercicio-9-copia-profunda-de-arvore">Exercício 9 — Cópia Profunda de Árvore<a class="headerlink" href="#exercicio-9-copia-profunda-de-arvore" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="nf">copiar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="nf">copiar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna um ponteiro para uma <strong>nova árvore</strong> com mesma estrutura e valores.</p>
 <blockquote>
@@ -2601,7 +2596,7 @@ a) <code>pre_ordem(raiz)</code></p>
 </blockquote>
 <h3 id="exercicio-10-verificacao-estritamente-binaria">Exercício 10 — Verificação: Estritamente Binária<a class="headerlink" href="#exercicio-10-verificacao-estritamente-binaria" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">eh_estritamente_binaria</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">eh_estritamente_binaria</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna <code>1</code> se <strong>todo nó</strong> tem grau 0 ou 2; retorna <code>0</code> caso contrário.</p>
 <hr />
@@ -2609,7 +2604,7 @@ a) <code>pre_ordem(raiz)</code></p>
 <h3 id="exercicio-11-similaridade-estrutural">Exercício 11 — Similaridade Estrutural<a class="headerlink" href="#exercicio-11-similaridade-estrutural" title="Permanent link">&para;</a></h3>
 <p>Duas árvores binárias são <strong>SIMILARES</strong> se possuem a mesma "forma" (distribuição de nós), independentemente dos valores armazenados.</p>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_similares</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_similares</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
 </code></pre></div>
 <p>Regra recursiva:</p>
 <ul>
@@ -2623,16 +2618,16 @@ a) <code>pre_ordem(raiz)</code></p>
 <h3 id="exercicio-12-igualdade-estrutural-e-de-valores">Exercício 12 — Igualdade Estrutural e de Valores<a class="headerlink" href="#exercicio-12-igualdade-estrutural-e-de-valores" title="Permanent link">&para;</a></h3>
 <p>Duas árvores são <strong>IGUAIS</strong> se são estruturalmente similares <strong>e</strong> armazenam os mesmos valores nos nós correspondentes.</p>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_iguais</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_iguais</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="exercicio-13-contagem-de-nos-com-um-unico-filho">Exercício 13 — Contagem de Nós com Um Único Filho<a class="headerlink" href="#exercicio-13-contagem-de-nos-com-um-unico-filho" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_um_filho</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_um_filho</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna quantos nós possuem <strong>exatamente um filho</strong> (esquerda XOR direita não-<code>NULL</code>).</p>
 <h3 id="exercicio-14-nos-em-um-nivel-especifico">Exercício 14 — Nós em um Nível Específico<a class="headerlink" href="#exercicio-14-nos-em-um-nivel-especifico" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_no_nivel</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_no_nivel</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna quantos nós estão no nível informado (<code>raiz</code> está no nível 0).</p>
 <blockquote>
@@ -2640,15 +2635,15 @@ a) <code>pre_ordem(raiz)</code></p>
 </blockquote>
 <h3 id="exercicio-15-impressao-formatada-com-indentacao">Exercício 15 — Impressão Formatada com Indentação<a class="headerlink" href="#exercicio-15-impressao-formatada-com-indentacao" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">imprimir_formatado</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">imprimir_formatado</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
 </code></pre></div>
 <p>Imprime a árvore com indentação visual, ex.:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>10
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>├─ 20
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>│  ├─ 30
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>│  └─ 40
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>└─ 50
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>   └─ 60
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>10
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>├─ 20
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>│  ├─ 30
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>│  └─ 40
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>└─ 50
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>   └─ 60
 </code></pre></div>
 <blockquote>
 <p>Chame inicialmente com <code>imprimir_formatado(raiz, 0);</code></p>
@@ -2657,12 +2652,12 @@ a) <code>pre_ordem(raiz)</code></p>
 <h2 id="bonus-funcoes-utilitarias">🔹 Bônus: Funções Utilitárias<a class="headerlink" href="#bonus-funcoes-utilitarias" title="Permanent link">&para;</a></h2>
 <h3 id="exercicio-b1-liberar-memoria-pos-ordem">Exercício B1 — Liberar Memória (Pós-ordem)<a class="headerlink" href="#exercicio-b1-liberar-memoria-pos-ordem" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">liberar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">liberar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Libera recursivamente toda a memória alocada. Use percurso <strong>pós-ordem</strong> para garantir que filhos sejam liberados antes dos pais.</p>
 <h3 id="exercicio-b2-busca-de-valor-sem-ordenacao">Exercício B2 — Busca de Valor (Sem Ordenação)<a class="headerlink" href="#exercicio-b2-busca-de-valor-sem-ordenacao" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscar_valor</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscar_valor</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna <code>1</code> se <code>alvo</code> existe em algum nó da árvore; <code>0</code> caso contrário.</p>
 <blockquote>
@@ -2670,7 +2665,7 @@ a) <code>pre_ordem(raiz)</code></p>
 </blockquote>
 <h3 id="exercicio-b3-maximo-valor-na-arvore">Exercício B3 — Máximo Valor na Árvore<a class="headerlink" href="#exercicio-b3-maximo-valor-na-arvore" title="Permanent link">&para;</a></h3>
 <p>Implemente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">valor_maximo</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">valor_maximo</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
 </code></pre></div>
 <p>Retorna o maior valor <code>int</code> armazenado.</p>
 <blockquote>
@@ -2678,47 +2673,47 @@ a) <code>pre_ordem(raiz)</code></p>
 </blockquote>
 <hr />
 <h2 id="arquivo-cabecalho-sugerido-arvore_binariah">📦 Arquivo Cabeçalho Sugerido (<code>arvore_binaria.h</code>)<a class="headerlink" href="#arquivo-cabecalho-sugerido-arvore_binariah" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="cp">#ifndef ARVORE_BINARIA_H</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="cp">#define ARVORE_BINARIA_H</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Arvore</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">esquerda</span><span class="p">;</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">direita</span><span class="p">;</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span><span class="w"> </span><span class="n">Arvore</span><span class="p">;</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="c1">// Função fornecida</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="nf">criar_arvore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">esq</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">dir</span><span class="p">);</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="c1">// Percursos</span>
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="kt">void</span><span class="w"> </span><span class="nf">pre_ordem</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="kt">void</span><span class="w"> </span><span class="nf">em_ordem</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="kt">void</span><span class="w"> </span><span class="nf">pos_ordem</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>
-<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="c1">// Operações básicas</span>
-<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="kt">int</span><span class="w"> </span><span class="nf">altura</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_folhas</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="kt">int</span><span class="w"> </span><span class="nf">soma_valores</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>
-<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="c1">// Transformações</span>
-<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="kt">void</span><span class="w"> </span><span class="nf">espelhar</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="nf">copiar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>
-<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="c1">// Verificações estruturais</span>
-<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="kt">int</span><span class="w"> </span><span class="nf">eh_estritamente_binaria</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_similares</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
-<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_iguais</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
-<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_um_filho</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_no_nivel</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
-<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>
-<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a><span class="c1">// Utilitárias</span>
-<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a><span class="kt">void</span><span class="w"> </span><span class="nf">imprimir_formatado</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
-<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a><span class="kt">void</span><span class="w"> </span><span class="nf">liberar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscar_valor</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">);</span>
-<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a><span class="kt">int</span><span class="w"> </span><span class="nf">valor_maximo</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
-<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a>
-<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a><span class="cp">#endif</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="cp">#ifndef ARVORE_BINARIA_H</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="cp">#define ARVORE_BINARIA_H</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Arvore</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">esquerda</span><span class="p">;</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">direita</span><span class="p">;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">}</span><span class="w"> </span><span class="n">Arvore</span><span class="p">;</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="c1">// Função fornecida</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="nf">criar_arvore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">esq</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">dir</span><span class="p">);</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="c1">// Percursos</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="kt">void</span><span class="w"> </span><span class="nf">pre_ordem</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="kt">void</span><span class="w"> </span><span class="nf">em_ordem</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="kt">void</span><span class="w"> </span><span class="nf">pos_ordem</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="c1">// Operações básicas</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="kt">int</span><span class="w"> </span><span class="nf">altura</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_folhas</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="kt">int</span><span class="w"> </span><span class="nf">soma_valores</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="c1">// Transformações</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a><span class="kt">void</span><span class="w"> </span><span class="nf">espelhar</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="nf">copiar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="c1">// Verificações estruturais</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="kt">int</span><span class="w"> </span><span class="nf">eh_estritamente_binaria</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_similares</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sao_iguais</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">a2</span><span class="p">);</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_um_filho</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a><span class="kt">int</span><span class="w"> </span><span class="nf">contar_nos_no_nivel</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="c1">// Utilitárias</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="kt">void</span><span class="w"> </span><span class="nf">imprimir_formatado</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nivel</span><span class="p">);</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="kt">void</span><span class="w"> </span><span class="nf">liberar_arvore</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="kt">int</span><span class="w"> </span><span class="nf">buscar_valor</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">);</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a><span class="kt">int</span><span class="w"> </span><span class="nf">valor_maximo</span><span class="p">(</span><span class="n">Arvore</span><span class="o">*</span><span class="w"> </span><span class="n">raiz</span><span class="p">);</span>
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a>
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="cp">#endif</span>
 </code></pre></div>
 <hr />
 <h2 id="criterios-de-avaliacao-sugeridos">✅ Critérios de Avaliação Sugeridos<a class="headerlink" href="#criterios-de-avaliacao-sugeridos" title="Permanent link">&para;</a></h2>

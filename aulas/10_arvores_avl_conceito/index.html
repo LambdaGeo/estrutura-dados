@@ -2376,36 +2376,17 @@
 <h2 id="1-revisao-motivacao-o-problema-da-degeneracao">1. Revisão &amp; Motivação: O Problema da Degeneração<a class="headerlink" href="#1-revisao-motivacao-o-problema-da-degeneracao" title="Permanent link">&para;</a></h2>
 <p>No capítulo anterior, vimos que a <strong>Árvore Binária de Busca (ABB)</strong> oferece busca, inserção e remoção em <strong>O(h)</strong>, onde <code>h</code> é a altura da árvore. Contudo, a ABB <strong>não garante</strong> que a árvore permaneça balanceada.</p>
 <h3 id="o-que-acontece-com-dados-inseridos-em-ordem">O que acontece com dados inseridos em ordem?<a class="headerlink" href="#o-que-acontece-com-dados-inseridos-em-ordem" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Sequência: [1, 2, 3, 4, 5, 6, 7]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ABB resultante:
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>1
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a> \
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  2
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   \
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    3
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     \
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      4
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>       \
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        5
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>         \
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>          6
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>           \
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            7
-</code></pre></div>
+<p>Sequência: <code>[1, 2, 3, 4, 5, 6, 7]</code></p>
+<p>ABB resultante:</p>
+<p><img alt="Árvore degenerada em cadeia após inserir 1 a 7 em ordem crescente" src="../images/avl_conceito/seq_linear_1a7.svg" /></p>
 <ul>
 <li><strong>Altura:</strong> <code>h = 6</code> (para <code>n = 7</code>)</li>
 <li><strong>Complexidade de busca:</strong> <code>O(n)</code> → Equivale a uma lista encadeada!</li>
 <li><strong>Conclusão:</strong> O desempenho da ABB depende criticamente da <strong>ordem de inserção</strong>.</li>
 </ul>
 <h3 id="o-ideal-arvore-balanceada">O ideal: Árvore Balanceada<a class="headerlink" href="#o-ideal-arvore-balanceada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Mesmos dados, mas balanceados:
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>      4
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     / \
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    2   6
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>   / \ / \
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  1  3 5  7
-</code></pre></div>
+<p>Mesmos dados, mas balanceados:</p>
+<p><img alt="Mesma árvore, agora balanceada com raiz 4" src="../images/avl_conceito/seq_balanceada.svg" /></p>
 <ul>
 <li><strong>Altura:</strong> <code>h = 2</code></li>
 <li><strong>Complexidade de busca:</strong> <code>O(log n)</code></li>
@@ -2423,7 +2404,7 @@
 </blockquote>
 <h3 id="21-fator-de-balanceamento-fb">2.1 Fator de Balanceamento (FB)<a class="headerlink" href="#21-fator-de-balanceamento-fb" title="Permanent link">&para;</a></h3>
 <p>Para medir essa diferença, calculamos o <strong>Fator de Balanceamento</strong> de cada nó:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>FB(nó) = altura(SAE) − altura(SAD)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>FB(nó) = altura(SAE) − altura(SAD)
 </code></pre></div>
 <p>Onde:</p>
 <ul>
@@ -2458,22 +2439,41 @@
 </tbody>
 </table>
 <h3 id="22-exemplo-de-verificacao">2.2 Exemplo de Verificação<a class="headerlink" href="#22-exemplo-de-verificacao" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Árvore A:                    Árvore B:
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>      20                           20
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>     /  \                         /  \
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>   10    30                     10    30
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  /  \   /  \                  /     /  \
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a> 5   15 25  35                5     25  35
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                  \
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                   30
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Alturas (folha=0):             Alturas (folha=0):
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>FB(5)=0, FB(15)=0              FB(5)=0, FB(30)=0
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>FB(10)=0-0=0                   FB(10)=0-1=-1 ✓
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>FB(25)=0, FB(35)=0             FB(25)=0-0=0
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>FB(30)=0-0=0                   FB(35)=0
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>FB(20)=0-0=0 ✓ (AVL!)          FB(20)=1-2=-1 ✓ (AVL!)
-</code></pre></div>
+<p><strong>Árvore A:</strong></p>
+<p><img alt="Árvore A: raiz 20 balanceada perfeitamente" src="../images/avl_conceito/arvore_a_comparacao.svg" /></p>
+<p><strong>Árvore B:</strong></p>
+<p><img alt="Árvore B: mesma raiz 20, formato diferente mas ainda AVL válida" src="../images/avl_conceito/arvore_b_comparacao.svg" /></p>
+<p>Alturas (folha = 0):</p>
+<table>
+<thead>
+<tr>
+<th>Árvore A</th>
+<th>Árvore B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FB(5)=0, FB(15)=0</td>
+<td>FB(5)=0</td>
+</tr>
+<tr>
+<td>FB(10)=0-0=0</td>
+<td>FB(10)=0-(-1)=1 ✓</td>
+</tr>
+<tr>
+<td>FB(25)=0, FB(35)=0</td>
+<td>FB(25)=0</td>
+</tr>
+<tr>
+<td>FB(30)=0-0=0</td>
+<td>FB(35)=1-(-1)=1 ✓</td>
+</tr>
+<tr>
+<td>FB(20)=0-0=0 ✓ (AVL!)</td>
+<td>FB(20)=2-1=1 ✓ (AVL!)</td>
+</tr>
+</tbody>
+</table>
 <p>Ambas são AVLs válidas. A diferença está na distribuição, mas nenhuma viola <code>|FB| ≤ 1</code>.</p>
 <hr />
 <h2 id="3-rotacoes-o-mecanismo-de-rebalanceamento">3. Rotações: O Mecanismo de Rebalanceamento<a class="headerlink" href="#3-rotacoes-o-mecanismo-de-rebalanceamento" title="Permanent link">&para;</a></h2>
@@ -2486,31 +2486,26 @@
 <p>Existem <strong>4 configurações</strong> e <strong>4 rotações</strong> correspondentes:</p>
 <h3 id="31-rotacao-simples-a-direita-caso-ll">3.1 Rotação Simples à Direita (Caso LL)<a class="headerlink" href="#31-rotacao-simples-a-direita-caso-ll" title="Permanent link">&para;</a></h3>
 <p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>esquerda</strong> e o filho à esquerda também está "pesado" na <strong>esquerda</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Antes (FB = +2):          Depois da Rotação à Direita:
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>      C                         B
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>     / \                       / \
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    B   E     →              A   C
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>   / \                           / \
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  A   D                         D   E
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>• B sobe, C desce para a direita
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>• D (filho direito de B) passa a ser filho esquerdo de C
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>• Propriedade ABB mantida: A &lt; B &lt; D &lt; C &lt; E
-</code></pre></div>
+<p><strong>Antes (FB = +2):</strong></p>
+<p><img alt="Árvore antes da rotação à direita, desbalanceada à esquerda" src="../images/avl_conceito/rotacao_direita_antes.svg" /></p>
+<p><strong>Depois da Rotação à Direita:</strong></p>
+<p><img alt="Árvore balanceada após a rotação à direita" src="../images/avl_conceito/rotacao_direita_depois.svg" /></p>
+<ul>
+<li>B sobe, C desce para a direita</li>
+<li>D (filho direito de B) passa a ser filho esquerdo de C</li>
+<li>Propriedade ABB mantida: A &lt; B &lt; D &lt; C &lt; E</li>
+</ul>
 <h3 id="32-rotacao-simples-a-esquerda-caso-rr">3.2 Rotação Simples à Esquerda (Caso RR)<a class="headerlink" href="#32-rotacao-simples-a-esquerda-caso-rr" title="Permanent link">&para;</a></h3>
 <p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>direita</strong> e o filho à direita também está "pesado" na <strong>direita</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Antes (FB = -2):          Depois da Rotação à Esquerda:
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    A                           B
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   / \                         / \
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  D   B        →             A   C
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>     / \                    / \
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    C   E                  D   C
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>                              \
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                               E
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>• B sobe, A desce para a esquerda
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>• C (filho esquerdo de B) passa a ser filho direito de A
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>• Ordem mantida: A &lt; C &lt; B &lt; E
-</code></pre></div>
+<p><strong>Antes (FB = -2):</strong></p>
+<p><img alt="Árvore antes da rotação à esquerda, desbalanceada à direita" src="../images/avl_conceito/rotacao_esquerda_antes.svg" /></p>
+<p><strong>Depois da Rotação à Esquerda:</strong></p>
+<p><img alt="Árvore balanceada após a rotação à esquerda" src="../images/avl_conceito/rotacao_esquerda_depois.svg" /></p>
+<ul>
+<li>B sobe, A desce para a esquerda</li>
+<li>C (filho esquerdo de B) passa a ser filho direito de A</li>
+<li>Ordem mantida: A &lt; C &lt; B &lt; E</li>
+</ul>
 <h3 id="33-rotacao-dupla-esquerda-direita-caso-lr">3.3 Rotação Dupla Esquerda-Direita (Caso LR)<a class="headerlink" href="#33-rotacao-dupla-esquerda-direita-caso-lr" title="Permanent link">&para;</a></h3>
 <p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>esquerda</strong>, mas o filho esquerdo está "pesado" na <strong>direita</strong>.
 <strong>Solução:</strong> Duas rotações simples:</p>
@@ -2518,15 +2513,12 @@
 <li>Rotação à <strong>esquerda</strong> no filho esquerdo</li>
 <li>Rotação à <strong>direita</strong> no nó desbalanceado</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Antes:                  Passo 1 (Rotação Esq em B):    Passo 2 (Rotação Dir em C):
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>      C                         C                             B
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>     / \                       / \                           / \
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    B   E     →              A   E         →              A   C
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>     \                       /                           / \   \
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>      D                     B                           D   B   E
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>                             \
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>                              D
-</code></pre></div>
+<p><strong>Antes:</strong></p>
+<p><img alt="Árvore antes da rotação dupla LR" src="../images/avl_conceito/lr_antes.svg" /></p>
+<p><strong>Passo 1 (Rotação Esquerda em B):</strong></p>
+<p><img alt="Passo intermediário da rotação LR" src="../images/avl_conceito/lr_passo1.svg" /></p>
+<p><strong>Passo 2 (Rotação Direita em C):</strong></p>
+<p><img alt="Árvore final após a rotação dupla LR, com D como nova raiz" src="../images/avl_conceito/lr_passo2.svg" /></p>
 <h3 id="34-rotacao-dupla-direita-esquerda-caso-rl">3.4 Rotação Dupla Direita-Esquerda (Caso RL)<a class="headerlink" href="#34-rotacao-dupla-direita-esquerda-caso-rl" title="Permanent link">&para;</a></h3>
 <p><strong>Ocorre quando:</strong> Desbalanceamento na <strong>direita</strong>, mas o filho direito está "pesado" na <strong>esquerda</strong>.
 <strong>Solução:</strong></p>
@@ -2534,13 +2526,12 @@
 <li>Rotação à <strong>direita</strong> no filho direito</li>
 <li>Rotação à <strong>esquerda</strong> no nó desbalanceado</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Antes:                  Passo 1 (Rotação Dir em C):    Passo 2 (Rotação Esq em A):
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    A                           A                             B
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>   / \                         / \                           / \
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  D   C        →             D   B         →              A   C
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>     / \                         \                       / \   \
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    B   E                         C                     D   B   E
-</code></pre></div>
+<p><strong>Antes:</strong></p>
+<p><img alt="Árvore antes da rotação dupla RL" src="../images/avl_conceito/rl_antes.svg" /></p>
+<p><strong>Passo 1 (Rotação Direita em C):</strong></p>
+<p><img alt="Passo intermediário da rotação RL" src="../images/avl_conceito/rl_passo1.svg" /></p>
+<p><strong>Passo 2 (Rotação Esquerda em A):</strong></p>
+<p><img alt="Árvore final após a rotação dupla RL, com B como nova raiz" src="../images/avl_conceito/rl_passo2.svg" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Regra prática para identificar a rotação</p>
 <p>Siga o caminho do nó inserido até a raiz. O primeiro nó com <code>|FB| ≥ 2</code> é o <strong>nó desbalanceado</strong>. Olhe para os dois primeiros passos do caminho a partir dele:</p>
@@ -2568,106 +2559,48 @@
 <hr />
 <h2 id="5-exemplos-visuais-passo-a-passo">5. Exemplos Visuais Passo a Passo<a class="headerlink" href="#5-exemplos-visuais-passo-a-passo" title="Permanent link">&para;</a></h2>
 <h3 id="exemplo-1-insercao-de-10-20-30">Exemplo 1: Inserção de <code>[10, 20, 30]</code><a class="headerlink" href="#exemplo-1-insercao-de-10-20-30" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>1. Inserir 10:      2. Inserir 20:      3. Inserir 30:
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>   10                  10                   10
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                        \                    \
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>                         20                    20
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>                                                \
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>                                                 30
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>FB: 10 → 0-1 = -1      FB: 10 → 0-1 = -1     FB: 10 → 0-2 = -2 ❌
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>OK                     OK                    Desbalanceado! (Caso RR)
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>→ Aplicar Rotação Simples à Esquerda em 10:
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        20
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>       /  \
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>     10    30
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>FB atualizados: 10→0, 30→0, 20→0. Árvore balanceada! ✓
-</code></pre></div>
+<p><strong>1. Inserir 10:</strong></p>
+<p><img alt="Árvore com um único nó (10)" src="../images/avl_conceito/ex1_insere10.svg" /></p>
+<p>FB: 10 → OK</p>
+<p><strong>2. Inserir 20:</strong></p>
+<p><img alt="Árvore com 10 e 20 à direita" src="../images/avl_conceito/ex1_insere20.svg" /></p>
+<p>FB: 10 → 0-1 = -1, OK</p>
+<p><strong>3. Inserir 30:</strong></p>
+<p><img alt="Árvore degenerada 10→20→30, desbalanceada" src="../images/avl_conceito/ex1_insere30.svg" /></p>
+<p>FB: 10 → 0-2 = -2 ❌ Desbalanceado! (Caso RR)</p>
+<p>→ Aplicar Rotação Simples à Esquerda em 10:</p>
+<p><img alt="Árvore balanceada com 20 como raiz" src="../images/avl_conceito/ex1_final.svg" /></p>
+<p>FB atualizados: 10→0, 30→0, 20→0. Árvore balanceada! ✓</p>
 <h3 id="exemplo-2-insercao-de-30-10-20">Exemplo 2: Inserção de <code>[30, 10, 20]</code><a class="headerlink" href="#exemplo-2-insercao-de-30-10-20" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>1. 30      2. 30         3. 30
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>          /             /
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        10            10
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                        \
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>                         20
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>FB(30) = 2-0 = +2 ❌ → Nó desbalanceado. Caminho: 30 → Esq(10) → Dir(20)
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>Tipo: LR (Esquerda-Direita)
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>Passo 1: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        30
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>       /
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>     20
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    /
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  10
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
-<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>Passo 2: Rotação Dir em 30 → 20 sobe, 30 desce à direita
-<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        20
-<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>       /  \
-<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>     10    30
-<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>
-<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>FB: todos 0. AVL válida! ✓
-</code></pre></div>
+<p><strong>1. Insere 30:</strong></p>
+<p><img alt="Árvore com um único nó (30)" src="../images/avl_conceito/ex2_insere30.svg" /></p>
+<p><strong>2. Insere 10:</strong></p>
+<p><img alt="Árvore com 30 e 10 à esquerda" src="../images/avl_conceito/ex2_insere10.svg" /></p>
+<p><strong>3. Insere 20:</strong></p>
+<p><img alt="Árvore 30→10→20, formando um zigzag desbalanceado" src="../images/avl_conceito/ex2_insere20.svg" /></p>
+<p>FB(30) = 2-0 = +2 ❌ → Nó desbalanceado. Caminho: 30 → Esq(10) → Dir(20). Tipo: <strong>LR (Esquerda-Direita)</strong></p>
+<p><strong>Passo 1: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda</strong></p>
+<p><img alt="Passo intermediário: 20 sobe, 10 fica à esquerda de 20" src="../images/avl_conceito/ex2_passo1.svg" /></p>
+<p><strong>Passo 2: Rotação Dir em 30 → 20 sobe, 30 desce à direita</strong></p>
+<p><img alt="Árvore final balanceada com 20 como raiz" src="../images/avl_conceito/ex2_passo2.svg" /></p>
+<p>FB: todos 0. AVL válida! ✓</p>
 <h3 id="exemplo-3-insercao-de-10-30-20-40-35">Exemplo 3: Inserção de <code>[10, 30, 20, 40, 35]</code><a class="headerlink" href="#exemplo-3-insercao-de-10-30-20-40-35" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Inserimos: 10 → 30 → 20 → 40
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        10
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>       /  \
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>      .    30
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>          /  \
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        20    40
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>FB(10) = 0-2 = -2 ❌ → Caminho: 10 → Dir(30) → Esq(20)
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>Tipo: RL (Direita-Esquerda)
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>Passo 1: Rotação Dir em 30 → 20 sobe, 30 desce à direita
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        10
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>         \
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>          20
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>           \
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>            30
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>             \
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>              40
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
-<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>Passo 2: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda
-<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        20
-<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>       /  \
-<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>     10    30
-<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>            \
-<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>             40
-<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
-<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>FB: 10→0, 40→0, 30→-1, 20→0. Balanceada! ✓
-<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>
-<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>Agora inserimos 35:
-<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>        20
-<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>       /  \
-<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>     10    30
-<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>            \
-<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>             40
-<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>            /
-<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>          35
-<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>
-<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>FB(30) = -1-1 = -2 ❌ → Caminho: 30 → Dir(40) → Esq(35)
-<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>Tipo: RL novamente!
-<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
-<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>Rotação Dir em 40 → 35 sobe, 40 desce à direita
-<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>        20
-<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>       /  \
-<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>     10    30
-<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>            \
-<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>             35
-<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>            /  \
-<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>          .    40
-<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>
-<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>Rotação Esq em 30 → 35 sobe, 30 desce à esquerda
-<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>        20
-<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>       /  \
-<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>     10    35
-<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>          /  \
-<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>        30    40
-<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>
-<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>FB: todos ≤1. AVL válida! ✓
-</code></pre></div>
+<p>Inserimos: 10 → 30 → 20 → 40</p>
+<p><img alt="Árvore 10 com filho 30, que tem 20 e 40" src="../images/avl_conceito/ex3_antes.svg" /></p>
+<p>FB(10) = 0-2 = -2 ❌ → Caminho: 10 → Dir(30) → Esq(20). Tipo: <strong>RL (Direita-Esquerda)</strong></p>
+<p><strong>Passo 1: Rotação Dir em 30 → 20 sobe, 30 desce à direita</strong></p>
+<p><img alt="Passo intermediário da rotação RL neste exemplo" src="../images/avl_conceito/ex3_passo1.svg" /></p>
+<p><strong>Passo 2: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda</strong></p>
+<p><img alt="Árvore balanceada com 20 como raiz, 10 à esquerda, 30 e 40 à direita" src="../images/avl_conceito/ex3_passo2.svg" /></p>
+<p>FB: 10→0, 40→0, 30→-1, 20→0. Balanceada! ✓</p>
+<p><strong>Agora inserimos 35:</strong></p>
+<p><img alt="Árvore após inserir 35, desbalanceada em 30" src="../images/avl_conceito/ex3_insere35.svg" /></p>
+<p>FB(30) = -1-1 = -2 ❌ → Caminho: 30 → Dir(40) → Esq(35). Tipo: <strong>RL novamente!</strong></p>
+<p><strong>Rotação Dir em 40 → 35 sobe, 40 desce à direita</strong></p>
+<p><img alt="Passo intermediário: 35 sobe no lugar de 40" src="../images/avl_conceito/ex3_rotdir40.svg" /></p>
+<p><strong>Rotação Esq em 30 → 35 sobe, 30 desce à esquerda</strong></p>
+<p><img alt="Árvore final balanceada, com 35 como filho direito de 20" src="../images/avl_conceito/ex3_final.svg" /></p>
+<p>FB: todos ≤1. AVL válida! ✓</p>
 <hr />
 <h2 id="6-ferramenta-interativa-visualgo">6. Ferramenta Interativa: VisuAlgo<a class="headerlink" href="#6-ferramenta-interativa-visualgo" title="Permanent link">&para;</a></h2>
 <h3 id="acesse-httpsvisualgonetenbst">Acesse: <strong><a href="https://visualgo.net/en/bst">https://visualgo.net/en/bst</a></strong><a class="headerlink" href="#acesse-httpsvisualgonetenbst" title="Permanent link">&para;</a></h3>
@@ -2705,14 +2638,7 @@
 </div>
 <h3 id="exercicio-1-calculo-de-fb-e-identificacao-de-desbalanceamento">Exercício 1 — Cálculo de FB e Identificação de Desbalanceamento<a class="headerlink" href="#exercicio-1-calculo-de-fb-e-identificacao-de-desbalanceamento" title="Permanent link">&para;</a></h3>
 <p>Dada a árvore abaixo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>        50
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>       /  \
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>     30    70
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    /  \     \
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  20   40    80
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> /           /
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>10          75
-</code></pre></div>
+<p><img alt="Árvore para cálculo de FB: raiz 50, com 30 e 70 como filhos" src="../images/avl_conceito/exercicio1_fb.svg" /></p>
 <p>a) Calcule a altura de cada nó.</p>
 <p>b) Calcule o FB de cada nó.</p>
 <p>c) Há algum nó desbalanceado? Se sim, qual?</p>
@@ -2749,14 +2675,7 @@ d) Caminho do nó inserido (75): 70 → Dir(80) → Esq(75) → **Caso RL** → 
 - Após `3`: 10 FB=2-0=2 ❌ → Caso LL (caminho 10→Esq(5)→Esq(3)) → Rotação Simples à Direita em 10
 - Árvore final balanceada:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>        20
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>       /  \
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>     10    30
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    / \   /  \
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>   5  15 25  35
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  /
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a> 3
-</code></pre></div>
+![Árvore final do exercício 2: raiz 20, com 5 e 30 como filhos](images/avl_conceito/exercicio2_final.svg)
 
 **Valide no VisuAlgo:** Insira a sequência completa e compare com seu desenho
 </details>
@@ -2770,21 +2689,9 @@ d) Caminho do nó inserido (75): 70 → Dir(80) → Esq(75) → **Caso RL** → 
 <li>Qual rotação deve ser aplicada?</li>
 </ol>
 <p><strong>Situação A:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>      40
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>     /
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>   20
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  /  \
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> 10  30
-</code></pre></div>
+<p><img alt="Situação A: árvore 40→20, com 10 e 30 como filhos de 20" src="../images/avl_conceito/exercicio3_situacaoA.svg" /></p>
 <p><strong>Situação B:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>      50
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>        \
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>         80
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>        /  \
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>      70    90
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>     /
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>   60
-</code></pre></div>
+<p><img alt="Situação B: árvore 50→80, com 70 e 90 como filhos, e 60 filho de 70" src="../images/avl_conceito/exercicio3_situacaoB.svg" /></p>
 <details>
 <summary>Gabarito</summary>
 
@@ -2817,12 +2724,7 @@ Situação B:
 1. ABB: Lista encadeada à direita. Altura = 6. Busca pior caso = 7 comparações.
 2. AVL:
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>        4
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>       / \
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>      2   6
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>     / \ / \
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    1  3 5  7
-</code></pre></div>
+![Árvore AVL balanceada com raiz 4, resultado de inserir 1-7 com rebalanceamento](images/avl_conceito/resumo_balanceada.svg)
 
 Altura = 2. Busca pior caso = 3 comparações.
 3. Diferença drástica: O(n) vs O(log n). A AVL realiza rotações automáticas que redistribuem os nós, mantendo a altura próxima de log₂(n).

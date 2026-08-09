@@ -3540,9 +3540,9 @@
 <a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
 <a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>b) Comparações: 7 (n1 + n2 - 1 no pior caso)
 <a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>
-<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>c) Com &#39;&lt;&#39; em vez de &#39;&lt;=&#39;:
-<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>   Quando 7 e 7 fossem comparados, o da direita seria copiado primeiro,
-<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>   invertendo a ordem relativa → algoritmo não seria estável.
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>c) Com `&lt;` em vez de `&lt;=`:
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>   Neste exemplo específico, o resultado seria **idêntico** — `L` e `R` não têm nenhum valor repetido entre si, então trocar `&lt;=` por `&lt;` nunca muda qual dos dois é copiado primeiro.
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>   A diferença só aparece quando há **empate** (um valor que existe em ambos os subvetores). Por exemplo, se `L = [3, 7, 12, 19]` e `R = [5, 7, 15, 20]`: com `&lt;=`, ao comparar os dois `7`, o da **esquerda** (`L`) é copiado primeiro — preservando a ordem relativa original entre eles. Com `&lt;`, o da **direita** (`R`) seria copiado primeiro, invertendo essa ordem → o algoritmo deixaria de ser estável.
 </code></pre></div>
 
 </details>
