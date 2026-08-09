@@ -54,26 +54,23 @@ void pos_ordem(Arvore* raiz);
 
 Para cada árvore abaixo, indique se **é ou não** uma ABB válida. Justifique brevemente.
 
-```
-a)          b)          c)
-    5           5           10
-   / \         / \         /  \
-  3   8       3   8       5    15
- / \   \     /   / \     / \   / \
-1   4   9   2   7   9   3  7  12 20
-```
+**a)**
+
+![Árvore a: candidata a ABB com raiz 5](images/arvores_busca/exercicio1_a.svg)
+
+**b)**
+
+![Árvore b: candidata a ABB com raiz 5](images/arvores_busca/exercicio1_b.svg)
+
+**c)**
+
+![Árvore c: candidata a ABB com raiz 10](images/arvores_busca/exercicio1_c.svg)
 
 ### Exercício 2 — Previsão de `em_ordem`
 
 Considere a ABB abaixo:
 
-```
-        50
-       /  \
-     30    70
-    /  \   / \
-  20  40 60  80
-```
+![ABB para o exercício de previsão do em-ordem: raiz 50](images/arvores_busca/exercicio2_abb.svg)
 
 a) Qual sequência será impressa por `em_ordem(raiz)`?
 

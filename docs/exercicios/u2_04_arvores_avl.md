@@ -20,13 +20,7 @@ Mostre a estrutura da árvore após cada operação que causar desbalanceamento,
 
 **5.** Considere a árvore AVL abaixo (desenhe-a antes de responder):
 
-```
-      30
-     /  \
-    20   40
-   / \   / \
-  10 25 35 50
-```
+![Árvore AVL para o exercício 5: raiz 30](images/arvores_avl/exercicio5_avl.svg)
 
 a) Calcule o fator de balanceamento de cada nó.
 

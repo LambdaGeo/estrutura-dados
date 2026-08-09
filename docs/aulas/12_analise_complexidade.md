@@ -22,21 +22,7 @@ A **complexidade de tempo** descreve a taxa de crescimento do tempo de execuçã
 
 ### 1.2 Comparação Visual do Crescimento
 
-```
-Tempo (t)
-  ▲
-  │                                     / O(n²)
-  │                                    /
-  │                                   /   / O(n log n)
-  │                                  /   /
-  │                                 /   /   / O(n)
-  │                                /   /   /
-  │                               /   /   /   / O(log n)
-  │                              /   /   /   /
-  │─────────────────────────────/───/───/───/──────► O(1)
-  │
-  └──────────────────────────────────────────────► Entrada (n)
-```
+![Gráfico comparando as curvas reais de crescimento de O(1), O(log n), O(n), O(n log n) e O(n²)](images/analise_complexidade/comparacao_crescimento.svg)
 
 ---
 

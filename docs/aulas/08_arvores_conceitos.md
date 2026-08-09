@@ -104,14 +104,16 @@ D
 
 #### c) Representação Gráfica (como grafo)
 
-```
-        D
-       / \
-      E   G
-     /   /|\
-    F   H J M
-         / \
-        K   L
+```mermaid
+graph TD
+    D((D)) -->|E| E((E))
+    D -->|D| G((G))
+    E --> F((F))
+    G --> H((H))
+    G --> J((J))
+    G --> M((M))
+    J -->|E| K((K))
+    J -->|D| L((L))
 ```
 
 ---
@@ -120,13 +122,7 @@ D
 
 Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
-```
-        A  ← raiz (nível 0)
-       / \
-      B   C  ← filhos de A (nível 1)
-     / \   \
-    D   E   F  ← folhas (nível 2)
-```
+![Árvore com raiz no nível 0, filhos no nível 1 e folhas no nível 2](images/arvores_conceitos/raiz_nivel.svg)
 
 ### 3.1 Relações Genealógicas
 
@@ -141,13 +137,7 @@ Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
 ### 3.2 Grau, Folhas e Altura
 
-```
-        A  ← grau(A) = 2
-       / \
-      B   C  ← grau(B) = 2, grau(C) = 1
-     / \   \
-    D   E   F  ← grau(D) = grau(E) = grau(F) = 0 → FOLHAS
-```
+![Árvore ilustrando o grau de cada nó](images/arvores_conceitos/grau_exemplo.svg)
 
 - **Grau de um nó**: número de filhos que ele possui
 - **Grau da árvore**: máximo entre os graus de seus nós
@@ -193,17 +183,20 @@ Uma **árvore binária** *T* é um conjunto finito de elementos, denominados nó
 
 ### 4.2 Comparação: Árvore Geral vs. Árvore Binária
 
-```
-Árvore Geral (n filhos)      Árvore Binária (máx. 2 filhos)
-        •                              •
-     /  |  \                          / \
-    •   •   •                        •   •
-   / \                               /   / \
-  •   •                             •   •   •
+**Árvore Geral (n filhos):** ordem dos filhos não importa, grau arbitrário.
 
-- Ordem dos filhos não importa    - Esquerda e direita são distintos
-- Grau arbitrário                 - Grau máximo = 2
+```mermaid
+graph TD
+    R1((•)) --> A1((•))
+    R1 -->|E| A2((•))
+    R1 -->|D| A3((•))
+    A1 -->|E| B1((•))
+    A1 -->|D| B2((•))
 ```
+
+**Árvore Binária (máx. 2 filhos):** esquerda e direita são distintos, grau máximo = 2.
+
+![Exemplo de árvore binária com no máximo dois filhos por nó](images/arvores_conceitos/comparacao_binaria.svg)
 
 ---
 
@@ -320,49 +313,34 @@ void liberarArvore(No* raiz) {
 
 > **Definição:** Cada nó tem grau **0 ou 2** (ou seja, todo nó tem exatamente 0 ou 2 filhos).
 
-```
-a) Estritamente binária        b) NÃO estritamente binária
-          •                               •
-         / \                             / \
-        •   •                           •   •
-       / \                                 /
-      •   •                               •
+**a) Estritamente binária** — todos os nós têm 0 ou 2 filhos ✓
 
-✓ Todos os nós têm 0 ou 2 filhos    ✗ Nó com 1 filho (violando a regra)
-```
+![Árvore estritamente binária: todo nó tem 0 ou 2 filhos](images/arvores_conceitos/estritamente_binaria_a.svg)
+
+**b) NÃO estritamente binária** — nó com 1 filho, violando a regra ✗
+
+![Árvore não estritamente binária: um nó tem apenas 1 filho](images/arvores_conceitos/estritamente_binaria_b.svg)
 
 ### 6.2 Árvore Binária Completa
 
 > **Definição:** Árvore estritamente binária na qual todo nó que apresente alguma subárvore vazia está localizado no **último ou penúltimo nível** da árvore.
 
-```
-a) Completa                      b) NÃO completa
-          •                               •
-         / \                             / \
-        •   •                           •   •
-       / \   /                         /   / \
-      •   • •                         •   •   •
-     /                                   \
-    •                                     •
+**a) Completa** — nós com subárvores vazias apenas nos últimos níveis ✓
 
-✓ Nós com subárvores vazias        ✗ Nó com subárvore vazia
-  apenas nos últimos níveis            em nível intermediário
-```
+![Árvore completa: subárvores vazias só nos últimos níveis](images/arvores_conceitos/completa_a.svg)
+
+**b) NÃO completa** — nó com subárvore vazia em nível intermediário ✗
+
+![Árvore não completa: subárvore vazia em nível intermediário](images/arvores_conceitos/completa_b.svg)
 
 ### 6.3 Árvore Binária Cheia (Full)
 
 > **Definição:** Todos os nós internos têm grau 2 e **todas as folhas estão no mesmo nível**.
 
-```
-        •
-       / \
-      •   •
-     / \ / \
-    •  ••  •
+![Árvore binária cheia: todos os nós internos com 2 filhos, folhas no mesmo nível](images/arvores_conceitos/cheia_perfeita.svg)
 
 ✓ Todos os nós internos têm 2 filhos
 ✓ Todas as folhas estão no nível 2
-```
 
 ### 6.4 Propriedades da Árvore Binária Cheia
 
@@ -409,13 +387,7 @@ Não existe um único percurso correto. A escolha depende da aplicação.
 
 Considere a árvore de exemplo:
 
-```
-        A
-       / \
-      B   C
-     / \   \
-    D   E   F
-```
+![Árvore de exemplo para os percursos pré-ordem, em-ordem e pós-ordem](images/arvores_conceitos/percursos_exemplo.svg)
 
 #### a) Pré-ordem (Pre-order)
 
@@ -638,14 +610,13 @@ void espelhar(No* raiz) {
 
 **Antes e depois:**
 
-```
-Antes:              Depois (espelhada):
-    A                   A
-   / \                 / \
-  B   C               C   B
- / \   \             /   / \
-D   E   F           F   E   D
-```
+**Antes:**
+
+![Árvore antes do espelhamento](images/arvores_conceitos/espelhamento_antes.svg)
+
+**Depois (espelhada):**
+
+![Árvore depois do espelhamento: filhos esquerdo e direito trocados em todos os níveis](images/arvores_conceitos/espelhamento_depois.svg)
 
 ---
 
