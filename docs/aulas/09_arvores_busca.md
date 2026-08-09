@@ -209,15 +209,7 @@ No* buscarIterativo(No* raiz, int chave) {
 
 **ABB:**
 
-```mermaid
-graph TD
-    N20((20)) --> N10((10))
-    N20 --> N30((30))
-    N10 --> N5((5))
-    N10 --> N15((15))
-    N30 --> N25((25))
-    N30 --> N35((35))
-```
+![ABB de exemplo com raiz 20](images/arvores_busca/abb_exemplo.svg)
 
 **Busca por 25:**
 
@@ -275,26 +267,11 @@ Existem **três casos** a considerar:
 
 **Antes (remover o nó 5, marcado com ↑):**
 
-```mermaid
-graph TD
-    A20((20)) --> A10((10))
-    A20 --> A30((30))
-    A10 --> A5["5 ← remover"]
-    A10 --> A15((15))
-    A30 --> A25((25))
-    A30 --> A35((35))
-```
+![Árvore antes de remover o nó 5](images/arvores_busca/remocao_folha_antes.svg)
 
 **Depois:**
 
-```mermaid
-graph TD
-    B20((20)) --> B10((10))
-    B20 --> B30((30))
-    B10 --> B15((15))
-    B30 --> B25((25))
-    B30 --> B35((35))
-```
+![Árvore depois de remover o nó 5](images/arvores_busca/remocao_folha_depois.svg)
 
 Implementação: simplesmente libera o nó e retorna `NULL`.
 
@@ -302,26 +279,11 @@ Implementação: simplesmente libera o nó e retorna `NULL`.
 
 **Antes (remover o nó 10, marcado com ↑):**
 
-```mermaid
-graph TD
-    A20((20)) --> A10["10 ← remover"]
-    A20 --> A30((30))
-    A10 --> A15((15))
-    A15 --> A5((5))
-    A30 --> A25((25))
-    A30 --> A35((35))
-```
+![Árvore antes de remover o nó 10, que tem um único filho](images/arvores_busca/remocao_umfilho_antes.svg)
 
 **Depois:**
 
-```mermaid
-graph TD
-    B20((20)) --> B15((15))
-    B20 --> B30((30))
-    B15 --> B5((5))
-    B30 --> B25((25))
-    B30 --> B35((35))
-```
+![Árvore depois de remover o nó 10](images/arvores_busca/remocao_umfilho_depois.svg)
 
 Implementação: "puxa" o filho para o lugar do pai.
 
@@ -333,40 +295,17 @@ Implementação: "puxa" o filho para o lugar do pai.
 
 **Passo 0 — Antes (remover o nó 20):**
 
-```mermaid
-graph TD
-    S20["20 ← remover"] --> S10((10))
-    S20 --> S30((30))
-    S10 --> S5((5))
-    S10 --> S15((15))
-    S30 --> S25["25 ← sucessor"]
-    S30 --> S35((35))
-```
+![Passo 0: árvore antes de remover o nó 20, com o sucessor 25 destacado](images/arvores_busca/remocao_doisfilhos_passo0.svg)
 
 O **sucessor** de 20 é o menor valor da subárvore direita: 25.
 
 **Passo 1 — substituir 20 por 25 (duplicado temporário):**
 
-```mermaid
-graph TD
-    T25a((25)) --> T10((10))
-    T25a --> T30((30))
-    T10 --> T5((5))
-    T10 --> T15((15))
-    T30 --> T25b["25 ← duplicado"]
-    T30 --> T35((35))
-```
+![Passo 1: substituir 20 por 25, com o 25 original duplicado temporariamente](images/arvores_busca/remocao_doisfilhos_passo1.svg)
 
 **Passo 2 — remover o nó 25 original (agora duplicado):**
 
-```mermaid
-graph TD
-    F25((25)) --> F10((10))
-    F25 --> F30((30))
-    F10 --> F5((5))
-    F10 --> F15((15))
-    F30 --> F35((35))
-```
+![Passo 2: árvore final depois de remover o 25 duplicado](images/arvores_busca/remocao_doisfilhos_passo2.svg)
 
 #### Implementação Completa da Remoção
 
@@ -652,15 +591,7 @@ Todas as operações básicas (busca, inserção, remoção) dependem do **camin
 
 Exemplo (n=7, h=2):
 
-```mermaid
-graph TD
-    A((•)) --> B((•))
-    A --> C((•))
-    B --> D((•))
-    B --> E((•))
-    C --> F((•))
-    C --> G((•))
-```
+![Exemplo de árvore balanceada com n=7 elementos](images/arvores_busca/melhor_caso.svg)
 
 **Pior Caso: Árvore Degenerada (linear)**
 
@@ -669,13 +600,7 @@ graph TD
 
 Exemplo (inserção em ordem crescente):
 
-```mermaid
-graph TD
-    N1((1)) --> N2((2))
-    N2 --> N3((3))
-    N3 --> N4((4))
-    N4 --> N5((5))
-```
+![Árvore degenerada, equivalente a uma lista encadeada](images/arvores_busca/pior_caso.svg)
 
 ### 5.3 Tabela Comparativa: ABB vs. Outras Estruturas
 
@@ -710,16 +635,7 @@ d) Quantas comparações são necessárias para buscar o valor `10`?
 
 **a) Árvore final:**
 
-```mermaid
-graph TD
-    N50((50)) --> N30((30))
-    N50 --> N70((70))
-    N30 --> N20((20))
-    N30 --> N40((40))
-    N70 --> N60((60))
-    N70 --> N80((80))
-    N20 --> N10((10))
-```
+![Árvore final do exercício de construção por inserção sequencial](images/arvores_busca/arvore_final_exercicio.svg)
 
 b) Altura = 3 (caminho 50→30→20→10)
 
@@ -814,31 +730,15 @@ Considere inserir os valores **em ordem crescente**: `[1, 2, 3, 4, 5, 6, 7]`
 
 **Passo 1** — insere `1`:
 
-```mermaid
-graph TD
-    P1((1))
-```
+![Árvore com um único nó (valor 1)](images/arvores_busca/construcao_passo1.svg)
 
 **Passo 4** — insere `1,2,3,4`:
 
-```mermaid
-graph TD
-    P4_1((1)) --> P4_2((2))
-    P4_2 --> P4_3((3))
-    P4_3 --> P4_4((4))
-```
+![Árvore degenerada após inserir 1,2,3,4](images/arvores_busca/construcao_passo4.svg)
 
 **Passo 7** — insere `1,2,3,4,5,6,7` → árvore degenerada:
 
-```mermaid
-graph TD
-    F1((1)) --> F2((2))
-    F2 --> F3((3))
-    F3 --> F4((4))
-    F4 --> F5((5))
-    F5 --> F6((6))
-    F6 --> F7((7))
-```
+![Árvore totalmente degenerada após inserir 1 a 7 em ordem crescente](images/arvores_busca/construcao_passo7.svg)
 
 ### 7.2 Consequências
 
@@ -869,19 +769,11 @@ graph TD
 
 Antes da rotação (desbalanceada à direita):
 
-```mermaid
-graph TD
-    A((A)) --> B((B))
-    B --> C((C))
-```
+![Árvore antes da rotação, desbalanceada à direita](images/arvores_busca/rotacao_antes.svg)
 
 Após rotação à esquerda:
 
-```mermaid
-graph TD
-    B2((B)) --> A2((A))
-    B2 --> C2((C))
-```
+![Árvore balanceada após a rotação à esquerda](images/arvores_busca/rotacao_depois.svg)
 
 - A altura diminui de 2 para 1
 - A propriedade da ABB é preservada

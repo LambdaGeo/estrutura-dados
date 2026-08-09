@@ -106,15 +106,14 @@ D
 
 ```mermaid
 graph TD
-    D((D)) --> E((E))
-    D --> G((G))
+    D((D)) -->|E| E((E))
+    D -->|D| G((G))
     E --> F((F))
     G --> H((H))
     G --> J((J))
     G --> M((M))
-    H --> I((I))
-    J --> K((K))
-    J --> L((L))
+    J -->|E| K((K))
+    J -->|D| L((L))
 ```
 
 ---
@@ -123,14 +122,7 @@ graph TD
 
 Considere a árvore: `T = {A, {B, {D}, {E}}, {C, {F}}}`
 
-```mermaid
-graph TD
-    A["A ← raiz (nível 0)"] --> B["B ← nível 1"]
-    A --> C["C ← nível 1"]
-    B --> D["D ← folha (nível 2)"]
-    B --> E["E ← folha (nível 2)"]
-    C --> F["F ← folha (nível 2)"]
-```
+![Árvore com raiz no nível 0, filhos no nível 1 e folhas no nível 2](images/arvores_conceitos/raiz_nivel.svg)
 
 ### 3.1 Relações Genealógicas
 
@@ -145,14 +137,7 @@ graph TD
 
 ### 3.2 Grau, Folhas e Altura
 
-```mermaid
-graph TD
-    A["A — grau 2"] --> B["B — grau 2"]
-    A --> C["C — grau 1"]
-    B --> D["D — grau 0 (folha)"]
-    B --> E["E — grau 0 (folha)"]
-    C --> F["F — grau 0 (folha)"]
-```
+![Árvore ilustrando o grau de cada nó](images/arvores_conceitos/grau_exemplo.svg)
 
 - **Grau de um nó**: número de filhos que ele possui
 - **Grau da árvore**: máximo entre os graus de seus nós
@@ -203,22 +188,15 @@ Uma **árvore binária** *T* é um conjunto finito de elementos, denominados nó
 ```mermaid
 graph TD
     R1((•)) --> A1((•))
-    R1 --> A2((•))
-    R1 --> A3((•))
-    A1 --> B1((•))
-    A1 --> B2((•))
+    R1 -->|E| A2((•))
+    R1 -->|D| A3((•))
+    A1 -->|E| B1((•))
+    A1 -->|D| B2((•))
 ```
 
 **Árvore Binária (máx. 2 filhos):** esquerda e direita são distintos, grau máximo = 2.
 
-```mermaid
-graph TD
-    R2((•)) --> A4((•))
-    R2 --> A5((•))
-    A5 --> B3((•))
-    A5 --> B4((•))
-    B4 --> C1((•))
-```
+![Exemplo de árvore binária com no máximo dois filhos por nó](images/arvores_conceitos/comparacao_binaria.svg)
 
 ---
 
@@ -337,22 +315,11 @@ void liberarArvore(No* raiz) {
 
 **a) Estritamente binária** — todos os nós têm 0 ou 2 filhos ✓
 
-```mermaid
-graph TD
-    A1((•)) --> B1((•))
-    A1 --> B2((•))
-    B1 --> C1((•))
-    B1 --> C2((•))
-```
+![Árvore estritamente binária: todo nó tem 0 ou 2 filhos](images/arvores_conceitos/estritamente_binaria_a.svg)
 
 **b) NÃO estritamente binária** — nó com 1 filho, violando a regra ✗
 
-```mermaid
-graph TD
-    A2((•)) --> B3((•))
-    A2 --> B4((•))
-    B3 --> C3((•))
-```
+![Árvore não estritamente binária: um nó tem apenas 1 filho](images/arvores_conceitos/estritamente_binaria_b.svg)
 
 ### 6.2 Árvore Binária Completa
 
@@ -360,41 +327,17 @@ graph TD
 
 **a) Completa** — nós com subárvores vazias apenas nos últimos níveis ✓
 
-```mermaid
-graph TD
-    A1((•)) --> B1((•))
-    A1 --> B2((•))
-    B1 --> C1((•))
-    B1 --> C2((•))
-    B2 --> C3((•))
-    C1 --> D1((•))
-```
+![Árvore completa: subárvores vazias só nos últimos níveis](images/arvores_conceitos/completa_a.svg)
 
 **b) NÃO completa** — nó com subárvore vazia em nível intermediário ✗
 
-```mermaid
-graph TD
-    A2((•)) --> B3((•))
-    A2 --> B4((•))
-    B3 --> C4((•))
-    B4 --> C5((•))
-    B4 --> C6((•))
-    C5 --> D2((•))
-```
+![Árvore não completa: subárvore vazia em nível intermediário](images/arvores_conceitos/completa_b.svg)
 
 ### 6.3 Árvore Binária Cheia (Full)
 
 > **Definição:** Todos os nós internos têm grau 2 e **todas as folhas estão no mesmo nível**.
 
-```mermaid
-graph TD
-    A((•)) --> B((•))
-    A --> C((•))
-    B --> D((•))
-    B --> E((•))
-    C --> F((•))
-    C --> G((•))
-```
+![Árvore binária cheia: todos os nós internos com 2 filhos, folhas no mesmo nível](images/arvores_conceitos/cheia_perfeita.svg)
 
 ✓ Todos os nós internos têm 2 filhos
 ✓ Todas as folhas estão no nível 2
@@ -444,14 +387,7 @@ Não existe um único percurso correto. A escolha depende da aplicação.
 
 Considere a árvore de exemplo:
 
-```mermaid
-graph TD
-    A((A)) --> B((B))
-    A --> C((C))
-    B --> D((D))
-    B --> E((E))
-    C --> F((F))
-```
+![Árvore de exemplo para os percursos pré-ordem, em-ordem e pós-ordem](images/arvores_conceitos/percursos_exemplo.svg)
 
 #### a) Pré-ordem (Pre-order)
 
@@ -676,25 +612,11 @@ void espelhar(No* raiz) {
 
 **Antes:**
 
-```mermaid
-graph TD
-    A1((A)) --> B1((B))
-    A1 --> C1((C))
-    B1 --> D1((D))
-    B1 --> E1((E))
-    C1 --> F1((F))
-```
+![Árvore antes do espelhamento](images/arvores_conceitos/espelhamento_antes.svg)
 
 **Depois (espelhada):**
 
-```mermaid
-graph TD
-    A2((A)) --> C2((C))
-    A2 --> B2((B))
-    C2 --> F2((F))
-    B2 --> E2((E))
-    B2 --> D2((D))
-```
+![Árvore depois do espelhamento: filhos esquerdo e direito trocados em todos os níveis](images/arvores_conceitos/espelhamento_depois.svg)
 
 ---
 

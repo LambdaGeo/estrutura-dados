@@ -177,14 +177,7 @@ c) Libere toda a memória ao final.
 
 Considere a árvore binária abaixo:
 
-```mermaid
-graph TD
-    N1((1)) --> N2((2))
-    N1 --> N3((3))
-    N2 --> N4((4))
-    N3 --> N5((5))
-    N3 --> N6((6))
-```
+![Árvore binária para os exercícios de percurso: raiz 1, com 2 e 3 como filhos](images/arvores_binarias/percursos_exercicio3.svg)
 
 Sem executar código, determine a sequência de valores impressos por:
 a) `pre_ordem(raiz)`

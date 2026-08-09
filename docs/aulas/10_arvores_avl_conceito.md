@@ -15,15 +15,7 @@ Sequência: `[1, 2, 3, 4, 5, 6, 7]`
 
 ABB resultante:
 
-```mermaid
-graph TD
-    N1((1)) --> N2((2))
-    N2 --> N3((3))
-    N3 --> N4((4))
-    N4 --> N5((5))
-    N5 --> N6((6))
-    N6 --> N7((7))
-```
+![Árvore degenerada em cadeia após inserir 1 a 7 em ordem crescente](images/avl_conceito/seq_linear_1a7.svg)
 
 - **Altura:** `h = 6` (para `n = 7`)
 - **Complexidade de busca:** `O(n)` → Equivale a uma lista encadeada!
@@ -33,15 +25,7 @@ graph TD
 
 Mesmos dados, mas balanceados:
 
-```mermaid
-graph TD
-    N4((4)) --> N2((2))
-    N4 --> N6((6))
-    N2 --> N1((1))
-    N2 --> N3((3))
-    N6 --> N5((5))
-    N6 --> N7((7))
-```
+![Mesma árvore, agora balanceada com raiz 4](images/avl_conceito/seq_balanceada.svg)
 
 - **Altura:** `h = 2`
 - **Complexidade de busca:** `O(log n)`
@@ -83,27 +67,11 @@ Onde:
 
 **Árvore A:**
 
-```mermaid
-graph TD
-    A20((20)) --> A10((10))
-    A20 --> A30((30))
-    A10 --> A5((5))
-    A10 --> A15((15))
-    A30 --> A25((25))
-    A30 --> A35((35))
-```
+![Árvore A: raiz 20 balanceada perfeitamente](images/avl_conceito/arvore_a_comparacao.svg)
 
 **Árvore B:**
 
-```mermaid
-graph TD
-    B20((20)) --> B10((10))
-    B20 --> B30((30))
-    B10 --> B5((5))
-    B30 --> B25((25))
-    B30 --> B35((35))
-    B35 --> B40((40))
-```
+![Árvore B: mesma raiz 20, formato diferente mas ainda AVL válida](images/avl_conceito/arvore_b_comparacao.svg)
 
 Alturas (folha = 0):
 
@@ -135,23 +103,11 @@ Existem **4 configurações** e **4 rotações** correspondentes:
 
 **Antes (FB = +2):**
 
-```mermaid
-graph TD
-    C((C)) --> B((B))
-    C --> E((E))
-    B --> A((A))
-    B --> D((D))
-```
+![Árvore antes da rotação à direita, desbalanceada à esquerda](images/avl_conceito/rotacao_direita_antes.svg)
 
 **Depois da Rotação à Direita:**
 
-```mermaid
-graph TD
-    B2((B)) --> A2((A))
-    B2 --> C2((C))
-    C2 --> D2((D))
-    C2 --> E2((E))
-```
+![Árvore balanceada após a rotação à direita](images/avl_conceito/rotacao_direita_depois.svg)
 
 - B sobe, C desce para a direita
 - D (filho direito de B) passa a ser filho esquerdo de C
@@ -163,23 +119,11 @@ graph TD
 
 **Antes (FB = -2):**
 
-```mermaid
-graph TD
-    A((A)) --> D((D))
-    A --> B((B))
-    B --> C((C))
-    B --> E((E))
-```
+![Árvore antes da rotação à esquerda, desbalanceada à direita](images/avl_conceito/rotacao_esquerda_antes.svg)
 
 **Depois da Rotação à Esquerda:**
 
-```mermaid
-graph TD
-    B2((B)) --> A2((A))
-    B2 --> E2((E))
-    A2 --> D2((D))
-    A2 --> C2((C))
-```
+![Árvore balanceada após a rotação à esquerda](images/avl_conceito/rotacao_esquerda_depois.svg)
 
 - B sobe, A desce para a esquerda
 - C (filho esquerdo de B) passa a ser filho direito de A
@@ -195,30 +139,15 @@ graph TD
 
 **Antes:**
 
-```mermaid
-graph TD
-    C((C)) --> B((B))
-    C --> E((E))
-    B --> D((D))
-```
+![Árvore antes da rotação dupla LR](images/avl_conceito/lr_antes.svg)
 
 **Passo 1 (Rotação Esquerda em B):**
 
-```mermaid
-graph TD
-    C2((C)) --> D2((D))
-    C2 --> E2((E))
-    D2 --> B2((B))
-```
+![Passo intermediário da rotação LR](images/avl_conceito/lr_passo1.svg)
 
 **Passo 2 (Rotação Direita em C):**
 
-```mermaid
-graph TD
-    D3((D)) --> B3((B))
-    D3 --> C3((C))
-    C3 --> E3((E))
-```
+![Árvore final após a rotação dupla LR, com D como nova raiz](images/avl_conceito/lr_passo2.svg)
 
 ### 3.4 Rotação Dupla Direita-Esquerda (Caso RL)
 
@@ -230,33 +159,15 @@ graph TD
 
 **Antes:**
 
-```mermaid
-graph TD
-    A((A)) --> D((D))
-    A --> C((C))
-    C --> B((B))
-    C --> E((E))
-```
+![Árvore antes da rotação dupla RL](images/avl_conceito/rl_antes.svg)
 
 **Passo 1 (Rotação Direita em C):**
 
-```mermaid
-graph TD
-    A2((A)) --> D2((D))
-    A2 --> B2((B))
-    B2 --> C2((C))
-    C2 --> E2((E))
-```
+![Passo intermediário da rotação RL](images/avl_conceito/rl_passo1.svg)
 
 **Passo 2 (Rotação Esquerda em A):**
 
-```mermaid
-graph TD
-    B3((B)) --> A3((A))
-    B3 --> C3((C))
-    A3 --> D3((D))
-    C3 --> E3((E))
-```
+![Árvore final após a rotação dupla RL, com B como nova raiz](images/avl_conceito/rl_passo2.svg)
 
 !!! tip "Regra prática para identificar a rotação"
     Siga o caminho do nó inserido até a raiz. O primeiro nó com `|FB| ≥ 2` é o **nó desbalanceado**. Olhe para os dois primeiros passos do caminho a partir dele:
@@ -287,39 +198,25 @@ graph TD
 
 **1. Inserir 10:**
 
-```mermaid
-graph TD
-    S1_10((10))
-```
+![Árvore com um único nó (10)](images/avl_conceito/ex1_insere10.svg)
 
 FB: 10 → OK
 
 **2. Inserir 20:**
 
-```mermaid
-graph TD
-    S2_10((10)) --> S2_20((20))
-```
+![Árvore com 10 e 20 à direita](images/avl_conceito/ex1_insere20.svg)
 
 FB: 10 → 0-1 = -1, OK
 
 **3. Inserir 30:**
 
-```mermaid
-graph TD
-    S3_10((10)) --> S3_20((20))
-    S3_20 --> S3_30((30))
-```
+![Árvore degenerada 10→20→30, desbalanceada](images/avl_conceito/ex1_insere30.svg)
 
 FB: 10 → 0-2 = -2 ❌ Desbalanceado! (Caso RR)
 
 → Aplicar Rotação Simples à Esquerda em 10:
 
-```mermaid
-graph TD
-    F20((20)) --> F10((10))
-    F20 --> F30((30))
-```
+![Árvore balanceada com 20 como raiz](images/avl_conceito/ex1_final.svg)
 
 FB atualizados: 10→0, 30→0, 20→0. Árvore balanceada! ✓
 
@@ -327,43 +224,25 @@ FB atualizados: 10→0, 30→0, 20→0. Árvore balanceada! ✓
 
 **1. Insere 30:**
 
-```mermaid
-graph TD
-    E1_30((30))
-```
+![Árvore com um único nó (30)](images/avl_conceito/ex2_insere30.svg)
 
 **2. Insere 10:**
 
-```mermaid
-graph TD
-    E2_30((30)) --> E2_10((10))
-```
+![Árvore com 30 e 10 à esquerda](images/avl_conceito/ex2_insere10.svg)
 
 **3. Insere 20:**
 
-```mermaid
-graph TD
-    E3_30((30)) --> E3_10((10))
-    E3_10 --> E3_20((20))
-```
+![Árvore 30→10→20, formando um zigzag desbalanceado](images/avl_conceito/ex2_insere20.svg)
 
 FB(30) = 2-0 = +2 ❌ → Nó desbalanceado. Caminho: 30 → Esq(10) → Dir(20). Tipo: **LR (Esquerda-Direita)**
 
 **Passo 1: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda**
 
-```mermaid
-graph TD
-    P1_30((30)) --> P1_20((20))
-    P1_20 --> P1_10((10))
-```
+![Passo intermediário: 20 sobe, 10 fica à esquerda de 20](images/avl_conceito/ex2_passo1.svg)
 
 **Passo 2: Rotação Dir em 30 → 20 sobe, 30 desce à direita**
 
-```mermaid
-graph TD
-    P2_20((20)) --> P2_10((10))
-    P2_20 --> P2_30((30))
-```
+![Árvore final balanceada com 20 como raiz](images/avl_conceito/ex2_passo2.svg)
 
 FB: todos 0. AVL válida! ✓
 
@@ -371,66 +250,33 @@ FB: todos 0. AVL válida! ✓
 
 Inserimos: 10 → 30 → 20 → 40
 
-```mermaid
-graph TD
-    A10((10)) --> A30((30))
-    A30 --> A20((20))
-    A30 --> A40((40))
-```
+![Árvore 10 com filho 30, que tem 20 e 40](images/avl_conceito/ex3_antes.svg)
 
 FB(10) = 0-2 = -2 ❌ → Caminho: 10 → Dir(30) → Esq(20). Tipo: **RL (Direita-Esquerda)**
 
 **Passo 1: Rotação Dir em 30 → 20 sobe, 30 desce à direita**
 
-```mermaid
-graph TD
-    B10((10)) --> B20((20))
-    B20 --> B30((30))
-    B30 --> B40((40))
-```
+![Passo intermediário da rotação RL neste exemplo](images/avl_conceito/ex3_passo1.svg)
 
 **Passo 2: Rotação Esq em 10 → 20 sobe, 10 desce à esquerda**
 
-```mermaid
-graph TD
-    C20((20)) --> C10((10))
-    C20 --> C30((30))
-    C30 --> C40((40))
-```
+![Árvore balanceada com 20 como raiz, 10 à esquerda, 30 e 40 à direita](images/avl_conceito/ex3_passo2.svg)
 
 FB: 10→0, 40→0, 30→-1, 20→0. Balanceada! ✓
 
 **Agora inserimos 35:**
 
-```mermaid
-graph TD
-    D20((20)) --> D10((10))
-    D20 --> D30((30))
-    D30 --> D40((40))
-    D40 --> D35((35))
-```
+![Árvore após inserir 35, desbalanceada em 30](images/avl_conceito/ex3_insere35.svg)
 
 FB(30) = -1-1 = -2 ❌ → Caminho: 30 → Dir(40) → Esq(35). Tipo: **RL novamente!**
 
 **Rotação Dir em 40 → 35 sobe, 40 desce à direita**
 
-```mermaid
-graph TD
-    E20((20)) --> E10((10))
-    E20 --> E30((30))
-    E30 --> E35((35))
-    E35 --> E40((40))
-```
+![Passo intermediário: 35 sobe no lugar de 40](images/avl_conceito/ex3_rotdir40.svg)
 
 **Rotação Esq em 30 → 35 sobe, 30 desce à esquerda**
 
-```mermaid
-graph TD
-    F20((20)) --> F10((10))
-    F20 --> F35((35))
-    F35 --> F30((30))
-    F35 --> F40((40))
-```
+![Árvore final balanceada, com 35 como filho direito de 20](images/avl_conceito/ex3_final.svg)
 
 FB: todos ≤1. AVL válida! ✓
 
@@ -474,16 +320,7 @@ O **VisuAlgo** é uma ferramenta visual interativa que permite:
 
 Dada a árvore abaixo:
 
-```mermaid
-graph TD
-    N50((50)) --> N30((30))
-    N50 --> N70((70))
-    N30 --> N20((20))
-    N30 --> N40((40))
-    N70 --> N80((80))
-    N20 --> N10((10))
-    N80 --> N75((75))
-```
+![Árvore para cálculo de FB: raiz 50, com 30 e 70 como filhos](images/avl_conceito/exercicio1_fb.svg)
 
 a) Calcule a altura de cada nó.
 
@@ -527,16 +364,7 @@ Insira os valores na ordem: `[20, 10, 30, 5, 15, 25, 35, 3]` em uma AVL inicialm
 - Após `3`: 10 FB=2-0=2 ❌ → Caso LL (caminho 10→Esq(5)→Esq(3)) → Rotação Simples à Direita em 10
 - Árvore final balanceada:
 
-```mermaid
-graph TD
-    N20((20)) --> N5((5))
-    N20 --> N30((30))
-    N5 --> N3((3))
-    N5 --> N10((10))
-    N10 --> N15((15))
-    N30 --> N25((25))
-    N30 --> N35((35))
-```
+![Árvore final do exercício 2: raiz 20, com 5 e 30 como filhos](images/avl_conceito/exercicio2_final.svg)
 
 **Valide no VisuAlgo:** Insira a sequência completa e compare com seu desenho
 </details>
@@ -553,22 +381,11 @@ Para cada situação abaixo, identifique:
 
 **Situação A:**
 
-```mermaid
-graph TD
-    A40((40)) --> A20((20))
-    A20 --> A10((10))
-    A20 --> A30((30))
-```
+![Situação A: árvore 40→20, com 10 e 30 como filhos de 20](images/avl_conceito/exercicio3_situacaoA.svg)
 
 **Situação B:**
 
-```mermaid
-graph TD
-    B50((50)) --> B80((80))
-    B80 --> B70((70))
-    B80 --> B90((90))
-    B70 --> B60((60))
-```
+![Situação B: árvore 50→80, com 70 e 90 como filhos, e 60 filho de 70](images/avl_conceito/exercicio3_situacaoB.svg)
 
 <details>
 <summary>Gabarito</summary>
@@ -603,15 +420,7 @@ Situação B:
 1. ABB: Lista encadeada à direita. Altura = 6. Busca pior caso = 7 comparações.
 2. AVL:
 
-```mermaid
-graph TD
-    N4((4)) --> N2((2))
-    N4 --> N6((6))
-    N2 --> N1((1))
-    N2 --> N3((3))
-    N6 --> N5((5))
-    N6 --> N7((7))
-```
+![Árvore AVL balanceada com raiz 4, resultado de inserir 1-7 com rebalanceamento](images/avl_conceito/resumo_balanceada.svg)
 
 Altura = 2. Busca pior caso = 3 comparações.
 3. Diferença drástica: O(n) vs O(log n). A AVL realiza rotações automáticas que redistribuem os nós, mantendo a altura próxima de log₂(n).

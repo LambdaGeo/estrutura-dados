@@ -122,27 +122,11 @@ int fatorBalanceamento(No *n) {
 
 **Antes (FB = +2, caso LL):**
 
-```mermaid
-graph TD
-    z((z)) --> y((y))
-    z --> T4[T4]
-    y --> x((x))
-    y --> T3[T3]
-    x --> T1[T1]
-    x --> T2[T2]
-```
+![Árvore genérica desbalanceada, caso LL](images/avl_implementacao/caso_ll_antes.svg)
 
 **Depois:**
 
-```mermaid
-graph TD
-    y2((y)) --> x2((x))
-    y2 --> z2((z))
-    x2 --> T1b[T1]
-    x2 --> T2b[T2]
-    z2 --> T3b[T3]
-    z2 --> T4b[T4]
-```
+![Árvore após rotação simples à direita, caso LL resolvido](images/avl_implementacao/caso_ll_depois.svg)
 
 **Implementação:**
 
@@ -174,27 +158,11 @@ No* rotacaoDireita(No *y) {
 
 **Antes (FB = -2, caso RR):**
 
-```mermaid
-graph TD
-    z((z)) --> T1[T1]
-    z --> y((y))
-    y --> T2[T2]
-    y --> x((x))
-    x --> T3[T3]
-    x --> T4[T4]
-```
+![Árvore genérica desbalanceada, caso RR](images/avl_implementacao/caso_rr_antes.svg)
 
 **Depois:**
 
-```mermaid
-graph TD
-    y2((y)) --> z2((z))
-    y2 --> x2((x))
-    z2 --> T1b[T1]
-    z2 --> T2b[T2]
-    x2 --> T3b[T3]
-    x2 --> T4b[T4]
-```
+![Árvore após rotação simples à esquerda, caso RR resolvido](images/avl_implementacao/caso_rr_depois.svg)
 
 **Implementação:**
 
@@ -298,25 +266,11 @@ no->esq = inserir(no->esq, chave);  // ← Atribuição importante!
 
 **Antes da rotação:**
 
-```mermaid
-graph TD
-    A((A)) --> B["B ← rotaciona"]
-    B --> C((C))
-    B --> T2[T2]
-    C --> T1[T1]
-    C --> T3[T3]
-```
+![Árvore antes: A com filho B (a rotacionar), B com filhos C e T2](images/avl_implementacao/rotacao_abc_antes.svg)
 
 **Após rotação em B:**
 
-```mermaid
-graph TD
-    A2((A)) --> C2["C ← nova raiz da subárvore"]
-    C2 --> B2((B))
-    C2 --> T2b[T2]
-    B2 --> T1b[T1]
-    B2 --> T3b[T3]
-```
+![Árvore depois: C é a nova raiz da subárvore, com B e T2 como filhos](images/avl_implementacao/rotacao_abc_depois.svg)
 
 Sem a atribuição: `A->esq` ainda apontaria para B (antigo, agora filho). Com a atribuição: `A->esq = C` (novo topo) ✓
 
@@ -550,10 +504,7 @@ int main() {
 
 ### Inserção 20
 
-```mermaid
-graph TD
-    N20["20:h2,FB-1"] --> N10["10:h1,FB0"]
-```
+![Árvore com 20 na raiz e 10 como filho esquerdo](images/avl_implementacao/insercao20.svg)
 
 → FB(20) = 0-1 = -1 ✓ (dentro de [-1,1])
 
@@ -561,30 +512,17 @@ graph TD
 
 **Antes da rotação:**
 
-```mermaid
-graph TD
-    N10["10:h3,FB-2 ❌"] --> N20["20:h2,FB-1"]
-    N20 --> N30["30:h1,FB0"]
-```
+![Árvore antes: 10 na raiz, 20 e 30 encadeados à direita, desbalanceada](images/avl_implementacao/insercao30_antes.svg)
 
 **Após rotação esquerda em 10:**
 
-```mermaid
-graph TD
-    M20["20:h2,FB0"] --> M10["10:h1,FB0"]
-    M20 --> M30["30:h1,FB0"]
-```
+![Árvore balanceada após a rotação, com 20 na raiz](images/avl_implementacao/insercao30_depois.svg)
 
 → Balanceada! ✓
 
 ### Inserção 40
 
-```mermaid
-graph TD
-    N20["20:h3,FB-1"] --> N10["10:h1,FB0"]
-    N20 --> N30["30:h2,FB-1"]
-    N30 --> N40["40:h1,FB0"]
-```
+![Árvore com 20 na raiz, 10 à esquerda, 30 e 40 à direita](images/avl_implementacao/insercao40.svg)
 
 → FB(20) = 1-2 = -1 ✓, FB(30) = 0-1 = -1 ✓
 
@@ -592,23 +530,11 @@ graph TD
 
 **Antes:**
 
-```mermaid
-graph TD
-    N20["20:h3,FB-2 ❌"] --> N10["10:h1"]
-    N20 --> N30["30:h3,FB-2 ❌"]
-    N30 --> N40["40:h2,FB-1"]
-    N40 --> N50["50:h1"]
-```
+![Árvore antes: 20 na raiz, com 30 desbalanceado à direita devido à cadeia 30→40→50](images/avl_implementacao/insercao50_antes.svg)
 
 **Rotação esquerda em 30:**
 
-```mermaid
-graph TD
-    M20["20:h3,FB-1"] --> M10["10:h1"]
-    M20 --> M40["40:h2,FB0"]
-    M40 --> M30["30:h1"]
-    M40 --> M50["50:h1"]
-```
+![Árvore balanceada após a rotação em 30, com 40 assumindo a posição](images/avl_implementacao/insercao50_depois.svg)
 
 → Balanceada! ✓
 
@@ -616,38 +542,17 @@ graph TD
 
 **Antes:**
 
-```mermaid
-graph TD
-    N40["40:h3,FB1"] --> N20["20:h2,FB2 ❌"]
-    N40 --> N50["50:h1"]
-    N20 --> N10["10:h1"]
-    N20 --> N30["30:h1,FB-1"]
-    N30 --> N25["25:h1 ← inserido aqui"]
-```
+![Árvore antes: 40 na raiz, 20 desbalanceado à esquerda devido à inserção de 25](images/avl_implementacao/insercao25_antes.svg)
 
 Caminho: 20 → Dir(30) → Esq(25) → Caso RL
 
 **Passo 1: Rotação direita em 30:**
 
-```mermaid
-graph TD
-    M40["40:h3"] --> M20["20:h2"]
-    M40 --> M50["50:h1"]
-    M20 --> M10["10:h1"]
-    M20 --> M25["25:h2,FB1"]
-    M25 --> M30["30:h1"]
-```
+![Passo intermediário: 25 sobe no lugar de 30](images/avl_implementacao/insercao25_passo1.svg)
 
 **Passo 2: Rotação esquerda em 20:**
 
-```mermaid
-graph TD
-    F40["40:h3,FB0"] --> F25["25:h2,FB0"]
-    F40 --> F50["50:h1"]
-    F25 --> F20["20:h2"]
-    F25 --> F30["30:h1"]
-    F20 --> F10["10:h1"]
-```
+![Árvore final balanceada, com 25 assumindo a posição de 20](images/avl_implementacao/insercao25_passo2.svg)
 
 → Balanceada! ✓
 

@@ -56,51 +56,21 @@ Para cada árvore abaixo, indique se **é ou não** uma ABB válida. Justifique 
 
 **a)**
 
-```mermaid
-graph TD
-    A5((5)) --> A3((3))
-    A5 --> A8((8))
-    A3 --> A1((1))
-    A3 --> A4((4))
-    A8 --> A9((9))
-```
+![Árvore a: candidata a ABB com raiz 5](images/arvores_busca/exercicio1_a.svg)
 
 **b)**
 
-```mermaid
-graph TD
-    B5((5)) --> B3((3))
-    B5 --> B8((8))
-    B3 --> B2((2))
-    B8 --> B7((7))
-    B8 --> B9((9))
-```
+![Árvore b: candidata a ABB com raiz 5](images/arvores_busca/exercicio1_b.svg)
 
 **c)**
 
-```mermaid
-graph TD
-    C10((10)) --> C5((5))
-    C10 --> C15((15))
-    C5 --> C3((3))
-    C5 --> C7((7))
-    C15 --> C12((12))
-    C15 --> C20((20))
-```
+![Árvore c: candidata a ABB com raiz 10](images/arvores_busca/exercicio1_c.svg)
 
 ### Exercício 2 — Previsão de `em_ordem`
 
 Considere a ABB abaixo:
 
-```mermaid
-graph TD
-    N50((50)) --> N30((30))
-    N50 --> N70((70))
-    N30 --> N20((20))
-    N30 --> N40((40))
-    N70 --> N60((60))
-    N70 --> N80((80))
-```
+![ABB para o exercício de previsão do em-ordem: raiz 50](images/arvores_busca/exercicio2_abb.svg)
 
 a) Qual sequência será impressa por `em_ordem(raiz)`?
 

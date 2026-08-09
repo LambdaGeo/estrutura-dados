@@ -20,15 +20,7 @@ Mostre a estrutura da árvore após cada operação que causar desbalanceamento,
 
 **5.** Considere a árvore AVL abaixo (desenhe-a antes de responder):
 
-```mermaid
-graph TD
-    N30((30)) --> N20((20))
-    N30 --> N40((40))
-    N20 --> N10((10))
-    N20 --> N25((25))
-    N40 --> N35((35))
-    N40 --> N50((50))
-```
+![Árvore AVL para o exercício 5: raiz 30](images/arvores_avl/exercicio5_avl.svg)
 
 a) Calcule o fator de balanceamento de cada nó.
 
