@@ -177,13 +177,7 @@ c) Libere toda a memória ao final.
 
 Considere a árvore binária abaixo:
 
-```
-        1
-       / \
-      2   3
-     /   / \
-    4   5   6
-```
+![Árvore binária para os exercícios de percurso: raiz 1, com 2 e 3 como filhos](images/arvores_binarias/percursos_exercicio3.svg)
 
 Sem executar código, determine a sequência de valores impressos por:
 a) `pre_ordem(raiz)`

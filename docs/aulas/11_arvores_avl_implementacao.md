@@ -120,16 +120,13 @@ int fatorBalanceamento(No *n) {
 
 **Situação visual:**
 
-```
-Antes (FB = +2, caso LL):        Depois:
-       z                              y
-      / \                            / \
-     y   T4                        x   z
-    / \                            / \ / \
-   x   T3                        T1 T2 T3 T4
-  / \
- T1  T2
-```
+**Antes (FB = +2, caso LL):**
+
+![Árvore genérica desbalanceada, caso LL](images/avl_implementacao/caso_ll_antes.svg)
+
+**Depois:**
+
+![Árvore após rotação simples à direita, caso LL resolvido](images/avl_implementacao/caso_ll_depois.svg)
 
 **Implementação:**
 
@@ -159,16 +156,13 @@ No* rotacaoDireita(No *y) {
 
 **Situação visual:**
 
-```
-Antes (FB = -2, caso RR):      Depois:
-   z                              y
-  / \                            / \
- T1  y                          z   x
-    / \                        / \ / \
-   T2  x                     T1 T2 T3 T4
-      / \
-    T3  T4
-```
+**Antes (FB = -2, caso RR):**
+
+![Árvore genérica desbalanceada, caso RR](images/avl_implementacao/caso_rr_antes.svg)
+
+**Depois:**
+
+![Árvore após rotação simples à esquerda, caso RR resolvido](images/avl_implementacao/caso_rr_depois.svg)
 
 **Implementação:**
 
@@ -270,19 +264,15 @@ no->esq = inserir(no->esq, chave);  // ← Atribuição importante!
 - O retorno da função é o **novo topo** da subárvore balanceada
 - A atribuição `no->esq = ...` ou `no->dir = ...` reconecta a árvore corretamente
 
-```
-Antes da rotação:        Após rotação em B:
-      A                        A
-     /                        /
-    B  ← rotaciona          C  ← nova raiz da subárvore
-   / \                      / \
-  C   T2                  B   T2
- / \                     / \
-T1 T3                  T1 T3
+**Antes da rotação:**
 
-Sem a atribuição: A->esq ainda apontaria para B (antigo, agora filho)
-Com a atribuição: A->esq = C (novo topo) ✓
-```
+![Árvore antes: A com filho B (a rotacionar), B com filhos C e T2](images/avl_implementacao/rotacao_abc_antes.svg)
+
+**Após rotação em B:**
+
+![Árvore depois: C é a nova raiz da subárvore, com B e T2 como filhos](images/avl_implementacao/rotacao_abc_depois.svg)
+
+Sem a atribuição: `A->esq` ainda apontaria para B (antigo, agora filho). Com a atribuição: `A->esq = C` (novo topo) ✓
 
 ---
 
@@ -510,100 +500,61 @@ int main() {
 
 ### Inserção 10
 
-```
-[10:h1,FB0]
-→ Árvore com 1 nó, balanceada ✓
-```
+`[10:h1,FB0]` → Árvore com 1 nó, balanceada ✓
 
 ### Inserção 20
 
-```
-    [20:h2,FB-1]
-        [10:h1,FB0]
+![Árvore com 20 na raiz e 10 como filho esquerdo](images/avl_implementacao/insercao20.svg)
+
 → FB(20) = 0-1 = -1 ✓ (dentro de [-1,1])
-```
 
 ### Inserção 30 → **Desbalanceamento RR!**
 
-```
-Antes da rotação:
-        [30:h3,FB-2]  ← FB = -2 ❌
-            [20:h2,FB-1]
-                [10:h1,FB0]
+**Antes da rotação:**
 
-Após rotação esquerda em 10:
-        [20:h2,FB0]
-        /        \
-    [10:h1,FB0]  [30:h1,FB0]
+![Árvore antes: 10 na raiz, 20 e 30 encadeados à direita, desbalanceada](images/avl_implementacao/insercao30_antes.svg)
+
+**Após rotação esquerda em 10:**
+
+![Árvore balanceada após a rotação, com 20 na raiz](images/avl_implementacao/insercao30_depois.svg)
+
 → Balanceada! ✓
-```
 
 ### Inserção 40
 
-```
-        [20:h3,FB-1]
-        /        \
-    [10:h1,FB0]  [30:h2,FB-1]
-                    \
-                    [40:h1,FB0]
+![Árvore com 20 na raiz, 10 à esquerda, 30 e 40 à direita](images/avl_implementacao/insercao40.svg)
+
 → FB(20) = 1-2 = -1 ✓, FB(30) = 0-1 = -1 ✓
-```
 
 ### Inserção 50 → **Desbalanceamento RR em 30!**
 
-```
-Antes:
-        [20:h3,FB-2]  ← FB = -2 ❌
-        /        \
-    [10:h1]    [30:h3,FB-2]  ← FB = -2 ❌
-                    \
-                    [40:h2,FB-1]
-                        \
-                        [50:h1]
+**Antes:**
 
-Rotação esquerda em 30:
-        [20:h3,FB-1]
-        /        \
-    [10:h1]    [40:h2,FB0]
-                /    \
-            [30:h1] [50:h1]
+![Árvore antes: 20 na raiz, com 30 desbalanceado à direita devido à cadeia 30→40→50](images/avl_implementacao/insercao50_antes.svg)
+
+**Rotação esquerda em 30:**
+
+![Árvore balanceada após a rotação em 30, com 40 assumindo a posição](images/avl_implementacao/insercao50_depois.svg)
+
 → Balanceada! ✓
-```
 
 ### Inserção 25 → **Desbalanceamento RL em 20!**
 
-```
-Antes:
-                [40:h3,FB1]
-              /            \
-        [20:h2,FB2]      [50:h1]   ← FB(20) = +2 ❌
-        /      \
-    [10:h1]  [30:h1,FB-1]
-                \
-                [25:h1]    ← inserido aqui
+**Antes:**
+
+![Árvore antes: 40 na raiz, 20 desbalanceado à esquerda devido à inserção de 25](images/avl_implementacao/insercao25_antes.svg)
 
 Caminho: 20 → Dir(30) → Esq(25) → Caso RL
 
-Passo 1: Rotação direita em 30:
-                [40:h3]
-              /        \
-        [20:h2]      [50:h1]
-        /     \
-    [10:h1] [25:h2,FB1]
-                \
-                [30:h1]
+**Passo 1: Rotação direita em 30:**
 
-Passo 2: Rotação esquerda em 20:
-                [40:h3,FB0]
-              /            \
-        [25:h2,FB0]      [50:h1]
-        /      \
-    [20:h1]  [30:h1]
-    /
-[10:h1]
+![Passo intermediário: 25 sobe no lugar de 30](images/avl_implementacao/insercao25_passo1.svg)
+
+**Passo 2: Rotação esquerda em 20:**
+
+![Árvore final balanceada, com 25 assumindo a posição de 20](images/avl_implementacao/insercao25_passo2.svg)
 
 → Balanceada! ✓
-```
 
 ### Saída Final
 

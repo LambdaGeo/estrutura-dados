@@ -746,9 +746,9 @@ a) Passo a passo:
 
 b) Comparações: 7 (n1 + n2 - 1 no pior caso)
 
-c) Com '<' em vez de '<=':
-   Quando 7 e 7 fossem comparados, o da direita seria copiado primeiro,
-   invertendo a ordem relativa → algoritmo não seria estável.
+c) Com `<` em vez de `<=`:
+   Neste exemplo específico, o resultado seria **idêntico** — `L` e `R` não têm nenhum valor repetido entre si, então trocar `<=` por `<` nunca muda qual dos dois é copiado primeiro.
+   A diferença só aparece quando há **empate** (um valor que existe em ambos os subvetores). Por exemplo, se `L = [3, 7, 12, 19]` e `R = [5, 7, 15, 20]`: com `<=`, ao comparar os dois `7`, o da **esquerda** (`L`) é copiado primeiro — preservando a ordem relativa original entre eles. Com `<`, o da **direita** (`R`) seria copiado primeiro, invertendo essa ordem → o algoritmo deixaria de ser estável.
 ```
 
 </details>

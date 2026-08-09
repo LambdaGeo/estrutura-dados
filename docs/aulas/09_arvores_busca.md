@@ -207,25 +207,22 @@ No* buscarIterativo(No* raiz, int chave) {
 
 #### c) Exemplo de Execução Passo a Passo
 
-```
-ABB:
-        20
-       /  \
-     10    30
-    /  \   /  \
-   5   15 25  35
+**ABB:**
 
-Busca por 25:
+![ABB de exemplo com raiz 20](images/arvores_busca/abb_exemplo.svg)
+
+**Busca por 25:**
+
 1. raiz=20 → 25 > 20 → vai para direita
 2. atual=30 → 25 < 30 → vai para esquerda
 3. atual=25 → 25 == 25 ✓ Encontrado! (3 comparações)
 
-Busca por 18:
+**Busca por 18:**
+
 1. raiz=20 → 18 < 20 → vai para esquerda
 2. atual=10 → 18 > 10 → vai para direita
 3. atual=15 → 18 > 15 → vai para direita
 4. atual=NULL → ✗ Não encontrado (4 comparações)
-```
 
 ### 3.4 Operação 2: Inserção
 
@@ -268,35 +265,27 @@ Existem **três casos** a considerar:
 
 #### Caso 1: Nó é uma folha (sem filhos)
 
-```
-Antes:              Depois (remover 5):
-    20                  20
-   /  \                /  \
- 10    30            10    30
- /  \   /  \         \   /  \
-5   15 25  35         15 25  35
-↑
-remover
+**Antes (remover o nó 5, marcado com ↑):**
 
-// Implementação: simplesmente libera o nó e retorna NULL
-```
+![Árvore antes de remover o nó 5](images/arvores_busca/remocao_folha_antes.svg)
+
+**Depois:**
+
+![Árvore depois de remover o nó 5](images/arvores_busca/remocao_folha_depois.svg)
+
+Implementação: simplesmente libera o nó e retorna `NULL`.
 
 #### Caso 2: Nó tem um único filho
 
-```
-Antes:              Depois (remover 10):
-    20                  20
-   /  \                /  \
- 10    30            15    30
-   \   /  \          /    /  \
-   15 25  35        5    25  35
-  /
- 5
-↑
-remover
+**Antes (remover o nó 10, marcado com ↑):**
 
-// Implementação: "puxa" o filho para o lugar do pai
-```
+![Árvore antes de remover o nó 10, que tem um único filho](images/arvores_busca/remocao_umfilho_antes.svg)
+
+**Depois:**
+
+![Árvore depois de remover o nó 10](images/arvores_busca/remocao_umfilho_depois.svg)
+
+Implementação: "puxa" o filho para o lugar do pai.
 
 #### Caso 3: Nó tem dois filhos (mais complexo)
 
@@ -304,25 +293,19 @@ remover
 > - **Sucessor**: menor valor da subárvore à direita (mais à esquerda), **ou**
 > - **Antecessor**: maior valor da subárvore à esquerda (mais à direita)
 
-```
-Antes (remover 20):     Passo 1: encontrar sucessor (25):
-        20                      20
-       /  \                    /  \
-	     10    30                10    30
-    /  \   /  \             /  \   /  \
-   5   15 25  35           5   15 25  35
-                                   ↑
-                              sucessor = 25
+**Passo 0 — Antes (remover o nó 20):**
 
-Passo 2: substituir 20 por 25:   Passo 3: remover o nó 25 original:
-        25                              25
-       /  \                            /  \
-	     10    30                        10    30
-    /  \   /  \                     /  \    \
-   5   15 25  35                   5   15    35
-           ↑
-      (agora duplicado)
-```
+![Passo 0: árvore antes de remover o nó 20, com o sucessor 25 destacado](images/arvores_busca/remocao_doisfilhos_passo0.svg)
+
+O **sucessor** de 20 é o menor valor da subárvore direita: 25.
+
+**Passo 1 — substituir 20 por 25 (duplicado temporário):**
+
+![Passo 1: substituir 20 por 25, com o 25 original duplicado temporariamente](images/arvores_busca/remocao_doisfilhos_passo1.svg)
+
+**Passo 2 — remover o nó 25 original (agora duplicado):**
+
+![Passo 2: árvore final depois de remover o 25 duplicado](images/arvores_busca/remocao_doisfilhos_passo2.svg)
 
 #### Implementação Completa da Remoção
 
@@ -601,33 +584,23 @@ Todas as operações básicas (busca, inserção, remoção) dependem do **camin
 
 ### 5.2 Melhor Caso vs. Pior Caso
 
-```
-Melhor Caso: Árvore Balanceada (cheia/completa)
-            • Altura h ≈ log₂(n)
-            • Complexidade: O(log n) ✓
+**Melhor Caso: Árvore Balanceada (cheia/completa)**
 
-        Exemplo (n=7, h=2):
-                •
-               / \
-              •   •
-             / \ / \
-            •  ••  •
+- Altura `h ≈ log₂(n)`
+- Complexidade: `O(log n)` ✓
 
-Pior Caso: Árvore Degenerada (linear)
-            • Altura h = n-1
-            • Complexidade: O(n) ✗ (equivalente a lista encadeada)
+Exemplo (n=7, h=2):
 
-        Exemplo (inserção em ordem crescente):
-            1
-             \
-              2
-               \
-                3
-                 \
-                  4
-                   \
-                    5
-```
+![Exemplo de árvore balanceada com n=7 elementos](images/arvores_busca/melhor_caso.svg)
+
+**Pior Caso: Árvore Degenerada (linear)**
+
+- Altura `h = n-1`
+- Complexidade: `O(n)` ✗ (equivalente a lista encadeada)
+
+Exemplo (inserção em ordem crescente):
+
+![Árvore degenerada, equivalente a uma lista encadeada](images/arvores_busca/pior_caso.svg)
 
 ### 5.3 Tabela Comparativa: ABB vs. Outras Estruturas
 
@@ -660,20 +633,15 @@ d) Quantas comparações são necessárias para buscar o valor `10`?
 <details>
 <summary>Gabarito parcial</summary>
 
-```
-a) Árvore final:
-           50
-         /    \
-       30      70
-      /  \    /  \
-    20   40  60  80
-   /
- 10
+**a) Árvore final:**
+
+![Árvore final do exercício de construção por inserção sequencial](images/arvores_busca/arvore_final_exercicio.svg)
 
 b) Altura = 3 (caminho 50→30→20→10)
+
 c) Em-ordem: 10 20 30 40 50 60 70 80
+
 d) Busca por 10: 50→30→20→10 = 4 comparações
-```
 
 </details>
 
@@ -760,31 +728,17 @@ Compare a altura das duas árvores resultantes.
 
 Considere inserir os valores **em ordem crescente**: `[1, 2, 3, 4, 5, 6, 7]`
 
-```
-Passo 1: [1]          Passo 4: [1,2,3,4]
-  1                        1
-                            \
-                             2
-                              \
-                               3
-                                \
-                                 4
+**Passo 1** — insere `1`:
 
-Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
-1
- \
-  2
-   \
-    3
-     \
-      4
-       \
-        5
-         \
-          6
-           \
-            7
-```
+![Árvore com um único nó (valor 1)](images/arvores_busca/construcao_passo1.svg)
+
+**Passo 4** — insere `1,2,3,4`:
+
+![Árvore degenerada após inserir 1,2,3,4](images/arvores_busca/construcao_passo4.svg)
+
+**Passo 7** — insere `1,2,3,4,5,6,7` → árvore degenerada:
+
+![Árvore totalmente degenerada após inserir 1 a 7 em ordem crescente](images/arvores_busca/construcao_passo7.svg)
 
 ### 7.2 Consequências
 
@@ -811,20 +765,19 @@ Passo 7: [1,2,3,4,5,6,7] — Árvore degenerada:
   para manter a altura próxima de log₂(n)
 ```
 
-```
-Exemplo de rotação simples (AVL):
+**Exemplo de rotação simples (AVL):**
 
-Antes da rotação (desbalanceada à direita):      Após rotação à esquerda:
-        A                                                B
-         \                                              / \
-          B                                            A   C
-           \
-            C
+Antes da rotação (desbalanceada à direita):
 
-• A altura diminui de 2 para 1
-• A propriedade da ABB é preservada
-• Operações continuam em O(log n) garantido
-```
+![Árvore antes da rotação, desbalanceada à direita](images/arvores_busca/rotacao_antes.svg)
+
+Após rotação à esquerda:
+
+![Árvore balanceada após a rotação à esquerda](images/arvores_busca/rotacao_depois.svg)
+
+- A altura diminui de 2 para 1
+- A propriedade da ABB é preservada
+- Operações continuam em O(log n) garantido
 
 ---
 
