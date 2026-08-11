@@ -1,6 +1,6 @@
 site_name: Estruturas de Dados
 site_description: >
-  Livro didático da disciplina de Estrutura de Dados:
+  Livro didático de Estruturas de Dados:
   Recursividade, TAD, Listas, Pilhas, Filas, Árvores (BST, AVL, Heaps) e Ordenação.
 site_author: "Sergio Souza Costa"
 
@@ -70,47 +70,47 @@ extra_javascript:
 
 nav:
   - "⇦ Coleção LambdaGeo": https://lambdageo.github.io/ebooks/
-  - Apresentação: index.md
+  - Prefácio: index.md
   - "Pré-requisito: C para Programadores Python e VisuAlg": https://lambdageo.github.io/introducao-c/
-  
-  - Unidade 1 — Pilhas, Listas e Filas:
-    - Aulas:
-      - "0. Apresentação da Disciplina": aulas/00_apresentacao.md
-      - "1. Pilha Estática I: Vetores Globais": aulas/01_pilha_estatica_1.md
-      - "2. Pilha Estática II: Funções, Ponteiros e Structs": aulas/02_pilha_estatica_2.md
-      - "3. Pilha Estática III: Alocação Dinâmica": aulas/03_pilha_estatica_3.md
-      - "4. Listas Estáticas como TAD em C": aulas/04_lista_estatica.md
-      - "5. Listas Encadeadas como TAD em C": aulas/05_lista_encadeada.md
-      - "6. Filas como TAD em C": aulas/06_fila_tad.md
-    - Exercícios:
-      - "Pilhas": exercicios/u1_02_pilhas.md
-      - "Exercícios com Listas":
-        - "Visão Geral": exercicios/u1_03_listas_index.md
-        - "Lista Estática": exercicios/u1_03_listas_estatica.md
-        - "Lista Encadeada": exercicios/u1_03_listas_encadeada.md
-      - "Caderno de Exercícios": exercicios/u1_04_caderno_exercicios.md
 
-  - Unidade 2 — Árvores:
-    - Aulas:
-      - "7. Recursão e Algoritmos de Busca": aulas/07_recursao_busca.md
-      - "8. Árvores: Conceitos e Binária": aulas/08_arvores_conceitos.md
-      - "9. Árvores Binárias de Busca": aulas/09_arvores_busca.md
-      - "10. Árvores AVL: Conceito": aulas/10_arvores_avl_conceito.md
-      - "11. Árvores AVL: Implementação": aulas/11_arvores_avl_implementacao.md
-    - Exercícios:
-      - "Recursividade": exercicios/u2_01_recursividade.md
-      - "Árvores Binárias (Estruturais)": exercicios/u2_02_arvores_binarias.md
-      - "Árvores Binárias de Busca (ABB)": exercicios/u2_03_arvores_busca.md
-      - "Árvores AVL": exercicios/u2_04_arvores_avl.md
+  - Parte I — Fundamentos e Estruturas Lineares:
+      - Capítulo 1 — Introdução e TAD: aulas/00_apresentacao.md
+      - Capítulo 2 — Pilhas:
+          - "2.1 Pilha Estática I: Vetores Globais": aulas/01_pilha_estatica_1.md
+          - "2.2 Pilha Estática II: Funções, Ponteiros e Structs": aulas/02_pilha_estatica_2.md
+          - "2.3 Pilha Estática III: Alocação Dinâmica": aulas/03_pilha_estatica_3.md
+      - Capítulo 3 — Listas:
+          - "3.1 Listas Estáticas como TAD em C": aulas/04_lista_estatica.md
+          - "3.2 Listas Encadeadas como TAD em C": aulas/05_lista_encadeada.md
+      - Capítulo 4 — Filas:
+          - "4.1 Filas como TAD em C": aulas/06_fila_tad.md
 
-  - Unidade 3 — Ordenação:
-    - Aulas:
-      - "12. Complexidade & Profiling (gcov/gprof)": aulas/12_analise_complexidade.md
-      - "13. Algoritmos de Ordenação Básicos": aulas/13_ordenacao_basica.md
-      - "14. Algoritmos de Ordenação Avançados": aulas/14_ordenacao_avancada.md
+  - Parte II — Estruturas Hierárquicas e Buscas:
+      - Capítulo 5 — Recursão e Algoritmos de Busca: aulas/07_recursao_busca.md
+      - Capítulo 6 — Árvores e Árvores Binárias de Busca:
+          - "6.1 Árvores: Conceitos e Binária": aulas/08_arvores_conceitos.md
+          - "6.2 Árvores Binárias de Busca": aulas/09_arvores_busca.md
+      - Capítulo 7 — Árvores Balanceadas:
+          - "7.1 Árvores AVL: Conceito": aulas/10_arvores_avl_conceito.md
+          - "7.2 Árvores AVL: Implementação": aulas/11_arvores_avl_implementacao.md
 
-  - Laboratórios:
-    - "Laboratório: REPL Baseado em Pilha": laboratorios/01_repl_pilha.md
-    - "Trabalho Prático: Algoritmos de Ordenação": laboratorios/02_trabalho_pratico.md
+  - Parte III — Análise de Desempenho e Ordenação:
+      - Capítulo 8 — Complexidade de Algoritmos: aulas/12_analise_complexidade.md
+      - Capítulo 9 — Algoritmos de Ordenação:
+          - "9.1 Algoritmos de Ordenação Básicos": aulas/13_ordenacao_basica.md
+          - "9.2 Algoritmos de Ordenação Avançados": aulas/14_ordenacao_avancada.md
 
-
+  - Apêndices e Prática:
+      - Apêndice A — Exercícios de Fixação:
+          - "Pilhas": exercicios/u1_02_pilhas.md
+          - "Exercícios com Listas (Visão Geral)": exercicios/u1_03_listas_index.md
+          - "Exercícios: Lista Estática": exercicios/u1_03_listas_estatica.md
+          - "Exercícios: Lista Encadeada": exercicios/u1_03_listas_encadeada.md
+          - "Caderno de Exercícios Gerais": exercicios/u1_04_caderno_exercicios.md
+          - "Recursividade": exercicios/u2_01_recursividade.md
+          - "Árvores Binárias (Estruturais)": exercicios/u2_02_arvores_binarias.md
+          - "Árvores Binárias de Busca (ABB)": exercicios/u2_03_arvores_busca.md
+          - "Árvores AVL": exercicios/u2_04_arvores_avl.md
+      - Apêndice B — Projetos e Laboratórios:
+          - "Laboratório: REPL Baseado em Pilha": laboratorios/01_repl_pilha.md
+          - "Trabalho Prático: Algoritmos de Ordenação": laboratorios/02_trabalho_pratico.md
